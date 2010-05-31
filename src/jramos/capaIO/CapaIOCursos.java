@@ -77,7 +77,7 @@ public class CapaIOCursos
 			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
 			idInicial = this.stringToIdInicial(new String(lineaDatos.toString()), tipoId);
 			if (idInicial == 0)
-				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un curso");
+				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un id");
                         lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
                 }
 		/** Cierro el archivo*/
@@ -101,9 +101,59 @@ public class CapaIOCursos
                         idInicial = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
                         return idInicial;
                 }
+                else if (((linea.indexOf("<idSemestresInicial") != -1)) && (tipoId.equals("idSemestres")))
+                {       comienzoDato = linea.indexOf("idSemestresInicial=") + "idSemestresInicial=".length();
+                        idInicial = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
+                        return idInicial;
+                }
                 else
                         return 0;
         }
+
+        public ArrayList<Carrera> leeCarreras() throws FileNotFoundException, IOException
+        {       ArrayList<Carrera> listaCarreras= new ArrayList(CapaIOCursos.capacidadInicialVector);
+		BufferedReader lector;
+		StringBuilder lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+		int caracterLeido = 0;
+		long i, j;
+
+		/** Intento abrir el archivo de cursos */
+		try
+		{	lector = new BufferedReader(new FileReader(this.nombreArchivoCursos));
+		}
+		catch (FileNotFoundException FNFE)
+		{	throw FNFE; //<Devuelvo la excepción haca quien llame el método leeCursos.
+		}
+
+		/** Leo el archivo de cursos hasta el final */
+		for (i = 0; caracterLeido != -1; i++)
+		{	caracterLeido = lector.read();
+			/**Comienza a leer datos desde que encuentra un caracter '<' */
+			if (caracterLeido == '<')
+			{	for (j = 0; ((caracterLeido != -1) && (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
+				{	lineaDatos.append(String.valueOf((char)caracterLeido));
+                                        //lineaDatos.append(Character.forDigit(caracterLeido, 10));
+					caracterLeido = lector.read();
+				}
+				lineaDatos.append(String.valueOf((char)caracterLeido));//agrego el caracter '>' que no fue agregado en el bucle
+				i += j; //sumo los caracteres que ya se han leido a i, aun no se si esto pueda ser necesario a futuro.
+			}
+			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
+			Carrera carreraEncontrada = this.stringToCarrera(new String(lineaDatos.toString()));
+			if (carreraEncontrada != null)
+				listaCarreras.add(carreraEncontrada);
+			else
+				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un curso");
+                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+                }
+		/** Cierro el archivo*/
+		lector.close();
+
+		/**  Retorno la lista con los cursos leidos*/
+		return listaCarreras;
+	}
+
+
 	/** Metodo para leer todos los cursos
 	* 
 	*/
@@ -153,22 +203,29 @@ public class CapaIOCursos
         public void escribeCursos(ArrayList<Curso> listaCursos) throws FileNotFoundException, SecurityException, IOException
         {       Integer idInicialCursosWrap = this.leeIDInicial("idCursos");
                 Integer idInicialCarrerasWrap = this.leeIDInicial("idCarreras");
-                int idInicialCursos, idInicialCarreras;
+                Integer idInicialSemestresWrap = this.leeIDInicial("idSemestres");
+                int idInicialCursos, idInicialCarreras, idInicialSemestres;
                 if (idInicialCursosWrap == null)
                         idInicialCursos = 1;
                 else
                         idInicialCursos = idInicialCursosWrap.intValue();
+
                 if (idInicialCarrerasWrap == null)
                         idInicialCarreras = 1;
                 else
                         idInicialCarreras = idInicialCarrerasWrap.intValue();
-                
-                escribeCursos(listaCursos, idInicialCursos, idInicialCarreras);
+
+                if (idInicialSemestresWrap == null)
+                        idInicialSemestres = 1;
+                else
+                        idInicialSemestres = idInicialSemestresWrap.intValue();
+
+                escribeCursos(listaCursos, idInicialCursos, idInicialCarreras, idInicialSemestres);
         }
 	/** 
 	* Método que guarda todos los cursos en el archivo de cursos.
 	*/
-	public void escribeCursos(ArrayList<Curso> listaCursos, int idInicialCursos, int idInicialCarreras) throws FileNotFoundException, SecurityException, IOException
+	public void escribeCursos(ArrayList<Curso> listaCursos, int idInicialCursos, int idInicialCarreras, int idInicialSemestres) throws FileNotFoundException, SecurityException, IOException
 	{	PrintWriter escritor;
                 String aEscribir;
 		ArrayList<Carrera> listaCarreras = new ArrayList(CapaIOCursos.capacidadInicialVector);
@@ -196,6 +253,7 @@ public class CapaIOCursos
                 //Escribo los idIniciales de carreras y cursos
                 escritor.println("<idCursosInicial=\""+idInicialCursos+"\" >");
                 escritor.println("<idCarrerasInicial=\""+idInicialCarreras+"\" >");
+                escritor.println("<idSemestresInicial=\""+idInicialSemestres+"\" >");
 
 		//Escribo las carreras en el archivo de cursos antes que los cursos.
 		for(i = 0; i<listaCarreras.size();i++)
@@ -212,6 +270,39 @@ public class CapaIOCursos
 		escritor.close();
 	}
 
+        private Carrera stringToCarrera(String linea)
+        {       String nomCarrera;
+                String descrip;
+                String idSemestresStr;
+                ArrayList<Integer> idSemestres = new ArrayList(CapaIOCursos.capacidadInicialVector);
+                int comienzoDato, i, codCarrera, posicionBarra;
+                if ((linea.indexOf("<Carrera") != -1))
+                {       if ((linea.indexOf("nomCarrera=") == -1) || (linea.indexOf("descrip=") == -1) || (linea.indexOf("codCarrera=") == -1) || (linea.indexOf("idSemestres=") == -1))
+                        {       System.out.println("ERROR: La linea leida desde el archivo de cursos es incorrecta");
+                                return null;
+                        }
+                        comienzoDato = linea.indexOf("codCarrera=") + "codCarrera=".length();
+                        codCarrera = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
+
+                        comienzoDato = linea.indexOf("nomCarrera=") + "nomCarrera=".length();
+                        nomCarrera = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1));
+
+                        comienzoDato = linea.indexOf("descrip=") + "descrip=".length();
+                        descrip = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1));
+
+                        comienzoDato = linea.indexOf("idSemestres=") + "idSemestres=".length();
+                        idSemestresStr = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1));
+
+                        Carrera carreraLeida = new Carrera(nomCarrera, codCarrera);
+                        carreraLeida.setDescripcion(descrip);
+                        //acá seteo los id de los semestres de carreraLeida!!!, alexis debes hacer un setter parar los id de semestre en las carreras
+                        //falta codigo aquí!!!
+
+                        return carreraLeida;
+                }
+                else
+                    return null;
+        }
 	/** 
 	* Este método recibe un String que contiene especificado un objeto del tipo Curso, analiza este String y devuelve un objeto Curso.
 	*/
@@ -231,8 +322,9 @@ public class CapaIOCursos
 		if ((linea.indexOf("<Curso") != -1))
 		{	/* Busco errores de sintaxis en la linea analizada*/
 			if ((linea.indexOf("idCurso=") == -1) || (linea.indexOf("nomCurso=") == -1) || (linea.indexOf("descrip=") == -1) || (linea.indexOf("codCurso=") == -1) || (linea.indexOf("seccion=") == -1) || (linea.indexOf("enCarreras=") == -1) || (linea.indexOf("idProfeAsig=") == -1) || (linea.indexOf("listSalas=") == -1) || (linea.indexOf("horario=") == -1))
-			{	System.out.println("ERROR: La linea leida desde el archivo de cursos es incorrecta");
-			}
+                        {       System.out.println("ERROR: La linea leida desde el archivo de cursos es incorrecta");
+                                return null;
+                        }
 
                         /* Busco el id del curso */
                         comienzoDato = linea.indexOf("idCurso=") + "idCurso=".length();
@@ -296,8 +388,7 @@ public class CapaIOCursos
 		}
 
 		else
-		{	return null;
-		}
+			return null;
 	}
 	/**
 	* Esté metodo recibe un objeto Curso y crea un string de como debe ser escrito en el archivo de cursos

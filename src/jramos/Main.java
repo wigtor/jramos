@@ -77,7 +77,7 @@ public class Main
                         lista = gestorIOCursos.leeCursos();
                         System.out.println(lista);
                         System.out.println("Ahora al revez, escribo una lista de cursos en el archivo.");
-                        gestorIOCursos.escribeCursos(lista);
+                        gestorIOCursos.escribeCursos(lista, 7 , 8, 2);
                 }
                         catch (Exception e)
                 {

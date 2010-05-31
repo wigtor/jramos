@@ -14,7 +14,7 @@ public class Carrera {
 
     private String nomCarrera;
     private int codCarrera;
-    private String descrip = "0";
+    private String descrip = "";
     private ArrayList<Semestre> semestres;
     private ArrayList<Integer> idSemestres;
     
@@ -63,7 +63,7 @@ public class Carrera {
      * @return String con la descripcion
      */
     public String getDescripcion(){
-        if (!this.descrip.contentEquals("0")){
+        if (!this.descrip.contentEquals("")){
             return this.descrip;
         }
         else{

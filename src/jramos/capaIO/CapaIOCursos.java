@@ -27,6 +27,8 @@ public class CapaIOCursos
 	private String nombreArchivoCursos;
 	private static final int capacidadInicialVector = 100;
 	private static final int capacidadInicialString = 200;
+        private int ultimoIdLeidoCursos;
+        private int ultimoIdLeidoCarreras;
 
 	/* CONSTRUCTORES */
 	public CapaIOCursos() throws IOException
@@ -44,6 +46,64 @@ public class CapaIOCursos
 	}
 
 	/* METODOS */
+
+        public Integer leeIDInicial(String tipoId) throws FileNotFoundException, IOException
+        {       int idInicial = 0;
+                BufferedReader lector;
+		StringBuilder lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+		int caracterLeido = 0;
+		long i, j;
+
+		/** Intento abrir el archivo de cursos */
+		try
+		{	lector = new BufferedReader(new FileReader(this.nombreArchivoCursos));
+		}
+		catch (FileNotFoundException FNFE)
+		{	throw FNFE; //<Devuelvo la excepción haca quien llame el método leeCursos.
+		}
+
+                for (i = 0; (caracterLeido != -1) && idInicial == 0; i++)
+		{	caracterLeido = lector.read();
+			/**Comienza a leer datos desde que encuentra un caracter '<' */
+			if (caracterLeido == '<')
+			{	for (j = 0; ((caracterLeido != -1) && (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
+				{	lineaDatos.append(String.valueOf((char)caracterLeido));
+                                        //lineaDatos.append(Character.forDigit(caracterLeido, 10));
+					caracterLeido = lector.read();
+				}
+				lineaDatos.append(String.valueOf((char)caracterLeido));//agrego el caracter '>' que no fue agregado en el bucle
+				i += j; //sumo los caracteres que ya se han leido a i, aun no se si esto pueda ser necesario a futuro.
+			}
+			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
+			idInicial = this.stringToIdInicial(new String(lineaDatos.toString()), tipoId);
+			if (idInicial == 0)
+				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un curso");
+                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+                }
+		/** Cierro el archivo*/
+		lector.close();
+                if (idInicial != 0)
+                        return new Integer(idInicial);
+                else
+                        return null;
+
+        }
+
+        private int stringToIdInicial(String linea, String tipoId)
+        {       int comienzoDato, idInicial;
+                if (((linea.indexOf("<idCursosInicial") != -1)) && (tipoId.equals("idCursos")))
+                {       comienzoDato = linea.indexOf("idCursosInicial=") + "idCursosInicial=".length();
+                        idInicial = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
+                        return idInicial;
+                }
+                else if (((linea.indexOf("<idCarrerasInicial") != -1)) && (tipoId.equals("idCarreras")))
+                {       comienzoDato = linea.indexOf("idCarrerasInicial=") + "idCarrerasInicial=".length();
+                        idInicial = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
+                        return idInicial;
+                }
+                else
+                        return 0;
+        }
 	/** Metodo para leer todos los cursos
 	* 
 	*/
@@ -89,17 +149,31 @@ public class CapaIOCursos
 		/**  Retorno la lista con los cursos leidos*/
 		return listaCursos;
 	}
-	
+
+        public void escribeCursos(ArrayList<Curso> listaCursos) throws FileNotFoundException, SecurityException, IOException
+        {       Integer idInicialCursosWrap = this.leeIDInicial("idCursos");
+                Integer idInicialCarrerasWrap = this.leeIDInicial("idCarreras");
+                int idInicialCursos, idInicialCarreras;
+                if (idInicialCursosWrap == null)
+                        idInicialCursos = 1;
+                else
+                        idInicialCursos = idInicialCursosWrap.intValue();
+                if (idInicialCarrerasWrap == null)
+                        idInicialCarreras = 1;
+                else
+                        idInicialCarreras = idInicialCarrerasWrap.intValue();
+                
+                escribeCursos(listaCursos, idInicialCursos, idInicialCarreras);
+        }
 	/** 
 	* Método que guarda todos los cursos en el archivo de cursos.
 	*/
-	public void escribeCursos(ArrayList<Curso> listaCursos) throws FileNotFoundException, SecurityException, IOException
+	public void escribeCursos(ArrayList<Curso> listaCursos, int idInicialCursos, int idInicialCarreras) throws FileNotFoundException, SecurityException, IOException
 	{	PrintWriter escritor;
                 String aEscribir;
 		ArrayList<Carrera> listaCarreras = new ArrayList(CapaIOCursos.capacidadInicialVector);
 		/** Leo todo el resto del contenido del archivo de cursos que no sea un "Curso" para no perder los datos.*/
 		//Acá debo llamar a los métodos leeCarreras() !!!.
-
                 //Acá debo llamar a leeIds()
 
 
@@ -117,6 +191,11 @@ public class CapaIOCursos
 		{	System.out.println("ERROR: No tiene permisos de escritura sobre el archivo de cursos.");
 			throw SE;
 		}
+
+
+                //Escribo los idIniciales de carreras y cursos
+                escritor.println("<idCursosInicial=\""+idInicialCursos+"\" >");
+                escritor.println("<idCarrerasInicial=\""+idInicialCarreras+"\" >");
 
 		//Escribo las carreras en el archivo de cursos antes que los cursos.
 		for(i = 0; i<listaCarreras.size();i++)

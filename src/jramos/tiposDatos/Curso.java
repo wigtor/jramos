@@ -136,11 +136,15 @@ public class Curso {
     */
    public String getEnCarreras_Codigo(){
         StringBuilder text = new StringBuilder();
-        for (Integer codigo: this.codigosCarrera){
-            text.append(String.valueOf(this.codigosCarrera)).append("|");
-        }
+        if (this.horario.size() != 0 )
+        {   for (Integer codigo: this.codigosCarrera){
+                text.append(String.valueOf(codigo)).append("|");
+            }
         text.deleteCharAt(text.length()-1);
         return text.toString();
+        }
+        else
+            return "";
     }
 
    /**
@@ -171,7 +175,10 @@ public class Curso {
       for (Integer numSala: this.listSalas){
           text.append(String.valueOf(numSala)).append("|");
       }
-      text.deleteCharAt(text.length()-1);
+      try //esto es en caso que no tenga salas
+      {      text.deleteCharAt(text.length()-1);
+      }
+      catch (Exception e){}
       return text.toString();
    }
 
@@ -182,17 +189,20 @@ public class Curso {
     */
    public String getHorario(){
       StringBuilder text = new StringBuilder();
-      for (Hora hora: this.horario){
-          try {
-              text.append(hora.getHoraStr()).append("|");
-          }
-          catch (Exception e){
-              System.out.println("Error al pedir datos de hora");
-          }
-
-      }
-      text.deleteCharAt(text.length()-1);
+      if (this.horario.size() != 0 )
+      {     for (Hora hora: this.horario){
+                try
+                {     text.append(hora.getHoraStr()).append("|");
+                }
+                catch (Exception e)
+                {     System.out.println("Error al pedir datos de hora");
+                }
+            }
+            text.deleteCharAt(text.length()-1);
       return text.toString();
+      }
+      else
+          return "";
    }
 
    /**

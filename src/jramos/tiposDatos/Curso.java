@@ -136,12 +136,12 @@ public class Curso {
     */
    public String getEnCarreras_Codigo(){
         StringBuilder text = new StringBuilder();
-        if (this.horario.size() != 0 )
+        if (this.codigosCarrera.size() != 0 )
         {   for (Integer codigo: this.codigosCarrera){
                 text.append(String.valueOf(codigo)).append("|");
             }
-        text.deleteCharAt(text.length()-1);
-        return text.toString();
+            text.deleteCharAt(text.length()-1);
+            return text.toString();
         }
         else
             return "";

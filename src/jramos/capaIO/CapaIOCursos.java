@@ -8,8 +8,6 @@
 *****************************************************/
 
 
-//Tengo unos excelente trabajadores programando xD, esta aprendiendo a usar git
-
 package jramos.capaIO;
 
 //import jramos.tiposDatos.Hora;
@@ -228,7 +226,7 @@ public class CapaIOCursos
 		int codCurso = cursoAEscribir.getCodigoCurso(); //Código del ramo
 		String seccion = cursoAEscribir.getSeccion(); //código de sección
 		String enCarreras = cursoAEscribir.getEnCarreras_Codigo(); //Carreras en que se dicta.
-		int idProfesor = cursoAEscribir.getIdProfesor(); //rut del profesor
+		int idProfesor = cursoAEscribir.getIdProfeAsig(); //rut del profesor
 		String listSalas = cursoAEscribir.getSalas(); //Salas donde se dicta el ramo.
 		String horario = cursoAEscribir.getHorario(); //Horas en que se dicta e la semana.
 		cursoString = "<Curso nomCurso=\""+nomCurso+"\" descrip=\""+descrip+"\" codCurso=\""+codCurso+"\" seccion=\""+seccion+"\" enCarreras=\""+enCarreras+"\" idProfesor=\""+idProfesor+"\" listSalas=\""+listSalas+"\" horario=\""+horario+"\" >";
@@ -238,7 +236,7 @@ public class CapaIOCursos
 	private String carreraToString(Carrera carreraAEscribir)
 	{	System.out.println("Se va a pasar una carrera a String...");
 		String nomCarrera = carreraAEscribir.getNombreCarrera(); //cambiar por un getter
-		String descrip = carreraAEscribir.getDescrip; //Cambiar por un getter
+		String descrip = "una descripcion";//carreraAEscribir.getDescrip; //Cambiar por un getter
 		int codCarrera = carreraAEscribir.getCodigoCarrera(); //cambiar por un getter
 		return "<Carrera nomCarrera=\""+nomCarrera+"\" descrip=\""+descrip+"\" codCarrera=\""+codCarrera+"\"";
 	}

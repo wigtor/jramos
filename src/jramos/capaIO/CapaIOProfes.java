@@ -97,9 +97,8 @@ public class CapaIOProfes
 	/** 
 	* Método que guarda todos los profesores en el archivo de profesores.
 	*/
-	public void escribeProfes(ArrayList<Curso> listaProfes) throws FileNotFoundException, SecurityException, IOException
+	public void escribeProfes(ArrayList<Profesor> listaProfes) throws FileNotFoundException, SecurityException, IOException
 	{	PrintWriter escritor;
-		ArrayList<Carrera> listaCarreras = new ArrayList(CapaIOProfes.capacidadInicialVector);
 
 		int i;
 		/** Intenta abrir el archivo de profesores para escribir en él. */
@@ -118,7 +117,7 @@ public class CapaIOProfes
 
 		//Escribo los profesores del ArrayList<Profesor> en el archivo de profesores.
 		for(i = 0; i<listaProfes.size();i++)
-		{	escritor.println(this.profesorToString(listaProfes.get(i)));//Escribo en el archivo de profes.
+		{       escritor.println(this.profesorToString(listaProfes.get(i)));//Escribo en el archivo de profes.
 		}
 		
 		/** Cierro el archivo*/
@@ -142,12 +141,12 @@ public class CapaIOProfes
 		/* Si es un curso lo que está espeficado en la linea, creo un objeto "Curso" */
 		if ((linea.indexOf("<Profesor") != -1))
 		{	/* Busco errores de sintaxis en la linea analizada*/
-			if ((linea.indexOf("nomProfe=") == -1) || (linea.indexOf("idProfe=") == -1) || (linea.indexOf("rutProfe=") == -1) || (linea.indexOf("idCursosAsig=") == -1) || (linea.indexOf("horasDisp=") == -1) || (linea.indexOf("horasAsig=") == -1))
+			if ((linea.indexOf("nombProfe=") == -1) || (linea.indexOf("idProfe=") == -1) || (linea.indexOf("rutProfe=") == -1) || (linea.indexOf("idCursosAsig=") == -1) || (linea.indexOf("horasDisp=") == -1) || (linea.indexOf("horasAsig=") == -1))
 			{	System.out.println("ERROR: La linea leida desde el archivo de cursos es incorrecta");
 			}
 
 			/* Busco el nombre del curso en la linea*/
-			comienzoDato = linea.indexOf("idProfesor=") + "idProfesor=".length();
+			comienzoDato = linea.indexOf("idProfe=") + "idProfe=".length();
 			idProfe = linea.substring(comienzoDato, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
 
 			/* Busco la descripción del curso en la linea*/
@@ -188,15 +187,14 @@ public class CapaIOProfes
 	*/
 	private String profesorToString(Profesor profesorAEscribir)
 	{	String cursoString;
-		String nomCurso = cursoAEscribir.getNombreCurso(); //Nombre del curso
-		String descrip = cursoAEscribir.getDescripcion(); //Descripción del curso
-		String codCurso = Integer.toString(cursoAEscribir.getCodigoCurso()); //Código del ramo
-		String seccion = cursoAEscribir.getSeccion(); //código de sección
-		String enCarreras = cursoAEscribir.getEnCarreras(); //Carreras en que se dicta.
-		String profesor = cursoAEscribir.getNombreProfesor(); //nombre del profesor
-		String listSalas = cursoAEscribir.getSalas(); //Salas donde se dicta el ramo.
-		String horario = cursoAEscribir.getHorario(); //Horas en que se dicta e la semana.
-		cursoString = "<Curso nomCurso=\""+nomCurso+"\" descrip=\""+descrip+"\" codCurso=\""+codCurso+"\" seccion=\""+seccion+"\" enCarreras=\""+enCarreras+"\" profesor=\""+profesor+"\" listSalas=\""+listSalas+"\" horario=\""+horario+"\" >";
+		String nomProfe = profesorAEscribir.getNombreProfesor(); //Nombre del profesor
+		String idProfe = Integer.toString(profesorAEscribir.getIdProfesor()); //id interna del profesor
+		String rutProfe = Integer.toString(profesorAEscribir.getRutProfesor()); //rut del profesor
+		String idCursosAsig = profesorAEscribir.getCursosAsignados(); //cursos que el profesor tiene asignados
+                String horasDisp = profesorAEscribir.getHorasDisponibles(); //obtiene las horas que el profesor tiene disponibles
+                String horasAsig = profesorAEscribir.getHorasAsignadas(); //obtiene las horas que se le han asignado al profesor
+                String codCursosDisp = profesorAEscribir.getCursosQueImparte(); //
+		cursoString = "<Profesor nombProfe=\""+nomProfe+"\" idProfe=\""+idProfe+"\" rutProfe=\""+rutProfe+"\" idCursosAsig=\""+idCursosAsig+"\" codCursosDisp=\""+codCursosDisp+"\" horasDisp=\""+horasDisp+"\" horasAsig=\""+horasDisp+"\" >";
 		return cursoString;
 	}
 

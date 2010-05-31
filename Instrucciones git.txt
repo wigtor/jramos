@@ -1,0 +1,8 @@
+tonce resumen
+cuando tengas cambios en tu codigo
+git add .
+git commit -a
+
+en el editor de texto vim entras al modo de insercion con shift + i , escribes todo los comentarios que quieras, sales del modo de insercion con ESC, apretas shift + Z 2 veces
+luego escribes en consola git push
+y quedan tus cambios en el server

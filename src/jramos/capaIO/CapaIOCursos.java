@@ -8,6 +8,8 @@
 *****************************************************/
 
 
+//Tengo unos excelente trabajadores programando xD, esta aprendiendo a usar git
+
 package jramos.capaIO;
 
 //import jramos.tiposDatos.Hora;

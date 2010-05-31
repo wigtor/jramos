@@ -1,6 +1,8 @@
 <idCursosInicial="7" >
 <idCarrerasInicial="8" >
 <idSemestresInicial="2" >
+<Carrera nomCarrera="ingenieria civil informatica" descrip="pta, la descripcion de informatica po wn!"
+ codCarrera="1863" idSemestres="23|24|25|26|27" >
 <Curso nomCurso="microeconomia" idCurso="2" descrip="curso en que se aprende las nociones basicas
 de economia y comportamiento de los actores del mercado
 " codCurso="10013" seccion="A04" enCarreras="1863|1864|1866|1868" idProfeAsig="0" listSalas="" horario="" >

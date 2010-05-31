@@ -76,8 +76,10 @@ public class Carrera {
      *
      * @return String con los Id separados con |
      */
-    public String getIdSemestres(){
+    public String getIdSemestres(){ ///ACA HAY UN POSIBLE ERROR CUANDO LA LISTA DE SEMESTRES ESTÁ VACÍA!!!
         StringBuilder text = new StringBuilder();
+        if (this.idSemestres.size() == 0 )
+                return "";
         for (Integer id: this.idSemestres){
             text.append(String.valueOf(id)).append("|");
         }
@@ -95,6 +97,12 @@ public class Carrera {
      */
     public void setDescripcion(String desc){
        this.descrip = desc;
+    }
+
+
+    public void modIdSemestres(Integer idSemestres, int selector)
+    {
+            
     }
 
     /**

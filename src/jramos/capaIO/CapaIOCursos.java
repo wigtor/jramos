@@ -13,6 +13,7 @@ package jramos.capaIO;
 //import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Carrera;
 import jramos.tiposDatos.Curso;
+import jramos.tiposDatos.Semestre;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.BufferedReader;
@@ -229,9 +230,10 @@ public class CapaIOCursos
 	{	PrintWriter escritor;
                 String aEscribir;
 		ArrayList<Carrera> listaCarreras = new ArrayList(CapaIOCursos.capacidadInicialVector);
+                ArrayList<Semestre> listaSemestres = new ArrayList(CapaIOCursos.capacidadInicialVector);
 		/** Leo todo el resto del contenido del archivo de cursos que no sea un "Curso" para no perder los datos.*/
-		//Acá debo llamar a los métodos leeCarreras() !!!.
-                //Acá debo llamar a leeIds()
+		listaCarreras = this.leeCarreras();
+                //Acá debo llamar a: listaSemestres = this.leeSemestres();
 
 
 		int i;
@@ -275,7 +277,7 @@ public class CapaIOCursos
                 String descrip;
                 String idSemestresStr;
                 ArrayList<Integer> idSemestres = new ArrayList(CapaIOCursos.capacidadInicialVector);
-                int comienzoDato, i, codCarrera, posicionBarra;
+                int comienzoDato, i, codCarrera, posicionBarra, idSemestre;
                 if ((linea.indexOf("<Carrera") != -1))
                 {       if ((linea.indexOf("nomCarrera=") == -1) || (linea.indexOf("descrip=") == -1) || (linea.indexOf("codCarrera=") == -1) || (linea.indexOf("idSemestres=") == -1))
                         {       System.out.println("ERROR: La linea leida desde el archivo de cursos es incorrecta");
@@ -296,7 +298,19 @@ public class CapaIOCursos
                         Carrera carreraLeida = new Carrera(nomCarrera, codCarrera);
                         carreraLeida.setDescripcion(descrip);
                         //acá seteo los id de los semestres de carreraLeida!!!, alexis debes hacer un setter parar los id de semestre en las carreras
-                        //falta codigo aquí!!!
+                        if (idSemestresStr.length() != 0)
+                        {       for (i = 0; idSemestresStr.indexOf("|") != -1;i++)
+                                {       System.out.println(idSemestresStr.substring(0, idSemestresStr.indexOf("|")));
+                                        idSemestre = Integer.valueOf(idSemestresStr.substring(0, idSemestresStr.indexOf("|")));
+                                        posicionBarra = idSemestresStr.indexOf("|");
+                                        idSemestresStr = idSemestresStr.substring(posicionBarra+1);
+                                        carreraLeida.modIdSemestres(idSemestre, 1);
+                                        System.out.println("En carrera: " + idSemestre);
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                carreraLeida.modIdSemestres(Integer.valueOf(idSemestresStr), 1);
+                                System.out.println("En carrera: " +idSemestresStr);
+                        }
 
                         return carreraLeida;
                 }
@@ -410,10 +424,11 @@ public class CapaIOCursos
 
 	private String carreraToString(Carrera carreraAEscribir)
 	{	System.out.println("Se va a pasar una carrera a String...");
-		String nomCarrera = carreraAEscribir.getNombreCarrera(); //cambiar por un getter
-		String descrip = "una descripcion";//carreraAEscribir.getDescrip; //Cambiar por un getter
-		int codCarrera = carreraAEscribir.getCodigoCarrera(); //cambiar por un getter
-		return "<Carrera nomCarrera=\""+nomCarrera+"\" descrip=\""+descrip+"\" codCarrera=\""+codCarrera+"\"";
+		String nomCarrera = carreraAEscribir.getNombreCarrera();
+		String descrip = carreraAEscribir.getDescripcion();
+		int codCarrera = carreraAEscribir.getCodigoCarrera();
+                String idSemestresStr = carreraAEscribir.getIdSemestres();
+		return "<Carrera nomCarrera=\""+nomCarrera+"\" descrip=\""+descrip+"\" codCarrera=\""+codCarrera+"\" idSemestres=\""+idSemestresStr+"\" >";
 	}
 }
 

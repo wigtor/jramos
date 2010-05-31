@@ -16,7 +16,7 @@ public class Curso {
     static int idCursoActual = 0;
 
     private String nomCurso;
-    private String descrip = "0";
+    private String descrip = "";
     private int codCurso;
     private String seccion = "0";
     private ArrayList<Carrera> enCarrera;
@@ -88,7 +88,7 @@ public class Curso {
     * @return String con la descripcion del curso
     */
    public String getDescripcion(){
-        if (!this.descrip.contentEquals("0")){
+        if (!this.descrip.contentEquals("")){
             return this.descrip;
         }
         else{

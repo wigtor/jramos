@@ -1,0 +1,245 @@
+/**
+******************************************************
+* @file CapaIOCursos.java
+* @author victor flores sanchez
+* @date mayo 2010
+* @version 0.1
+* @brief En este archivo se especifica la clase CapaIOCursos que se encarga de leer/escribir datos en el archivo de cursos.
+*****************************************************/
+
+
+package jramos.capaIO;
+
+//import jramos.tiposDatos.Hora;
+import jramos.tiposDatos.Carrera;
+import jramos.tiposDatos.Curso;
+import java.util.ArrayList;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.PrintWriter;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+
+
+public class CapaIOCursos
+{	/* ATRIBUTOS */
+	private String nombreArchivoCursos;
+	private static final int capacidadInicialVector = 100;
+	private static final int capacidadInicialString = 200;
+
+	/* CONSTRUCTORES */
+	public CapaIOCursos() throws IOException
+	{	this.nombreArchivoCursos = (System.getProperty("user.home") + System.getProperty("file.separator") + "archCursos.txt");
+		File archPrueba = new File(this.nombreArchivoCursos);
+		/** Si no existe el archivo de cursos, este es creado.*/
+		try
+		{	if (archPrueba.createNewFile())
+				System.out.println("Se ha creado el archivo de cursos vacio\nEn: " + this.nombreArchivoCursos);
+		}
+		catch (IOException IOE)
+		{	System.out.println("No se puede crear un archivo de cursos en: \n" + this.nombreArchivoCursos + "\nError grave!!");
+			throw IOE;
+		}
+	}
+
+	/* METODOS */
+	/** Metodo para leer todos los cursos
+	* 
+	*/
+	public ArrayList<Curso> leeCursos() throws FileNotFoundException, IOException
+	{	ArrayList<Curso> listaCursos= new ArrayList(CapaIOCursos.capacidadInicialVector);
+		BufferedReader lector;
+		StringBuilder lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+		int caracterLeido = 0;
+		long i, j;
+		
+		/** Intento abrir el archivo de cursos */
+		try
+		{	lector = new BufferedReader(new FileReader(this.nombreArchivoCursos));
+		}
+		catch (FileNotFoundException FNFE)
+		{	throw FNFE; //<Devuelvo la excepción haca quien llame el método leeCursos.
+		}
+		
+		/** Leo el archivo de cursos hasta el final */
+		for (i = 0; caracterLeido != -1; i++)
+		{	caracterLeido = lector.read();
+			/**Comienza a leer datos desde que encuentra un caracter '<' */
+			if (caracterLeido == '<')
+			{	for (j = 0; ((caracterLeido != -1) && (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
+				{	lineaDatos.append(String.valueOf((char)caracterLeido));
+                                        //lineaDatos.append(Character.forDigit(caracterLeido, 10));
+					caracterLeido = lector.read();
+				}
+				lineaDatos.append(String.valueOf((char)caracterLeido));//agrego el caracter '>' que no fue agregado en el bucle
+				i += j; //sumo los caracteres que ya se han leido a i, aun no se si esto pueda ser necesario a futuro.
+			}
+			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
+			Curso cursoEncontrado = this.stringToCurso(new String(lineaDatos.toString()));
+			if (cursoEncontrado != null)
+				listaCursos.add(cursoEncontrado);
+			else
+				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un curso");
+                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+                }
+		/** Cierro el archivo*/
+		lector.close();
+
+		/**  Retorno la lista con los cursos leidos*/
+		return listaCursos;
+	}
+	
+	/** 
+	* Método que guarda todos los cursos en el archivo de cursos.
+	*/
+	public void escribeCursos(ArrayList<Curso> listaCursos) throws FileNotFoundException, SecurityException, IOException
+	{	PrintWriter escritor;
+                String aEscribir;
+		ArrayList<Carrera> listaCarreras = new ArrayList(CapaIOCursos.capacidadInicialVector);
+		/** Leo todo el resto del contenido del archivo de cursos que no sea un "Curso" para no perder los datos.*/
+		//Acá debo llamar a los métodos leeCarreras() !!!.
+
+                //Acá debo llamar a leeIds()
+
+
+		int i;
+		/** Intenta abrir el archivo de cursos para escribir en él. */
+		try
+		{	escritor = new PrintWriter(this.nombreArchivoCursos);
+		}
+		catch (FileNotFoundException FNFE)
+		{	System.out.println("ERROR: El archivo no existe"); //no deberia llegar a esta excepcion con el constructor que crea el archivo.
+			throw FNFE;
+			
+		}
+		catch (SecurityException SE)
+		{	System.out.println("ERROR: No tiene permisos de escritura sobre el archivo de cursos.");
+			throw SE;
+		}
+
+		//Escribo las carreras en el archivo de cursos antes que los cursos.
+		for(i = 0; i<listaCarreras.size();i++)
+		{	escritor.println(this.carreraToString(listaCarreras.get(i)));//Escribo en el archivo de cursos.
+		}
+
+		//Escribo los Cursos del ArrayList<Curso> en el archivo de cursos.
+		for(i = 0; i<listaCursos.size();i++)
+		{   aEscribir = this.cursoToString(listaCursos.get(i));
+                    escritor.println(aEscribir);//Escribo en el archivo de cursos.
+		}
+		
+		/** Cierro el archivo*/
+		escritor.close();
+	}
+
+	/** 
+	* Este método recibe un String que contiene especificado un objeto del tipo Curso, analiza este String y devuelve un objeto Curso.
+	*/
+	private Curso stringToCurso(String linea)
+	{	
+		String nomCurso; //Nombre del curso
+		String descrip; //Descripción del curso
+		String codCurso; //Código del ramo
+		String seccion; //código de sección
+		String enCarreras; //Carreras en que se dicta.
+		String idProfesor; //id del profesor que dicta el curso.
+		String listSalas; //Salas donde se dicta el ramo.
+		String horario; //Horas en que se dicta e la semana.
+		int comienzoDato, i, codigoCarrera, posicionBarra, idCurso;
+		
+		/* Si es un curso lo que está espeficado en la linea, creo un objeto "Curso" */
+		if ((linea.indexOf("<Curso") != -1))
+		{	/* Busco errores de sintaxis en la linea analizada*/
+			if ((linea.indexOf("idCurso=") == -1) || (linea.indexOf("nomCurso=") == -1) || (linea.indexOf("descrip=") == -1) || (linea.indexOf("codCurso=") == -1) || (linea.indexOf("seccion=") == -1) || (linea.indexOf("enCarreras=") == -1) || (linea.indexOf("rutProfesor=") == -1) || (linea.indexOf("listSalas=") == -1) || (linea.indexOf("horario=") == -1))
+			{	System.out.println("ERROR: La linea leida desde el archivo de cursos es incorrecta");
+			}
+
+                        /* Busco el id del curso */
+                        comienzoDato = linea.indexOf("idCurso=") + "idCurso=".length();
+                        idCurso = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
+                        
+			/* Busco el nombre del curso en la linea*/
+			comienzoDato = linea.indexOf("nomCurso=") + "nomCurso=".length();
+			nomCurso = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+
+			/* Busco la descripción del curso en la linea*/
+			comienzoDato = linea.indexOf("descrip=") + "descrip=".length();
+			descrip = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+
+			/* Busco el código del curso en la linea*/
+			comienzoDato = linea.indexOf("codCurso=") + "codCurso=".length();
+			codCurso = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+
+			/* Busco las secciones del curso en la linea*/
+			comienzoDato = linea.indexOf("seccion=") + "seccion=".length();
+			seccion = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+
+			/* Busco las carreras del curso en la linea*/
+			comienzoDato = linea.indexOf("enCarreras=") + "enCarreras=".length();
+			enCarreras = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+
+			/* Busco el profesor del curso en la linea*/
+			comienzoDato = linea.indexOf("idProfesor=") + "idProfesor=".length();
+			idProfesor = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+
+			/* Busco las salas donde se dicta del curso en la linea*/
+			comienzoDato = linea.indexOf("listSalas=") + "listSalas=".length();
+			listSalas = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+
+			/* Busco el horario del curso en la linea*/
+			comienzoDato = linea.indexOf("horario=") + "horario=".length();
+			horario = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+
+			/* Construyo el objeto cursoLeido con los datos recopilados */
+			Curso cursoLeido = new Curso(nomCurso, Integer.valueOf(codCurso));
+                        //cursoLeido.setId(id);
+                        cursoLeido.setDescripcion(descrip);
+                        cursoLeido.setSeccion(seccion);
+                        cursoLeido.setIdProfeAsig(Integer.valueOf(idProfesor));
+                        for (i = 0; enCarreras.indexOf("|") != -1;i++)
+                        {       System.out.println(enCarreras.substring(0, enCarreras.indexOf("|")));
+                                codigoCarrera = Integer.valueOf(enCarreras.substring(0, enCarreras.indexOf("|")));
+                                posicionBarra = enCarreras.indexOf("|");
+                                enCarreras = enCarreras.substring(posicionBarra+1);
+                                cursoLeido.modCodigosCarrera(codigoCarrera, 1);
+                                System.out.println("En carrera: " + codigoCarrera);
+                        }
+			/* Seteo los demas atributos del curso leido */
+                        //carrera.
+                        //listaSalas.
+                        //horario.
+			return cursoLeido;
+		}
+
+		else
+		{	return null;
+		}
+	}
+	/**
+	* Esté metodo recibe un objeto Curso y crea un string de como debe ser escrito en el archivo de cursos
+	*/
+	private String cursoToString(Curso cursoAEscribir)
+	{	String cursoString;
+		String nomCurso = cursoAEscribir.getNombreCurso(); //Nombre del curso
+		String descrip = cursoAEscribir.getDescripcion(); //Descripción del curso
+		int codCurso = cursoAEscribir.getCodigoCurso(); //Código del ramo
+		String seccion = cursoAEscribir.getSeccion(); //código de sección
+		String enCarreras = cursoAEscribir.getEnCarreras_Codigo(); //Carreras en que se dicta.
+		int idProfesor = cursoAEscribir.getIdProfesor(); //rut del profesor
+		String listSalas = cursoAEscribir.getSalas(); //Salas donde se dicta el ramo.
+		String horario = cursoAEscribir.getHorario(); //Horas en que se dicta e la semana.
+		cursoString = "<Curso nomCurso=\""+nomCurso+"\" descrip=\""+descrip+"\" codCurso=\""+codCurso+"\" seccion=\""+seccion+"\" enCarreras=\""+enCarreras+"\" idProfesor=\""+idProfesor+"\" listSalas=\""+listSalas+"\" horario=\""+horario+"\" >";
+		return cursoString;
+	}
+
+	private String carreraToString(Carrera carreraAEscribir)
+	{	System.out.println("Se va a pasar una carrera a String...");
+		String nomCarrera = carreraAEscribir.getNombreCarrera(); //cambiar por un getter
+		String descrip = carreraAEscribir.getDescrip; //Cambiar por un getter
+		int codCarrera = carreraAEscribir.getCodigoCarrera(); //cambiar por un getter
+		return "<Carrera nomCarrera=\""+nomCarrera+"\" descrip=\""+descrip+"\" codCarrera=\""+codCarrera+"\"";
+	}
+}
+
+

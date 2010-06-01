@@ -12,7 +12,9 @@ package jramos.capaIO;
 
 import jramos.tiposDatos.Carrera;
 import jramos.tiposDatos.Curso;
+import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Semestre;
+import jramos.tiposDatos.HourOutOfRangeException;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.BufferedReader;
@@ -157,7 +159,7 @@ public class CapaIOCursos
 	/** Metodo para leer todos los cursos
 	* 
 	*/
-	public ArrayList<Curso> leeCursos() throws FileNotFoundException, IOException
+	public ArrayList<Curso> leeCursos() throws FileNotFoundException, IOException, HourOutOfRangeException
 	{	ArrayList<Curso> listaCursos= new ArrayList(CapaIOCursos.capacidadInicialVector);
 		BufferedReader lector;
 		StringBuilder lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
@@ -200,7 +202,7 @@ public class CapaIOCursos
 		return listaCursos;
 	}
 
-        public void escribeCarreras(ArrayList<Carrera> listaCarreras) throws FileNotFoundException, SecurityException, IOException
+        public void escribeCarreras(ArrayList<Carrera> listaCarreras) throws FileNotFoundException, SecurityException, IOException, HourOutOfRangeException
         {       Integer idInicialCursosWrap = this.leeIDInicial("idCursos");
                 Integer idInicialCarrerasWrap = this.leeIDInicial("idCarreras");
                 Integer idInicialSemestresWrap = this.leeIDInicial("idSemestres");
@@ -223,7 +225,7 @@ public class CapaIOCursos
                 escribeCarreras(listaCarreras, idInicialCursos, idInicialCarreras, idInicialSemestres);
         }
 
-        public void escribeCarreras(ArrayList<Carrera> listaCarreras, int idInicialCursos, int idInicialCarreras, int idInicialSemestres) throws FileNotFoundException, SecurityException, IOException
+        public void escribeCarreras(ArrayList<Carrera> listaCarreras, int idInicialCursos, int idInicialCarreras, int idInicialSemestres) throws FileNotFoundException, SecurityException, IOException, HourOutOfRangeException
         {       PrintWriter escritor;
                 String aEscribir;
 		ArrayList<Curso> listaCursos = new ArrayList(CapaIOCursos.capacidadInicialVector);
@@ -394,8 +396,8 @@ public class CapaIOCursos
 	/** 
 	* Este método recibe un String que contiene especificado un objeto del tipo Curso, analiza este String y devuelve un objeto Curso.
 	*/
-	private Curso stringToCurso(String linea)
-	{	
+	private Curso stringToCurso(String linea) throws HourOutOfRangeException
+        {
 		String nomCurso; //Nombre del curso
 		String descrip; //Descripción del curso
 		String codCurso; //Código del ramo
@@ -404,7 +406,8 @@ public class CapaIOCursos
 		String idProfeAsig; //id del profesor que dicta el curso.
 		String listSalas; //Salas donde se dicta el ramo.
 		String horario; //Horas en que se dicta e la semana.
-		int comienzoDato, i, codigoCarrera, posicionBarra, idCurso;
+		int comienzoDato, i, codigoCarrera, posicionBarra, idCurso, sala;
+                Hora objHora;
 		
 		/* Si es un curso lo que está espeficado en la linea, creo un objeto "Curso" */
 		if ((linea.indexOf("<Curso") != -1))
@@ -468,10 +471,37 @@ public class CapaIOCursos
                                 cursoLeido.modCodigosCarrera(Integer.valueOf(enCarreras), 1);
                                 System.out.println("En carrera: " +enCarreras);
                         }
-                        /* Seteo los demas atributos del curso leido */
-                        //carrera.
-                        //listaSalas.
-                        //horario.
+                        
+                        //Seteo la lista de salas asignadas al curso
+                        if (listSalas.length() != 0)
+                        {       for (i = 0; listSalas.indexOf("|") != -1;i++)
+                                {       System.out.println(listSalas.substring(0, listSalas.indexOf("|")));
+                                        sala = Integer.valueOf(listSalas.substring(0, listSalas.indexOf("|")));
+                                        posicionBarra = listSalas.indexOf("|");
+                                        listSalas = listSalas.substring(posicionBarra+1);
+                                        cursoLeido.modListaSalas(sala, 1);
+                                        System.out.println("En carrera: " + sala);
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                cursoLeido.modListaSalas(Integer.valueOf(listSalas), 1);
+                                System.out.println("En carrera: " +listSalas);
+                        }
+
+                        //Seteo la lista de horarios asignadas al curso
+                        if (horario.length() != 0)
+                        {       for (i = 0; horario.indexOf("|") != -1;i++)
+                                {       System.out.println(horario.substring(0, horario.indexOf("|")));
+                                        objHora = new Hora(horario.substring(0, horario.indexOf("|")));
+                                        posicionBarra = horario.indexOf("|");
+                                        horario = horario.substring(posicionBarra+1);
+                                        cursoLeido.modHorario(objHora, 1);
+                                        System.out.println("En carrera: " + objHora);
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                cursoLeido.modHorario(new Hora(horario), 1);
+                                System.out.println("En carrera: " +horario);
+                        }
+                        
 			return cursoLeido;
 		}
 

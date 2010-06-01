@@ -122,6 +122,15 @@ public class Semestre {
         return this.idSemestre;
     }
 
+    /**
+     * Metodo para obtener el ultimo id del semestre utilizado
+     *
+     * @return int con el id de este semestre
+     */
+    public int getIdSemestreGlobal(){
+        return Semestre.idSemestreActual;
+    }
+
     //////////////////////////////////////////////////////////////////////
     // Metodos de Modificar Variables
 

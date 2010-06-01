@@ -214,6 +214,15 @@ public class Curso {
        return this.idCurso;
    }
 
+   /**
+    * Metodo para obtener el ultimo id del curso que se utilizo
+    *
+    * @return int con el id del curso
+    */
+   public int getIdCursoGlobal(){
+       return Curso.idCursoActual;
+   }
+
 
    //////////////////////////////////////////////////////////////////////
    // Metodos de Modificar Variables

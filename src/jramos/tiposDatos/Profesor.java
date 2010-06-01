@@ -163,6 +163,15 @@ public class Profesor {
         return this.idProfesor;
     }
 
+    /**
+     * Metodo para obtener el ultimo id del profesor utilizado
+     *
+     * @return int con el id del profesor
+     */
+    public int getIdProfesorGlobal(){
+        return Profesor.idProfesorActual;
+    }
+
     // Metodos para agregar o modificar Variables
 
     /**

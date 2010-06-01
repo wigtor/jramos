@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 public class Carrera {
 
+    static int codCarreraActual = 10000;
+
     private String nomCarrera;
     private int codCarrera;
     private String descrip = "";
@@ -23,7 +25,19 @@ public class Carrera {
     // Contructor
 
     /**
-     *  Constructor para Carrera:
+     * 1º Constructor para Carrera:
+     *
+     * @param nombreCarrera Nombre de la carrera
+     */
+    public Carrera(String nombreCarrera){
+        this.nomCarrera = nombreCarrera;
+        this.codCarrera = ++codCarreraActual;
+        this.semestres = new ArrayList<Semestre>();
+        this.idSemestres = new ArrayList<Integer>();
+    }
+
+    /**
+     * 2º Constructor para Carrera:
      *
      * @param nombreCarrera Nombre de la carrera
      * @param codigoCarrera Codigo unico para la carrera
@@ -58,6 +72,15 @@ public class Carrera {
     }
 
     /**
+     * Metodo para obtener el ultimo codigo de la carrera utilizadp
+     *
+     * @return int codigo de la carrera
+     */
+    public int getCodigoCarreraGlobal(){
+        return Carrera.codCarreraActual;
+    }
+
+    /**
      * Metodo para obtener la descripcion de la carrera
      *
      * @return String con la descripcion
@@ -78,8 +101,9 @@ public class Carrera {
      */
     public String getIdSemestres(){ ///ACA HAY UN POSIBLE ERROR CUANDO LA LISTA DE SEMESTRES ESTÁ VACÍA!!!
         StringBuilder text = new StringBuilder();
-        if (this.idSemestres.size() == 0 )
+        if (this.idSemestres.size() == 0 ){
                 return "";
+        }
         for (Integer id: this.idSemestres){
             text.append(String.valueOf(id)).append("|");
         }
@@ -99,6 +123,16 @@ public class Carrera {
        this.descrip = desc;
     }
 
+    /**
+     * Metodo para setear el Id de la Carrera actual(variable static). Se debe obtener desde un archivo.
+     * Se utiliza este metodo siempre que se cargue el sistema, para no volver a utilizar los mismos
+     * id.
+     * 
+     * @param id int con el id static para ser seteado
+     */
+    public void setIdCarreras(int id){
+        Carrera.codCarreraActual = id;
+    }
 
     public void modIdSemestres(Integer idSemestres, int selector)
     {

@@ -144,7 +144,6 @@ public class Semestre {
         if (selector == 1){
             if (!this.ramos.contains(cursoToAsig)){
                 this.ramos.add(cursoToAsig);
-                this.listCodRamos.add(cursoToAsig.getCodigoCurso());
             }
             else{
 
@@ -153,7 +152,7 @@ public class Semestre {
         else if (selector == -1){
             if (this.ramos.contains(cursoToAsig)){
                 this.ramos.remove(cursoToAsig);
-                this.listCodRamos.remove(cursoToAsig.getCodigoCurso());
+                this.modCodRamos(cursoToAsig.getCodigoCurso(), -1);
             }
             else{
                 System.out.println("No existe ese curso...");
@@ -164,6 +163,32 @@ public class Semestre {
             System.out.println("Error en la seleccion...");
         }
     }
+
+    public void modCodRamos(int codRamo, int selector){
+        Integer codRamoWrap = new Integer(codRamo);
+        if (selector == 1){
+            if (!this.listCodRamos.contains(codRamoWrap)){
+                this.listCodRamos.add(codRamoWrap);
+            }
+            else{
+                System.out.println("el semestre ya contiene este ramo en su listado de cursos");
+                return ;
+            }
+        }
+        else if (selector == -1){
+            if (this.listCodRamos.contains(codRamoWrap)){
+                this.listCodRamos.remove(codRamoWrap);
+            }
+            else{
+                System.out.println("No existe ese curso...");
+            }
+
+        }
+        else{
+            System.out.println("Error en la seleccion...");
+        }
+    }
+
 
     /**
      * Metodo para setear el Id del Semestre actual(variable static). Se debe obtener desde un archivo.

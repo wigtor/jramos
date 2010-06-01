@@ -543,6 +543,49 @@ public class CapaIOCursos
                 String codRamosDelSemestre = semestreAEscribir.getCodigosRamos();
 		return "<Semestre numSemestre=\""+numSemestre+"\" idSemestre=\""+idSemestre+"\" enCarreraId=\""+enCarreraId+"\" codRamosDelSemestre=\""+codRamosDelSemestre+"\" >";
 	}
+
+        private Semestre stringToSemestre(String linea)
+        {       String codRamosDelSemestre;
+                int comienzoDato, i, posicionBarra, numSemestre, idSemestre, enCarreraId, codRamo;
+                if ((linea.indexOf("<Semestre") != -1))
+                {       if ((linea.indexOf("numSemestre=") == -1) || (linea.indexOf("idSemestre=") == -1) || (linea.indexOf("enCarreraId=") == -1) || (linea.indexOf("codRamosDelSemestre=") == -1))
+                        {       System.out.println("ERROR: La linea leida desde el archivo de cursos es incorrecta");
+                                return null;
+                        }
+                        comienzoDato = linea.indexOf("numSemestre=") + "numSemestre=".length();
+                        numSemestre = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
+
+                        comienzoDato = linea.indexOf("idSemestre=") + "idSemestre=".length();
+                        idSemestre = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
+
+                        comienzoDato = linea.indexOf("enCarreraId=") + "enCarreraId=".length();
+                        enCarreraId = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
+
+                        comienzoDato = linea.indexOf("codRamosDelSemestre=") + "codRamosDelSemestre=".length();
+                        codRamosDelSemestre = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1));
+
+                        Semestre semestreLeido = new Semestre(numSemestre, enCarreraId, idSemestre);
+                        //acá seteo los id de los semestres de carreraLeida!!!, alexis debes hacer un setter parar los id de semestre en las carreras
+                        if (codRamosDelSemestre.length() != 0)
+                        {       for (i = 0; codRamosDelSemestre.indexOf("|") != -1;i++)
+                                {       System.out.println(codRamosDelSemestre.substring(0, codRamosDelSemestre.indexOf("|")));
+                                        codRamo = Integer.valueOf(codRamosDelSemestre.substring(0, codRamosDelSemestre.indexOf("|")));
+                                        posicionBarra = codRamosDelSemestre.indexOf("|");
+                                        codRamosDelSemestre = codRamosDelSemestre.substring(posicionBarra+1);
+                                        semestreLeido.modCodRamos(codRamo, 1);
+                                        System.out.println("codigo del semestre: " + codRamo);
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                semestreLeido.modCodRamos(Integer.valueOf(codRamosDelSemestre), 1);
+                                System.out.println("En carrera: " + codRamosDelSemestre);
+                        }
+
+                        return semestreLeido;
+                }
+                else
+                    return null;
+        }
+
 }
 
 

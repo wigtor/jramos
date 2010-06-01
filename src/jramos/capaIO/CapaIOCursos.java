@@ -232,7 +232,7 @@ public class CapaIOCursos
                 ArrayList<Semestre> listaSemestres = new ArrayList(CapaIOCursos.capacidadInicialVector);
 		/** Leo todo el resto del contenido del archivo de cursos que no sea un "Curso" para no perder los datos.*/
 		listaCursos = this.leeCursos();
-                //Acá debo llamar a: listaSemestres = this.leeSemestres();
+                listaSemestres = this.leeSemestres();
 
 
 		int i;
@@ -261,10 +261,10 @@ public class CapaIOCursos
 		{       escritor.println(this.carreraToString(listaCarreras.get(i)));//Escribo en el archivo de cursos.
 		}
 
-                //Escribo los semestres en el archivo de cursos antes que los cursos.
-		/*for(i = 0; i<listaSemestres.size();i++)
-		{	escritor.println(this.semestreToString(listaSemestres.get(i)));//Escribo en el archivo de cursos.
-		} */
+                //Escribo los Semestres del ArrayList<Semestre> en el archivo de cursos.
+		for(i = 0; i<listaSemestres.size();i++)
+		{       escritor.println(this.SemestreToString(listaSemestres.get(i)));//Escribo en el archivo de cursos.
+		}
 
                 //Escribo los cursos en el archivo de cursos
 		for(i = 0; i<listaCursos.size();i++)
@@ -309,7 +309,7 @@ public class CapaIOCursos
                 ArrayList<Semestre> listaSemestres = new ArrayList(CapaIOCursos.capacidadInicialVector);
 		/** Leo todo el resto del contenido del archivo de cursos que no sea un "Curso" para no perder los datos.*/
 		listaCarreras = this.leeCarreras();
-                //Acá debo llamar a: listaSemestres = this.leeSemestres();
+                listaSemestres = this.leeSemestres();
 
 
 		int i;
@@ -338,6 +338,11 @@ public class CapaIOCursos
 		{	escritor.println(this.carreraToString(listaCarreras.get(i)));//Escribo en el archivo de cursos.
 		}
 
+                //Escribo los Semestres del ArrayList<Semestre> en el archivo de cursos.
+		for(i = 0; i<listaSemestres.size();i++)
+		{       escritor.println(this.SemestreToString(listaSemestres.get(i)));//Escribo en el archivo de cursos.
+		}
+
 		//Escribo los Cursos del ArrayList<Curso> en el archivo de cursos.
 		for(i = 0; i<listaCursos.size();i++)
 		{   aEscribir = this.cursoToString(listaCursos.get(i));
@@ -347,6 +352,125 @@ public class CapaIOCursos
 		/** Cierro el archivo*/
 		escritor.close();
 	}
+
+
+        public void escribeSemestres(ArrayList<Semestre> listaSemestres) throws FileNotFoundException, SecurityException, IOException, HourOutOfRangeException
+        {       Integer idInicialCursosWrap = this.leeIDInicial("idCursos");
+                Integer idInicialCarrerasWrap = this.leeIDInicial("idCarreras");
+                Integer idInicialSemestresWrap = this.leeIDInicial("idSemestres");
+                int idInicialCursos, idInicialCarreras, idInicialSemestres;
+                if (idInicialCursosWrap == null)
+                        idInicialCursos = 1;
+                else
+                        idInicialCursos = idInicialCursosWrap.intValue();
+
+                if (idInicialCarrerasWrap == null)
+                        idInicialCarreras = 1;
+                else
+                        idInicialCarreras = idInicialCarrerasWrap.intValue();
+
+                if (idInicialSemestresWrap == null)
+                        idInicialSemestres = 1;
+                else
+                        idInicialSemestres = idInicialSemestresWrap.intValue();
+
+                escribeSemestres(listaSemestres, idInicialCursos, idInicialCarreras, idInicialSemestres);
+        }
+
+        public void escribeSemestres(ArrayList<Semestre> listaSemestres, int idInicialCursos, int idInicialCarreras, int idInicialSemestres) throws FileNotFoundException, SecurityException, IOException, HourOutOfRangeException
+	{	PrintWriter escritor;
+                String aEscribir;
+		ArrayList<Carrera> listaCarreras = new ArrayList(CapaIOCursos.capacidadInicialVector);
+                ArrayList<Curso> listaCursos = new ArrayList(CapaIOCursos.capacidadInicialVector);
+		/** Leo todo el resto del contenido del archivo de cursos que no sea un "Curso" para no perder los datos.*/
+		listaCarreras = this.leeCarreras();
+                listaCursos = this.leeCursos();
+
+		int i;
+		/** Intenta abrir el archivo de cursos para escribir en él. */
+		try
+		{	escritor = new PrintWriter(this.nombreArchivoCursos);
+		}
+		catch (FileNotFoundException FNFE)
+		{	System.out.println("ERROR: El archivo no existe"); //no deberia llegar a esta excepcion con el constructor que crea el archivo.
+			throw FNFE;
+
+		}
+		catch (SecurityException SE)
+		{	System.out.println("ERROR: No tiene permisos de escritura sobre el archivo de cursos.");
+			throw SE;
+		}
+
+
+                //Escribo los idIniciales de carreras y cursos
+                escritor.println("<idCursosInicial=\""+idInicialCursos+"\" >");
+                escritor.println("<idCarrerasInicial=\""+idInicialCarreras+"\" >");
+                escritor.println("<idSemestresInicial=\""+idInicialSemestres+"\" >");
+
+		//Escribo las carreras en el archivo de cursos antes que los cursos.
+		for(i = 0; i<listaCarreras.size();i++)
+		{	escritor.println(this.carreraToString(listaCarreras.get(i)));//Escribo en el archivo de cursos.
+		}
+
+                //Escribo los Semestres del ArrayList<Semestre> en el archivo de cursos.
+		for(i = 0; i<listaSemestres.size();i++)
+		{       escritor.println(this.SemestreToString(listaSemestres.get(i)));//Escribo en el archivo de cursos.
+		}
+
+		//Escribo los Cursos del ArrayList<Curso> en el archivo de cursos.
+		for(i = 0; i<listaCursos.size();i++)
+		{       escritor.println(this.cursoToString(listaCursos.get(i)));//Escribo en el archivo de cursos.
+                }
+
+		/** Cierro el archivo*/
+		escritor.close();
+	}
+
+        public ArrayList<Semestre> leeSemestres() throws FileNotFoundException, SecurityException, IOException
+        {       ArrayList<Semestre> listaSemestres= new ArrayList(CapaIOCursos.capacidadInicialVector);
+		BufferedReader lector;
+		StringBuilder lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+		int caracterLeido = 0;
+		long i, j;
+
+		/** Intento abrir el archivo de cursos */
+		try
+		{	lector = new BufferedReader(new FileReader(this.nombreArchivoCursos));
+		}
+		catch (FileNotFoundException FNFE)
+		{	throw FNFE; //<Devuelvo la excepción haca quien llame el método leeCursos.
+		}
+
+		/** Leo el archivo de cursos hasta el final */
+		for (i = 0; caracterLeido != -1; i++)
+		{	caracterLeido = lector.read();
+			/**Comienza a leer datos desde que encuentra un caracter '<' */
+			if (caracterLeido == '<')
+			{	for (j = 0; ((caracterLeido != -1) && (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
+				{	lineaDatos.append(String.valueOf((char)caracterLeido));
+                                        //lineaDatos.append(Character.forDigit(caracterLeido, 10));
+					caracterLeido = lector.read();
+				}
+				lineaDatos.append(String.valueOf((char)caracterLeido));//agrego el caracter '>' que no fue agregado en el bucle
+				i += j; //sumo los caracteres que ya se han leido a i, aun no se si esto pueda ser necesario a futuro.
+			}
+			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
+			Semestre semestreEncontrado = this.stringToSemestre(new String(lineaDatos.toString()));
+			if (semestreEncontrado != null)
+				listaSemestres.add(semestreEncontrado);
+			else
+				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un semestre");
+                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+                }
+		/** Cierro el archivo*/
+		lector.close();
+
+		/**  Retorno la lista con los cursos leidos*/
+		return listaSemestres;
+
+
+                
+        }
 
         private Carrera stringToCarrera(String linea)
         {       String nomCarrera;

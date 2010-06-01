@@ -20,6 +20,7 @@ public class Profesor {
     private ArrayList<Hora> horaOcup;
     private ArrayList<Integer> cursosDisp; //Solo codigos de curso
     private ArrayList<Integer> cursosAsig; //Solo codigos de curso
+    private ArrayList<Integer> idCursosAsig; //Solo id de cursos
     private ArrayList<String> seccionAsig; //Solo secciones de curso
     private int rutProfe;
     private int idProfesor;
@@ -41,6 +42,7 @@ public class Profesor {
         this.horaOcup = new ArrayList<Hora>();
         this.cursosAsig = new ArrayList<Integer>();
         this.seccionAsig = new ArrayList<String>();
+        this.idCursosAsig =  new ArrayList<Integer>();
         this.idProfesor = ++idProfesorActual;
 
     }
@@ -60,6 +62,7 @@ public class Profesor {
         this.horaOcup = new ArrayList<Hora>();
         this.cursosAsig = new ArrayList<Integer>();
         this.seccionAsig = new ArrayList<String>();
+        this.idCursosAsig =  new ArrayList<Integer>();
         this.idProfesor = id;
 
     }
@@ -101,15 +104,17 @@ public class Profesor {
      */
     public String getHorasAsignadas(){
         StringBuilder text = new StringBuilder();
-        for (Hora hora: this.horaOcup){
-            try{
-                text.append(hora.getHoraStr()).append("|");
+        if (this.horaOcup.size() !=0)
+        {   for (Hora hora: this.horaOcup){
+                try{
+                    text.append(hora.getHoraStr()).append("|");
+                }
+                catch (Exception e){
+                    System.out.println("Error al pedir datos de hora");
+                }
             }
-            catch (Exception e){
-                System.out.println("Error al pedir datos de hora");
-            }
+            text.deleteCharAt(text.length()-1);
         }
-        text.deleteCharAt(text.length()-1);
         return text.toString();
     }
 
@@ -139,6 +144,17 @@ public class Profesor {
             text.append(String.valueOf(codCurso));
             text.append("/");
             text.append(this.seccionAsig.get(posicion++));
+            text.append("|");
+        }
+        text.deleteCharAt(text.length()-1);
+        return text.toString();
+    }
+
+    public String getIdCursosAsignados(){
+        int posicion = 0;
+        StringBuilder text = new StringBuilder();
+        for (Integer idCurso: this.idCursosAsig){
+            text.append(String.valueOf(idCurso));
             text.append("|");
         }
         text.deleteCharAt(text.length()-1);
@@ -208,20 +224,15 @@ public class Profesor {
      * @param horaToAsig Objeto Hora que se quiere agregar o quitar
      * @param selector 1: Agregar  -1:Quitar
      */
-    public void modHorasAsignadas(Hora horaToAsig, int selector){
-        if (selector == 1){
-            if (this.horaDisp.contains(horaToAsig)){
-                if (!this.horaOcup.contains(horaToAsig)){
-                    this.horaOcup.add(horaToAsig);
+    public void modHorasAsignadas(Hora horaToAsig, int selector) throws HourOutOfRangeException {
+        if (selector == 1)
+        {       if (!this.horaOcup.contains(horaToAsig))
+                {       this.horaOcup.add(horaToAsig);
                 }
-                else{
-                    System.out.println("Ya existe esa hora...");
+                else
+                {
+                        System.out.println("Ya existe esa hora...");
                 }
-                
-            }
-            else{
-                System.out.println("No existe esa hora como disponible");
-            }
         }
         else if (selector == -1){
             if (this.horaOcup.contains(horaToAsig)){
@@ -285,6 +296,28 @@ public class Profesor {
             if (!this.cursosAsig.contains(codCursoToAsig)){
                 this.cursosAsig.remove(codCursoToAsig);
                 this.seccionAsig.remove(seccionToAsig);
+            }
+            else{
+                System.out.println("No existe ese curso...");
+            }
+        }
+        else{
+            System.out.println("Error en la seleccion...");
+        }
+    }
+
+    public void modIdCursosAsignados(Integer idCursoToAsig, int selector){
+        if (selector == 1){
+            if (!this.idCursosAsig.contains(idCursoToAsig)){
+                this.idCursosAsig.add(idCursoToAsig);
+            }
+            else{
+                System.out.println("Ya existe ese curso...");
+            }
+        }
+        else if (selector == -1){
+            if (!this.idCursosAsig.contains(idCursoToAsig)){
+                this.idCursosAsig.remove(idCursoToAsig);
             }
             else{
                 System.out.println("No existe ese curso...");

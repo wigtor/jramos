@@ -202,7 +202,7 @@ public class CapaIOProfes
                 String codCursosDisp; //Codigo de los cursos que puede dictar el profesor
 		String horasDisp; //Horas que el profesor tiene disponibles para hacer clases
 		String horasAsig; //Horas que al profesor se le han asignado.
-		int comienzoDato, codCurso, posicionBarra, i;
+		int comienzoDato, codCurso, posicionBarra, i, idCurso;
 		Hora objHora;
                 
 		/* Si es un curso lo que está espeficado en la linea, creo un objeto "Curso" */
@@ -265,15 +265,43 @@ public class CapaIOProfes
                                         posicionBarra = horasDisp.indexOf("|");
                                         horasDisp = horasDisp.substring(posicionBarra+1);
                                         profesorLeido.modHorasDisponibles(objHora, 1);
-                                        System.out.println("En carrera: " + objHora);
+                                        System.out.println("Hora disponible: " + objHora);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
                                 profesorLeido.modHorasDisponibles(new Hora(horasDisp), 1);
-                                System.out.println("En carrera: " +horasDisp);
+                                System.out.println("Hora disponible: " +horasDisp);
                         }
+                        //Seteo la lista de horarios asignados del profesor
+                        if (horasAsig.length() != 0)
+                        {       for (i = 0; horasAsig.indexOf("|") != -1;i++)
+                                {       System.out.println(horasAsig.substring(0, horasAsig.indexOf("|")));
+                                        objHora = new Hora(horasAsig.substring(0, horasAsig.indexOf("|")));
+                                        posicionBarra = horasAsig.indexOf("|");
+                                        horasAsig = horasAsig.substring(posicionBarra+1);
+                                        profesorLeido.modHorasAsignadas(objHora, 1);
+                                        System.out.println("Hora asignada: " + objHora);
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                profesorLeido.modHorasAsignadas(new Hora(horasAsig), 1);
+                                System.out.println("Hora asignada: " +horasAsig);
+                        }
+                        //Seteo la lista de cursos asignaos al profesor
+                        if (idCursosAsig.length() != 0) //Seteo los codigos de curso que puede impartir
+                        {       for (i = 0; idCursosAsig.indexOf("|") != -1;i++)
+                                {       System.out.println(idCursosAsig.substring(0, idCursosAsig.indexOf("|")));
+                                        idCurso = Integer.valueOf(idCursosAsig.substring(0, idCursosAsig.indexOf("|")));
+                                        posicionBarra = idCursosAsig.indexOf("|");
+                                        idCursosAsig = idCursosAsig.substring(posicionBarra+1);
+                                        profesorLeido.modIdCursosAsignados(Integer.valueOf(idCurso), 1);
+                                        System.out.println("id cursos asignados: " + idCurso);
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                profesorLeido.modIdCursosAsignados(Integer.valueOf(idCursosAsig), 1);
+                                System.out.println("id cursos asignados: " +idCursosAsig);
+                        }
+
                         //Falta hacer el siguiente código acá!!!
                         //Seteo idCursosAsig
-                        //Seteo horasAsig
 
 
 			/* Seteo los demas atributos del curso leido */
@@ -292,11 +320,11 @@ public class CapaIOProfes
 		String nomProfe = profesorAEscribir.getNombreProfesor(); //Nombre del profesor
 		String idProfe = Integer.toString(profesorAEscribir.getIdProfesor()); //id interna del profesor
 		String rutProfe = Integer.toString(profesorAEscribir.getRutProfesor()); //rut del profesor
-		String idCursosAsig = profesorAEscribir.getCursosAsignados(); //cursos que el profesor tiene asignados
+		String idCursosAsig = profesorAEscribir.getIdCursosAsignados(); //cursos que el profesor tiene asignados
                 String horasDisp = profesorAEscribir.getHorasDisponibles(); //obtiene las horas que el profesor tiene disponibles
                 String horasAsig = profesorAEscribir.getHorasAsignadas(); //obtiene las horas que se le han asignado al profesor
                 String codCursosDisp = profesorAEscribir.getCursosQueImparte(); //
-		cursoString = "<Profesor nombProfe=\""+nomProfe+"\" idProfe=\""+idProfe+"\" rutProfe=\""+rutProfe+"\" idCursosAsig=\""+idCursosAsig+"\" codCursosDisp=\""+codCursosDisp+"\" horasDisp=\""+horasDisp+"\" horasAsig=\""+horasDisp+"\" >";
+		cursoString = "<Profesor nombProfe=\""+nomProfe+"\" idProfe=\""+idProfe+"\" rutProfe=\""+rutProfe+"\" idCursosAsig=\""+idCursosAsig+"\" codCursosDisp=\""+codCursosDisp+"\" horasDisp=\""+horasDisp+"\" horasAsig=\""+horasAsig+"\" >";
 		return cursoString;
 	}
 }

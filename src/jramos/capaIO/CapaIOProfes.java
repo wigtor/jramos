@@ -10,10 +10,8 @@
 
 package jramos.capaIO;
 
-//import jramos.tiposDatos.Hora;
-import jramos.tiposDatos.Carrera;
 import jramos.tiposDatos.Profesor;
-import jramos.tiposDatos.Curso;
+import jramos.tiposDatos.Hora;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.BufferedReader;
@@ -93,11 +91,74 @@ public class CapaIOProfes
 		return listaProfes;
 	}
 
-	
+        public void escribeProfes(ArrayList<Profesor> listaProfes) throws FileNotFoundException, SecurityException, IOException
+        {       Integer idInicialProfesWrap = this.leeIDInicial("idProfes");
+                int idInicialProfes;
+                if (idInicialProfesWrap == null)
+                        idInicialProfes = 1;
+                else
+                        idInicialProfes = idInicialProfesWrap.intValue();
+
+                escribeProfes(listaProfes, idInicialProfes);
+        }
+
+	public Integer leeIDInicial(String tipoId) throws FileNotFoundException, IOException
+        {       int idInicial = 0;
+                BufferedReader lector;
+		StringBuilder lineaDatos = new StringBuilder(CapaIOProfes.capacidadInicialString);
+		int caracterLeido = 0;
+		long i, j;
+
+		/** Intento abrir el archivo de cursos */
+		try
+		{	lector = new BufferedReader(new FileReader(this.nombreArchivoProfes));
+		}
+		catch (FileNotFoundException FNFE)
+		{	throw FNFE; //<Devuelvo la excepción haca quien llame el método leeCursos.
+		}
+
+                for (i = 0; (caracterLeido != -1) && idInicial == 0; i++)
+		{	caracterLeido = lector.read();
+			/**Comienza a leer datos desde que encuentra un caracter '<' */
+			if (caracterLeido == '<')
+			{	for (j = 0; ((caracterLeido != -1) && (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
+				{	lineaDatos.append(String.valueOf((char)caracterLeido));
+                                        //lineaDatos.append(Character.forDigit(caracterLeido, 10));
+					caracterLeido = lector.read();
+				}
+				lineaDatos.append(String.valueOf((char)caracterLeido));//agrego el caracter '>' que no fue agregado en el bucle
+				i += j; //sumo los caracteres que ya se han leido a i, aun no se si esto pueda ser necesario a futuro.
+			}
+			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
+			idInicial = this.stringToIdInicial(new String(lineaDatos.toString()), tipoId);
+			if (idInicial == 0)
+				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un id");
+                        lineaDatos = new StringBuilder(CapaIOProfes.capacidadInicialString);
+                }
+		/** Cierro el archivo*/
+		lector.close();
+                if (idInicial != 0)
+                        return new Integer(idInicial);
+                else
+                        return null;
+
+        }
+
+        private int stringToIdInicial(String linea, String tipoId)
+        {       int comienzoDato, idInicial;
+                if (((linea.indexOf("<idProfesInicial") != -1)) && (tipoId.equals("idProfes")))
+                {       comienzoDato = linea.indexOf("idProfesInicial=") + "idProfesInicial=".length();
+                        idInicial = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
+                        return idInicial;
+                }
+                else
+                        return 0;
+        }
+
 	/** 
 	* Método que guarda todos los profesores en el archivo de profesores.
 	*/
-	public void escribeProfes(ArrayList<Profesor> listaProfes) throws FileNotFoundException, SecurityException, IOException
+	public void escribeProfes(ArrayList<Profesor> listaProfes, int idInicialProfes) throws FileNotFoundException, SecurityException, IOException
 	{	PrintWriter escritor;
 
 		int i;
@@ -114,6 +175,9 @@ public class CapaIOProfes
 		{	System.out.println("ERROR: No tiene permisos de escritura sobre el archivo de cursos.");
 			throw SE;
 		}
+
+                 //Escribo los idIniciales de los profesores
+                escritor.println("<idProfesInicial=\""+idInicialProfes+"\" >");
 
 		//Escribo los profesores del ArrayList<Profesor> en el archivo de profesores.
 		for(i = 0; i<listaProfes.size();i++)
@@ -136,7 +200,7 @@ public class CapaIOProfes
                 String codCursosDisp; //Codigo de los cursos que puede dictar el profesor
 		String horasDisp; //Horas que el profesor tiene disponibles para hacer clases
 		String horasAsig; //Horas que al profesor se le han asignado.
-		int comienzoDato;
+		int comienzoDato, codCurso, posicionBarra, i;
 		
 		/* Si es un curso lo que está espeficado en la linea, creo un objeto "Curso" */
 		if ((linea.indexOf("<Profesor") != -1))
@@ -173,7 +237,28 @@ public class CapaIOProfes
 			horasAsig = linea.substring(comienzoDato, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
 
 			/* Construyo el objeto cursoLeido con los datos recopilados */
-			profesorLeido = new Profesor(nombProfe, null);
+			profesorLeido = new Profesor(nombProfe, null, Integer.valueOf(idProfe));
+                        profesorLeido.setRutProfesor(Integer.valueOf(rutProfe));
+                        if (codCursosDisp.length() != 0) //Seteo los codigos de curso que puede impartir
+                        {       for (i = 0; codCursosDisp.indexOf("|") != -1;i++)
+                                {       System.out.println(codCursosDisp.substring(0, codCursosDisp.indexOf("|")));
+                                        codCurso = Integer.valueOf(codCursosDisp.substring(0, codCursosDisp.indexOf("|")));
+                                        posicionBarra = codCursosDisp.indexOf("|");
+                                        codCursosDisp = codCursosDisp.substring(posicionBarra+1);
+                                        profesorLeido.modCursosParaImpartir(codCurso, 1);
+                                        System.out.println("En carrera: " + codCurso);
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                profesorLeido.modCursosParaImpartir(Integer.valueOf(codCursosDisp), 1);
+                                System.out.println("En carrera: " +codCursosDisp);
+                        }
+
+                        //Falta hacer el siguiente código acá!!!
+                        //Seteo idCursosAsig
+                        //Seteo horasAsig
+                        //Seteo horasDisp
+
+
 			/* Seteo los demas atributos del curso leido */
 			return profesorLeido;
 		}
@@ -196,14 +281,6 @@ public class CapaIOProfes
                 String codCursosDisp = profesorAEscribir.getCursosQueImparte(); //
 		cursoString = "<Profesor nombProfe=\""+nomProfe+"\" idProfe=\""+idProfe+"\" rutProfe=\""+rutProfe+"\" idCursosAsig=\""+idCursosAsig+"\" codCursosDisp=\""+codCursosDisp+"\" horasDisp=\""+horasDisp+"\" horasAsig=\""+horasDisp+"\" >";
 		return cursoString;
-	}
-
-	private String carreraToString(Carrera carreraAEscribir)
-	{	System.out.println("Se va a pasar una carrera a String...");
-		String nomCarrera = "nombre de la carrera"; //cambiar por un getter
-		String descrip = "Descripcion de la carrera"; //Cambiar por un getter
-		int codCarrera = 1863; //cambiar por un getter
-		return "<Carrera nomCarrera=\""+nomCarrera+"\" descrip=\""+descrip+"\" codCarrera=\""+codCarrera+"\"";
 	}
 }
 

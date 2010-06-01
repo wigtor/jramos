@@ -10,7 +10,6 @@
 
 package jramos.capaIO;
 
-//import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Carrera;
 import jramos.tiposDatos.Curso;
 import jramos.tiposDatos.Semestre;
@@ -250,7 +249,7 @@ public class CapaIOCursos
 		}
 
 
-                //Escribo los idIniciales de carreras y cursos
+                //Escribo los idIniciales de carreras, semestres y cursos
                 escritor.println("<idCursosInicial=\""+idInicialCursos+"\" >");
                 escritor.println("<idCarrerasInicial=\""+idInicialCarreras+"\" >");
                 escritor.println("<idSemestresInicial=\""+idInicialSemestres+"\" >");

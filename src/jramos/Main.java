@@ -63,7 +63,8 @@ import java.util.ArrayList;
 }
 */
 
-
+//Este main está hecho para probar la capaIOCursos
+/*
 public class Main
 {
 	public static void main(String args[])
@@ -85,4 +86,26 @@ public class Main
                 }
 
 	}
+}
+*/
+//Este main es para probar la capaIOProfes
+public class Main
+{
+	public static void main(String args[])
+	{       CapaIOProfes gestorIOProfes;
+                ArrayList<Profesor> lista;
+                try
+                {       gestorIOProfes = new CapaIOProfes();
+                        lista = gestorIOProfes.leeProfes();
+                        System.out.println(lista);
+                        System.out.println("Ahora al revez, escribo una lista de profes en el archivo.");
+                        gestorIOProfes.escribeProfes(lista, 7);
+                }
+                        catch (Exception e)
+                {
+                        System.out.println("ERROR");
+                }
+
+
+        }
 }

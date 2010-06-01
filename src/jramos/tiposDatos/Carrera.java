@@ -134,8 +134,26 @@ public class Carrera {
         Carrera.codCarreraActual = id;
     }
 
-    public void modIdSemestres(Integer idSemestres, int selector)
-    {
+    public void modIdSemestres(int idSemestre, int selector)
+    {   if (selector == 1)
+        {   if (!this.idSemestres.contains(idSemestre))
+            {   this.idSemestres.add(new Integer(idSemestre));
+            }
+            else
+            {   System.out.println("Ya existe el codigo de semestre...");
+            }
+        }
+        else if (selector == -1){
+           if (this.idSemestres.contains(idSemestre)){
+               this.idSemestres.remove(new Integer (idSemestre));
+           }
+           else{
+               System.out.println("No existe ese codigo del semestre...");
+           }
+       }
+       else{
+           System.out.println("Error en la seleccion...");
+       }
             
     }
 

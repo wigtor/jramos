@@ -64,7 +64,7 @@ import java.util.ArrayList;
 */
 
 //Este main está hecho para probar la capaIOCursos
-/*
+
 public class Main
 {
 	public static void main(String args[])
@@ -87,8 +87,9 @@ public class Main
 
 	}
 }
-*/
+
 //Este main es para probar la capaIOProfes
+/*
 public class Main
 {
 	public static void main(String args[])
@@ -108,4 +109,4 @@ public class Main
 
 
         }
-}
+}*/

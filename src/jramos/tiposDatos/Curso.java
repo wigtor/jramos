@@ -340,21 +340,16 @@ public class Curso {
     * @param selector 1: Agregar  -1: Quitar
     */
    public void modListaSalas (int sala, int selector){
-       if (selector == 1){
-           if (!this.listSalas.contains(sala)){
-               this.listSalas.add(new Integer(sala));
-           }
-           else{
-               System.out.println("Ya existe la sala...");
-           }
+       if (selector == 1)
+       {    this.listSalas.add(new Integer(sala));
        }
-       else if (selector == -1){
-           if (this.listSalas.contains(sala)){
-               this.listSalas.remove(new Integer(sala));
-           }
-           else{
-               System.out.println("No existe la sala...");
-           }
+       else if (selector == -1)
+       {    if (this.listSalas.contains(sala)){
+                this.listSalas.remove(new Integer(sala));
+            }
+            else
+            {   System.out.println("No existe la sala...");
+            }
        }
        else{
            System.out.println("Error en la seleccion...");
@@ -368,21 +363,16 @@ public class Curso {
     * @param selector 1: Agregar  -1: Quitar
     */
    public void modHorario(Hora horaToAsig, int selector){
-       if (selector == 1){
-           if (!this.horario.contains(horaToAsig)){
-               this.horario.add(horaToAsig);
-           }
-           else{
-               System.out.println("Ya existe esa hora...");
-           }
+       if (selector == 1)
+       {    this.horario.add(horaToAsig);
        }
-       else if (selector == -1){
-           if (this.horario.contains(horaToAsig)){
-               this.horario.remove(horaToAsig);
-           }
-           else{
-               System.out.println("No existe esa hora...");
-           }
+       else if (selector == -1)
+       {    if (this.horario.contains(horaToAsig)){
+                this.horario.remove(horaToAsig);
+            }
+            else{
+                System.out.println("No existe esa hora...");
+            }
        }
        else{
            System.out.println("Error en la seleccion...");

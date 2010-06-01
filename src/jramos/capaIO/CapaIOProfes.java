@@ -12,6 +12,7 @@ package jramos.capaIO;
 
 import jramos.tiposDatos.Profesor;
 import jramos.tiposDatos.Hora;
+import jramos.tiposDatos.HourOutOfRangeException;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.BufferedReader;
@@ -45,7 +46,7 @@ public class CapaIOProfes
 	/** Metodo para leer todos los profesores.
 	* 
 	*/
-	public ArrayList<Profesor> leeProfes() throws FileNotFoundException, IOException
+	public ArrayList<Profesor> leeProfes() throws FileNotFoundException, IOException, HourOutOfRangeException
 	{	ArrayList<Profesor> listaProfes= new ArrayList(CapaIOProfes.capacidadInicialVector);
 		BufferedReader lector;
 		StringBuilder lineaDatos = new StringBuilder(CapaIOProfes.capacidadInicialString);
@@ -65,11 +66,11 @@ public class CapaIOProfes
 		{	caracterLeido = lector.read();
 			/**Comienza a leer datos desde que encuentra un caracter '<' */
 			if (caracterLeido == '<')
-			{	for (j = 0; ((caracterLeido != -1) || (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
-				{	lineaDatos.append(caracterLeido);
+			{	for (j = 0; ((caracterLeido != -1) && (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
+				{	lineaDatos.append(String.valueOf((char)caracterLeido));
 					caracterLeido = lector.read();
 				}
-				lineaDatos.append(caracterLeido);//agrego el caracter '>' que no fue agregado en el bucle
+				lineaDatos.append(String.valueOf((char)caracterLeido));//agrego el caracter '>' que no fue agregado en el bucle
 				i += j; //sumo los caracteres que ya se han leido a i, aun no se si esto pueda ser necesario a futuro.
 			}
 			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
@@ -78,7 +79,8 @@ public class CapaIOProfes
 				listaProfes.add(ProfesorEncontrado);
 			else
 				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un curso");
-		}
+                        lineaDatos = new StringBuilder(CapaIOProfes.capacidadInicialString);
+                }
 		/** Cierro el archivo*/
 		try
 		{	lector.close();
@@ -191,7 +193,7 @@ public class CapaIOProfes
 	/** 
 	* Este método recibe un String que contiene especificado un objeto del tipo Curso, analiza este String y devuelve un objeto Curso.
 	*/
-	private Profesor stringToProfesor(String linea)
+	private Profesor stringToProfesor(String linea) throws HourOutOfRangeException
 	{	Profesor profesorLeido;
                 String idProfe; //id Interna del profesor
 		String nombProfe; //Nombre del cur
@@ -201,7 +203,8 @@ public class CapaIOProfes
 		String horasDisp; //Horas que el profesor tiene disponibles para hacer clases
 		String horasAsig; //Horas que al profesor se le han asignado.
 		int comienzoDato, codCurso, posicionBarra, i;
-		
+		Hora objHora;
+                
 		/* Si es un curso lo que está espeficado en la linea, creo un objeto "Curso" */
 		if ((linea.indexOf("<Profesor") != -1))
 		{	/* Busco errores de sintaxis en la linea analizada*/
@@ -211,52 +214,66 @@ public class CapaIOProfes
 
 			/* Busco el nombre del curso en la linea*/
 			comienzoDato = linea.indexOf("idProfe=") + "idProfe=".length();
-			idProfe = linea.substring(comienzoDato, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+			idProfe = linea.substring(comienzoDato +1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
 
 			/* Busco la descripción del curso en la linea*/
 			comienzoDato = linea.indexOf("nombProfe=") + "nombProfe=".length();
-			nombProfe = linea.substring(comienzoDato, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+			nombProfe = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
 
 			/* Busco el código del curso en la linea*/
 			comienzoDato = linea.indexOf("rutProfe=") + "rutProfe=".length();
-			rutProfe = linea.substring(comienzoDato, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+			rutProfe = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
 
 			/* Busco las secciones del curso en la linea*/
 			comienzoDato = linea.indexOf("idCursosAsig=") + "idCursosAsig=".length();
-			idCursosAsig = linea.substring(comienzoDato, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+			idCursosAsig = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
 
                         comienzoDato = linea.indexOf("codCursosDisp=") + "codCursosDisp=".length();
-			codCursosDisp = linea.substring(comienzoDato, linea.indexOf("\"", comienzoDato+1));
+			codCursosDisp = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1));
 
 			/* Busco las carreras del curso en la linea*/
 			comienzoDato = linea.indexOf("horasDisp=") + "horasDisp=".length();
-			horasDisp = linea.substring(comienzoDato, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+			horasDisp = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
 
 			/* Busco el profesor del curso en la linea*/
 			comienzoDato = linea.indexOf("horasAsig=") + "horasAsig=".length();
-			horasAsig = linea.substring(comienzoDato, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+			horasAsig = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
 
-			/* Construyo el objeto cursoLeido con los datos recopilados */
-			profesorLeido = new Profesor(nombProfe, null, Integer.valueOf(idProfe));
-                        profesorLeido.setRutProfesor(Integer.valueOf(rutProfe));
+                        ArrayList<Integer> listaCursosParaImpartir= new ArrayList();
                         if (codCursosDisp.length() != 0) //Seteo los codigos de curso que puede impartir
                         {       for (i = 0; codCursosDisp.indexOf("|") != -1;i++)
                                 {       System.out.println(codCursosDisp.substring(0, codCursosDisp.indexOf("|")));
                                         codCurso = Integer.valueOf(codCursosDisp.substring(0, codCursosDisp.indexOf("|")));
                                         posicionBarra = codCursosDisp.indexOf("|");
                                         codCursosDisp = codCursosDisp.substring(posicionBarra+1);
-                                        profesorLeido.modCursosParaImpartir(codCurso, 1);
+                                        listaCursosParaImpartir.add(new Integer(Integer.valueOf(codCurso)));
                                         System.out.println("En carrera: " + codCurso);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
-                                profesorLeido.modCursosParaImpartir(Integer.valueOf(codCursosDisp), 1);
+                                listaCursosParaImpartir.add(new Integer(Integer.valueOf(codCursosDisp)));
                                 System.out.println("En carrera: " +codCursosDisp);
                         }
 
+                        /* Construyo el objeto cursoLeido con los datos recopilados */
+			profesorLeido = new Profesor(nombProfe, listaCursosParaImpartir, Integer.valueOf(idProfe));
+                        profesorLeido.setRutProfesor(Integer.valueOf(rutProfe));
+                        //Seteo la lista de horarios disponibles del profesor.
+                        if (horasDisp.length() != 0)
+                        {       for (i = 0; horasDisp.indexOf("|") != -1;i++)
+                                {       System.out.println(horasDisp.substring(0, horasDisp.indexOf("|")));
+                                        objHora = new Hora(horasDisp.substring(0, horasDisp.indexOf("|")));
+                                        posicionBarra = horasDisp.indexOf("|");
+                                        horasDisp = horasDisp.substring(posicionBarra+1);
+                                        profesorLeido.modHorasDisponibles(objHora, 1);
+                                        System.out.println("En carrera: " + objHora);
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                profesorLeido.modHorasDisponibles(new Hora(horasDisp), 1);
+                                System.out.println("En carrera: " +horasDisp);
+                        }
                         //Falta hacer el siguiente código acá!!!
                         //Seteo idCursosAsig
                         //Seteo horasAsig
-                        //Seteo horasDisp
 
 
 			/* Seteo los demas atributos del curso leido */

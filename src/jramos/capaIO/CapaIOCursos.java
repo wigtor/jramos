@@ -201,6 +201,81 @@ public class CapaIOCursos
 		return listaCursos;
 	}
 
+        public void escribeCarreras(ArrayList<Carrera> listaCarreras) throws FileNotFoundException, SecurityException, IOException
+        {       Integer idInicialCursosWrap = this.leeIDInicial("idCursos");
+                Integer idInicialCarrerasWrap = this.leeIDInicial("idCarreras");
+                Integer idInicialSemestresWrap = this.leeIDInicial("idSemestres");
+                int idInicialCursos, idInicialCarreras, idInicialSemestres;
+                if (idInicialCursosWrap == null)
+                        idInicialCursos = 1;
+                else
+                        idInicialCursos = idInicialCursosWrap.intValue();
+
+                if (idInicialCarrerasWrap == null)
+                        idInicialCarreras = 1;
+                else
+                        idInicialCarreras = idInicialCarrerasWrap.intValue();
+
+                if (idInicialSemestresWrap == null)
+                        idInicialSemestres = 1;
+                else
+                        idInicialSemestres = idInicialSemestresWrap.intValue();
+
+                escribeCarreras(listaCarreras, idInicialCursos, idInicialCarreras, idInicialSemestres);
+        }
+
+        public void escribeCarreras(ArrayList<Carrera> listaCarreras, int idInicialCursos, int idInicialCarreras, int idInicialSemestres) throws FileNotFoundException, SecurityException, IOException
+        {       PrintWriter escritor;
+                String aEscribir;
+		ArrayList<Curso> listaCursos = new ArrayList(CapaIOCursos.capacidadInicialVector);
+                ArrayList<Semestre> listaSemestres = new ArrayList(CapaIOCursos.capacidadInicialVector);
+		/** Leo todo el resto del contenido del archivo de cursos que no sea un "Curso" para no perder los datos.*/
+		listaCursos = this.leeCursos();
+                //Acá debo llamar a: listaSemestres = this.leeSemestres();
+
+
+		int i;
+		/** Intenta abrir el archivo de cursos para escribir en él. */
+		try
+		{	escritor = new PrintWriter(this.nombreArchivoCursos);
+		}
+		catch (FileNotFoundException FNFE)
+		{	System.out.println("ERROR: El archivo no existe"); //no deberia llegar a esta excepcion con el constructor que crea el archivo.
+			throw FNFE;
+
+		}
+		catch (SecurityException SE)
+		{	System.out.println("ERROR: No tiene permisos de escritura sobre el archivo de cursos.");
+			throw SE;
+		}
+
+
+                //Escribo los idIniciales de carreras y cursos
+                escritor.println("<idCursosInicial=\""+idInicialCursos+"\" >");
+                escritor.println("<idCarrerasInicial=\""+idInicialCarreras+"\" >");
+                escritor.println("<idSemestresInicial=\""+idInicialSemestres+"\" >");
+
+		//Escribo las carreras del ArrayList<Carreras> en el archivo de cursos.
+		for(i = 0; i<listaCarreras.size();i++)
+		{       escritor.println(this.carreraToString(listaCarreras.get(i)));//Escribo en el archivo de cursos.
+		}
+
+                //Escribo los semestres en el archivo de cursos antes que los cursos.
+		/*for(i = 0; i<listaSemestres.size();i++)
+		{	escritor.println(this.semestreToString(listaSemestres.get(i)));//Escribo en el archivo de cursos.
+		} */
+
+                //Escribo los cursos en el archivo de cursos
+		for(i = 0; i<listaCursos.size();i++)
+		{	escritor.println(this.cursoToString(listaCursos.get(i)));//Escribo en el archivo de cursos.
+		}
+
+		/** Cierro el archivo*/
+		escritor.close();
+
+                
+        }
+
         public void escribeCursos(ArrayList<Curso> listaCursos) throws FileNotFoundException, SecurityException, IOException
         {       Integer idInicialCursosWrap = this.leeIDInicial("idCursos");
                 Integer idInicialCarrerasWrap = this.leeIDInicial("idCarreras");
@@ -276,7 +351,7 @@ public class CapaIOCursos
         {       String nomCarrera;
                 String descrip;
                 String idSemestresStr;
-                ArrayList<Integer> idSemestres = new ArrayList(CapaIOCursos.capacidadInicialVector);
+                Integer idSemestres;
                 int comienzoDato, i, codCarrera, posicionBarra, idSemestre;
                 if ((linea.indexOf("<Carrera") != -1))
                 {       if ((linea.indexOf("nomCarrera=") == -1) || (linea.indexOf("descrip=") == -1) || (linea.indexOf("codCarrera=") == -1) || (linea.indexOf("idSemestres=") == -1))

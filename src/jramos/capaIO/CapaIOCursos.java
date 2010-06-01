@@ -534,6 +534,15 @@ public class CapaIOCursos
                 String idSemestresStr = carreraAEscribir.getIdSemestres();
 		return "<Carrera nomCarrera=\""+nomCarrera+"\" descrip=\""+descrip+"\" codCarrera=\""+codCarrera+"\" idSemestres=\""+idSemestresStr+"\" >";
 	}
+
+        private String SemestreToString(Semestre semestreAEscribir)
+	{	System.out.println("Se va a pasar un semestre a String...");
+		int numSemestre = semestreAEscribir.getNumeroSemestre();
+		int idSemestre = semestreAEscribir.getIdSemestre();
+		int enCarreraId = semestreAEscribir.getCodigoEnCarrera();
+                String codRamosDelSemestre = semestreAEscribir.getCodigosRamos();
+		return "<Semestre numSemestre=\""+numSemestre+"\" idSemestre=\""+idSemestre+"\" enCarreraId=\""+enCarreraId+"\" codRamosDelSemestre=\""+codRamosDelSemestre+"\" >";
+	}
 }
 
 

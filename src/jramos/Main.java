@@ -64,7 +64,7 @@ import java.util.ArrayList;
 */
 
 //Este main está hecho para probar la capaIOCursos
-/*
+
 public class Main
 {
 	public static void main(String args[])
@@ -72,13 +72,26 @@ public class Main
                 //VentanaPrincipal window = new VentanaPrincipal();
                 //window.setVisible(true);
                 CapaIOCursos gestorIOCursos;
-                ArrayList<Curso> lista;
+                ArrayList<Curso> listaCursos;
+                ArrayList<Carrera> listaCarreras;
+                ArrayList<Semestre> listaSemestres;
                 try
                 {       gestorIOCursos = new CapaIOCursos();
-                        lista = gestorIOCursos.leeCursos();
-                        System.out.println(lista);
+                        listaCursos = gestorIOCursos.leeCursos();
+                        System.out.println(listaCursos);
                         System.out.println("Ahora al revez, escribo una lista de cursos en el archivo.");
-                        gestorIOCursos.escribeCursos(lista, 7 , 8, 2);
+                        gestorIOCursos.escribeCursos(listaCursos, 7 , 8, 2);
+
+                        listaCarreras = gestorIOCursos.leeCarreras();
+                        System.out.println(listaCarreras);
+                        System.out.println("Ahora al revez, escribo una lista de carreras en el archivo.");
+                        gestorIOCursos.escribeCarreras(listaCarreras, 7 , 8, 2);
+                
+                        listaSemestres = gestorIOCursos.leeSemestres();
+                        System.out.println(listaCarreras);
+                        System.out.println("Ahora al revez, escribo una lista de semestres en el archivo.");
+                        gestorIOCursos.escribeSemestres(listaSemestres, 7 , 8, 2);
+
                 }
                         catch (Exception e)
                 {
@@ -87,9 +100,10 @@ public class Main
 
 	}
 }
-*/
-//Este main es para probar la capaIOProfes
 
+
+//Este main es para probar la capaIOProfes
+ /*
 public class Main
 {
 	public static void main(String args[])
@@ -110,3 +124,4 @@ public class Main
 
         }
 }
+ */

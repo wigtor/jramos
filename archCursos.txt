@@ -1,15 +1,17 @@
-<idCursosInicial="7" >
+<idFacultadesInicial="39" >
 <idCarrerasInicial="8" >
+<idCursosInicial="7" >
 <idSemestresInicial="2" >
+<Facultad nomFacultad="ingenieria" idFacultad="38" descrip="" codCarreras="1863|1864|1866|1868" >
 <Carrera nomCarrera="ingenieria civil informatica" descrip="pta, la descripcion de informatica po wn!" codCarrera="1863" idSemestres="23|24|25|26|27|28" >
+<Curso nomCurso="microeconomia" idCurso="2" descrip="curso en que se aprende las nociones basicas
+de economia y comportamiento de los actores del mercado
+" codCurso="10013" seccion="A04" enCarreras="1863|1864|1866|1868" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="macroeconomia" idCurso="3" descrip="curso en que se aprende las nociones 
+de economia a gran nivel" codCurso="10014" seccion="A01" enCarreras="1863|1864|1866|1868" idProfeAsig="3" listSalas="756|768" horario="L3|M3" >
 <Semestre numSemestre="1" idSemestre="23" enCarreraId="1863" codRamosDelSemestre="10001|10002|10003|10004|10005" >
 <Semestre numSemestre="2" idSemestre="24" enCarreraId="1863" codRamosDelSemestre="10001|10002|10003|10004|13001" >
 <Semestre numSemestre="3" idSemestre="25" enCarreraId="1863" codRamosDelSemestre="10006|10007|10008|10009|13002" >
 <Semestre numSemestre="4" idSemestre="26" enCarreraId="1863" codRamosDelSemestre="10009|10010|10011|13012|13013" >
 <Semestre numSemestre="5" idSemestre="27" enCarreraId="1863" codRamosDelSemestre="10013|10014|10015|13014|13015" >
 <Semestre numSemestre="6" idSemestre="28" enCarreraId="1863" codRamosDelSemestre="10016|10017|13016|13017|13018" >
-<Curso nomCurso="microeconomia" idCurso="2" descrip="curso en que se aprende las nociones basicas
-de economia y comportamiento de los actores del mercado
-" codCurso="10013" seccion="A04" enCarreras="1863|1864|1866|1868" idProfeAsig="0" listSalas="" horario="" >
-<Curso nomCurso="macroeconomia" idCurso="3" descrip="curso en que se aprende las nociones 
-de economia a gran nivel" codCurso="10014" seccion="A01" enCarreras="1863|1864|1866|1868" idProfeAsig="3" listSalas="756|768" horario="L3|M3" >

@@ -2,7 +2,8 @@
 <idCarrerasInicial="8" >
 <idCursosInicial="7" >
 <idSemestresInicial="2" >
-<Facultad nomFacultad="ingenieria" idFacultad="38" descrip="" codCarreras="1863|1864|1866|1868" >
+<Facultad nomFacultad="ingenieria" idFacultad="38" descrip="Esta es la grandiosa facultad de injenieria!, 
+donde los estudiantes saben sumar y restar, pero no escribir bien." codCarreras="1863|1864|1866|1868" >
 <Carrera nomCarrera="ingenieria civil informatica" descrip="pta, la descripcion de informatica po wn!" codCarrera="1863" idSemestres="23|24|25|26|27|28" >
 <Curso nomCurso="microeconomia" idCurso="2" descrip="curso en que se aprende las nociones basicas
 de economia y comportamiento de los actores del mercado

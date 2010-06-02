@@ -851,13 +851,14 @@ public class CapaIOCursos
                         comienzoDato = linea.indexOf("idFacultad=") + "idFacultad=".length();
                         idFacultad = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
 
-                        comienzoDato = linea.indexOf("descrip=") + "escrip=".length();
+                        comienzoDato = linea.indexOf("descrip=") + "descrip=".length();
                         descrip = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1));
 
                         comienzoDato = linea.indexOf("codCarreras=") + "codCarreras=".length();
                         codCarreras = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1));
 
                         Facultad facultadLeida = new Facultad(nomFacultad, idFacultad);
+                        facultadLeida.setDescripcion(descrip);
                         //acá seteo los id de los semestres de carreraLeida!!!, alexis debes hacer un setter parar los id de semestre en las carreras
                         if (codCarreras.length() != 0)
                         {       for (i = 0; codCarreras.indexOf("|") != -1;i++)

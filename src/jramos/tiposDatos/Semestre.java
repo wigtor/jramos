@@ -189,6 +189,14 @@ public class Semestre {
         }
     }
 
+    /**
+     * Metodo para hacer la referencia real de la carrera donde esta este semestre
+     * 
+     * @param carreraToAsig carrera para hacer la referencia
+     */
+    public void setEnCarrera(Carrera carreraToAsig){
+        this.enCarrera = carreraToAsig;
+    }
 
     /**
      * Metodo para setear el Id del Semestre actual(variable static). Se debe obtener desde un archivo.

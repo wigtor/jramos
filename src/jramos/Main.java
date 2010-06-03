@@ -92,13 +92,13 @@ public class Main
                         listaProfesores = gestorIOProfes.leeProfes();
 
 
-                        Referenciador.crearReferencias(listaCarreras, listaCursos, listaFacultades, listaProfesores, listaSemestres);
+                        //Referenciador.crearReferencias(listaCarreras, listaCursos, listaFacultades, listaProfesores, listaSemestres);
                         
                         // Aqui se escriben
-                        gestorIOCursos.escribeSemestres(listaSemestres, 7 , 8, 2, 39);
-                        gestorIOCursos.escribeCarreras(listaCarreras, 7 , 8, 2, 39);
-                        gestorIOCursos.escribeCursos(listaCursos, 7 , 8, 2, 39);
-                        gestorIOCursos.escribeFacultades(listaFacultades, 7 , 8, 2, 39);
+                        gestorIOCursos.escribeSemestres(listaSemestres);
+                        gestorIOCursos.escribeCarreras(listaCarreras);
+                        gestorIOCursos.escribeCursos(listaCursos);
+                        gestorIOCursos.escribeFacultades(listaFacultades);
 
 
 

@@ -162,7 +162,7 @@ public class Facultad {
        if (selector == 1){
            if (!this.listCarreras.contains(carreraToAsig)){
                this.listCarreras.add(carreraToAsig);
-               this.listCodigosCarreras.add(carreraToAsig.getCodigoCarrera());
+               this.modListaCodigoCarreras(carreraToAsig.getCodigoCarrera(), 1);
            }
            else{
                System.out.println("Ya existe la carrera...");
@@ -171,7 +171,7 @@ public class Facultad {
        else if (selector == -1){
            if (!this.listCarreras.contains(carreraToAsig)){
                this.listCarreras.remove(carreraToAsig);
-               this.listCodigosCarreras.remove(carreraToAsig.getCodigoCarrera());
+               this.modListaCodigoCarreras(carreraToAsig.getCodigoCarrera(), -1);
            }
            else{
                System.out.println("No existe la carrera...");

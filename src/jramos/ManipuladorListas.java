@@ -65,4 +65,9 @@ public class ManipuladorListas
 
                 this.listaCarreras.add(carreraNueva);
         }
+
+        public void eliminaCarrera(int idCarrera)
+        {
+
+        }
 }

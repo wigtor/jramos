@@ -72,25 +72,35 @@ public class Main
                 //VentanaPrincipal window = new VentanaPrincipal();
                 //window.setVisible(true);
                 CapaIOCursos gestorIOCursos;
+                CapaIOProfes gestorIOProfes;
+
                 ArrayList<Curso> listaCursos;
                 ArrayList<Carrera> listaCarreras;
                 ArrayList<Semestre> listaSemestres;
+                ArrayList<Facultad> listaFacultades;
+                ArrayList<Profesor> listaProfesores;
+
+
                 try
                 {       gestorIOCursos = new CapaIOCursos();
-                        listaCursos = gestorIOCursos.leeCursos();
-                        System.out.println(listaCursos);
-                        System.out.println("Ahora al revez, escribo una lista de cursos en el archivo.");
-                        gestorIOCursos.escribeCursos(listaCursos, 7 , 8, 2, 39);
+                        gestorIOProfes = new CapaIOProfes();
 
+                        listaCursos = gestorIOCursos.leeCursos();
                         listaCarreras = gestorIOCursos.leeCarreras();
-                        System.out.println(listaCarreras);
-                        System.out.println("Ahora al revez, escribo una lista de carreras en el archivo.");
-                        gestorIOCursos.escribeCarreras(listaCarreras, 7 , 8, 2, 39);
-                
                         listaSemestres = gestorIOCursos.leeSemestres();
-                        System.out.println(listaCarreras);
-                        System.out.println("Ahora al revez, escribo una lista de semestres en el archivo.");
+                        listaFacultades = gestorIOCursos.leeFacultades();
+                        listaProfesores = gestorIOProfes.leeProfes();
+
+
+                        Referenciador.crearReferencias(listaCarreras, listaCursos, listaFacultades, listaProfesores, listaSemestres);
+                        
+                        // Aqui se escriben
                         gestorIOCursos.escribeSemestres(listaSemestres, 7 , 8, 2, 39);
+                        gestorIOCursos.escribeCarreras(listaCarreras, 7 , 8, 2, 39);
+                        gestorIOCursos.escribeCursos(listaCursos, 7 , 8, 2, 39);
+                        gestorIOCursos.escribeFacultades(listaFacultades, 7 , 8, 2, 39);
+
+
 
                 }
                         catch (Exception e)

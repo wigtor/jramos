@@ -19,9 +19,8 @@ public class Profesor {
     private ArrayList<Hora> horaDisp;
     private ArrayList<Hora> horaOcup;
     private ArrayList<Integer> cursosDisp; //Solo codigos de curso
-    private ArrayList<Integer> cursosAsig; //Solo codigos de curso
+    private ArrayList<Curso> cursosAsig; //Referencias reales de curso
     private ArrayList<Integer> idCursosAsig; //Solo id de cursos
-    private ArrayList<String> seccionAsig; //Solo secciones de curso
     private int rutProfe;
     private int idProfesor;
 
@@ -40,8 +39,7 @@ public class Profesor {
         this.cursosDisp = cursosParaImpartir;
         this.horaDisp = new ArrayList<Hora>();
         this.horaOcup = new ArrayList<Hora>();
-        this.cursosAsig = new ArrayList<Integer>();
-        this.seccionAsig = new ArrayList<String>();
+        this.cursosAsig = new ArrayList<Curso>();
         this.idCursosAsig =  new ArrayList<Integer>();
         this.idProfesor = ++idProfesorActual;
 
@@ -60,8 +58,7 @@ public class Profesor {
         this.cursosDisp = cursosParaImpartir;
         this.horaDisp = new ArrayList<Hora>();
         this.horaOcup = new ArrayList<Hora>();
-        this.cursosAsig = new ArrayList<Integer>();
-        this.seccionAsig = new ArrayList<String>();
+        this.cursosAsig = new ArrayList<Curso>();
         this.idCursosAsig =  new ArrayList<Integer>();
         this.idProfesor = id;
 
@@ -140,11 +137,8 @@ public class Profesor {
     public String getCursosAsignados(){
         int posicion = 0;
         StringBuilder text = new StringBuilder();
-        for (Integer codCurso: this.cursosAsig){
-            text.append(String.valueOf(codCurso));
-            text.append("/");
-            text.append(this.seccionAsig.get(posicion++));
-            text.append("|");
+        for (Curso curso: this.cursosAsig){
+            text.append(String.valueOf(curso.getCodigoCurso())).append("|");
         }
         text.deleteCharAt(text.length()-1);
         return text.toString();
@@ -278,24 +272,27 @@ public class Profesor {
     /**
      * Metodo para agregar o quitar un curso de los que el profesor tiene asignados
      *
-     * @param codCursoToAsig int con el codigo del curso que se quiere impartir
-     * @param seccionToAsig String con el formato BNF <seccionToAsig>:= <letra>-<num><num>
+     * @param cursoToAsig Objeto Curso que se quiere agregar o quitar
      * @param selector 1: Agregar  -1:Quitar
      */
-    public void modCursosAsignados(int codCursoToAsig, String seccionToAsig,  int selector){
+    public void modCursosAsignados(Curso cursoToAsig,  int selector){
+        Integer codigoActual = new Integer(cursoToAsig.getCodigoCurso());
         if (selector == 1){
-            if (!this.cursosAsig.contains(codCursoToAsig)){
-                this.cursosAsig.add(codCursoToAsig);
-                this.seccionAsig.add(seccionToAsig);
+            if (!this.cursosAsig.contains(cursoToAsig)){
+                this.cursosAsig.add(cursoToAsig);
+                if(this.idCursosAsig.contains(codigoActual)){
+                    this.idCursosAsig.add(codigoActual);
+                }
             }
             else{
                 System.out.println("Ya existe ese curso...");
             }
         }
         else if (selector == -1){
-            if (!this.cursosAsig.contains(codCursoToAsig)){
-                this.cursosAsig.remove(codCursoToAsig);
-                this.seccionAsig.remove(seccionToAsig);
+            if (this.cursosAsig.contains(cursoToAsig)){
+                this.cursosAsig.remove(cursoToAsig);
+                if (this.idCursosAsig.contains(codigoActual))
+                this.idCursosAsig.remove(codigoActual);
             }
             else{
                 System.out.println("No existe ese curso...");

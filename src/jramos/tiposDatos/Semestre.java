@@ -94,6 +94,10 @@ public class Semestre {
         text.deleteCharAt(text.length()-1);
         return text.toString();
     }
+    public ArrayList<Integer> getCodigosRamosArrayList()
+    {       return this.listCodRamos;
+    }
+
 
     /**
      * Metodo para obtener el nombre de la carrera a la cual pertenece este semestre

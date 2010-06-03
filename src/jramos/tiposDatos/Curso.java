@@ -26,6 +26,9 @@ public class Curso {
     private ArrayList<Integer> listSalas;
     private ArrayList<Hora> horario;
     private int idCurso;
+    private ArrayList<Semestre> listSemestres;
+    private ArrayList<Integer> listIdSemestres;
+
 
     //////////////////////////////////////////////////////////////////////
     // Contructor
@@ -47,6 +50,8 @@ public class Curso {
         this.listSalas = new ArrayList<Integer>();
         this.horario = new ArrayList<Hora>();
         this.idCurso = ++idCursoActual;
+        this.listSemestres = new ArrayList<Semestre>();
+        this.listIdSemestres = new ArrayList<Integer>();
 
 
     }
@@ -223,6 +228,22 @@ public class Curso {
        return Curso.idCursoActual;
    }
 
+   /**
+    * Metodo para obtener los id de los semestres en los que esta
+    * este curso
+    *
+    * @return String con los id separados por |.
+    */
+   public String getIdSemestres(){
+      StringBuilder text = new StringBuilder();
+      if (!this.listIdSemestres.isEmpty()){
+        for (Integer id: this.listIdSemestres){
+          text.append(String.valueOf(id)).append("|");
+        }
+        text.deleteCharAt(text.length()-1);
+      }
+      return text.toString();
+   }
 
    //////////////////////////////////////////////////////////////////////
    // Metodos de Modificar Variables
@@ -232,6 +253,7 @@ public class Curso {
     *
     * @param desc String con la descripcion del curso
     */
+
    public void setDescripcion(String desc){
        this.descrip = desc;
    }
@@ -388,5 +410,67 @@ public class Curso {
     */
    public void setIdCursos(int id){
        Curso.idCursoActual = id;
+   }
+
+   /**
+    * Metodo para agregar o quitar un id de la lista con id de semestre
+    *
+    * @param id int con el id para agregar o quitar
+    * @param selector 1: Agregar  -1: Quitar
+    */
+   public void modIdSemestres(int id, int selector){
+       if (selector == 1){
+           if (!this.listIdSemestres.contains(id)){
+               this.listIdSemestres.add(id);
+           }
+           else{
+               System.out.println("Ya existe el id...");
+           }
+       }
+       else if (selector ==-1){
+           if (this.listIdSemestres.contains(id)){
+               this.listIdSemestres.remove(new Integer(id));
+           }
+           else{
+               System.out.println("No existe el id...");
+           }
+       }
+       else{
+           System.out.println("Seleccion erronea...");
+       }
+   }
+
+   /**
+    * Metodo para agregar o quitar un semestre a la lista de semestres
+    *
+    * @param semestreToAsig Objeto semestre que se quiere agregar o quitar
+    * @param selector 1: Agregar  -1: Quitar
+    */
+   public void modSemestres(Semestre semestreToAsig, int selector){
+       if (selector == 1){
+           if (!this.listSemestres.contains(semestreToAsig)){
+               this.listSemestres.add(semestreToAsig);
+               if (!this.listIdSemestres.contains(new Integer(semestreToAsig.getIdSemestre()))){
+                   this.listIdSemestres.add(semestreToAsig.getIdSemestre());
+               }
+           }
+           else{
+               System.out.println("Ya existe el id...");
+           }
+       }
+       else if (selector ==-1){
+           if (this.listSemestres.contains(semestreToAsig)){
+               this.listSemestres.remove(semestreToAsig);
+               if (this.listIdSemestres.contains(new Integer(semestreToAsig.getIdSemestre()))){
+                   this.listIdSemestres.remove(new Integer(semestreToAsig.getIdSemestre()));
+               }
+           }
+           else{
+               System.out.println("No existe el id...");
+           }
+       }
+       else{
+           System.out.println("Seleccion erronea...");
+       }
    }
 }

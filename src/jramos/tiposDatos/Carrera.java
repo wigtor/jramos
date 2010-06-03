@@ -19,7 +19,7 @@ public class Carrera {
     private String descrip = "";
     private ArrayList<Semestre> semestres;
     private ArrayList<Integer> idSemestres;
-    
+    private Facultad enFacultad;
 
     //////////////////////////////////////////////////////////////////////
     // Contructor
@@ -111,6 +111,15 @@ public class Carrera {
         return text.toString();
     }
 
+    /**
+     * Metodo para obtener el id de la facultad en la que está esta carrera
+     *
+     * @return int con el id de la facultad
+     */
+    public int getIdFacultad(){
+        return this.enFacultad.getIdFacultad();
+    }
+
     //////////////////////////////////////////////////////////////////////
     // Metodos de Modificar Variables
 
@@ -189,5 +198,13 @@ public class Carrera {
         }
     } 
 
+    /**
+     * Metodo para asignar la facultad en la que está esta carrera
+     * 
+     * @param facultadToAsig Objeto facultad para ser asignado
+     */
+    public void setFacultad(Facultad facultadToAsig){
+        this.enFacultad = facultadToAsig;
+    }
 
 }

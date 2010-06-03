@@ -144,6 +144,7 @@ public class Semestre {
         if (selector == 1){
             if (!this.ramos.contains(cursoToAsig)){
                 this.ramos.add(cursoToAsig);
+                this.modCodRamos(cursoToAsig.getCodigoCurso(), 1);
             }
             else{
 

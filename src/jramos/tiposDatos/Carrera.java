@@ -168,7 +168,7 @@ public class Carrera {
         if (selector == 1){
             if (!this.semestres.contains(semestreToAsig)){
                 this.semestres.add(semestreToAsig);
-                this.idSemestres.add(semestreToAsig.getIdSemestre());
+                this.modIdSemestres(semestreToAsig.getIdSemestre(), 1);
             }
             else{
                 System.out.println("Ya existe el semestre...");
@@ -178,7 +178,7 @@ public class Carrera {
         else if (selector == -1){
             if (this.semestres.contains(semestreToAsig)){
                 this.semestres.remove(semestreToAsig);
-                this.idSemestres.remove(semestreToAsig.getIdSemestre());
+                this.modIdSemestres(semestreToAsig.getIdSemestre(), -1);
             }
             else{
                 System.out.println("El semestre no existe...");

@@ -129,6 +129,10 @@ public class Facultad {
         }
     }
 
+    public ArrayList getCodigosCarrerasArrayList(){
+        return this.listCodigosCarreras;
+    }
+
     //////////////////////////////////////////////////////////////////////
     // Metodos de Modificar Variables
 

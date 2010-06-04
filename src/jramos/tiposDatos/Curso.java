@@ -102,6 +102,10 @@ public class Curso {
         
     }
 
+   public ArrayList<Integer> getIdSemestresArray(){
+       return this.listIdSemestres;
+   }
+
    /**
     * Metodo para obtener el codigo del curso
     *
@@ -133,6 +137,10 @@ public class Curso {
         text.deleteCharAt(text.length()-1);
         return text.toString();
     }
+
+   public ArrayList<Integer> getEnCarrerasCodigosArrayList(){
+       return this.codigosCarrera;
+   }
 
    /**
     * Metodo para obtener los codigos de las carreras que contienen este curso

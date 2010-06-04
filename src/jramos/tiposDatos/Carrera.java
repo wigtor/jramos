@@ -120,6 +120,12 @@ public class Carrera {
         return this.enFacultad.getIdFacultad();
     }
 
+    public ArrayList<Integer> getIdSemestresArrayList(){
+        return this.idSemestres;
+    }
+
+
+
     //////////////////////////////////////////////////////////////////////
     // Metodos de Modificar Variables
 
@@ -206,5 +212,6 @@ public class Carrera {
     public void setFacultad(Facultad facultadToAsig){
         this.enFacultad = facultadToAsig;
     }
+
 
 }

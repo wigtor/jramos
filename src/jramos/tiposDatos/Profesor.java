@@ -144,6 +144,11 @@ public class Profesor {
         return text.toString();
     }
 
+    /**
+     * Metodo para obetener los codigos de los cursos asignados
+     * 
+     * @return String con los codigos separados por |
+     */
     public String getIdCursosAsignados(){
         int posicion = 0;
         StringBuilder text = new StringBuilder();
@@ -153,6 +158,10 @@ public class Profesor {
         }
         text.deleteCharAt(text.length()-1);
         return text.toString();
+    }
+
+    public ArrayList<Integer> getIdCursosAsignadosArrayList(){
+        return this.idCursosAsig;
     }
 
     /**

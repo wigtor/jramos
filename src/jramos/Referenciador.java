@@ -42,7 +42,6 @@ public class Referenciador {
      */
     static private void crearReferenciasCarrera(ArrayList<Carrera> listaCarreras, ArrayList<Semestre> listaSemestres){
         int idActual;
-        ArrayList<Integer> listaCodCarreras;
         if (!listaCarreras.isEmpty() && !listaSemestres.isEmpty()){
          for (Carrera carrera : listaCarreras){
              idActual = carrera.getCodigoCarrera();
@@ -120,34 +119,6 @@ public class Referenciador {
 
 
 
-    }
-
-    ///////////////////////////////////////////////////////////////////
-    // Metodos adicionales para trabajar
-
-    /**
-     * Metodo para crear un ArrayList de Integer a partir de un string
-     *
-     * @param texto Un string con int separados por |
-     *
-     * @return Un ArrayList<Integer>
-     */
-    static private ArrayList<Integer> stringToArrayList(String texto){
-        ArrayList<Integer> lista = new ArrayList();
-        boolean lector = true;
-        int indexAct = 0;
-        int indexTemp;
-        while (lector){
-            indexTemp = texto.indexOf("|", indexAct);
-            if (indexTemp == -1){
-                lector = false;
-            }
-            else{
-                lista.add(new Integer(texto.substring(indexAct, indexTemp)));
-                indexAct = indexTemp;
-            }
-        }
-        return lista;
     }
 
 }

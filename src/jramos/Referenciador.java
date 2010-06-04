@@ -43,16 +43,16 @@ public class Referenciador {
     static private void crearReferenciasCarrera(ArrayList<Carrera> listaCarreras, ArrayList<Semestre> listaSemestres){
         int idActual;
         if (!listaCarreras.isEmpty() && !listaSemestres.isEmpty()){
-         for (Carrera carrera : listaCarreras){
-             idActual = carrera.getCodigoCarrera();
-             for (Semestre semestre : listaSemestres){
-                 if (semestre.getIdSemestre() == idActual){
-                     carrera.modSemestres(semestre, 1);
-                     semestre.setEnCarrera(carrera);
-                     break;
-                 }
-             }
-         }
+            for (Carrera carrera : listaCarreras){
+                idActual = carrera.getCodigoCarrera();
+                for (Semestre semestre : listaSemestres){
+                    if (semestre.getCodigoEnCarrera() == idActual){
+                        //Acá se
+                        carrera.modSemestres(semestre, 1);
+                        semestre.setEnCarrera(carrera);
+                    }
+                }
+            }
         }
     }
 
@@ -69,10 +69,12 @@ public class Referenciador {
                 listaIdActual = semestre.getCodigosRamosArrayList();
                 for (Integer idActual : listaIdActual){
                     for (Curso curso: listaCursos){
-                        if (curso.getIdCurso() == idActual){
+                        if (curso.getIdCurso() == idActual.intValue())
+                        {   //Acá se crean las referencias a los cursos en el atributo "ramos" de los objetos Semestre
                             semestre.modRamos(curso, 1);
+                            //Acá se crean las referencias a los semestres en el atributo "listSemestres" de los objetos Curso
                             curso.modSemestres(semestre, 1);
-                            break;
+                            
                         }
                     }
                 }
@@ -122,9 +124,13 @@ public class Referenciador {
                 for (Integer codigoCarrera : listaCarrerasFacultadActual){
                     for (Carrera carrera : listaCarreras){
                         if (carrera.getCodigoCarrera() == codigoCarrera.intValue()){
+                            //Acá se crean las referencias a las facultades en el atributo "enFacultad" de los objetos carrera
                             carrera.setFacultad(facultad);
+                            //Acá se crean las referencias a las carreras en el atributo "listCarreras" de los objetos facultad
+                            facultad.modListaCarreras(carrera, 1);
                         }
                     }
+
                 }
             }
         }

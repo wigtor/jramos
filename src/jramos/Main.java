@@ -92,7 +92,7 @@ public class Main
                         listaProfesores = gestorIOProfes.leeProfes();
 
 
-                        //Referenciador.crearReferencias(listaCarreras, listaCursos, listaFacultades, listaProfesores, listaSemestres);
+                        Referenciador.crearReferencias(listaCarreras, listaCursos, listaFacultades, listaProfesores, listaSemestres);
                         
                         // Aqui se escriben
                         gestorIOCursos.escribeSemestres(listaSemestres);

@@ -26,7 +26,7 @@ public class Referenciador {
     static public void crearReferencias(ArrayList<Carrera> listCarreras, ArrayList<Curso> listCursos, ArrayList<Facultad> listFacultades, ArrayList<Profesor> listProfesores, ArrayList<Semestre> listSemestres){
         Referenciador.crearReferenciasCarrera(listCarreras, listSemestres);
         Referenciador.crearReferenciasSemestre(listSemestres, listCursos);
-        Referenciador.crearReferenciasCurso(listCursos, listProfesores);
+        Referenciador.crearReferenciasCurso(listCursos, listProfesores, listCarreras);
         Referenciador.crearReferenciasFacultad(listFacultades, listCarreras);
         
     }
@@ -86,39 +86,48 @@ public class Referenciador {
      * @param listaCursos ArrayList con Cursos por crear referencias
      * @param listaProfesores ArrayList con Profesores por crear referencias
      */
-    static private void crearReferenciasCurso(ArrayList<Curso> listaCursos, ArrayList<Profesor> listaProfesores){
-        int idProfesor;
+    static private void crearReferenciasCurso(ArrayList<Curso> listaCursos, ArrayList<Profesor> listaProfesores, ArrayList<Carrera> listaCarreras){
+        int idProfesorAsignado;
+        ArrayList<Integer> listaCodCarreras;
         if (!listaCursos.isEmpty() && !listaProfesores.isEmpty()){
             for (Curso curso: listaCursos){
-                idProfesor = curso.getIdProfeAsig();
+                idProfesorAsignado = curso.getIdProfeAsig();
                 for (Profesor profesor: listaProfesores){
-                    if (profesor.getIdProfesor() == idProfesor){
+                    if (profesor.getIdProfesor() == idProfesorAsignado){
                         curso.setProfesor(profesor);
                         profesor.modCursosAsignados(curso, 1);
                         break;
                     }
                 }
             }
-        }
-    }
-
-    static private void crearReferenciasFacultad(ArrayList<Facultad> listaFacultades, ArrayList<Carrera> listaCarreras){
-        int idFacultadActual;
-        if (!listaFacultades.isEmpty() && !listaCarreras.isEmpty()){
-            for (Facultad facultad: listaFacultades){
-                idFacultadActual = facultad.getIdFacultad();
-                for (Carrera carrera : listaCarreras){
-                    if (carrera.getIdFacultad() == idFacultadActual){
-                        carrera.setFacultad(facultad);
-                        facultad.modListaCarreras(carrera, 1);
-                        break;
+            //referencio las carreras a las que pertenece un curso.
+            for (Curso curso: listaCursos){
+                listaCodCarreras = curso.getEnCarrerasCodigosArrayList();
+                for (Integer codCarrera: listaCodCarreras){
+                    for (Carrera carrera : listaCarreras){
+                        if (carrera.getCodigoCarrera() == codCarrera.intValue()){
+                            curso.modCarrera(carrera, 1);
+                        }
                     }
                 }
             }
         }
-
-
-
+    }
+  
+    static private void crearReferenciasFacultad(ArrayList<Facultad> listaFacultades, ArrayList<Carrera> listaCarreras){
+        ArrayList<Integer> listaCarrerasFacultadActual;
+        if (!listaFacultades.isEmpty() && !listaCarreras.isEmpty()){
+            for (Facultad facultad: listaFacultades){
+                listaCarrerasFacultadActual = facultad.getCodigosCarrerasArrayList();
+                for (Integer codigoCarrera : listaCarrerasFacultadActual){
+                    for (Carrera carrera : listaCarreras){
+                        if (carrera.getCodigoCarrera() == codigoCarrera.intValue()){
+                            carrera.setFacultad(facultad);
+                        }
+                    }
+                }
+            }
+        }
     }
 
 }

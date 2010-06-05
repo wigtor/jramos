@@ -14,6 +14,8 @@ package jramos;
 import jramos.tiposDatos.Facultad;
 import jramos.tiposDatos.Carrera;
 import java.util.ArrayList;
+import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerNumberModel;
 
 /**
  *
@@ -23,6 +25,8 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
 
     private java.awt.Frame ventanaPadre;
     private ManipuladorListas listManager;
+    private SpinnerNumberModel modelCantidadSemestres;
+
     /** Creates new form DialogoCarreraNueva */
     public DialogoCarreraNueva(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager) {
         super(ventanaPadre, modal);
@@ -35,6 +39,8 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
         for (i = 0; i < cantidadFacultades; i++)
         {       selectorListaFacultades.addItem(listaFacultades.get(i));
         }
+        this.modelCantidadSemestres = new SpinnerNumberModel(4, 1, 20, 1);
+        this.spinnerCantidadSemestres.setModel(this.modelCantidadSemestres);
     }
 
     /** This method is called from within the constructor to
@@ -187,7 +193,7 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
                         return ;
                 }
         }
-        this.listManager.agregaCarrera(this.campoNombreCarreraNueva.getText(), (Facultad)selectorListaFacultades.getSelectedItem(), textoDescripcionCarrera.getText(), 6);
+        this.listManager.agregaCarrera(this.campoNombreCarreraNueva.getText(), (Facultad)selectorListaFacultades.getSelectedItem(), textoDescripcionCarrera.getText(), this.modelCantidadSemestres.getNumber().intValue());
         ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
         this.setVisible(false);
     }//GEN-LAST:event_botonAceptaAgregarCarreraActionPerformed

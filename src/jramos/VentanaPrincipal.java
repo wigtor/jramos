@@ -38,7 +38,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.visualizadorListaFacultades.removeAll();
         this.visualizadorListaProfes.removeAll();
         this.visualizadorListaCarreras.removeAll();
-        this.labelCarreraSeleccionada.setText("null");
+        //this.labelCarreraSeleccionada.setText("null");
         this.gestorIOCursos = gestorIOCursos;
         this.gestorIOProfes = gestorIOProfes;
         this.listModelFacultades = new DefaultListModel();
@@ -70,12 +70,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         visualizadorListaFacultades = new javax.swing.JList();
         jScrollPane4 = new javax.swing.JScrollPane();
         visualizadorListaCarreras = new javax.swing.JList();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        visualizadorMalla = new javax.swing.JTable();
         botonNuevaCarrera = new javax.swing.JButton();
         botonNuevaFacultad = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         labelCarreraSeleccionada = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        cuadroInfornacionFacultad = new javax.swing.JTextArea();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        cuadroInformacionCarrera = new javax.swing.JTextArea();
+        jButton7 = new javax.swing.JButton();
         PanelVisualizadorProfesores = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         visualizadorListaProfes = new javax.swing.JList();
@@ -176,25 +179,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(visualizadorListaCarreras);
 
-        visualizadorMalla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Nivel 1", "Nivel 2", "Nivel 3", "Nivel 4"
-            }
-        ));
-        visualizadorMalla.setMaximumSize(new java.awt.Dimension(400, 360));
-        visualizadorMalla.setMinimumSize(new java.awt.Dimension(300, 360));
-        visualizadorMalla.setRequestFocusEnabled(false);
-        visualizadorMalla.setRowHeight(60);
-        jScrollPane5.setViewportView(visualizadorMalla);
-
         botonNuevaCarrera.setFont(new java.awt.Font("Dialog", 1, 10));
         botonNuevaCarrera.setText("Nueva carrera...");
         botonNuevaCarrera.addActionListener(new java.awt.event.ActionListener() {
@@ -213,7 +197,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel22.setText("Malla de carrera: ");
 
-        labelCarreraSeleccionada.setText("CARRERA SELECCIONADA EN LISTA");
+        labelCarreraSeleccionada.setText("Seleccione una facultad y luego una carrera...");
+
+        cuadroInfornacionFacultad.setColumns(20);
+        cuadroInfornacionFacultad.setRows(5);
+        cuadroInfornacionFacultad.setText("Seleccione una facultad del listado del costado para ver su información");
+        jScrollPane5.setViewportView(cuadroInfornacionFacultad);
+
+        cuadroInformacionCarrera.setColumns(20);
+        cuadroInformacionCarrera.setRows(5);
+        cuadroInformacionCarrera.setText("Seleccione una carrera del listado del costado para ver su información");
+        jScrollPane8.setViewportView(cuadroInformacionCarrera);
+
+        jButton7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton7.setText("Ver Malla");
 
         javax.swing.GroupLayout PanelVisualizadorCarrerasLayout = new javax.swing.GroupLayout(PanelVisualizadorCarreras);
         PanelVisualizadorCarreras.setLayout(PanelVisualizadorCarrerasLayout);
@@ -222,45 +219,60 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                         .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
+                            .addComponent(botonNuevaFacultad)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonNuevaCarrera)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                        .addComponent(botonNuevaFacultad)
-                        .addGap(75, 75, 75)
-                        .addComponent(jLabel22)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(botonNuevaCarrera))
+                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                                .addGap(40, 40, 40)
+                                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                                        .addComponent(jLabel22)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                                .addGap(178, 178, 178)
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         PanelVisualizadorCarrerasLayout.setVerticalGroup(
             PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonNuevaFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel22)
-                    .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(botonNuevaFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(botonNuevaCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonNuevaCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22)
+                            .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         PanelVisualizadorGeneral.addTab("Carreras", PanelVisualizadorCarreras);
@@ -687,6 +699,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 }
         }
         this.visualizadorListaCarreras.setModel(this.listModelCarreras);
+        //Muestro la información de la facultad seleccionada en el cuadro de informacion
+        this.cuadroInfornacionFacultad.setText("Facultad de " +facultadSeleccionada.getNombreFacultad()+ "\nDetalles: \n" + facultadSeleccionada.getDescripcion());
+        this.cuadroInformacionCarrera.setText("Seleccione una carrera del listado del costado para ver su información");
     }//GEN-LAST:event_visualizadorListaFacultadesValueChanged
 
     private void visualizadorListaCarrerasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_visualizadorListaCarrerasValueChanged
@@ -698,9 +713,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         if (carreraSeleccionada != null)
         {       labelCarreraSeleccionada.setText(carreraSeleccionada.getNombreCarrera());
         }
-
-        //Acá debo mostrar la malla de esa carrera en la jTable
-        //!!!
+        this.cuadroInformacionCarrera.setText("Nombre de Carrera: " + carreraSeleccionada.getNombreCarrera()+"\nFacultad de "+carreraSeleccionada.getFacultad()+"\nCantidad de semestres : "+carreraSeleccionada.getListaSemestres().size()+"\nDescripción de la carrera: "+carreraSeleccionada.getDescripcion());
     }//GEN-LAST:event_visualizadorListaCarrerasValueChanged
 
 
@@ -715,12 +728,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonAgregarProfesor;
     private javax.swing.JButton botonNuevaCarrera;
     private javax.swing.JButton botonNuevaFacultad;
+    private javax.swing.JTextArea cuadroInformacionCarrera;
+    private javax.swing.JTextArea cuadroInfornacionFacultad;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -752,6 +768,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField jTextField1;
@@ -772,7 +789,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JList visualizadorListaCarreras;
     private javax.swing.JList visualizadorListaFacultades;
     private javax.swing.JList visualizadorListaProfes;
-    private javax.swing.JTable visualizadorMalla;
     // End of variables declaration//GEN-END:variables
 
 }

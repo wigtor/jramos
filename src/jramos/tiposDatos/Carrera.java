@@ -216,6 +216,15 @@ public class Carrera {
     public void setFacultad(Facultad facultadToAsig){
         this.enFacultad = facultadToAsig;
     }
+    
+    /**
+     * Metodo para obtener la facultad en la que está esta carrera
+     * 
+     * @return Objeto facultad al cual está asignada esa carrera
+     */
+    public Facultad getFacultad(){
+        return this.enFacultad;
+    }
 
     @Override
     public String toString()

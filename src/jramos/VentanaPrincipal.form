@@ -176,12 +176,12 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Facultad"/>
+                <Property name="text" type="java.lang.String" value="Facultad de: "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Carrera"/>
+                <Property name="text" type="java.lang.String" value="Carrera: "/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">

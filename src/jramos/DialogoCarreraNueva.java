@@ -168,6 +168,7 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
     private void botonAceptaAgregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptaAgregarCarreraActionPerformed
         // Accion a realizar cuando se aprieta el boton "agregar carrera"
         listManager.agregaCarrera(campoNombreCarreraNueva.getText(), (Facultad)selectorListaFacultades.getSelectedItem(), textoDescripcionCarrera.getText(), 6);
+        ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
         this.setVisible(false);
     }//GEN-LAST:event_botonAceptaAgregarCarreraActionPerformed
 

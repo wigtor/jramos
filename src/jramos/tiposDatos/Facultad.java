@@ -75,7 +75,7 @@ public class Facultad {
 
     @Override
     public String toString()
-    {       return "Facultad de " + this.getNombreFacultad();
+    {       return this.getNombreFacultad();
     }
     /**
      * Metodo para obtener el id de la facultad actual

@@ -27,9 +27,9 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="botonAceptaAgregarCarrera" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonAceptaAgregarFacultad" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="botonCancelaAgregarCarrera" min="-2" pref="130" max="-2" attributes="0"/>
+                      <Component id="botonCancelaAgregarFacultad" min="-2" pref="130" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" alignment="0" pref="479" max="32767" attributes="1"/>
                   <Group type="102" alignment="0" attributes="0">
@@ -56,8 +56,8 @@
               <Component id="jScrollPane1" min="-2" pref="138" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="botonCancelaAgregarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="botonAceptaAgregarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonCancelaAgregarFacultad" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonAceptaAgregarFacultad" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -65,20 +65,20 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="botonAceptaAgregarCarrera">
+    <Component class="javax.swing.JButton" name="botonAceptaAgregarFacultad">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar Facultad"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAceptaAgregarCarreraActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAceptaAgregarFacultadActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="botonCancelaAgregarCarrera">
+    <Component class="javax.swing.JButton" name="botonCancelaAgregarFacultad">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCancelaAgregarCarreraActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCancelaAgregarFacultadActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">

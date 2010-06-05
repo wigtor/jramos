@@ -155,9 +155,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setText("Facultad");
+        jLabel3.setText("Facultad de: ");
 
-        jLabel4.setText("Carrera");
+        jLabel4.setText("Carrera: ");
 
         visualizadorListaFacultades.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -638,6 +638,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         dialogoCarreraNueva = null;
     }//GEN-LAST:event_botonNuevaCarreraActionPerformed
 
+    public void actualizaJListListaFacultades()
+    {       this.listModelFacultades = null;
+            this.listModelFacultades = new DefaultListModel();
+            for (Facultad facultad : this.listManager.getListaFacultades())
+            {       this.listModelFacultades.addElement(facultad);
+            }
+            this.visualizadorListaFacultades.setModel(this.listModelFacultades);
+            visualizadorListaFacultadesValueChanged(null);
+    }
+
+    public void actualizaJListListaCarreras()
+    {       visualizadorListaFacultadesValueChanged(null);
+            visualizadorListaCarrerasValueChanged(null);
+    }
+
     private void botonNuevaFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaFacultadActionPerformed
         //Acción a realizar cuando se presiona el boton "nueva facultad"
         DialogoFacultadNueva dialogoFacultadNueva = new DialogoFacultadNueva(this, rootPaneCheckingEnabled, listManager);
@@ -665,7 +680,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowClosing
 
     private void visualizadorListaFacultadesComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_visualizadorListaFacultadesComponentHidden
-        
+
     }//GEN-LAST:event_visualizadorListaFacultadesComponentHidden
 
     private void visualizadorListaFacultadesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_visualizadorListaFacultadesValueChanged

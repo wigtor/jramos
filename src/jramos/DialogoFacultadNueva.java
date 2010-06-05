@@ -36,8 +36,8 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        botonAceptaAgregarCarrera = new javax.swing.JButton();
-        botonCancelaAgregarCarrera = new javax.swing.JButton();
+        botonAceptaAgregarFacultad = new javax.swing.JButton();
+        botonCancelaAgregarFacultad = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         campoNombreFacultadNueva = new javax.swing.JTextField();
@@ -46,17 +46,17 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        botonAceptaAgregarCarrera.setText("Agregar Facultad");
-        botonAceptaAgregarCarrera.addActionListener(new java.awt.event.ActionListener() {
+        botonAceptaAgregarFacultad.setText("Agregar Facultad");
+        botonAceptaAgregarFacultad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAceptaAgregarCarreraActionPerformed(evt);
+                botonAceptaAgregarFacultadActionPerformed(evt);
             }
         });
 
-        botonCancelaAgregarCarrera.setText("Cancelar");
-        botonCancelaAgregarCarrera.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelaAgregarFacultad.setText("Cancelar");
+        botonCancelaAgregarFacultad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonCancelaAgregarCarreraActionPerformed(evt);
+                botonCancelaAgregarFacultadActionPerformed(evt);
             }
         });
 
@@ -84,9 +84,9 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(botonAceptaAgregarCarrera)
+                        .addComponent(botonAceptaAgregarFacultad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonCancelaAgregarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botonCancelaAgregarFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -107,8 +107,8 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonCancelaAgregarCarrera)
-                    .addComponent(botonAceptaAgregarCarrera))
+                    .addComponent(botonCancelaAgregarFacultad)
+                    .addComponent(botonAceptaAgregarFacultad))
                 .addContainerGap())
         );
 
@@ -119,20 +119,21 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_campoNombreFacultadNuevaActionPerformed
 
-    private void botonAceptaAgregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptaAgregarCarreraActionPerformed
+    private void botonAceptaAgregarFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptaAgregarFacultadActionPerformed
         // Accion a realizar cuando se aprieta el boton "agregar facultad"
         listManager.agregaFacultad(campoNombreFacultadNueva.getText(), textoDescripcionFacultadNueva.getText());
+        ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaFacultades();
         this.setVisible(false);
-    }//GEN-LAST:event_botonAceptaAgregarCarreraActionPerformed
+    }//GEN-LAST:event_botonAceptaAgregarFacultadActionPerformed
 
-    private void botonCancelaAgregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelaAgregarCarreraActionPerformed
+    private void botonCancelaAgregarFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelaAgregarFacultadActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-    }//GEN-LAST:event_botonCancelaAgregarCarreraActionPerformed
+    }//GEN-LAST:event_botonCancelaAgregarFacultadActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonAceptaAgregarCarrera;
-    private javax.swing.JButton botonCancelaAgregarCarrera;
+    private javax.swing.JButton botonAceptaAgregarFacultad;
+    private javax.swing.JButton botonCancelaAgregarFacultad;
     private javax.swing.JTextField campoNombreFacultadNueva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

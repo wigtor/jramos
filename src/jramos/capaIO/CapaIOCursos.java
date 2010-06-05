@@ -85,11 +85,7 @@ public class CapaIOCursos
                 }
 		/** Cierro el archivo*/
 		lector.close();
-                if (idInicial != 0)
-                        return new Integer(idInicial);
-                else
-                        return null;
-
+                return new Integer(idInicial);
         }
 
         private int stringToIdInicial(String linea, String tipoId)

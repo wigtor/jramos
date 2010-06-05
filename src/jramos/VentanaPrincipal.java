@@ -12,6 +12,7 @@
 package jramos;
 
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import jramos.tiposDatos.*;
 import jramos.capaIO.CapaIOCursos;
 import jramos.capaIO.CapaIOProfes;
@@ -25,16 +26,43 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private ManipuladorListas listManager;
     private CapaIOCursos gestorIOCursos;
     private CapaIOProfes gestorIOProfes;
+    private DefaultListModel listModelFacultades;
+    private DefaultListModel listModelCarreras;
 
     /** Creates new form VentanaPrincipal */
     public VentanaPrincipal(ManipuladorListas listManager, CapaIOCursos gestorIOCursos, CapaIOProfes gestorIOProfes) {
         initComponents();
+        int i, tamLista, idFacultadSeleccionada = 0;
+        Facultad facultadSeleccionada;
         this.listManager = listManager;
         this.visualizadorListaFacultades.removeAll();
         this.visualizadorListaProfes.removeAll();
         this.visualizadorListaCarreras.removeAll();
+        this.labelCarreraSeleccionada.setText("null");
         this.gestorIOCursos = gestorIOCursos;
         this.gestorIOProfes = gestorIOProfes;
+        this.listModelFacultades = new DefaultListModel();
+        this.listModelCarreras = new DefaultListModel();
+
+        //Muestra el listado de facultades en un jList.
+        tamLista = this.listManager.getListaFacultades().size();
+        for (i = 0; i < tamLista; i++)
+        {   this.listModelFacultades.addElement(this.listManager.getListaFacultades().get(i));
+        }
+        this.visualizadorListaFacultades.setModel(this.listModelFacultades);
+
+
+        //Muestra el listado de carreras en un jList, muestra solo las que pertenecen a la facultad seleccionada en el jList de facultades.
+        tamLista = this.listManager.getListaCarreras().size();
+        for (i = 0; i < tamLista; i++)
+        {   facultadSeleccionada = (Facultad)this.visualizadorListaFacultades.getSelectedValue();
+            if (facultadSeleccionada != null)
+                idFacultadSeleccionada = facultadSeleccionada.getIdFacultad();
+            if (idFacultadSeleccionada == this.listManager.getListaCarreras().get(i).getIdFacultad())
+                this.listModelCarreras.addElement(this.listManager.getListaCarreras().get(i));
+        }
+        this.visualizadorListaCarreras.setModel(this.listModelCarreras);
+
     }
 
     /** This method is called from within the constructor to
@@ -136,12 +164,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        visualizadorListaFacultades.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                visualizadorListaFacultadesValueChanged(evt);
+            }
+        });
+        visualizadorListaFacultades.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                visualizadorListaFacultadesComponentHidden(evt);
+            }
+        });
         jScrollPane3.setViewportView(visualizadorListaFacultades);
 
         visualizadorListaCarreras.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
+        });
+        visualizadorListaCarreras.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                visualizadorListaCarrerasValueChanged(evt);
+            }
         });
         jScrollPane4.setViewportView(visualizadorListaCarreras);
 
@@ -620,6 +663,42 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         {       System.out.println("Error al escribir en los archivos");
         }
     }//GEN-LAST:event_formWindowClosing
+
+    private void visualizadorListaFacultadesComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_visualizadorListaFacultadesComponentHidden
+        
+    }//GEN-LAST:event_visualizadorListaFacultadesComponentHidden
+
+    private void visualizadorListaFacultadesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_visualizadorListaFacultadesValueChanged
+        // Acción a realizar cuando se selecciona una facultad, se debe mostrar en el jList solo las carreras de esa facultad
+        int tamLista, i, idFacultadSeleccionada = 0;
+        Facultad facultadSeleccionada;
+        this.listModelCarreras = null;
+        this.listModelCarreras = new DefaultListModel();
+        tamLista = this.listManager.getListaCarreras().size();
+        facultadSeleccionada = (Facultad)this.visualizadorListaFacultades.getSelectedValue();
+        if (facultadSeleccionada != null)
+        {       idFacultadSeleccionada = facultadSeleccionada.getIdFacultad();
+                for (i = 0; i < tamLista; i++)
+                {   if (idFacultadSeleccionada == this.listManager.getListaCarreras().get(i).getIdFacultad())
+                        this.listModelCarreras.addElement(this.listManager.getListaCarreras().get(i));
+                }
+        }
+        this.visualizadorListaCarreras.setModel(this.listModelCarreras);
+    }//GEN-LAST:event_visualizadorListaFacultadesValueChanged
+
+    private void visualizadorListaCarrerasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_visualizadorListaCarrerasValueChanged
+        // Acción a realizar cuando se selecciona un elemento de la lista de carreras
+        //Se debe mostrar la malla especifica de esa carrera y el nombre de carrera en "labelCarreraSeleccionada"
+        //Acá se muestra el nombre de la carrera seleccionada en el jlabel "labelCarreraSeleccionada"
+        Carrera carreraSeleccionada;
+        carreraSeleccionada = (Carrera)this.visualizadorListaCarreras.getSelectedValue();
+        if (carreraSeleccionada != null)
+        {       labelCarreraSeleccionada.setText(carreraSeleccionada.getNombreCarrera());
+        }
+
+        //Acá debo mostrar la malla de esa carrera en la jTable
+        //!!!
+    }//GEN-LAST:event_visualizadorListaCarrerasValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

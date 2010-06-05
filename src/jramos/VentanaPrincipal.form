@@ -203,6 +203,10 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="visualizadorListaFacultadesValueChanged"/>
+                    <EventHandler event="componentHidden" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="visualizadorListaFacultadesComponentHidden"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -225,6 +229,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="visualizadorListaCarrerasValueChanged"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

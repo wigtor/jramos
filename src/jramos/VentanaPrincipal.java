@@ -673,7 +673,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void visualizadorListaFacultadesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_visualizadorListaFacultadesValueChanged
         // Acción a realizar cuando se selecciona una facultad, se debe mostrar en el jList solo las carreras de esa facultad
-        int tamLista, i, idFacultadSeleccionada = 0, idFacultadEnListaCarreras;
+        int tamLista, i;
         Facultad facultadSeleccionada;
         ArrayList<Carrera> listaCarrerasFacultadSeleccionada = null;
         this.listModelCarreras = null;

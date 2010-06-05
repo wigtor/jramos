@@ -12,6 +12,7 @@
 package jramos;
 
 import jramos.tiposDatos.Facultad;
+import jramos.tiposDatos.Carrera;
 import java.util.ArrayList;
 
 /**
@@ -167,7 +168,26 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
 
     private void botonAceptaAgregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptaAgregarCarreraActionPerformed
         // Accion a realizar cuando se aprieta el boton "agregar carrera"
-        listManager.agregaCarrera(campoNombreCarreraNueva.getText(), (Facultad)selectorListaFacultades.getSelectedItem(), textoDescripcionCarrera.getText(), 6);
+        //si lo que se ha escrito es nada, entonces no se agrega la carrera
+        if (this.campoNombreCarreraNueva.getText().trim().equals(""))
+        {       //abro nueva ventana
+                DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "No hay un nombre de carrera escrito", "Debe escribir un nombre de carrera");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+        //Si ya existe una carrera con el mismo nombre tampoco se agrega.
+        ArrayList<Carrera> listaCompletaCarreras = this.listManager.getListaCarreras();
+        for (Carrera carrera : listaCompletaCarreras)
+        {       if (this.campoNombreCarreraNueva.getText().equals(carrera.getNombreCarrera()))
+                {       //abro nueva ventana de error.
+                        DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nombre de carrera ya existe.", "vuelva a escribir otro nombre para la carrera");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+        }
+        this.listManager.agregaCarrera(this.campoNombreCarreraNueva.getText(), (Facultad)selectorListaFacultades.getSelectedItem(), textoDescripcionCarrera.getText(), 6);
         ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
         this.setVisible(false);
     }//GEN-LAST:event_botonAceptaAgregarCarreraActionPerformed

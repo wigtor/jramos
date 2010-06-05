@@ -10,6 +10,8 @@
  */
 
 package jramos;
+import jramos.tiposDatos.Facultad;
+import java.util.ArrayList;
 
 /**
  *
@@ -121,6 +123,24 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
 
     private void botonAceptaAgregarFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptaAgregarFacultadActionPerformed
         // Accion a realizar cuando se aprieta el boton "agregar facultad"
+        if (this.campoNombreFacultadNueva .getText().trim().equals(""))
+        {       //abro nueva ventana
+                DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "No hay un nombre de facultad escrito", "Debe escribir un nombre de facultad");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+        //Si ya existe una carrera con el mismo nombre tampoco se agrega.
+        ArrayList<Facultad> listaCompletaFacultades = this.listManager.getListaFacultades();
+        for (Facultad facultad : listaCompletaFacultades)
+        {       if (this.campoNombreFacultadNueva.getText().equals(facultad.getNombreFacultad()))
+                {       //abro nueva ventana de error.
+                        DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nombre de facultad ya existe.", "vuelva a escribir otro nombre para la facultad");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+        }
         listManager.agregaFacultad(campoNombreFacultadNueva.getText(), textoDescripcionFacultadNueva.getText());
         ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaFacultades();
         this.setVisible(false);

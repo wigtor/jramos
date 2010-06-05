@@ -73,6 +73,10 @@ public class Facultad {
         return this.descrip;
     }
 
+    @Override
+    public String toString()
+    {       return "Facultad de " + this.getNombreFacultad();
+    }
     /**
      * Metodo para obtener el id de la facultad actual
      *
@@ -87,7 +91,7 @@ public class Facultad {
      *
      * @return int con el codigo de la facultad
      */
-    public int getIdFacultadGlobal(){
+    static public int getIdFacultadGlobal(){
         return Facultad.idFacultadActual;
     }
 
@@ -152,7 +156,7 @@ public class Facultad {
      *
      * @param id int con el id static para ser seteado
      */
-    public void setIdFacultades(int id){
+    static public void setIdFacultades(int id){
         Facultad.idFacultadActual = id;
     }
 

@@ -11,15 +11,30 @@
 
 package jramos;
 
+import java.util.ArrayList;
+import jramos.tiposDatos.*;
+import jramos.capaIO.CapaIOCursos;
+import jramos.capaIO.CapaIOProfes;
+
 /**
  *
  * @author victor
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
 
+    private ManipuladorListas listManager;
+    private CapaIOCursos gestorIOCursos;
+    private CapaIOProfes gestorIOProfes;
+
     /** Creates new form VentanaPrincipal */
-    public VentanaPrincipal() {
+    public VentanaPrincipal(ManipuladorListas listManager, CapaIOCursos gestorIOCursos, CapaIOProfes gestorIOProfes) {
         initComponents();
+        this.listManager = listManager;
+        this.visualizadorListaFacultades.removeAll();
+        this.visualizadorListaProfes.removeAll();
+        this.visualizadorListaCarreras.removeAll();
+        this.gestorIOCursos = gestorIOCursos;
+        this.gestorIOProfes = gestorIOProfes;
     }
 
     /** This method is called from within the constructor to
@@ -103,6 +118,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName("JRamos - Planificación horaria"); // NOI18N
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         jLabel3.setText("Facultad");
 
@@ -141,11 +161,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         visualizadorMalla.setRowHeight(60);
         jScrollPane5.setViewportView(visualizadorMalla);
 
-        botonNuevaCarrera.setFont(new java.awt.Font("Dialog", 1, 10));
+        botonNuevaCarrera.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         botonNuevaCarrera.setText("Nueva carrera...");
+        botonNuevaCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonNuevaCarreraActionPerformed(evt);
+            }
+        });
 
-        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10));
+        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         botonNuevaFacultad.setText("Nueva facultad...");
+        botonNuevaFacultad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonNuevaFacultadActionPerformed(evt);
+            }
+        });
 
         jLabel22.setText("Malla de carrera: ");
 
@@ -554,6 +584,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuVerManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVerManualActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_menuVerManualActionPerformed
+
+    private void botonNuevaCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaCarreraActionPerformed
+        //Acción a realizar cuando se presiona el boton "nueva carrera"
+        DialogoCarreraNueva dialogoCarreraNueva = new DialogoCarreraNueva(this, rootPaneCheckingEnabled, listManager);
+        dialogoCarreraNueva.setVisible(true);
+        dialogoCarreraNueva = null;
+    }//GEN-LAST:event_botonNuevaCarreraActionPerformed
+
+    private void botonNuevaFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaFacultadActionPerformed
+        //Acción a realizar cuando se presiona el boton "nueva facultad"
+        DialogoFacultadNueva dialogoFacultadNueva = new DialogoFacultadNueva(this, rootPaneCheckingEnabled, listManager);
+        dialogoFacultadNueva.setVisible(true);
+        dialogoFacultadNueva = null;
+    }//GEN-LAST:event_botonNuevaFacultadActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        //Antes de escribir, debo setear los nuevos valores de los id despues de utilizar las clases
+        try
+        {       // Aqui se escriben
+                gestorIOCursos.escribeSemestres(listManager.getListaSemestres(), Curso.getIdCursoGlobal(), Carrera.getCodigoCarreraGlobal(), Semestre.getIdSemestreGlobal(), Facultad.getIdFacultadGlobal());
+                gestorIOCursos.escribeCarreras(listManager.getListaCarreras(), Curso.getIdCursoGlobal(), Carrera.getCodigoCarreraGlobal(), Semestre.getIdSemestreGlobal(), Facultad.getIdFacultadGlobal());
+                gestorIOCursos.escribeCursos(listManager.getListaCursos(), Curso.getIdCursoGlobal(), Carrera.getCodigoCarreraGlobal(), Semestre.getIdSemestreGlobal(), Facultad.getIdFacultadGlobal());
+                gestorIOCursos.escribeFacultades(listManager.getListaFacultades(), Curso.getIdCursoGlobal(), Carrera.getCodigoCarreraGlobal(), Semestre.getIdSemestreGlobal(), Facultad.getIdFacultadGlobal());
+                gestorIOProfes.escribeProfes(listManager.getListaProfesores(), Profesor.getIdProfesorGlobal());
+        }
+        catch (Exception e)
+        {       System.out.println("Error al escribir en los archivos");
+        }
+    }//GEN-LAST:event_formWindowClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

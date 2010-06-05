@@ -27,9 +27,9 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="botonAceptaAgregarCarrera" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="130" max="-2" attributes="0"/>
+                      <Component id="botonCancelarAgregarCarrera" min="-2" pref="130" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
@@ -46,11 +46,11 @@
                                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                                       <Group type="102" attributes="0">
                                           <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                                          <Component id="jSpinner1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="spinnerCantidadSemestres" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="visualizadorListaFacultades" pref="261" max="32767" attributes="1"/>
+                                      <Component id="selectorListaFacultades" pref="261" max="32767" attributes="1"/>
                                   </Group>
-                                  <Component id="jTextField1" alignment="1" min="-2" pref="261" max="-2" attributes="1"/>
+                                  <Component id="campoNombreCarreraNueva" alignment="1" min="-2" pref="261" max="-2" attributes="1"/>
                               </Group>
                           </Group>
                       </Group>
@@ -65,18 +65,18 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campoNombreCarreraNueva" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="visualizadorListaFacultades" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="selectorListaFacultades" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jSpinner1" min="-2" max="-2" attributes="0"/>
+                  <Component id="spinnerCantidadSemestres" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -84,8 +84,8 @@
               <Component id="jScrollPane1" pref="84" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonAceptaAgregarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="botonCancelarAgregarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -93,22 +93,25 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="botonAceptaAgregarCarrera">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar carrera"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAceptaAgregarCarreraActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="botonCancelarAgregarCarrera">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCancelarAgregarCarreraActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="campoNombreCarreraNueva">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoNombreCarreraNuevaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -121,7 +124,7 @@
         <Property name="text" type="java.lang.String" value="Facultad:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="visualizadorListaFacultades">
+    <Component class="javax.swing.JComboBox" name="selectorListaFacultades">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -138,7 +141,7 @@
         <Property name="text" type="java.lang.String" value="Cantidad de semestres: "/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="jSpinner1">
+    <Component class="javax.swing.JSpinner" name="spinnerCantidadSemestres">
       <Properties>
         <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
           <Connection code="4" type="code"/>
@@ -160,7 +163,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="textoDescripcionCarrera">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>

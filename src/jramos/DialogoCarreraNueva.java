@@ -11,16 +11,29 @@
 
 package jramos;
 
+import jramos.tiposDatos.Facultad;
+import java.util.ArrayList;
+
 /**
  *
  * @author victor
  */
 public class DialogoCarreraNueva extends javax.swing.JDialog {
 
+    private java.awt.Frame ventanaPadre;
+    private ManipuladorListas listManager;
     /** Creates new form DialogoCarreraNueva */
-    public DialogoCarreraNueva(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DialogoCarreraNueva(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager) {
+        super(ventanaPadre, modal);
         initComponents();
+        this.ventanaPadre = ventanaPadre;
+        this.listManager = listManager;
+        selectorListaFacultades.removeAllItems();
+        ArrayList<Facultad> listaFacultades = listManager.getListaFacultades();
+        int i, cantidadFacultades = listaFacultades.size();
+        for (i = 0; i < cantidadFacultades; i++)
+        {       selectorListaFacultades.addItem(listaFacultades.get(i));
+        }
     }
 
     /** This method is called from within the constructor to
@@ -32,33 +45,38 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        botonAceptaAgregarCarrera = new javax.swing.JButton();
+        botonCancelarAgregarCarrera = new javax.swing.JButton();
+        campoNombreCarreraNueva = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        visualizadorListaFacultades = new javax.swing.JComboBox();
+        selectorListaFacultades = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        jSpinner1 = new javax.swing.JSpinner();
+        spinnerCantidadSemestres = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        textoDescripcionCarrera = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("Agregar una nueva carrera..."); // NOI18N
 
-        jButton1.setText("Agregar carrera");
-
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        botonAceptaAgregarCarrera.setText("Agregar carrera");
+        botonAceptaAgregarCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                botonAceptaAgregarCarreraActionPerformed(evt);
             }
         });
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        botonCancelarAgregarCarrera.setText("Cancelar");
+        botonCancelarAgregarCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                botonCancelarAgregarCarreraActionPerformed(evt);
+            }
+        });
+
+        campoNombreCarreraNueva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNombreCarreraNuevaActionPerformed(evt);
             }
         });
 
@@ -66,18 +84,18 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
 
         jLabel2.setText("Facultad:");
 
-        visualizadorListaFacultades.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectorListaFacultades.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setText("Cantidad de semestres: ");
 
-        jSpinner1.setValue(4);
+        spinnerCantidadSemestres.setValue(4);
 
         jLabel4.setFont(new java.awt.Font("Dialog", 1, 10));
         jLabel4.setText("Descripción de la carrera: (Optativo)");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        textoDescripcionCarrera.setColumns(20);
+        textoDescripcionCarrera.setRows(5);
+        jScrollPane1.setViewportView(textoDescripcionCarrera);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,9 +105,9 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(botonAceptaAgregarCarrera)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(botonCancelarAgregarCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -104,9 +122,9 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createSequentialGroup()
                                             .addGap(79, 79, 79)
-                                            .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(visualizadorListaFacultades, 0, 261, Short.MAX_VALUE))
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(spinnerCantidadSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(selectorListaFacultades, 0, 261, Short.MAX_VALUE))
+                                    .addComponent(campoNombreCarreraNueva, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,51 +132,58 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoNombreCarreraNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(visualizadorListaFacultades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(selectorListaFacultades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(spinnerCantidadSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(botonAceptaAgregarCarrera)
+                    .addComponent(botonCancelarAgregarCarrera))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void botonCancelarAgregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarAgregarCarreraActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_botonCancelarAgregarCarreraActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void campoNombreCarreraNuevaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNombreCarreraNuevaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_campoNombreCarreraNuevaActionPerformed
+
+    private void botonAceptaAgregarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptaAgregarCarreraActionPerformed
+        // Accion a realizar cuando se aprieta el boton "agregar carrera"
+        listManager.agregaCarrera(campoNombreCarreraNueva.getText(), (Facultad)selectorListaFacultades.getSelectedItem(), textoDescripcionCarrera.getText(), 6);
+        this.setVisible(false);
+    }//GEN-LAST:event_botonAceptaAgregarCarreraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton botonAceptaAgregarCarrera;
+    private javax.swing.JButton botonCancelarAgregarCarrera;
+    private javax.swing.JTextField campoNombreCarreraNueva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JComboBox visualizadorListaFacultades;
+    private javax.swing.JComboBox selectorListaFacultades;
+    private javax.swing.JSpinner spinnerCantidadSemestres;
+    private javax.swing.JTextArea textoDescripcionCarrera;
     // End of variables declaration//GEN-END:variables
 
 }

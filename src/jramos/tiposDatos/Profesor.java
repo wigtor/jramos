@@ -187,7 +187,7 @@ public class Profesor {
      *
      * @return int con el id del profesor
      */
-    public int getIdProfesorGlobal(){
+    static public int getIdProfesorGlobal(){
         return Profesor.idProfesorActual;
     }
 
@@ -350,7 +350,7 @@ public class Profesor {
      * 
      * @param id int con el id static para ser seteado
      */
-    public void setIdProfesores(int id){
+    static public void setIdProfesores(int id){
         Profesor.idProfesorActual = id;
     }
 

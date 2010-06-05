@@ -232,7 +232,7 @@ public class Curso {
     *
     * @return int con el id del curso
     */
-   public int getIdCursoGlobal(){
+   static public int getIdCursoGlobal(){
        return Curso.idCursoActual;
    }
 
@@ -265,6 +265,11 @@ public class Curso {
    public void setDescripcion(String desc){
        this.descrip = desc;
    }
+
+    @Override
+   public String toString()
+    {       return this.getNombreCurso();
+    }
 
    /**
     * Metodo para agregar el codigo del curso
@@ -416,7 +421,7 @@ public class Curso {
     * 
     * @param id int con el id static para ser seteado
     */
-   public void setIdCursos(int id){
+   static public void setIdCursos(int id){
        Curso.idCursoActual = id;
    }
 

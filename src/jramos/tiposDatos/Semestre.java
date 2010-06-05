@@ -34,7 +34,7 @@ public class Semestre {
     public Semestre(int numeroSemestre, int codEnLaCarrera){
         this.numSemestre = numeroSemestre;
         this.codEnCarrera = codEnLaCarrera;
-        this.idSemestre = ++idSemestreActual;
+        this.idSemestre = ++Semestre.idSemestreActual;
         this.ramos = new ArrayList<Curso>();
         this.listCodRamos = new ArrayList<Integer>();
     }
@@ -54,6 +54,15 @@ public class Semestre {
         this.ramos = new ArrayList<Curso>();
         this.listCodRamos = new ArrayList<Integer>();
     }
+
+    public Semestre(int numeroSemestre, Carrera EnLaCarrera){
+        this.numSemestre = numeroSemestre;
+        this.codEnCarrera = EnLaCarrera.getCodigoCarrera();
+        this.idSemestre = ++Semestre.idSemestreActual;
+        this.ramos = new ArrayList<Curso>();
+        this.listCodRamos = new ArrayList<Integer>();
+    }
+
 
     //////////////////////////////////////////////////////////////////////
     // Metodos de Obtener Variables
@@ -131,7 +140,7 @@ public class Semestre {
      *
      * @return int con el id de este semestre
      */
-    public int getIdSemestreGlobal(){
+    static public int getIdSemestreGlobal(){
         return Semestre.idSemestreActual;
     }
 
@@ -210,7 +219,7 @@ public class Semestre {
      *
      * @param id int con el id static para ser seteado
      */
-    public void setIdSemestres(int id){
+    static public void setIdSemestres(int id){
         Semestre.idSemestreActual = id;
     }
 

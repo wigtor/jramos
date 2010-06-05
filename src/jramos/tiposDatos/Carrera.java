@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Carrera {
 
-    static int codCarreraActual = 10000;
+    static int codCarreraActual = 1000;
 
     private String nomCarrera;
     private int codCarrera;
@@ -62,6 +62,10 @@ public class Carrera {
         return this.nomCarrera;
     }
 
+    public ArrayList<Semestre> getListaSemestres()
+    {       return this.semestres;
+    }
+
     /**
      * Metodo para obtener el codigo de la carrera
      *
@@ -76,7 +80,7 @@ public class Carrera {
      *
      * @return int codigo de la carrera
      */
-    public int getCodigoCarreraGlobal(){
+    static public int getCodigoCarreraGlobal(){
         return Carrera.codCarreraActual;
     }
 
@@ -145,7 +149,7 @@ public class Carrera {
      * 
      * @param id int con el id static para ser seteado
      */
-    public void setIdCarreras(int id){
+    static public void setIdCarreras(int id){
         Carrera.codCarreraActual = id;
     }
 
@@ -213,5 +217,9 @@ public class Carrera {
         this.enFacultad = facultadToAsig;
     }
 
+    @Override
+    public String toString()
+    {       return this.getNombreCarrera();
+    }
 
 }

@@ -52,22 +52,58 @@ public class ManipuladorListas
         {       return this.listaProfesores;
         }
 
-        public void agregaFacultad(String nombreFacultad)
-        {       Facultad facultadNueva = new Facultad(nombreFacultad);
-                //debo validar los datos ingresados y devolver una excepcion si no se puede
+        public void agregaFacultad(String nombreFacultad, String descripcion)
+        {       //debo validar los datos ingresados y devolver una excepcion si no se puede
+
+                Facultad facultadNueva = new Facultad(nombreFacultad);
+                facultadNueva.setDescripcion(descripcion);
 
                 this.listaFacultades.add(facultadNueva);
         }
 
-        public void agregaCarrera(String nombreCarrera, Facultad facultadALaQuePertenece)
-        {       Carrera carreraNueva = new Carrera(nombreCarrera);
-                //Debo válidar los datos ingresados y devolver excepción si no se puede agregar.
+        public void agregaCarrera(String nombreCarrera, Facultad facultadALaQuePertenece, String descripcion, int cantidadSemestres)
+        {       //Debo válidar los datos ingresados y devolver excepción si no se puede agregar.
+
+                int i;
+                Carrera carreraNueva = new Carrera(nombreCarrera);
+                carreraNueva.setFacultad(facultadALaQuePertenece);
+                carreraNueva.setDescripcion(descripcion);
+                //Agrego los semestres que posea, pero sin cursos.
+                for (i = 0; i < cantidadSemestres; i++)
+                {       carreraNueva.modSemestres(new Semestre(i+1, carreraNueva), 1);
+                }
 
                 this.listaCarreras.add(carreraNueva);
         }
 
-        public void eliminaCarrera(int idCarrera)
-        {
+        public void eliminaCarrera(int codCarreraAEliminar)
+        {       //elimino la carrera desde la lista de carreras
+                Carrera carreraAEliminar = null;
+                for (Carrera carrera : this.listaCarreras)
+                {       if (carrera.getCodigoCarrera() == codCarreraAEliminar)
+                        {       carreraAEliminar = carrera;
+                                this.listaCarreras.remove(carrera);
+                                break;
+                        }
 
+                }
+                //elimino la carrera desde las referencias de la facultad a la que pertenece
+                for (Facultad facultad : this.listaFacultades)
+                {       facultad.modListaCarreras(carreraAEliminar, -1); //borro todas las referencias de esa carrera de las facultades, si no existe, se muestra una advertencia
+                }
+
+                //elimino las referencias de todos los semestres que posee la carrera eliminada de la lista de semestres
+                ArrayList<Semestre> semestresAEliminar = carreraAEliminar.getListaSemestres();
+                for (Semestre semestre : semestresAEliminar)
+                {       this.listaSemestres.remove(semestre);
+                }
+
+                //elimino las referencias de los semestres eliminados que existan en los cursos
+                for (Semestre semestre : semestresAEliminar)
+                {       for (Curso curso : this.listaCursos)
+                        {       curso.modSemestres(semestre, -1);
+                        }
+                }
         }
+
 }

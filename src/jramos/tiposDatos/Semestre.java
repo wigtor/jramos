@@ -55,12 +55,13 @@ public class Semestre {
         this.listCodRamos = new ArrayList<Integer>();
     }
 
-    public Semestre(int numeroSemestre, Carrera EnLaCarrera){
+    public Semestre(int numeroSemestre, Carrera enLaCarrera){
         this.numSemestre = numeroSemestre;
-        this.codEnCarrera = EnLaCarrera.getCodigoCarrera();
+        this.codEnCarrera = enLaCarrera.getCodigoCarrera();
         this.idSemestre = ++Semestre.idSemestreActual;
         this.ramos = new ArrayList<Curso>();
         this.listCodRamos = new ArrayList<Integer>();
+        this.enCarrera = enLaCarrera;
     }
 
 
@@ -97,12 +98,17 @@ public class Semestre {
      */
     public String getCodigosRamos(){
         StringBuilder text = new StringBuilder();
-        for (Integer codigo: this.listCodRamos){
-            text.append(String.valueOf(codigo)).append("|");
+        if (this.listCodRamos.size() != 0){
+            for (Integer codigo: this.listCodRamos){
+                text.append(String.valueOf(codigo)).append("|");
+            }
+            text.deleteCharAt(text.length()-1);
+            return text.toString();
         }
-        text.deleteCharAt(text.length()-1);
-        return text.toString();
+        else
+            return "";
     }
+
     public ArrayList<Integer> getCodigosRamosArrayList()
     {       return this.listCodRamos;
     }

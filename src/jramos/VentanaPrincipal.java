@@ -119,6 +119,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName("JRamos - Planificación horaria"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
             }
@@ -161,7 +164,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         visualizadorMalla.setRowHeight(60);
         jScrollPane5.setViewportView(visualizadorMalla);
 
-        botonNuevaCarrera.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        botonNuevaCarrera.setFont(new java.awt.Font("Dialog", 1, 10));
         botonNuevaCarrera.setText("Nueva carrera...");
         botonNuevaCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +172,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10));
         botonNuevaFacultad.setText("Nueva facultad...");
         botonNuevaFacultad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -601,9 +604,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         //Antes de escribir, debo setear los nuevos valores de los id despues de utilizar las clases
         try
-        {       // Aqui se escriben
+        {       // Aqui se escriben las listas modificadas en los archivos.
                 gestorIOCursos.escribeSemestres(listManager.getListaSemestres(), Curso.getIdCursoGlobal(), Carrera.getCodigoCarreraGlobal(), Semestre.getIdSemestreGlobal(), Facultad.getIdFacultadGlobal());
                 gestorIOCursos.escribeCarreras(listManager.getListaCarreras(), Curso.getIdCursoGlobal(), Carrera.getCodigoCarreraGlobal(), Semestre.getIdSemestreGlobal(), Facultad.getIdFacultadGlobal());
                 gestorIOCursos.escribeCursos(listManager.getListaCursos(), Curso.getIdCursoGlobal(), Carrera.getCodigoCarreraGlobal(), Semestre.getIdSemestreGlobal(), Facultad.getIdFacultadGlobal());
@@ -613,7 +619,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         catch (Exception e)
         {       System.out.println("Error al escribir en los archivos");
         }
-    }//GEN-LAST:event_formWindowClosed
+    }//GEN-LAST:event_formWindowClosing
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -66,11 +66,14 @@ public class ManipuladorListas
 
                 int i;
                 Carrera carreraNueva = new Carrera(nombreCarrera);
+                Semestre semestreNuevo;
                 carreraNueva.setFacultad(facultadALaQuePertenece);
                 carreraNueva.setDescripcion(descripcion);
                 //Agrego los semestres que posea, pero sin cursos.
                 for (i = 0; i < cantidadSemestres; i++)
-                {       carreraNueva.modSemestres(new Semestre(i+1, carreraNueva), 1);
+                {       semestreNuevo = new Semestre(i+1, carreraNueva);
+                        carreraNueva.modSemestres(semestreNuevo, 1);
+                        this.listaSemestres.add(semestreNuevo);
                 }
 
                 this.listaCarreras.add(carreraNueva);

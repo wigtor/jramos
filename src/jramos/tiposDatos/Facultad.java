@@ -64,6 +64,9 @@ public class Facultad {
         return this.nomFacultad;
     }
 
+    public ArrayList<Carrera> getCarreras(){
+        return this.listCarreras;
+    }
     /**
      * Metodo para obtener la descripcion de la facultad
      *

@@ -6,7 +6,6 @@ package jramos;
 
 import jramos.tiposDatos.Carrera;
 import jramos.tiposDatos.Curso;
-import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Facultad;
 import jramos.tiposDatos.Semestre;
 import jramos.tiposDatos.Profesor;

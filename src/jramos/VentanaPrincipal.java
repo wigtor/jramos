@@ -50,19 +50,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         {   this.listModelFacultades.addElement(this.listManager.getListaFacultades().get(i));
         }
         this.visualizadorListaFacultades.setModel(this.listModelFacultades);
-
-
-        //Muestra el listado de carreras en un jList, muestra solo las que pertenecen a la facultad seleccionada en el jList de facultades.
-        tamLista = this.listManager.getListaCarreras().size();
-        for (i = 0; i < tamLista; i++)
-        {   facultadSeleccionada = (Facultad)this.visualizadorListaFacultades.getSelectedValue();
-            if (facultadSeleccionada != null)
-                idFacultadSeleccionada = facultadSeleccionada.getIdFacultad();
-            if (idFacultadSeleccionada == this.listManager.getListaCarreras().get(i).getIdFacultad())
-                this.listModelCarreras.addElement(this.listManager.getListaCarreras().get(i));
-        }
         this.visualizadorListaCarreras.setModel(this.listModelCarreras);
-
     }
 
     /** This method is called from within the constructor to
@@ -685,17 +673,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void visualizadorListaFacultadesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_visualizadorListaFacultadesValueChanged
         // Acción a realizar cuando se selecciona una facultad, se debe mostrar en el jList solo las carreras de esa facultad
-        int tamLista, i, idFacultadSeleccionada = 0;
+        int tamLista, i, idFacultadSeleccionada = 0, idFacultadEnListaCarreras;
         Facultad facultadSeleccionada;
+        ArrayList<Carrera> listaCarrerasFacultadSeleccionada = null;
         this.listModelCarreras = null;
         this.listModelCarreras = new DefaultListModel();
-        tamLista = this.listManager.getListaCarreras().size();
         facultadSeleccionada = (Facultad)this.visualizadorListaFacultades.getSelectedValue();
         if (facultadSeleccionada != null)
-        {       idFacultadSeleccionada = facultadSeleccionada.getIdFacultad();
+        {       listaCarrerasFacultadSeleccionada = facultadSeleccionada.getCarreras();
+                tamLista = listaCarrerasFacultadSeleccionada.size();
                 for (i = 0; i < tamLista; i++)
-                {   if (idFacultadSeleccionada == this.listManager.getListaCarreras().get(i).getIdFacultad())
-                        this.listModelCarreras.addElement(this.listManager.getListaCarreras().get(i));
+                {       this.listModelCarreras.addElement(listaCarrerasFacultadSeleccionada.get(i));
                 }
         }
         this.visualizadorListaCarreras.setModel(this.listModelCarreras);

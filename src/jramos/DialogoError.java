@@ -44,6 +44,7 @@ public class DialogoError extends javax.swing.JDialog {
         labelSolucionError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Error");
 
         jLabel1.setText("ERROR:");
 

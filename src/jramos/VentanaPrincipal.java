@@ -106,8 +106,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        botonEditarProfesor = new javax.swing.JButton();
+        botonEliminarProfesor = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
@@ -143,6 +143,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuAcercaDe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("JRamos- Planificación horaria");
         setMinimumSize(new java.awt.Dimension(800, 600));
         setName("JRamos - Planificación horaria"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -217,7 +218,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuadroInformacionCarrera.setText("Seleccione una carrera del listado del costado para ver su información");
         jScrollPane8.setViewportView(cuadroInformacionCarrera);
 
-        jButton7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Dialog", 1, 14));
         jButton7.setText("Ver Malla");
 
         javax.swing.GroupLayout PanelVisualizadorCarrerasLayout = new javax.swing.GroupLayout(PanelVisualizadorCarreras);
@@ -247,8 +248,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                                 .addGap(178, 178, 178)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         PanelVisualizadorCarrerasLayout.setVerticalGroup(
@@ -327,15 +327,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel10.setText("ej: 1234567");
 
-        jLabel11.setText("ej: ramo1| ramo2| ramo3");
+        jLabel11.setText("ej: codRamo1 codRamo2");
 
         jLabel12.setText("ej: L4 L5 W3 W4 V1 V2");
 
         jLabel20.setText("Listado de profesores");
 
-        jButton1.setText("Editar profesor");
+        botonEditarProfesor.setText("Editar profesor");
 
-        jButton2.setText("Eliminar profesor");
+        botonEliminarProfesor.setText("Eliminar profesor");
+        botonEliminarProfesor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarProfesorActionPerformed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 10));
         jLabel14.setText("Agregar un nuevo profesor al registro: ");
@@ -383,9 +388,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVisualizadorProfesoresLayout.createSequentialGroup()
                                 .addComponent(jButton5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)
+                                .addComponent(botonEditarProfesor)
                                 .addGap(44, 44, 44)
-                                .addComponent(jButton2)
+                                .addComponent(botonEliminarProfesor)
                                 .addGap(88, 88, 88)))))
                 .addContainerGap())
         );
@@ -395,9 +400,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jButton1)
+                    .addComponent(botonEditarProfesor)
                     .addComponent(jButton5)
-                    .addComponent(jButton2))
+                    .addComponent(botonEliminarProfesor))
                 .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelVisualizadorProfesoresLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -744,6 +749,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         dialogoCarreraNueva = null;
     }//GEN-LAST:event_botonNuevaCarreraActionPerformed
 
+    public void borrarProfesor(Profesor profesorABorrar)
+    {       //Borro el profesor del manipulador de listas, del Jlist y del visualizador
+            
+    }
+    public void borrarCarrera(Carrera carreraABorrar)
+    {       //Borro la carrera del manipulador de listas, del Jlist y del visualizador
+
+    }
+    public void borrarFacultad(Facultad facultadABorrar)
+    {       //Borro la facultad del manipulador de listas, del Jlist y del visualizador
+
+    }
+    public void borrarCurso(Curso cursoABorrar)
+    {       //Borro el curso del manipulador de listas, del Jlist y del visualizador
+
+    }
+
     public void actualizaJListListaFacultades()
     {       this.listModelFacultades = null;
             this.listModelFacultades = new DefaultListModel();
@@ -836,6 +858,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 this.VisualizadorDetallesProfe.setText("Seleccione un profesor del listado del costado para ver su información");
     }//GEN-LAST:event_visualizadorListaProfesValueChanged
 
+    private void botonEliminarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarProfesorActionPerformed
+        // Acción a realizar cuando se presiona el boton "eliminar profesor"
+        // Se revisa cual es el profesor seleccionado en la JList de profesores y es ese el que se va a eliminar.
+        // Se lanza una ventana pidiendo confirmación a esta acción
+        Profesor profesorSeleccionado;
+        profesorSeleccionado = (Profesor)this.visualizadorListaProfes.getSelectedValue();
+        if (profesorSeleccionado != null)
+        {       //Lanzo un dialogo pidiendo confirmación para eliminar el profesor seleccionado
+                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_PROFESOR, profesorSeleccionado);
+                dialogoConfirmacion.setVisible(true);
+                dialogoConfirmacion = null;
+                 
+                return ;
+        }
+        else
+        {       //abro nueva ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado un profesor para eliminar", "Seleccione un profesor desde la lista de profesores del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+    }//GEN-LAST:event_botonEliminarProfesorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox MarcadorFacultades;
@@ -846,6 +891,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JButton botonAgregarCurso;
     private javax.swing.JButton botonAgregarProfesor;
+    private javax.swing.JButton botonEditarProfesor;
+    private javax.swing.JButton botonEliminarProfesor;
     private javax.swing.JButton botonNuevaCarrera;
     private javax.swing.JButton botonNuevaFacultad;
     private javax.swing.JTextField campoHorasDisponibles;
@@ -854,8 +901,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField campoRutProfesor;
     private javax.swing.JTextArea cuadroInformacionCarrera;
     private javax.swing.JTextArea cuadroInfornacionFacultad;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;

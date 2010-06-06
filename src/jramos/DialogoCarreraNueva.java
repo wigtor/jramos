@@ -65,6 +65,7 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
         textoDescripcionCarrera = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Agregar una carrera");
         setName("Agregar una nueva carrera..."); // NOI18N
 
         botonAceptaAgregarCarrera.setText("Agregar carrera");

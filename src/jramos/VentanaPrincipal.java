@@ -631,8 +631,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonAgregarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarProfesorActionPerformed
         // Acción a realizar cuando se presiona el boton "agregar profesor"
-        int rut;
-        Hora horaNueva;
+        int rut = 0, i, tamLista, posicionBarra;;
+        ArrayList<Hora> listaHorasDisponibles = new ArrayList();
+        ArrayList<Integer> listaCodCursosDisponibles = new ArrayList();
         if (this.campoNombreProfesorNuevo.getText().trim().equals(""))
         {       //abro nueva ventana
                 DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay un nombre de profesor escrito", "Debe escribir un nombre de profesor");
@@ -642,22 +643,67 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
 
         //Compruebo si el rut es válido
-        rut = 0;
+        try
+        {       rut = Integer.valueOf(this.campoRutProfesor.getText());
+                if ((rut < 1000000) || (rut > 50000000))
+                    throw new NumberFormatException();
+        }
+        catch (NumberFormatException NFE)
+        {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "El rut introducido no es válido", "vuelva a escribir el rut del profesor");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+
+        //Transformo el string con los cursos que puede dictar a un ArrayList de Integer
+        try
+        {       int codCurso;
+                String codCursosDisp = this.campoRamosQueDicta.getText();
+                if (codCursosDisp.length() != 0) //Seteo los codigos de curso que puede impartir
+                        {       for (i = 0; codCursosDisp.indexOf(" ") != -1;i++)
+                                {       System.out.println(codCursosDisp.substring(0, codCursosDisp.indexOf(" ")));
+                                        codCurso = Integer.valueOf(codCursosDisp.substring(0, codCursosDisp.indexOf(" ")));
+                                        posicionBarra = codCursosDisp.indexOf(" ");
+                                        codCursosDisp = codCursosDisp.substring(posicionBarra+1);
+                                        listaCodCursosDisponibles.add(new Integer(Integer.valueOf(codCurso)));
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                listaCodCursosDisponibles.add(new Integer(Integer.valueOf(codCursosDisp)));
+                        }
+        }
+        catch (NumberFormatException NFE)
+        {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Los codigos de curso introducidos no son válidos", "vuelva a escribir los cursos disponibles del profesor");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }//modifica esto!!!
 
         //Transformo el string de horas a un ArrayList de Hora
         try
-        {       horaNueva = new Hora(1);
+        {       String horasDisp = this.campoHorasDisponibles.getText();
+                Hora objHora;
+                if (horasDisp.length() != 0)
+                        {       for (i = 0; horasDisp.indexOf(" ") != -1;i++)
+                                {       System.out.println(horasDisp.substring(0, horasDisp.indexOf(" ")));
+                                        objHora = new Hora(horasDisp.substring(0, horasDisp.indexOf(" ")));
+                                        posicionBarra = horasDisp.indexOf(" ");
+                                        horasDisp = horasDisp.substring(posicionBarra+1);
+                                        listaHorasDisponibles.add(objHora);
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                listaHorasDisponibles.add(new Hora(horasDisp));
+                        }
             
         } 
         catch (HourOutOfRangeException HOORE)
-        {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Las horas introducidas no son válidas.", "Revise las horas escritas y su sintaxis");
+        {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Las horas introducidas no son válidas.", "Revise las horas escritas y vuelva a escribirlas");
                 dialogoError.setVisible(true);
                 dialogoError = null;
                 return ;
 
         }
 
-        //Si ya existe una carrera con el mismo nombre tampoco se agrega.
+        //Si ya existe un profesor con el mismo nombre tampoco se agrega.
         ArrayList<Profesor> listaCompletaProfesores = this.listManager.getListaProfesores();
         for (Profesor profesor : listaCompletaProfesores)
         {       if (this.campoNombreProfesorNuevo.getText().equals(profesor.getNombreProfesor()))
@@ -668,8 +714,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         return ;
                 }
         }
-        this.listManager.agregaProfesor(this.campoNombreProfesorNuevo.getText(), rut, null, null);
-        this.actualizaJListListaFacultades();
+        this.listManager.agregaProfesor(this.campoNombreProfesorNuevo.getText(), rut, listaCodCursosDisponibles, listaHorasDisponibles);
+        this.listModelProfesores = new DefaultListModel();
+        tamLista = this.listManager.getListaProfesores().size();
+        for (i = 0; i < tamLista; i++)
+        {   this.listModelProfesores.addElement(this.listManager.getListaProfesores().get(i));
+        }
+        this.visualizadorListaProfes.setModel(this.listModelProfesores);
+        this.visualizadorListaProfesValueChanged(null);
 
     }//GEN-LAST:event_botonAgregarProfesorActionPerformed
 
@@ -751,10 +803,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 for (i = 0; i < tamLista; i++)
                 {       this.listModelCarreras.addElement(listaCarrerasFacultadSeleccionada.get(i));
                 }
+                //Muestro la información de la facultad seleccionada en el cuadro de informacion
+                this.cuadroInfornacionFacultad.setText("Facultad de " +facultadSeleccionada.getNombreFacultad()+ "\nDetalles: \n" + facultadSeleccionada.getDescripcion());
         }
         this.visualizadorListaCarreras.setModel(this.listModelCarreras);
-        //Muestro la información de la facultad seleccionada en el cuadro de informacion
-        this.cuadroInfornacionFacultad.setText("Facultad de " +facultadSeleccionada.getNombreFacultad()+ "\nDetalles: \n" + facultadSeleccionada.getDescripcion());
         this.cuadroInformacionCarrera.setText("Seleccione una carrera del listado del costado para ver su información");
     }//GEN-LAST:event_visualizadorListaFacultadesValueChanged
 
@@ -778,7 +830,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Profesor profesorSeleccionado;
         profesorSeleccionado = (Profesor)this.visualizadorListaProfes.getSelectedValue();
         if (profesorSeleccionado != null)
-        {       this.VisualizadorDetallesProfe.setText("Nombre del profesor: "+profesorSeleccionado.getNombreProfesor()+"Rut del profesor: "+profesorSeleccionado.getRutProfesor()+"\nCursos para impartir: "+profesorSeleccionado.getCodCursosQueImparte()+"\nHoras disponibles: "+profesorSeleccionado.getHorasDisponibles() + "\nCursosAsignados: "+profesorSeleccionado.getCursosAsignados()+"\nHoras asignadas: "+profesorSeleccionado.getHorasAsignadas());
+        {       this.VisualizadorDetallesProfe.setText("Nombre del profesor: "+profesorSeleccionado.getNombreProfesor()+"\nRut del profesor: "+profesorSeleccionado.getRutProfesor()+"\nCursos para impartir: "+profesorSeleccionado.getCodCursosQueImparte()+"\nHoras disponibles: "+profesorSeleccionado.getHorasDisponibles() + "\nCursosAsignados: "+profesorSeleccionado.getCursosAsignados()+"\nHoras asignadas: "+profesorSeleccionado.getHorasAsignadas());
         }
         else
                 this.VisualizadorDetallesProfe.setText("Seleccione un profesor del listado del costado para ver su información");

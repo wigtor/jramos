@@ -282,7 +282,7 @@ public class CapaIOProfes
                                 profesorLeido.modHorasAsignadas(new Hora(horasAsig), 1);
                                 System.out.println("Hora asignada: " +horasAsig);
                         }
-                        //Seteo la lista de cursos asignaos al profesor
+                        //Seteo la lista de cursos asignados al profesor
                         if (idCursosAsig.length() != 0) //Seteo los codigos de curso que puede impartir
                         {       for (i = 0; idCursosAsig.indexOf("|") != -1;i++)
                                 {       System.out.println(idCursosAsig.substring(0, idCursosAsig.indexOf("|")));

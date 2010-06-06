@@ -37,6 +37,7 @@ public class Profesor {
     public Profesor(String nombreProfesor, int rut, ArrayList<Integer> cursosParaImpartir){
         this.nomProfe = nombreProfesor;
         this.cursosDisp = cursosParaImpartir;
+        this.rutProfe = rut;
         this.horaDisp = new ArrayList<Hora>();
         this.horaOcup = new ArrayList<Hora>();
         this.cursosAsig = new ArrayList<Curso>();
@@ -140,13 +141,16 @@ public class Profesor {
      * @return String con formato BNF  <curso>:=<nombreCurso> /<Seccion> Separados con |
      */
     public String getCursosAsignados(){
-        int posicion = 0;
-        StringBuilder text = new StringBuilder();
-        for (Curso curso: this.cursosAsig){
-            text.append(curso + " - "+curso.getSeccion() + "\n");
+        if (this.cursosAsig.size() != 0)
+        {   StringBuilder text = new StringBuilder();
+            for (Curso curso: this.cursosAsig){
+                text.append(curso + " - "+curso.getSeccion() + "\n");
+            }
+            text.deleteCharAt(text.length()-1);
+            return text.toString();
         }
-        text.deleteCharAt(text.length()-1);
-        return text.toString();
+        else
+            return "";
     }
 
     /**
@@ -155,13 +159,17 @@ public class Profesor {
      * @return String con los codigos separados por |
      */
     public String getIdCursosAsignados(){
-        StringBuilder text = new StringBuilder();
-        for (Integer idCurso: this.idCursosAsig){
-            text.append(String.valueOf(idCurso));
-            text.append("|");
+        if (this.idCursosAsig.size() != 0)
+        {   StringBuilder text = new StringBuilder();
+            for (Integer idCurso: this.idCursosAsig){
+                text.append(String.valueOf(idCurso));
+                text.append("|");
+            }
+            text.deleteCharAt(text.length()-1);
+            return text.toString();
         }
-        text.deleteCharAt(text.length()-1);
-        return text.toString();
+        else
+            return "";
     }
 
     public ArrayList<Integer> getIdCursosAsignadosArrayList(){

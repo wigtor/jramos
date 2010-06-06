@@ -132,11 +132,15 @@ public class Curso {
     */
    public String getEnCarreras(){
         StringBuilder text = new StringBuilder();
-        for (Carrera carrera: this.enCarrera){
-            text.append(carrera.getNombreCarrera()).append("|");
+        if (this.enCarrera.size() != 0)
+        {   for (Carrera carrera: this.enCarrera){
+                text.append(carrera.getNombreCarrera()).append("|");
+            }
+            text.deleteCharAt(text.length()-1);
+            return text.toString();
         }
-        text.deleteCharAt(text.length()-1);
-        return text.toString();
+        else
+            return "";
     }
 
    public ArrayList<Integer> getEnCarrerasCodigosArrayList(){

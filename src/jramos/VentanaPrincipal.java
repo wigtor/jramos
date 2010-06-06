@@ -821,6 +821,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             this.cuadroInformacionProfes.setText("Se ha eliminado correctamente el profesor "+ profesorABorrar.getNombreProfesor());
             this.listManager.eliminaProfesor(profesorABorrar);
             this.actualizaJListListaProfes();
+            this.actualizaJListListaCursos();
     }
     public void borrarCarrera(Carrera carreraABorrar)
     {       //Borro la carrera del manipulador de listas, del Jlist y del visualizador
@@ -1033,11 +1034,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_PanelVisualizadorGeneralStateChanged
 
     private void PanelVisualizadorGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelVisualizadorGeneralMouseClicked
-        // cuando cambia el tab a los cursos, redibujo la JList de cursos
-        actualizaJListListaCursos();
-        actualizaJListListaCarreras();
-        actualizaJListListaFacultades();
-        actualizaJListListaProfes();
+
     }//GEN-LAST:event_PanelVisualizadorGeneralMouseClicked
 
 

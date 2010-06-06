@@ -180,7 +180,7 @@ public class Facultad {
            }
        }
        else if (selector == -1){
-           if (!this.listCarreras.contains(carreraToAsig)){
+           if (this.listCarreras.contains(carreraToAsig)){
                this.listCarreras.remove(carreraToAsig);
                this.modListaCodigoCarreras(carreraToAsig.getCodigoCarrera(), -1);
            }

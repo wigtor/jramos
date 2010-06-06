@@ -87,6 +87,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         cuadroInformacionCarrera = new javax.swing.JTextArea();
         jButton7 = new javax.swing.JButton();
+        botonEditarFacultad = new javax.swing.JButton();
+        botonEliminarFacultad = new javax.swing.JButton();
+        botonEditarCarrera = new javax.swing.JButton();
+        botonEliminarCarrera = new javax.swing.JButton();
         PanelVisualizadorProfesores = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         visualizadorListaProfes = new javax.swing.JList();
@@ -218,8 +222,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuadroInformacionCarrera.setText("Seleccione una carrera del listado del costado para ver su información");
         jScrollPane8.setViewportView(cuadroInformacionCarrera);
 
-        jButton7.setFont(new java.awt.Font("Dialog", 1, 14));
+        jButton7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton7.setText("Ver Malla");
+
+        botonEditarFacultad.setText("Editar facultad");
+
+        botonEliminarFacultad.setText("Eliminar facultad");
+        botonEliminarFacultad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarFacultadActionPerformed(evt);
+            }
+        });
+
+        botonEditarCarrera.setText("Editar carrera");
+
+        botonEliminarCarrera.setText("Eliminar carrera");
+        botonEliminarCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarCarreraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelVisualizadorCarrerasLayout = new javax.swing.GroupLayout(PanelVisualizadorCarreras);
         PanelVisualizadorCarreras.setLayout(PanelVisualizadorCarrerasLayout);
@@ -228,59 +250,80 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botonNuevaFacultad)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonNuevaCarrera)
                     .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonNuevaFacultad)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4)
-                            .addComponent(botonNuevaCarrera))
-                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                                        .addComponent(jLabel22)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                                .addGap(178, 178, 178)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(botonEditarFacultad)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                                .addComponent(botonEliminarFacultad)
+                                .addGap(82, 82, 82))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                                .addGap(46, 46, 46)
+                                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                                            .addComponent(jLabel22)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addContainerGap(38, Short.MAX_VALUE))))
+                    .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                        .addGap(77, 77, 77)
+                        .addComponent(botonEditarCarrera)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
+                        .addComponent(botonEliminarCarrera)
+                        .addGap(79, 79, 79))))
         );
         PanelVisualizadorCarrerasLayout.setVerticalGroup(
             PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(botonNuevaFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                        .addComponent(botonNuevaFacultad, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botonNuevaCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22)
-                            .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
+                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonEditarFacultad)
+                            .addComponent(botonEliminarFacultad))
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                         .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonEditarCarrera)
+                            .addComponent(botonEliminarCarrera)))
+                    .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                        .addComponent(botonNuevaCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(26, 26, 26))
         );
 
         PanelVisualizadorGeneral.addTab("Carreras", PanelVisualizadorCarreras);
@@ -755,11 +798,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
     public void borrarCarrera(Carrera carreraABorrar)
     {       //Borro la carrera del manipulador de listas, del Jlist y del visualizador
-
+            this.cuadroInformacionCarrera.setText("Se ha eliminado correctamente la carrera:\n"+ carreraABorrar.getNombreCarrera()+"\nSe han eliminado también los semestres de esas carreras");
+            this.listManager.eliminaCarrera(carreraABorrar.getCodigoCarrera());
+            this.actualizaJListListaCarreras();
     }
     public void borrarFacultad(Facultad facultadABorrar)
     {       //Borro la facultad del manipulador de listas, del Jlist y del visualizador
-
+            this.cuadroInfornacionFacultad.setText("Se ha eliminado correctamente la facultad: \n"+ facultadABorrar.getNombreFacultad()+"\nSe ha borrado ademas las carreras de esa facultad: \n"+facultadABorrar.getNombreCarreras()+"\nY se han eliminado los semestres de las carreras eliminadas\n");
+            this.listManager.eliminaFacultad(facultadABorrar);
+            this.actualizaJListListaFacultades();
+            this.actualizaJListListaCarreras();
     }
     public void borrarCurso(Curso cursoABorrar)
     {       //Borro el curso del manipulador de listas, del Jlist y del visualizador
@@ -868,8 +916,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         {       //Lanzo un dialogo pidiendo confirmación para eliminar el profesor seleccionado
                 DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_PROFESOR, profesorSeleccionado);
                 dialogoConfirmacion.setVisible(true);
-                dialogoConfirmacion = null;
-                 
+                dialogoConfirmacion = null; 
                 return ;
         }
         else
@@ -881,6 +928,52 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonEliminarProfesorActionPerformed
 
+    private void botonEliminarFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarFacultadActionPerformed
+        // Acción a realizar cuando se presiona el boton "eliminar facultad"
+        // Se revisa cual es la facultad seleccionada en la JList de facultades y es ese el que se va a eliminar.
+        // Se lanza una ventana pidiendo confirmación a esta acción
+        Facultad facultadSeleccionada;
+        facultadSeleccionada = (Facultad)this.visualizadorListaFacultades.getSelectedValue();
+        if (facultadSeleccionada != null)
+        {       //Lanzo un dialogo pidiendo confirmación para eliminar la facultad seleccionada
+                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_FACULTAD, facultadSeleccionada);
+                dialogoConfirmacion.setVisible(true);
+                dialogoConfirmacion = null;
+
+                return ;
+        }
+        else
+        {       //abro ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado una facultad para eliminar", "Seleccione una facultad desde la lista de facultades del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+    }//GEN-LAST:event_botonEliminarFacultadActionPerformed
+
+    private void botonEliminarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarCarreraActionPerformed
+        // Acción a realizar cuando se presiona el boton "eliminar carrera"
+        // Se revisa cual es la carrera seleccionada en la JList de carreras y es ese el que se va a eliminar.
+        // Se lanza una ventana pidiendo confirmación a esta acción
+        Carrera carreraSeleccionada;
+        carreraSeleccionada = (Carrera)this.visualizadorListaCarreras.getSelectedValue();
+        if (carreraSeleccionada != null)
+        {       //Lanzo un dialogo pidiendo confirmación para eliminar la facultad seleccionada
+                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_CARRERA, carreraSeleccionada);
+                dialogoConfirmacion.setVisible(true);
+                dialogoConfirmacion = null;
+
+                return ;
+        }
+        else
+        {       //abro ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado una carrera para eliminar", "Seleccione una carrera desde la lista de carreras del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+    }//GEN-LAST:event_botonEliminarCarreraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox MarcadorFacultades;
@@ -891,7 +984,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JButton botonAgregarCurso;
     private javax.swing.JButton botonAgregarProfesor;
+    private javax.swing.JButton botonEditarCarrera;
+    private javax.swing.JButton botonEditarFacultad;
     private javax.swing.JButton botonEditarProfesor;
+    private javax.swing.JButton botonEliminarCarrera;
+    private javax.swing.JButton botonEliminarFacultad;
     private javax.swing.JButton botonEliminarProfesor;
     private javax.swing.JButton botonNuevaCarrera;
     private javax.swing.JButton botonNuevaFacultad;

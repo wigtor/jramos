@@ -72,7 +72,8 @@ public class Curso {
         this.listSalas = new ArrayList<Integer>();
         this.horario = new ArrayList<Hora>();
         this.idCurso = id;
-
+        this.listSemestres = new ArrayList<Semestre>();
+        this.listIdSemestres = new ArrayList<Integer>();
     }
 
     //////////////////////////////////////////////////////////////////////

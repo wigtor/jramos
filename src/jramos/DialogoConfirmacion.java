@@ -43,7 +43,7 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
         }
         if (tipoAccion == DialogoConfirmacion.BORRA_FACULTAD)
         {       //MENSAJE A MOSTRAR PARA BORRAR UNA FACULTAD
-                this.labelAccionAConfirmar1.setText("borrar la facultad: ");
+                this.labelAccionAConfirmar1.setText("borrar la facultad de: ");
                 this.labelAccionAConfirmar2.setText(((Facultad)objeto).getNombreFacultad() + " ?");
         }
         if (tipoAccion == DialogoConfirmacion.BORRA_CARRERA)

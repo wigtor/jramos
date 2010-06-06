@@ -60,8 +60,26 @@ public class ManipuladorListas
                 this.listaFacultades.add(facultadNueva);
         }
 
-        public void eliminaFacultad()
+        public void eliminaFacultad(Facultad facultadAEliminar)
         {       //SE DEBE HACER ESTE METODO
+                //Elimino todoas las carreras que pertenecen a esa facultad.
+                //ATENTO A ALGUN POSIBLE FALLO EN LA ITERACION Y ELIMINACION DE CARRERAS CON EL METODO eliminaCarrera()
+                ArrayList<Carrera> carrerasAEliminar = new ArrayList();
+                for (Carrera carrera : this.listaCarreras)
+                {       if (carrera.getFacultad().equals(facultadAEliminar))
+                        {       carrerasAEliminar.add(carrera);
+                        }
+                }
+                for (Carrera carrera : carrerasAEliminar) //Esto es para evitar un error en el acceso al ArrayList al ir eliminando elementos
+                {       this.eliminaCarrera(carrera.getCodigoCarrera());
+                }
+                //Elimino la facultad de la lista de facultades
+                for (Facultad facultad :this.listaFacultades)
+                {       if (facultadAEliminar.equals(facultad))
+                        {       this.listaFacultades.remove(facultad);
+                                break;
+                        }
+                }
         }
 
         public void agregaProfesor(String nombreProfesor, int rut, ArrayList<Integer> cursosDisponibles, ArrayList<Hora> horasDisponibles)
@@ -105,17 +123,16 @@ public class ManipuladorListas
                 {       facultad.modListaCarreras(carreraAEliminar, -1); //borro todas las referencias de esa carrera de las facultades, si no existe, se muestra una advertencia
                 }
 
-                //elimino las referencias de todos los semestres que posee la carrera eliminada de la lista de semestres
                 ArrayList<Semestre> semestresAEliminar = carreraAEliminar.getListaSemestres();
-                for (Semestre semestre : semestresAEliminar)
-                {       this.listaSemestres.remove(semestre);
-                }
-
                 //elimino las referencias de los semestres eliminados que existan en los cursos
                 for (Semestre semestre : semestresAEliminar)
                 {       for (Curso curso : this.listaCursos)
                         {       curso.modSemestres(semestre, -1);
                         }
+                }
+                //elimino las referencias de todos los semestres que posee la carrera eliminada de la lista de semestres
+                for (Semestre semestre : semestresAEliminar)
+                {       this.listaSemestres.remove(semestre);
                 }
         }
 

@@ -89,6 +89,20 @@ public class ManipuladorListas
                 this.listaProfesores.add(profesorNuevo);
         }
 
+        public void eliminaProfesor(Profesor profeABorrar)
+        {       //Elimino al profesor de la lista de profesores
+                this.listaProfesores.remove(profeABorrar);
+                //elimino las rederencias al profesor que puedan existir en sus cursos asignados
+                for (Integer idCursosAsignados : profeABorrar.getIdCursosAsignadosArrayList())
+                {       //Recorro la lista de cursos completa y elimino las referencias al profesor
+                        for (Curso curso : this.listaCursos)
+                        {       if (curso.getIdProfeAsig() == profeABorrar.getIdProfesor())
+                                {       curso.setProfesor(null);
+                                }
+                        }
+                }
+        }
+
         public void agregaCarrera(String nombreCarrera, Facultad facultadALaQuePertenece, String descripcion, int cantidadSemestres)
         {       //Debo válidar los datos ingresados y devolver excepción si no se puede agregar.
                 int i;
@@ -130,7 +144,14 @@ public class ManipuladorListas
                         {       curso.modSemestres(semestre, -1);
                         }
                 }
-                //elimino las referencias de todos los semestres que posee la carrera eliminada de la lista de semestres
+                //elimino las referencias de la carreras eliminada que existan en los cursos
+                for (Curso curso : this.listaCursos)
+                {       if (curso.getEnCarrerasCodigosArrayList().contains(new Integer(carreraAEliminar.getCodigoCarrera())))
+                        {       curso.getEnCarrerasCodigosArrayList().remove(new Integer(carreraAEliminar.getCodigoCarrera()));
+                                curso.getEnCarrerasObj().remove(carreraAEliminar);
+                        }
+                }
+                //elimino los semestres que posee la carrera eliminada de la lista de semestres
                 for (Semestre semestre : semestresAEliminar)
                 {       this.listaSemestres.remove(semestre);
                 }

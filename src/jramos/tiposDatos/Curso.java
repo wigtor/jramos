@@ -143,6 +143,9 @@ public class Curso {
        return this.codigosCarrera;
    }
 
+   public ArrayList<Carrera> getEnCarrerasObj()
+   {        return this.enCarrera;
+   }
    /**
     * Metodo para obtener los codigos de las carreras que contienen este curso
     *
@@ -167,7 +170,10 @@ public class Curso {
     * @return String con el nombre del profesor
     */
    public String getNombreProfesor(){
-       return this.profeAsig.getNombreProfesor();
+       if (this.profeAsig != null)
+            return this.profeAsig.getNombreProfesor();
+       else
+           return "";
    }
 
    /**
@@ -298,7 +304,10 @@ public class Curso {
     */
    public void setProfesor(Profesor profesorToAsig){
        this.profeAsig = profesorToAsig;
-       this.idProfeAsig = profesorToAsig.getIdProfesor();
+       if (this.profeAsig != null)
+            this.idProfeAsig = profesorToAsig.getIdProfesor();
+       else
+            this.idProfeAsig = 0;
    }
 
    /**

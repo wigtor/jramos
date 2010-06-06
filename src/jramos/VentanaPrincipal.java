@@ -29,6 +29,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private DefaultListModel listModelFacultades;
     private DefaultListModel listModelCarreras;
     private DefaultListModel listModelProfesores;
+    private DefaultListModel listModelCursos;
 
     /** Creates new form VentanaPrincipal */
     public VentanaPrincipal(ManipuladorListas listManager, CapaIOCursos gestorIOCursos, CapaIOProfes gestorIOProfes) {
@@ -38,13 +39,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.visualizadorListaFacultades.removeAll();
         this.visualizadorListaProfes.removeAll();
         this.visualizadorListaCarreras.removeAll();
-        this.visualizadorListaProfes.removeAll();
-        //this.labelCarreraSeleccionada.setText("null");
+        this.visualizadorListaCursos.removeAll();
         this.gestorIOCursos = gestorIOCursos;
         this.gestorIOProfes = gestorIOProfes;
         this.listModelFacultades = new DefaultListModel();
         this.listModelCarreras = new DefaultListModel();
         this.listModelProfesores = new DefaultListModel();
+        this.listModelCursos = new DefaultListModel();
 
         //Muestra el listado de facultades en un jList.
         tamLista = this.listManager.getListaFacultades().size();
@@ -56,9 +57,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         for (i = 0; i < tamLista; i++)
         {   this.listModelProfesores.addElement(this.listManager.getListaProfesores().get(i));
         }
+        //Muestra el listado de cursos en un jList
+        tamLista = this.listManager.getListaCursos().size();
+        for (i = 0; i < tamLista; i++)
+        {   this.listModelCursos.addElement(this.listManager.getListaCursos().get(i));
+        }
+
         this.visualizadorListaProfes.setModel(this.listModelProfesores);
         this.visualizadorListaFacultades.setModel(this.listModelFacultades);
         this.visualizadorListaCarreras.setModel(this.listModelCarreras);
+        this.visualizadorListaCursos.setModel(listModelCursos);
     }
 
     /** This method is called from within the constructor to
@@ -95,7 +103,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         visualizadorListaProfes = new javax.swing.JList();
         jScrollPane2 = new javax.swing.JScrollPane();
-        VisualizadorDetallesProfe = new javax.swing.JTextArea();
+        cuadroInformacionProfes = new javax.swing.JTextArea();
         botonAgregarProfesor = new javax.swing.JButton();
         campoNombreProfesorNuevo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -117,19 +125,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         panelVisualizadorCursos = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        listadoCursos = new javax.swing.JList();
+        visualizadorListaCursos = new javax.swing.JList();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        visualizadorDetallesCurso = new javax.swing.JTextArea();
+        cuadroInformacionCurso = new javax.swing.JTextArea();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        MarcadorFacultades = new javax.swing.JComboBox();
         jComboBox1 = new javax.swing.JComboBox();
         botonAgregarCurso = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
@@ -156,6 +162,17 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             public void windowClosed(java.awt.event.WindowEvent evt) {
                 formWindowClosed(evt);
+            }
+        });
+
+        PanelVisualizadorGeneral.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PanelVisualizadorGeneralMouseClicked(evt);
+            }
+        });
+        PanelVisualizadorGeneral.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                PanelVisualizadorGeneralStateChanged(evt);
             }
         });
 
@@ -222,7 +239,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuadroInformacionCarrera.setText("Seleccione una carrera del listado del costado para ver su información");
         jScrollPane8.setViewportView(cuadroInformacionCarrera);
 
-        jButton7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Dialog", 1, 14));
         jButton7.setText("Ver Malla");
 
         botonEditarFacultad.setText("Editar facultad");
@@ -340,10 +357,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(visualizadorListaProfes);
 
-        VisualizadorDetallesProfe.setColumns(20);
-        VisualizadorDetallesProfe.setRows(5);
-        VisualizadorDetallesProfe.setText("Seleccione un profesor del listado del costado para ver su información");
-        jScrollPane2.setViewportView(VisualizadorDetallesProfe);
+        cuadroInformacionProfes.setColumns(20);
+        cuadroInformacionProfes.setRows(5);
+        cuadroInformacionProfes.setText("Seleccione un profesor del listado del costado para ver su información");
+        jScrollPane2.setViewportView(cuadroInformacionProfes);
 
         botonAgregarProfesor.setText("Agregar profesor");
         botonAgregarProfesor.addActionListener(new java.awt.event.ActionListener() {
@@ -486,32 +503,38 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         panelVisualizadorCursos.setMinimumSize(new java.awt.Dimension(750, 500));
         panelVisualizadorCursos.setPreferredSize(new java.awt.Dimension(780, 456));
+        panelVisualizadorCursos.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                panelVisualizadorCursosFocusGained(evt);
+            }
+        });
 
-        listadoCursos.setModel(new javax.swing.AbstractListModel() {
+        visualizadorListaCursos.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane6.setViewportView(listadoCursos);
+        visualizadorListaCursos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                visualizadorListaCursosValueChanged(evt);
+            }
+        });
+        jScrollPane6.setViewportView(visualizadorListaCursos);
 
         jLabel13.setText("Listado de cursos");
 
-        visualizadorDetallesCurso.setColumns(20);
-        visualizadorDetallesCurso.setRows(5);
-        visualizadorDetallesCurso.setText("Nombre del curso:\t\nCódigo del curso:\t\nProfesor asignado:\t\nSección:\t\t\nCarreras en que se dicta:\t\nHorario:\t\tL5-L6(546), M3-M4(546), J1-J2(546)\nDescripción del curso:\t\n\t\t");
-        jScrollPane7.setViewportView(visualizadorDetallesCurso);
+        cuadroInformacionCurso.setColumns(20);
+        cuadroInformacionCurso.setRows(5);
+        cuadroInformacionCurso.setText("Seleccione un curso del listado del costado para ver su información");
+        jScrollPane7.setViewportView(cuadroInformacionCurso);
 
         jLabel15.setText("Nombre del curso:");
 
         jLabel16.setText("Código del curso:");
 
-        jLabel17.setText("Facultad:");
-
         jLabel18.setText("Sección:");
 
         jLabel19.setText("Carreras en que se dicta:");
-
-        MarcadorFacultades.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -542,28 +565,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
-                                .addGap(183, 183, 183)
-                                .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
                                         .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel15)
                                             .addComponent(jLabel16)
-                                            .addComponent(jLabel17)
                                             .addComponent(jLabel18)
                                             .addComponent(jLabel19))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(MarcadorFacultades, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jTextField7)
                                             .addComponent(jTextField6)
                                             .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                                            .addComponent(jTextField7)))
-                                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
+                                .addGap(182, 182, 182)
+                                .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
                         .addComponent(jLabel13)
@@ -584,7 +605,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addComponent(jButton6)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -602,20 +623,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel18))
-                            .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
-                                .addComponent(MarcadorFacultades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel19))))
+                            .addComponent(jLabel18)
+                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel19))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -792,19 +806,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         dialogoCarreraNueva = null;
     }//GEN-LAST:event_botonNuevaCarreraActionPerformed
 
+    public void actualizaJListListaProfes()
+    {       this.listModelProfesores = null;
+            this.listModelProfesores = new DefaultListModel();
+            for (Profesor profesor : this.listManager.getListaProfesores())
+            {       this.listModelProfesores.addElement(profesor);
+            }
+            this.visualizadorListaProfes.setModel(this.listModelProfesores);
+            this.visualizadorListaProfesValueChanged(null);
+    }
+
     public void borrarProfesor(Profesor profesorABorrar)
     {       //Borro el profesor del manipulador de listas, del Jlist y del visualizador
-            
+            this.cuadroInformacionProfes.setText("Se ha eliminado correctamente el profesor "+ profesorABorrar.getNombreProfesor());
+            this.listManager.eliminaProfesor(profesorABorrar);
+            this.actualizaJListListaProfes();
     }
     public void borrarCarrera(Carrera carreraABorrar)
     {       //Borro la carrera del manipulador de listas, del Jlist y del visualizador
-            this.cuadroInformacionCarrera.setText("Se ha eliminado correctamente la carrera:\n"+ carreraABorrar.getNombreCarrera()+"\nSe han eliminado también los semestres de esas carreras");
+            this.cuadroInformacionCarrera.setText("Se ha eliminado correctamente la carrera de "+ carreraABorrar.getNombreCarrera()+"\nSe han eliminado también los semestres de esas carreras");
             this.listManager.eliminaCarrera(carreraABorrar.getCodigoCarrera());
             this.actualizaJListListaCarreras();
     }
     public void borrarFacultad(Facultad facultadABorrar)
     {       //Borro la facultad del manipulador de listas, del Jlist y del visualizador
-            this.cuadroInfornacionFacultad.setText("Se ha eliminado correctamente la facultad: \n"+ facultadABorrar.getNombreFacultad()+"\nSe ha borrado ademas las carreras de esa facultad: \n"+facultadABorrar.getNombreCarreras()+"\nY se han eliminado los semestres de las carreras eliminadas\n");
+            this.cuadroInfornacionFacultad.setText("Se ha eliminado correctamente la facultad de "+ facultadABorrar.getNombreFacultad()+"\nSe ha borrado ademas las carreras de esa facultad: \n"+facultadABorrar.getNombreCarreras()+"\nY se han eliminado los semestres de las carreras eliminadas\n");
             this.listManager.eliminaFacultad(facultadABorrar);
             this.actualizaJListListaFacultades();
             this.actualizaJListListaCarreras();
@@ -812,6 +838,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     public void borrarCurso(Curso cursoABorrar)
     {       //Borro el curso del manipulador de listas, del Jlist y del visualizador
 
+    }
+
+    public void actualizaJListListaCursos()
+    {       this.listModelCursos = null;
+            this.listModelCursos = new DefaultListModel();
+            for (Curso curso : this.listManager.getListaCursos())
+            {       this.listModelCursos.addElement(curso);
+            }
+            this.visualizadorListaCursos.setModel(this.listModelCursos);
+            visualizadorListaCursosValueChanged(null);
     }
 
     public void actualizaJListListaFacultades()
@@ -882,7 +918,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void visualizadorListaCarrerasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_visualizadorListaCarrerasValueChanged
         // Acción a realizar cuando se selecciona un elemento de la lista de carreras
-        //Se debe mostrar la malla especifica de esa carrera y el nombre de carrera en "labelCarreraSeleccionada"
+        //Se debe mostrar el nombre de carrera en "labelCarreraSeleccionada"
         //Acá se muestra el nombre de la carrera seleccionada en el jlabel "labelCarreraSeleccionada"
         Carrera carreraSeleccionada;
         carreraSeleccionada = (Carrera)this.visualizadorListaCarreras.getSelectedValue();
@@ -895,15 +931,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_visualizadorListaCarrerasValueChanged
 
     private void visualizadorListaProfesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_visualizadorListaProfesValueChanged
-        // TODO add your handling code here:
         //Acá se muestra la información del profesor seleccionado
         Profesor profesorSeleccionado;
         profesorSeleccionado = (Profesor)this.visualizadorListaProfes.getSelectedValue();
         if (profesorSeleccionado != null)
-        {       this.VisualizadorDetallesProfe.setText("Nombre del profesor: "+profesorSeleccionado.getNombreProfesor()+"\nRut del profesor: "+profesorSeleccionado.getRutProfesor()+"\nCursos para impartir: "+profesorSeleccionado.getCodCursosQueImparte()+"\nHoras disponibles: "+profesorSeleccionado.getHorasDisponibles() + "\nCursosAsignados: "+profesorSeleccionado.getCursosAsignados()+"\nHoras asignadas: "+profesorSeleccionado.getHorasAsignadas());
+        {       this.cuadroInformacionProfes.setText("Nombre del profesor: "+profesorSeleccionado.getNombreProfesor()+"\nRut del profesor: "+profesorSeleccionado.getRutProfesor()+"\nCursos para impartir: "+profesorSeleccionado.getCodCursosQueImparte()+"\nHoras disponibles: "+profesorSeleccionado.getHorasDisponibles() + "\nCursosAsignados: "+profesorSeleccionado.getCursosAsignados()+"\nHoras asignadas: "+profesorSeleccionado.getHorasAsignadas());
         }
         else
-                this.VisualizadorDetallesProfe.setText("Seleccione un profesor del listado del costado para ver su información");
+                this.cuadroInformacionProfes.setText("Seleccione un profesor del listado del costado para ver su información");
     }//GEN-LAST:event_visualizadorListaProfesValueChanged
 
     private void botonEliminarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarProfesorActionPerformed
@@ -974,13 +1009,42 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonEliminarCarreraActionPerformed
 
+    private void visualizadorListaCursosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_visualizadorListaCursosValueChanged
+        //Acá se muestra la información del curso seleccionado
+        //Acá se muestra el nombre de la carrera seleccionada en el jlabel "labelCarreraSeleccionada"
+        Curso cursoSeleccionado;
+        String horarioConSalas;
+        cursoSeleccionado = (Curso)this.visualizadorListaCursos.getSelectedValue();
+        if (cursoSeleccionado != null)
+        {       horarioConSalas = "L5-L6(546), M3-M4(546), J1-J2(546)"; //Es un ejemplo, debe ser implementado
+                this.cuadroInformacionCurso.setText("Nombre del curso: " + cursoSeleccionado.getNombreCurso()+"\nCódigo del curso: "+cursoSeleccionado.getCodigoCurso()+"\nSección: "+cursoSeleccionado.getSeccion()+"\nProfesor asignado: "+cursoSeleccionado.getNombreProfesor()+"\nCarreras en que se dicta: "+cursoSeleccionado.getEnCarreras()+"\nHorario: "+horarioConSalas+"\nDescripción del curso: "+cursoSeleccionado.getDescripcion());
+        }
+        else
+                this.cuadroInformacionCurso.setText("Seleccione una carrera del listado del costado para ver su información");
+
+    }//GEN-LAST:event_visualizadorListaCursosValueChanged
+
+    private void panelVisualizadorCursosFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_panelVisualizadorCursosFocusGained
+
+    }//GEN-LAST:event_panelVisualizadorCursosFocusGained
+
+    private void PanelVisualizadorGeneralStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_PanelVisualizadorGeneralStateChanged
+
+    }//GEN-LAST:event_PanelVisualizadorGeneralStateChanged
+
+    private void PanelVisualizadorGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelVisualizadorGeneralMouseClicked
+        // cuando cambia el tab a los cursos, redibujo la JList de cursos
+        actualizaJListListaCursos();
+        actualizaJListListaCarreras();
+        actualizaJListListaFacultades();
+        actualizaJListListaProfes();
+    }//GEN-LAST:event_PanelVisualizadorGeneralMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox MarcadorFacultades;
     private javax.swing.JPanel PanelVisualizadorCarreras;
     private javax.swing.JTabbedPane PanelVisualizadorGeneral;
     private javax.swing.JPanel PanelVisualizadorProfesores;
-    private javax.swing.JTextArea VisualizadorDetallesProfe;
     private javax.swing.JMenuBar barraMenu;
     private javax.swing.JButton botonAgregarCurso;
     private javax.swing.JButton botonAgregarProfesor;
@@ -997,6 +1061,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField campoRamosQueDicta;
     private javax.swing.JTextField campoRutProfesor;
     private javax.swing.JTextArea cuadroInformacionCarrera;
+    private javax.swing.JTextArea cuadroInformacionCurso;
+    private javax.swing.JTextArea cuadroInformacionProfes;
     private javax.swing.JTextArea cuadroInfornacionFacultad;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1011,7 +1077,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -1041,14 +1106,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JLabel labelCarreraSeleccionada;
-    private javax.swing.JList listadoCursos;
     private javax.swing.JMenuItem menuAcercaDe;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenuItem menuVerManual;
     private javax.swing.JPanel panelVisualizadorCursos;
-    private javax.swing.JTextArea visualizadorDetallesCurso;
     private javax.swing.JList visualizadorListaCarreras;
+    private javax.swing.JList visualizadorListaCursos;
     private javax.swing.JList visualizadorListaFacultades;
     private javax.swing.JList visualizadorListaProfes;
     // End of variables declaration//GEN-END:variables

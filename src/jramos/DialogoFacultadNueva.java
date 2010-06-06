@@ -123,7 +123,7 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
 
     private void botonAceptaAgregarFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptaAgregarFacultadActionPerformed
         // Accion a realizar cuando se aprieta el boton "agregar facultad"
-        if (this.campoNombreFacultadNueva .getText().trim().equals(""))
+        if (this.campoNombreFacultadNueva.getText().trim().equals(""))
         {       //abro nueva ventana
                 DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "No hay un nombre de facultad escrito", "Debe escribir un nombre de facultad");
                 dialogoError.setVisible(true);
@@ -144,6 +144,7 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
         listManager.agregaFacultad(campoNombreFacultadNueva.getText(), textoDescripcionFacultadNueva.getText());
         ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaFacultades();
         this.setVisible(false);
+
     }//GEN-LAST:event_botonAceptaAgregarFacultadActionPerformed
 
     private void botonCancelaAgregarFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelaAgregarFacultadActionPerformed

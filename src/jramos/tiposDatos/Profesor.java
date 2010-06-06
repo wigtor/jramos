@@ -34,7 +34,7 @@ public class Profesor {
      * @param nombreProfesor string con el Nombre del Profesor
      * @param cursosParaImpartir ArrayList<Integer> con los codigos de los cursos que este profesor puede impartir
      */
-    public Profesor(String nombreProfesor, ArrayList<Integer> cursosParaImpartir){
+    public Profesor(String nombreProfesor, int rut, ArrayList<Integer> cursosParaImpartir){
         this.nomProfe = nombreProfesor;
         this.cursosDisp = cursosParaImpartir;
         this.horaDisp = new ArrayList<Hora>();
@@ -115,12 +115,17 @@ public class Profesor {
         return text.toString();
     }
 
+    @Override
+    public String toString()
+    {       return this.nomProfe;
+    }
+
     /**
      * Metodo para obtener los codigos de los curso que puede impartir este profesor
      *
      * @return String con los codigos separados con |
      */
-    public String getCursosQueImparte(){
+    public String getCodCursosQueImparte(){
         StringBuilder text = new StringBuilder();
         for (Integer codCurso: this.cursosDisp){
             text.append(String.valueOf(codCurso)).append("|");
@@ -130,15 +135,15 @@ public class Profesor {
     }
 
     /**
-     * Metodo para obtener los codigos  y las secciones de los curso que ya esta impartiendo este profesor
+     * Metodo para obtener los cursos que ya esta impartiendo este profesor
      *
-     * @return String con formato BNF  <curso>:=<codCurso>/<Seccion> Separados con |
+     * @return String con formato BNF  <curso>:=<nombreCurso> /<Seccion> Separados con |
      */
     public String getCursosAsignados(){
         int posicion = 0;
         StringBuilder text = new StringBuilder();
         for (Curso curso: this.cursosAsig){
-            text.append(String.valueOf(curso.getCodigoCurso())).append("|");
+            text.append(curso + " - "+curso.getSeccion() + "\n");
         }
         text.deleteCharAt(text.length()-1);
         return text.toString();
@@ -150,7 +155,6 @@ public class Profesor {
      * @return String con los codigos separados por |
      */
     public String getIdCursosAsignados(){
-        int posicion = 0;
         StringBuilder text = new StringBuilder();
         for (Integer idCurso: this.idCursosAsig){
             text.append(String.valueOf(idCurso));

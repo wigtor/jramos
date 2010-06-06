@@ -28,27 +28,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private CapaIOProfes gestorIOProfes;
     private DefaultListModel listModelFacultades;
     private DefaultListModel listModelCarreras;
+    private DefaultListModel listModelProfesores;
 
     /** Creates new form VentanaPrincipal */
     public VentanaPrincipal(ManipuladorListas listManager, CapaIOCursos gestorIOCursos, CapaIOProfes gestorIOProfes) {
         initComponents();
-        int i, tamLista, idFacultadSeleccionada = 0;
-        Facultad facultadSeleccionada;
+        int i, tamLista;
         this.listManager = listManager;
         this.visualizadorListaFacultades.removeAll();
         this.visualizadorListaProfes.removeAll();
         this.visualizadorListaCarreras.removeAll();
+        this.visualizadorListaProfes.removeAll();
         //this.labelCarreraSeleccionada.setText("null");
         this.gestorIOCursos = gestorIOCursos;
         this.gestorIOProfes = gestorIOProfes;
         this.listModelFacultades = new DefaultListModel();
         this.listModelCarreras = new DefaultListModel();
+        this.listModelProfesores = new DefaultListModel();
 
         //Muestra el listado de facultades en un jList.
         tamLista = this.listManager.getListaFacultades().size();
         for (i = 0; i < tamLista; i++)
         {   this.listModelFacultades.addElement(this.listManager.getListaFacultades().get(i));
         }
+        //Muestra el listado de profesores en un jList
+        tamLista = this.listManager.getListaProfesores().size();
+        for (i = 0; i < tamLista; i++)
+        {   this.listModelProfesores.addElement(this.listManager.getListaProfesores().get(i));
+        }
+        this.visualizadorListaProfes.setModel(this.listModelProfesores);
         this.visualizadorListaFacultades.setModel(this.listModelFacultades);
         this.visualizadorListaCarreras.setModel(this.listModelCarreras);
     }
@@ -85,14 +93,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         VisualizadorDetallesProfe = new javax.swing.JTextArea();
         botonAgregarProfesor = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        campoNombreProfesorNuevo = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        campoRutProfesor = new javax.swing.JTextField();
+        campoRamosQueDicta = new javax.swing.JTextField();
+        campoHorasDisponibles = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -282,10 +290,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        visualizadorListaProfes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                visualizadorListaProfesValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(visualizadorListaProfes);
 
         VisualizadorDetallesProfe.setColumns(20);
         VisualizadorDetallesProfe.setRows(5);
+        VisualizadorDetallesProfe.setText("Seleccione un profesor del listado del costado para ver su información");
         jScrollPane2.setViewportView(VisualizadorDetallesProfe);
 
         botonAgregarProfesor.setText("Agregar profesor");
@@ -303,9 +317,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel8.setText("Horas disponibles:");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        campoHorasDisponibles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                campoHorasDisponiblesActionPerformed(evt);
             }
         });
 
@@ -354,10 +368,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     .addComponent(jLabel8))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
+                                    .addComponent(campoRutProfesor, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                    .addComponent(campoNombreProfesorNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                    .addComponent(campoRamosQueDicta, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                                    .addComponent(campoHorasDisponibles, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
@@ -396,21 +410,21 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel9)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(campoNombreProfesorNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
                             .addComponent(jLabel6)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(campoRutProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
                             .addComponent(jLabel7)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(campoRamosQueDicta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoHorasDisponibles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonAgregarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -616,12 +630,52 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonAgregarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarProfesorActionPerformed
-        // TODO add your handling code here:
+        // Acción a realizar cuando se presiona el boton "agregar profesor"
+        int rut;
+        Hora horaNueva;
+        if (this.campoNombreProfesorNuevo.getText().trim().equals(""))
+        {       //abro nueva ventana
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay un nombre de profesor escrito", "Debe escribir un nombre de profesor");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+
+        //Compruebo si el rut es válido
+        rut = 0;
+
+        //Transformo el string de horas a un ArrayList de Hora
+        try
+        {       horaNueva = new Hora(1);
+            
+        } 
+        catch (HourOutOfRangeException HOORE)
+        {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Las horas introducidas no son válidas.", "Revise las horas escritas y su sintaxis");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+
+        }
+
+        //Si ya existe una carrera con el mismo nombre tampoco se agrega.
+        ArrayList<Profesor> listaCompletaProfesores = this.listManager.getListaProfesores();
+        for (Profesor profesor : listaCompletaProfesores)
+        {       if (this.campoNombreProfesorNuevo.getText().equals(profesor.getNombreProfesor()))
+                {       //abro nueva ventana de error.
+                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "El nombre del profesor ya existe.", "vuelva a escribir otro nombre para el profesor");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+        }
+        this.listManager.agregaProfesor(this.campoNombreProfesorNuevo.getText(), rut, null, null);
+        this.actualizaJListListaFacultades();
+
     }//GEN-LAST:event_botonAgregarProfesorActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void campoHorasDisponiblesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoHorasDisponiblesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_campoHorasDisponiblesActionPerformed
 
     private void botonAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarCursoActionPerformed
         // TODO add your handling code here:
@@ -712,9 +766,23 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         carreraSeleccionada = (Carrera)this.visualizadorListaCarreras.getSelectedValue();
         if (carreraSeleccionada != null)
         {       labelCarreraSeleccionada.setText(carreraSeleccionada.getNombreCarrera());
+                this.cuadroInformacionCarrera.setText("Nombre de Carrera: " + carreraSeleccionada.getNombreCarrera()+"\nFacultad de "+carreraSeleccionada.getFacultad()+"\nCantidad de semestres : "+carreraSeleccionada.getListaSemestres().size()+"\nDescripción de la carrera: "+carreraSeleccionada.getDescripcion());
         }
-        this.cuadroInformacionCarrera.setText("Nombre de Carrera: " + carreraSeleccionada.getNombreCarrera()+"\nFacultad de "+carreraSeleccionada.getFacultad()+"\nCantidad de semestres : "+carreraSeleccionada.getListaSemestres().size()+"\nDescripción de la carrera: "+carreraSeleccionada.getDescripcion());
+        else
+                this.cuadroInformacionCarrera.setText("Seleccione una carrera del listado del costado para ver su información");
     }//GEN-LAST:event_visualizadorListaCarrerasValueChanged
+
+    private void visualizadorListaProfesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_visualizadorListaProfesValueChanged
+        // TODO add your handling code here:
+        //Acá se muestra la información del profesor seleccionado
+        Profesor profesorSeleccionado;
+        profesorSeleccionado = (Profesor)this.visualizadorListaProfes.getSelectedValue();
+        if (profesorSeleccionado != null)
+        {       this.VisualizadorDetallesProfe.setText("Nombre del profesor: "+profesorSeleccionado.getNombreProfesor()+"Rut del profesor: "+profesorSeleccionado.getRutProfesor()+"\nCursos para impartir: "+profesorSeleccionado.getCodCursosQueImparte()+"\nHoras disponibles: "+profesorSeleccionado.getHorasDisponibles() + "\nCursosAsignados: "+profesorSeleccionado.getCursosAsignados()+"\nHoras asignadas: "+profesorSeleccionado.getHorasAsignadas());
+        }
+        else
+                this.VisualizadorDetallesProfe.setText("Seleccione un profesor del listado del costado para ver su información");
+    }//GEN-LAST:event_visualizadorListaProfesValueChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -728,6 +796,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonAgregarProfesor;
     private javax.swing.JButton botonNuevaCarrera;
     private javax.swing.JButton botonNuevaFacultad;
+    private javax.swing.JTextField campoHorasDisponibles;
+    private javax.swing.JTextField campoNombreProfesorNuevo;
+    private javax.swing.JTextField campoRamosQueDicta;
+    private javax.swing.JTextField campoRutProfesor;
     private javax.swing.JTextArea cuadroInformacionCarrera;
     private javax.swing.JTextArea cuadroInfornacionFacultad;
     private javax.swing.JButton jButton1;
@@ -771,10 +843,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;

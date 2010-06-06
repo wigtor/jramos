@@ -320,7 +320,7 @@ public class CapaIOProfes
 		String idCursosAsig = profesorAEscribir.getIdCursosAsignados(); //cursos que el profesor tiene asignados
                 String horasDisp = profesorAEscribir.getHorasDisponibles(); //obtiene las horas que el profesor tiene disponibles
                 String horasAsig = profesorAEscribir.getHorasAsignadas(); //obtiene las horas que se le han asignado al profesor
-                String codCursosDisp = profesorAEscribir.getCursosQueImparte(); //
+                String codCursosDisp = profesorAEscribir.getCodCursosQueImparte(); //
 		cursoString = "<Profesor nombProfe=\""+nomProfe+"\" idProfe=\""+idProfe+"\" rutProfe=\""+rutProfe+"\" idCursosAsig=\""+idCursosAsig+"\" codCursosDisp=\""+codCursosDisp+"\" horasDisp=\""+horasDisp+"\" horasAsig=\""+horasAsig+"\" >";
 		return cursoString;
 	}

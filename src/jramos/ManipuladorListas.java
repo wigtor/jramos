@@ -8,8 +8,10 @@ import jramos.tiposDatos.Carrera;
 import jramos.tiposDatos.Curso;
 import jramos.tiposDatos.Facultad;
 import jramos.tiposDatos.Semestre;
+import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Profesor;
 import java.util.ArrayList;
+import jramos.tiposDatos.HourOutOfRangeException;
 
 /**
  *
@@ -56,13 +58,22 @@ public class ManipuladorListas
 
                 Facultad facultadNueva = new Facultad(nombreFacultad);
                 facultadNueva.setDescripcion(descripcion);
-
                 this.listaFacultades.add(facultadNueva);
+        }
+
+        public void eliminaFacultad()
+        {       //SE DEBE HACER ESTE METODO
+        }
+
+        public void agregaProfesor(String nombreProfesor, int rut, ArrayList<Integer> cursosDisponibles, ArrayList<Hora> horasDisponibles)
+        {       Profesor profesorNuevo = new Profesor(nombreProfesor, rut, cursosDisponibles);
+                for (Hora hora : horasDisponibles)
+                        profesorNuevo.modHorasDisponibles(hora, 1);
+                this.listaProfesores.add(profesorNuevo);
         }
 
         public void agregaCarrera(String nombreCarrera, Facultad facultadALaQuePertenece, String descripcion, int cantidadSemestres)
         {       //Debo válidar los datos ingresados y devolver excepción si no se puede agregar.
-
                 int i;
                 Carrera carreraNueva = new Carrera(nombreCarrera);
                 Semestre semestreNuevo;

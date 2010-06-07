@@ -27,7 +27,7 @@ public class Semestre {
      * 1º Constructor de Semestre:
      * Este constructor debe ser utilizado para crear un objeto Semestre la primera vez. Se le asigna un 
      * id de forma automatica.
-     *
+     * Se instancian los ArrayList de ramos y codigos de ramos que posee el semestre
      * @param numeroSemestre int con el numero del semestre
      * @param codEnLaCarrera int con el codigo de la carrera a la cual pertenece este semestre
      */
@@ -42,7 +42,7 @@ public class Semestre {
     /**
      * 2º Constructor de Semestre:
      * Este constructor debe ser utilizado para crear un objeto Semestre a partir de un registro o archivo.
-     *
+     * Se instancian los ArrayList de ramos y codigos de ramos que posee el semestre
      * @param numeroSemestre int con el numero del semestre
      * @param codEnLaCarrera int con el codigo de la carrera a la cual pertenece este semestre
      * @param id int con el id del semestre
@@ -55,6 +55,15 @@ public class Semestre {
         this.listCodRamos = new ArrayList<Integer>();
     }
 
+    /**
+     * 3º Constructor de Semestre:
+     * Este constructor debe ser utilizado para crear un objeto Semestre a partir de una carrera que se esté creando
+     * Se instancian los ArrayList de ramos y codigos de ramos que posee el semestre
+     * Se asignan las referencias con la carrera del que fue creado.
+     * @param numeroSemestre int con el numero del semestre
+     * @param codEnLaCarrera int con el codigo de la carrera a la cual pertenece este semestre
+     * @param id int con el id del semestre
+     */
     public Semestre(int numeroSemestre, Carrera enLaCarrera){
         this.numSemestre = numeroSemestre;
         this.codEnCarrera = enLaCarrera.getCodigoCarrera();
@@ -109,6 +118,10 @@ public class Semestre {
             return "";
     }
 
+    /**
+     *
+     * @return Devuelve un ArrayList de Integer con los codigos de ramos que posee el semestre
+     */
     public ArrayList<Integer> getCodigosRamosArrayList()
     {       return this.listCodRamos;
     }
@@ -184,6 +197,12 @@ public class Semestre {
         }
     }
 
+    /**
+     * Metodo para agregar o quitar un ramo a este semestre usando el codigo del ramo
+     *
+     * @param codRamo código del ramo que se quiere agregar o quitar del semestre
+     * @param selector 1: Agregar  -1: Quitar
+     */
     public void modCodRamos(int codRamo, int selector){
         Integer codRamoWrap = new Integer(codRamo);
         if (selector == 1){

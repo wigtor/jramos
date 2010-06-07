@@ -1,14 +1,14 @@
 /**
-******************************************************
-* @file Referenciador.java
-* @author AirZs
-* @date mayo 2010
-* @version 0.1
-* @brief En este archivo se especifica la clase Referenciador
- * cuyo uso es hacer las referncias reales de los distintos objetos que interactuan
- * entre si.
-
-*****************************************************/
+ ******************************************************
+ * @file Referenciador.java
+ * @author AirZs
+ * @date mayo 2010
+ * @version 0.1
+ * @brief En este archivo se especifica la clase Referenciador
+ * La función de esta clase es hacer las referencias reales entre
+ * los distintos objetos que interactuan entre si
+ * Esta clase no puede ser instanciada, todos sus métodos son static.
+ *****************************************************/
 
 package jramos;
 import java.util.ArrayList;
@@ -84,7 +84,8 @@ public class Referenciador {
 
     /**
      * Metodo para crear las referencias de Curso, se crean las referencias reales de la Curso<->Profesor
-     *
+     * Setea las referencias entre los cursos y los profesores que tengan asignados
+     * Setea las referencias entre las carreras a las que pertenece un curso
      * @param listaCursos ArrayList con Cursos por crear referencias
      * @param listaProfesores ArrayList con Profesores por crear referencias
      */
@@ -115,7 +116,13 @@ public class Referenciador {
             }
         }
     }
-  
+
+    /**
+     * Esté metodo se encarga de setear las listas de referencias de carreras que poseen las facultades
+     * Setear las referencias a las facultades a las que pertenecen las carreras
+     * @param listaFacultades lista de facultades que se desea unir referencias
+     * @param listaCarreras lista de carreras que se desea unir referencias
+     */
     static private void crearReferenciasFacultad(ArrayList<Facultad> listaFacultades, ArrayList<Carrera> listaCarreras){
         ArrayList<Integer> listaCarrerasFacultadActual;
         if (!listaFacultades.isEmpty() && !listaCarreras.isEmpty()){

@@ -1,13 +1,17 @@
 //Probando cambios con git-bash
 
 /**
-******************************************************
-* @file Profesor.java
-* @author AirZs
-* @date mayo 2010
-* @version 0.1
-* @brief En este archivo se especifica la clase del tipo Curso.
-*****************************************************/
+ ******************************************************
+ * @file Profesor.java
+ * @author AirZs
+ * @date mayo 2010
+ * @version 0.1
+ * Esta clase representa un curso de la universidad
+ * Se define como una instancia de un curso diferente cuando un
+ * curso posee un codigo de curso y sección distinto a otro curso
+ * Para diferenciar una instancia de otra se usa un id.
+ * @brief En este archivo se especifica la clase del tipo Curso.
+ *****************************************************/
 
 package jramos.tiposDatos;
 import java.util.ArrayList;
@@ -16,9 +20,9 @@ public class Curso {
     static int idCursoActual = 0;
 
     private String nomCurso;
-    private String descrip = "";
+    private String descrip;
     private int codCurso;
-    private String seccion = "0";
+    private String seccion;
     private ArrayList<Carrera> enCarrera;
     private ArrayList<Integer> codigosCarrera;
     private Profesor profeAsig;
@@ -35,9 +39,9 @@ public class Curso {
 
     /**
      * 1º Constructor para Curso:
-     * Este constructor debe ser utilizado para crear un objeto Curso la primera vez. Se le asigna un
-     * id de forma automatica.
-     *
+     * Este constructor debe ser utilizado para crear un objeto Curso la primera vez.
+     * Se le asigna un id de forma automática.
+     * Se instancian todos los ArrayList del objeto como listas vacias.
      * @param nombreRamo Nombre del Ramo
      * @param codigoCurso Codigo del Curso
      */
@@ -52,14 +56,15 @@ public class Curso {
         this.idCurso = ++idCursoActual;
         this.listSemestres = new ArrayList<Semestre>();
         this.listIdSemestres = new ArrayList<Integer>();
-
-
+        this.seccion = "0";
+        this.descrip = "";
     }
 
     /**
      * 2º Constructor para Curso:
-     * Este constructor debe ser utilizado para crear un objeto Profesor a partir de un registro o archivo.
-     *
+     * Este constructor debe ser utilizado para crear un objeto Profesor
+     * a partir de un registro o archivo.
+     * Se instancian todos los ArrayList del objeto como listas vacias.
      * @param nombreRamo Nombre del Ramo
      * @param codigoCurso Codigo del Curso
      * @param id int con el id del Curso
@@ -74,6 +79,8 @@ public class Curso {
         this.idCurso = id;
         this.listSemestres = new ArrayList<Semestre>();
         this.listIdSemestres = new ArrayList<Integer>();
+        this.seccion = "0";
+        this.descrip = "";
     }
 
     //////////////////////////////////////////////////////////////////////
@@ -90,7 +97,7 @@ public class Curso {
 
    /**
     * Metodo para obtener la descripcion del curso
-    *
+    * Si la descripción es un string vacio, devuelve un mensaje diciendo que no hay descripción.
     * @return String con la descripcion del curso
     */
    public String getDescripcion(){
@@ -103,32 +110,37 @@ public class Curso {
         
     }
 
+   /**
+    * Metodo que obtiene los id de los semestres a los cuales pertenece un curso.
+    *
+    * @return Devuelve un ArrayList de Integer con los id de los semestres que tienen al curso.
+    */
    public ArrayList<Integer> getIdSemestresArray(){
        return this.listIdSemestres;
    }
 
    /**
-    * Metodo para obtener el codigo del curso
+    * Obtiene el código del curso
     *
-    * @return int con el codigo del curso
+    * @return valor entero con el código del curso.
     */
    public int getCodigoCurso(){
         return this.codCurso;
     }
 
    /**
-    * Metodo para obtener la seccion del curso
+    * Obtiene la sección del curso
     *
-    * @return String con la seccion del curso
+    * @return String con la sección del curso
     */
    public String getSeccion(){
         return this.seccion;
     }
 
    /**
-    * Metodo para obtener las carreras que contienen este curso
+    * Obtiene las carreras que contienen este curso
     *
-    * @return String con los nombres de las carreras separados con |
+    * @return Devuelve un String con los nombres de las carreras separados con un "|"
     */
    public String getEnCarreras(){
         StringBuilder text = new StringBuilder();
@@ -143,13 +155,24 @@ public class Curso {
             return "";
     }
 
+   /**
+    * Obtiene los códigos de las carreras que poseen el curso
+    *
+    * @return Devuelve un ArrayList de iInteger con los códigos de las carreras en que se dicta el curso.
+    */
    public ArrayList<Integer> getEnCarrerasCodigosArrayList(){
        return this.codigosCarrera;
    }
 
+   /**
+    * Obtiene las carreras a las que pertenece el curso.
+    *
+    * @return Devuelve un ArrayList de objetos tipo Carrera con las carreras donde se dicta el curso.
+    */
    public ArrayList<Carrera> getEnCarrerasObj()
    {        return this.enCarrera;
    }
+
    /**
     * Metodo para obtener los codigos de las carreras que contienen este curso
     *
@@ -169,9 +192,9 @@ public class Curso {
     }
 
    /**
-    * Metodo para obtener el nombre del profesor que esta asignado este curso
-    *
-    * @return String con el nombre del profesor
+    * Obtiene el nombre del profesor al que esta asignado este curso
+    * Si el curso no tiene profesor asignado devuelve un String vacio
+    * @return String con el nombre del profesor asignado al curso
     */
    public String getNombreProfesor(){
        if (this.profeAsig != null)
@@ -182,8 +205,8 @@ public class Curso {
 
    /**
     * Metodo para obtener el id del profesor que esta asignado a este curso
-    *
-    * @return int con el id del profesor
+    * Si no existe un profesor asignado el valor pedido vale 0.
+    * @return valor entero con el id del profesor asignado al curso.
     */
    public int getIdProfeAsig(){
        return this.idProfeAsig;
@@ -191,25 +214,28 @@ public class Curso {
 
    /**
     * Metodo para obtener las salas donde se imparte este curso
-    *
-    * @return String con los numeros de las salas separados con |
+    * Funciona concatenando los numeros de sala asignadas al curso e
+    * intercalandole un "|" entre salas.
+    * @return String con los numeros de las salas separados por un "|"
     */
    public String getSalas(){
-      StringBuilder text = new StringBuilder();
-      for (Integer numSala: this.listSalas){
-          text.append(String.valueOf(numSala)).append("|");
-      }
-      try //esto es en caso que no tenga salas
-      {      text.deleteCharAt(text.length()-1);
-      }
-      catch (Exception e){}
-      return text.toString();
+        StringBuilder text = new StringBuilder();
+        if (this.listSalas.size() != 0)
+        {   for (Integer numSala: this.listSalas){
+                text.append(String.valueOf(numSala)).append("|");
+            }
+            text.deleteCharAt(text.length()-1);
+            return text.toString();
+        }
+        else
+            return "";
    }
 
    /**
     * Metodo para obtener los horarios de este curso
-    *
-    * @return String con los horarios con formato Str separados con |
+    * Funciona concatenando las horas asignadas al curso e
+    * intercalandole un "|" entre las horas.
+    * @return String con los horarios con formato String separados por un  "|"
     */
    public String getHorario(){
       StringBuilder text = new StringBuilder();
@@ -232,16 +258,16 @@ public class Curso {
    /**
     * Metodo para obtener el id del curso
     *
-    * @return int con el id del curso
+    * @return valor entero con el id del curso
     */
    public int getIdCurso(){
        return this.idCurso;
    }
 
    /**
-    * Metodo para obtener el ultimo id del curso que se utilizo
+    * Obtiene el valor del contador de id de la clase curso.
     *
-    * @return int con el id del curso
+    * @return valor entero con el contador id de la clase curso.
     */
    static public int getIdCursoGlobal(){
        return Curso.idCursoActual;

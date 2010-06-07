@@ -1,11 +1,13 @@
 /**
-******************************************************
-* @file CapaIOProfes.java
-* @author victor flores sanchez
-* @date mayo 2010
-* @version 0.1
-* @brief En este archivo se especifica la clase CapaIOCursos que se encarga de leer/escribir datos en el archivo de cursos.
-*****************************************************/
+ ******************************************************
+ * @file CapaIOProfes.java
+ * @author victor flores sanchez
+ * @date mayo 2010
+ * @version 0.1
+ * La clase capaIOCursos se encarga de leer y escribir ArrayList de profesores en el archivo de profesores
+ * Cada profesor especificado en el archivo está especificado entre caracteres '<' '>'.
+ * @brief En este archivo se especifica la clase CapaIOCursos que se encarga de leer/escribir datos en el archivo de cursos.
+ *****************************************************/
 
 
 package jramos.capaIO;
@@ -28,6 +30,13 @@ public class CapaIOProfes
 	private static final int capacidadInicialString = 200;
 
 	/* CONSTRUCTORES */
+        /**
+         * Este constructor instancia una capa de escritura de profesores
+         * Usa como archivo de profesores por default un archivo llamado "archProfes.txt"
+         * El archivo de profesores por default se almacena en el directorio home del usuario
+         * Se encarga de comprobar si el archivo de profesores existe o no, si no es así crea un archivo vacio.
+         * @throws IOException
+         */
 	public CapaIOProfes() throws IOException
 	{	this.nombreArchivoProfes = (System.getProperty("user.home") + System.getProperty("file.separator") + "archProfes.txt");
 		File archPrueba = new File(this.nombreArchivoProfes);
@@ -43,9 +52,19 @@ public class CapaIOProfes
 	}
 	
 	/* METODOS */
-	/** Metodo para leer todos los profesores.
-	* 
-	*/
+	/**
+         * Metodo que lee todos los profesores desde el archivo de profesores.
+         * Comprueba que el archivo de profesores exista y es posible leerlo.
+         * Lee caracter a caracter del archivo hasta que encuentra un caracter '<',
+         * El caracter '<' indica que comienza la especificación de un objeto nuevo.
+         * guarda en un String todos los caracteres desde el '<' hasta un '>'
+         * El string leido es enviado al método stringToProfesor para modelarlo como un objeto Profesor
+         * El nuevo objeto modelado es agregado a un ArrayList de profesores, el cual es devuelvo por este método
+         * @return Devuelve un ArrayList con todos los profesores leidos desde el archivo de profesores.
+         * @throws FileNotFoundException
+         * @throws IOException
+         * @throws HourOutOfRangeException
+         */
 	public ArrayList<Profesor> leeProfes() throws FileNotFoundException, IOException, HourOutOfRangeException
 	{	ArrayList<Profesor> listaProfes= new ArrayList(CapaIOProfes.capacidadInicialVector);
 		BufferedReader lector;
@@ -93,18 +112,17 @@ public class CapaIOProfes
 		return listaProfes;
 	}
 
-        public void escribeProfes(ArrayList<Profesor> listaProfes) throws FileNotFoundException, SecurityException, IOException
-        {       Integer idInicialProfesWrap = this.leeIDInicial("idProfes");
-                int idInicialProfes;
-                if (idInicialProfesWrap == null)
-                        idInicialProfes = 1;
-                else
-                        idInicialProfes = idInicialProfesWrap.intValue();
-
-                escribeProfes(listaProfes, idInicialProfes);
-        }
-
-	public Integer leeIDInicial(String tipoId) throws FileNotFoundException, IOException
+        /**
+         * Lee desde el archivo de profesores un idInicial
+         * que será usado a futuro para setear el atributo static idProfesorActual de la clase Profesor
+         * el tipoId que se debe proporcionar debe ser el String "idProfes"
+         * si no encuentra un id válido en el archivo de profesores devuelve un id con el valor 0 .
+         * @param tipoId Corresponde a un String con el tipo de id que se desea leer desde el archivo
+         * @return Devuelve el idInicial leido desde el archivo de profesores modelado como un objeto Integer
+         * @throws FileNotFoundException
+         * @throws IOException
+         */
+        public Integer leeIDInicial(String tipoId) throws FileNotFoundException, IOException
         {       int idInicial = 0;
                 BufferedReader lector;
 		StringBuilder lineaDatos = new StringBuilder(CapaIOProfes.capacidadInicialString);
@@ -143,6 +161,12 @@ public class CapaIOProfes
 
         }
 
+        /**
+         * Extrae el valor de un idInicial de un string y lo devuelve como entero.
+         * @param linea corresponde al String que debe ser analizado buscando un Id inicial.
+         * @param tipoId es un string que especifica el tipo de id que se está buscando.
+         * @return Devuelve un valor entero con el id inicial que debe tener la clase Profesor
+         */
         private int stringToIdInicial(String linea, String tipoId)
         {       int comienzoDato, idInicial;
                 if (((linea.indexOf("<idProfesInicial") != -1)) && (tipoId.equals("idProfes")))
@@ -153,10 +177,40 @@ public class CapaIOProfes
                 else
                         return 0;
         }
+        
+        /**
+         * Este método es usado cuando no se conoce el idInicial desde la clase Profesor
+         * Lee el id desde le archivo de profesores, si no encuentra uno, entonces el id vale 0
+         * Llama al otro método ecribeProfes() que necesita un id.
+         * @param listaProfes Es la lista de profesores que se desea escribir en el archivo de profesores
+         * @throws FileNotFoundException
+         * @throws SecurityException
+         * @throws IOException
+         */
 
-	/** 
-	* Método que guarda todos los profesores en el archivo de profesores.
-	*/
+        public void escribeProfes(ArrayList<Profesor> listaProfes) throws FileNotFoundException, SecurityException, IOException
+        {       Integer idInicialProfesWrap = this.leeIDInicial("idProfes");
+                int idInicialProfes;
+                if (idInicialProfesWrap == null)
+                        idInicialProfes = 1;
+                else
+                        idInicialProfes = idInicialProfesWrap.intValue();
+
+                escribeProfes(listaProfes, idInicialProfes);
+        }
+
+	/**
+         * Este metodo recorre el Arraylist de profesores proporcionado,
+         * transforma a los profesores a string usando el método profesorToString()
+         * y escribe cada profesor en el archivo de profesores.
+         * En la primera linea escribe la cuenta de los Id de profesores.
+         * El metodo comprueba que se puede escribir en el archivo antes de usarlo.
+         * @param listaProfes Es la lista de profesores que se desea escribir en el archivo de profesores
+         * @param idInicialProfes Es el id inicial obtenido desde la clase Profesor que lleva la cuenta de los id asignados.
+         * @throws FileNotFoundException
+         * @throws SecurityException
+         * @throws IOException
+         */
 	public void escribeProfes(ArrayList<Profesor> listaProfes, int idInicialProfes) throws FileNotFoundException, SecurityException, IOException
 	{	PrintWriter escritor;
 
@@ -187,9 +241,13 @@ public class CapaIOProfes
 		escritor.close();
 	}
 
-	/** 
-	* Este método recibe un String que contiene especificado un objeto del tipo Curso, analiza este String y devuelve un objeto Curso.
-	*/
+	/**
+         * Este método crea un profesor usando los datos extraidos desde un String
+         * Crea un objeto profesor y setea sus atributos.
+         * @param linea es el string con el profesor que se desea modelar como objeto Profesor.
+         * @return Devuelve un objeto profesor que fue modelado a partir del String linea
+         * @throws HourOutOfRangeException
+         */
 	private Profesor stringToProfesor(String linea) throws HourOutOfRangeException
 	{	Profesor profesorLeido;
                 String idProfe; //id Interna del profesor
@@ -310,8 +368,10 @@ public class CapaIOProfes
 		}
 	}
 	/**
-	* Esté metodo recibe un objeto Curso y crea un string de como debe ser escrito en el archivo de cursos
-	*/
+         * Este metodo transforma un profesor a un string para que pueda ser almacenado en el archivo de profesores.
+         * @param profesorAEscribir es un objeto Profesor que se desea modelar como String.
+         * @return Devuelve el objeto Profesor modelado como String según la sintaxis válida del archivo de profesores.
+         */
 	private String profesorToString(Profesor profesorAEscribir)
 	{	String cursoString;
 		String nomProfe = profesorAEscribir.getNombreProfesor(); //Nombre del profesor

@@ -1,11 +1,13 @@
-/**
-******************************************************
-* @file CapaIOCursos.java
-* @author victor flores sanchez
-* @date mayo 2010
-* @version 0.1
-* @brief En este archivo se especifica la clase CapaIOCursos que se encarga de leer/escribir datos en el archivo de cursos.
-*****************************************************/
+ /**
+ ******************************************************
+ * @file CapaIOCursos.java
+ * @author victor flores sanchez
+ * @date mayo 2010
+ * @version 0.1
+ * La clase capaIOCursos se encarga de leer y escribir ArrayList de profesores en el archivo de profesores
+ * Cada profesor especificado en el archivo está especificado entre caracteres '<' '>'.
+ * @brief En este archivo se especifica la clase CapaIOCursos que se encarga de leer/escribir datos en el archivo de cursos.
+ *****************************************************/
 
 
 package jramos.capaIO;
@@ -30,10 +32,15 @@ public class CapaIOCursos
 	private String nombreArchivoCursos;
 	private static final int capacidadInicialVector = 100;
 	private static final int capacidadInicialString = 200;
-        private int ultimoIdLeidoCursos;
-        private int ultimoIdLeidoCarreras;
 
 	/* CONSTRUCTORES */
+        /**
+         * Este constructor instancia una capa de escritura de cursos
+         * Usa como archivo de cursos por default un archivo llamado "archCursos.txt"
+         * El archivo de cursos por default se almacena en el directorio home del usuario
+         * Se encarga de comprobar si el archivo de cursos existe o no, si no es así crea un archivo vacio.
+         * @throws IOException
+         */
 	public CapaIOCursos() throws IOException
 	{	this.nombreArchivoCursos = (System.getProperty("user.home") + System.getProperty("file.separator") + "archCursos.txt");
 		File archPrueba = new File(this.nombreArchivoCursos);
@@ -50,6 +57,17 @@ public class CapaIOCursos
 
 	/* METODOS */
 
+        /**
+         * Lee desde el archivo de cursos un idInicial
+         * que será usado a futuro para setear el atributo static idObjetoActual de la clase Curso, Carrera, Facultad o Semestre
+         * el tipoId que se debe proporcionar debe ser el String, por ejemplo:
+         * "idCursos", "idCarreras", "idSemestres" o "idFacultades".
+         * si no encuentra un id válido en el archivo de cursos devuelve un id con el valor 0 .
+         * @param tipoId Corresponde a un String con el tipo de id que se desea leer desde el archivo
+         * @return Devuelve el idInicial leido desde el archivo de cursos modelado como un objeto Integer
+         * @throws FileNotFoundException
+         * @throws IOException
+         */
         public Integer leeIDInicial(String tipoId) throws FileNotFoundException, IOException
         {       int idInicial = 0;
                 BufferedReader lector;
@@ -88,6 +106,12 @@ public class CapaIOCursos
                 return new Integer(idInicial);
         }
 
+        /**
+         * Extrae el valor de un idInicial de un string y lo devuelve como entero.
+         * @param linea corresponde al String que debe ser analizado buscando un Id inicial.
+         * @param tipoId es un string que especifica el tipo de id que se está buscando.
+         * @return Devuelve un valor entero con el id inicial que debe tener la clase Curso, Semestre, Carrera o Facultad.
+         */
         private int stringToIdInicial(String linea, String tipoId)
         {       int comienzoDato, idInicial;
                 if (((linea.indexOf("<idCursosInicial") != -1)) && (tipoId.equals("idCursos")))
@@ -114,6 +138,19 @@ public class CapaIOCursos
                         return 0;
         }
 
+        /**
+         * Metodo que lee todas las carreras desde el archivo de cursos.
+         * Comprueba que el archivo de cursos exista y es posible leerlo.
+         * Lee caracter a caracter del archivo hasta que encuentra un caracter '<',
+         * El caracter '<' indica que comienza la especificación de un objeto nuevo.
+         * guarda en un String todos los caracteres desde el '<' hasta un '>'
+         * El string leido es enviado al método stringToCarrera para modelarlo como un objeto Carrera
+         * Si la linea que se encontró entre '<' '>' no es una carrera la omite.
+         * El nuevo objeto modelado es agregado a un ArrayList de Carreras, el cual es devuelvo por este método
+         * @return Devuelve un ArrayList con todos las carreras leidas desde el archivo de cursos.
+         * @throws FileNotFoundException
+         * @throws IOException
+         */
         public ArrayList<Carrera> leeCarreras() throws FileNotFoundException, IOException
         {       ArrayList<Carrera> listaCarreras= new ArrayList(CapaIOCursos.capacidadInicialVector);
 		BufferedReader lector;
@@ -158,9 +195,20 @@ public class CapaIOCursos
 	}
 
 
-	/** Metodo para leer todos los cursos
-	* 
-	*/
+	/**
+         * Metodo que lee todos los cursos desde el archivo de cursos.
+         * Comprueba que el archivo de cursos exista y es posible leerlo.
+         * Lee caracter a caracter del archivo hasta que encuentra un caracter '<',
+         * El caracter '<' indica que comienza la especificación de un objeto nuevo.
+         * guarda en un String todos los caracteres desde el '<' hasta un '>'
+         * El string leido es enviado al método stringToCurso para modelarlo como un objeto Curso
+         * Si la linea que se encontró entre '<' '>' no es un Curso la omite.
+         * El nuevo objeto modelado es agregado a un ArrayList de Cursos, el cual es devuelvo por este método
+         * @return Devuelve un ArrayList con todos los cursos leidos desde el archivo de cursos.
+         * @throws FileNotFoundException
+         * @throws IOException
+         * @throws HourOutOfRangeException
+         */
 	public ArrayList<Curso> leeCursos() throws FileNotFoundException, IOException, HourOutOfRangeException
 	{	ArrayList<Curso> listaCursos= new ArrayList(CapaIOCursos.capacidadInicialVector);
 		BufferedReader lector;
@@ -204,6 +252,133 @@ public class CapaIOCursos
 		return listaCursos;
 	}
 
+        /**
+         * Metodo que lee todos los semestres desde el archivo de cursos.
+         * Comprueba que el archivo de cursos exista y es posible leerlo.
+         * Lee caracter a caracter del archivo hasta que encuentra un caracter '<',
+         * El caracter '<' indica que comienza la especificación de un objeto nuevo.
+         * guarda en un String todos los caracteres desde el '<' hasta un '>'
+         * El string leido es enviado al método stringToSemestre para modelarlo como un objeto Semestre
+         * Si la linea que se encontró entre '<' '>' no es un Semestre la omite.
+         * El nuevo objeto modelado es agregado a un ArrayList de Semestres, el cual es devuelvo por este método
+         * @return Devuelve un ArrayList con todos los Semestres leidos desde el archivo de cursos.
+         * @throws FileNotFoundException
+         * @throws IOException
+         * @throws HourOutOfRangeException
+         */
+        public ArrayList<Semestre> leeSemestres() throws FileNotFoundException, SecurityException, IOException
+        {       ArrayList<Semestre> listaSemestres= new ArrayList(CapaIOCursos.capacidadInicialVector);
+		BufferedReader lector;
+		StringBuilder lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+		int caracterLeido = 0;
+		long i, j;
+
+		/* Intento abrir el archivo de cursos */
+		try
+		{	lector = new BufferedReader(new FileReader(this.nombreArchivoCursos));
+		}
+		catch (FileNotFoundException FNFE)
+		{	throw FNFE; //<Devuelvo la excepción haca quien llame el método leeCursos.
+		}
+
+		/* Leo el archivo de cursos hasta el final */
+		for (i = 0; caracterLeido != -1; i++)
+		{	caracterLeido = lector.read();
+			/*Comienza a leer datos desde que encuentra un caracter '<' */
+			if (caracterLeido == '<')
+			{	for (j = 0; ((caracterLeido != -1) && (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
+				{	lineaDatos.append(String.valueOf((char)caracterLeido));
+                                        //lineaDatos.append(Character.forDigit(caracterLeido, 10));
+					caracterLeido = lector.read();
+				}
+				lineaDatos.append(String.valueOf((char)caracterLeido));//agrego el caracter '>' que no fue agregado en el bucle
+				i += j; //sumo los caracteres que ya se han leido a i, aun no se si esto pueda ser necesario a futuro.
+			}
+			/* Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
+			Semestre semestreEncontrado = this.stringToSemestre(new String(lineaDatos.toString()));
+			if (semestreEncontrado != null)
+				listaSemestres.add(semestreEncontrado);
+			else
+				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un semestre");
+                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+                }
+		/* Cierro el archivo*/
+		lector.close();
+
+		/*  Retorno la lista con los cursos leidos*/
+		return listaSemestres;
+
+
+
+        }
+
+        /**
+         * Metodo que lee todas las facultades desde el archivo de cursos.
+         * Comprueba que el archivo de cursos exista y es posible leerlo.
+         * Lee caracter a caracter del archivo hasta que encuentra un caracter '<',
+         * El caracter '<' indica que comienza la especificación de un objeto nuevo.
+         * guarda en un String todos los caracteres desde el '<' hasta un '>'
+         * El string leido es enviado al método stringToFacultad para modelarlo como un objeto Facultad
+         * Si la linea que se encontró entre '<' '>' no es una Facultad la omite.
+         * El nuevo objeto modelado es agregado a un ArrayList de Facultades, el cual es devuelvo por este método
+         * @return Devuelve un ArrayList con todos las facultades leidas desde el archivo de cursos.
+         * @throws FileNotFoundException
+         * @throws IOException
+         */
+        public ArrayList<Facultad> leeFacultades() throws FileNotFoundException, SecurityException, IOException
+        {       ArrayList<Facultad> listaFacultades= new ArrayList(CapaIOCursos.capacidadInicialVector);
+		BufferedReader lector;
+		StringBuilder lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+		int caracterLeido = 0;
+		long i, j;
+                Facultad facultadEncontrada;
+
+		/* Intento abrir el archivo de cursos */
+		try
+		{	lector = new BufferedReader(new FileReader(this.nombreArchivoCursos));
+		}
+		catch (FileNotFoundException FNFE)
+		{	throw FNFE; //<Devuelvo la excepción haca quien llame el método leeCursos.
+		}
+
+		/* Leo el archivo de cursos hasta el final */
+		for (i = 0; caracterLeido != -1; i++)
+		{	caracterLeido = lector.read();
+			/*Comienza a leer datos desde que encuentra un caracter '<' */
+			if (caracterLeido == '<')
+			{	for (j = 0; ((caracterLeido != -1) && (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
+				{	lineaDatos.append(String.valueOf((char)caracterLeido));
+                                        //lineaDatos.append(Character.forDigit(caracterLeido, 10));
+					caracterLeido = lector.read();
+				}
+				lineaDatos.append(String.valueOf((char)caracterLeido));//agrego el caracter '>' que no fue agregado en el bucle
+				i += j; //sumo los caracteres que ya se han leido a i, aun no se si esto pueda ser necesario a futuro.
+			}
+			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
+                        facultadEncontrada = this.stringToFacultad(new String(lineaDatos.toString()));
+			if (facultadEncontrada != null)
+				listaFacultades.add(facultadEncontrada);
+			else
+				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un semestre");
+                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+                }
+		/* Cierro el archivo*/
+		lector.close();
+
+		/*  Retorno la lista con los cursos leidos*/
+		return listaFacultades;
+        }
+
+        /**
+         * Este método es usado cuando no se conoce el idInicial desde las clases Carrera, Curso, Semestre y Facultad
+         * Lee los id desde le archivo de cursos, si no encuentra uno, entonces el id vale 0
+         * Llama al otro método escribeCarreras() que necesita los id.
+         * @param listaCarreras Es la lista de carreras que se desea escribir en el archivo de cursos
+         * @throws FileNotFoundException
+         * @throws SecurityException
+         * @throws IOException
+         * @throws HourOutOfRangeException
+         */
         public void escribeCarreras(ArrayList<Carrera> listaCarreras) throws FileNotFoundException, SecurityException, IOException, HourOutOfRangeException
         {       Integer idInicialCursosWrap = this.leeIDInicial("idCursos");
                 Integer idInicialCarrerasWrap = this.leeIDInicial("idCarreras");
@@ -232,9 +407,26 @@ public class CapaIOCursos
                 escribeCarreras(listaCarreras, idInicialCursos, idInicialCarreras, idInicialSemestres, idInicialFacultades);
         }
 
+        /**
+         * Este metodo recorre el Arraylist de Carreras proporcionado,
+         * transforma las Carreras a String usando el método carreraToString()
+         * y escribe cada carrera en el archivo de cursos.
+         * Antes de escribir todo se leen los cursos, semestres y facultades
+         * para escribir estas listas tambien. Esto porque al escribir en el archivo se borra todo lo existente.
+         * En la primera linea escribe la cuenta de los id de cada clase.
+         * El metodo comprueba que se puede escribir en el archivo antes de usarlo.
+         * @param listaCarreras Es la lista de carreras que se desea escribir en e archivo de cursos.
+         * @param idInicialCursos Es el id inicial obtenido desde la clase Curso que lleva la cuenta de los id asignados.
+         * @param idInicialCarreras Es el id inicial obtenido desde la clase Carrera que lleva la cuenta de los id asignados.
+         * @param idInicialSemestres Es el id inicial obtenido desde la clase Semestre que lleva la cuenta de los id asignados.
+         * @param idInicialFacultades Es el id inicial obtenido desde la clase Facultad que lleva la cuenta de los id asignados.
+         * @throws FileNotFoundException
+         * @throws SecurityException
+         * @throws IOException
+         * @throws HourOutOfRangeException
+         */
         public void escribeCarreras(ArrayList<Carrera> listaCarreras, int idInicialCursos, int idInicialCarreras, int idInicialSemestres, int idInicialFacultades) throws FileNotFoundException, SecurityException, IOException, HourOutOfRangeException
         {       PrintWriter escritor;
-                String aEscribir;
 		ArrayList<Curso> listaCursos = new ArrayList(CapaIOCursos.capacidadInicialVector);
                 ArrayList<Semestre> listaSemestres = new ArrayList(CapaIOCursos.capacidadInicialVector);
                 ArrayList<Facultad> listaFacultades = new ArrayList(CapaIOCursos.capacidadInicialVector);
@@ -292,6 +484,16 @@ public class CapaIOCursos
                 
         }
 
+        /**
+         * Este método es usado cuando no se conoce el idInicial desde las clases Carrera, Curso, Semestre y Facultad
+         * Lee los id desde le archivo de cursos, si no encuentra uno, entonces el id vale 0
+         * Llama al otro método escribeFacultades() que necesita los id.
+         * @param listaFacultades Es la lista de facultades que se desea escribir en el archivo de cursos
+         * @throws FileNotFoundException
+         * @throws SecurityException
+         * @throws IOException
+         * @throws HourOutOfRangeException
+         */
         public void escribeFacultades(ArrayList<Facultad> listaFacultades) throws FileNotFoundException, SecurityException, IOException, HourOutOfRangeException
         {       Integer idInicialCursosWrap = this.leeIDInicial("idCursos");
                 Integer idInicialCarrerasWrap = this.leeIDInicial("idCarreras");
@@ -320,9 +522,26 @@ public class CapaIOCursos
                 escribeFacultades(listaFacultades, idInicialCursos, idInicialCarreras, idInicialSemestres, idInicialFacultades);
         }
 
+        /**
+         * Este metodo recorre el Arraylist de facultades proporcionado,
+         * transforma las facultades a String usando el método facultadToString()
+         * y escribe cada facultad en el archivo de cursos.
+         * Antes de escribir todo se leen los cursos, semestres y carreras
+         * para escribir estas listas tambien. Esto porque al escribir en el archivo se borra todo lo existente.
+         * En la primera linea escribe la cuenta de los id de cada clase.
+         * El metodo comprueba que se puede escribir en el archivo antes de usarlo
+         * @param listaFacultades Es la lista de facultades que se desea escribir en e archivo de cursos.
+         * @param idInicialCursos Es el id inicial obtenido desde la clase Curso que lleva la cuenta de los id asignados.
+         * @param idInicialCarreras Es el id inicial obtenido desde la clase Carrera que lleva la cuenta de los id asignados.
+         * @param idInicialSemestres Es el id inicial obtenido desde la clase Semestre que lleva la cuenta de los id asignados.
+         * @param idInicialFacultades Es el id inicial obtenido desde la clase Facultad que lleva la cuenta de los id asignados.
+         * @throws FileNotFoundException
+         * @throws SecurityException
+         * @throws IOException
+         * @throws HourOutOfRangeException
+         */
         public void escribeFacultades(ArrayList<Facultad> listaFacultades, int idInicialCursos, int idInicialCarreras, int idInicialSemestres, int idInicialFacultades) throws FileNotFoundException, SecurityException, IOException, HourOutOfRangeException
         {       PrintWriter escritor;
-                String aEscribir;
 		ArrayList<Curso> listaCursos = new ArrayList(CapaIOCursos.capacidadInicialVector);
                 ArrayList<Semestre> listaSemestres = new ArrayList(CapaIOCursos.capacidadInicialVector);
                 ArrayList<Carrera> listaCarreras = new ArrayList(CapaIOCursos.capacidadInicialVector);
@@ -380,6 +599,15 @@ public class CapaIOCursos
 
         }
 
+        /**
+         * Este método es usado cuando no se conoce el idInicial desde las clases Carrera, Curso, Semestre y Facultad
+         * Lee los id desde le archivo de cursos, si no encuentra uno, entonces el id vale 0
+         * Llama al otro método escribeCursos() que necesita los id.
+         * @param listaCursos Es la lista de cursos que se desea escribir en el archivo de cursos
+         * @throws FileNotFoundException
+         * @throws SecurityException
+         * @throws IOException
+         */
         public void escribeCursos(ArrayList<Curso> listaCursos) throws FileNotFoundException, SecurityException, IOException
         {       Integer idInicialCursosWrap = this.leeIDInicial("idCursos");
                 Integer idInicialCarrerasWrap = this.leeIDInicial("idCarreras");
@@ -407,12 +635,26 @@ public class CapaIOCursos
                         idInicialFacultades = idInicialFacultadesWrap.intValue();
                 escribeCursos(listaCursos, idInicialCursos, idInicialCarreras, idInicialSemestres, idInicialFacultades);
         }
-	/** 
-	* Método que guarda todos los cursos en el archivo de cursos.
-	*/
+
+        /**
+         * Este metodo recorre el Arraylist de cursos proporcionado,
+         * transforma los cursos a String usando el método cursoToString()
+         * y escribe cada curso en el archivo de cursos.
+         * Antes de escribir todo se leen las carreras, semestres y facultades
+         * para escribir estas listas tambien. Esto porque al escribir en el archivo se borra todo lo existente.
+         * En la primera linea escribe la cuenta de los id de cada clase.
+         * El metodo comprueba que se puede escribir en el archivo antes de usarlo.
+         * @param listaCursos Es la lista de cursos que se desea escribir en e archivo de cursos.
+         * @param idInicialCursos Es el id inicial obtenido desde la clase Curso que lleva la cuenta de los id asignados.
+         * @param idInicialCarreras Es el id inicial obtenido desde la clase Carrera que lleva la cuenta de los id asignados.
+         * @param idInicialSemestres Es el id inicial obtenido desde la clase Semestre que lleva la cuenta de los id asignados.
+         * @param idInicialFacultades Es el id inicial obtenido desde la clase Facultad que lleva la cuenta de los id asignados.
+         * @throws FileNotFoundException
+         * @throws SecurityException
+         * @throws IOException
+         */
 	public void escribeCursos(ArrayList<Curso> listaCursos, int idInicialCursos, int idInicialCarreras, int idInicialSemestres, int idInicialFacultades) throws FileNotFoundException, SecurityException, IOException
 	{	PrintWriter escritor;
-                String aEscribir;
 		ArrayList<Carrera> listaCarreras = new ArrayList(CapaIOCursos.capacidadInicialVector);
                 ArrayList<Semestre> listaSemestres = new ArrayList(CapaIOCursos.capacidadInicialVector);
 		ArrayList<Facultad> listaFacultades = new ArrayList(CapaIOCursos.capacidadInicialVector);
@@ -454,8 +696,7 @@ public class CapaIOCursos
 
 		//Escribo los Cursos del ArrayList<Curso> en el archivo de cursos.
 		for(i = 0; i<listaCursos.size();i++)
-		{   aEscribir = this.cursoToString(listaCursos.get(i));
-                    escritor.println(aEscribir);//Escribo en el archivo de cursos.
+		{       escritor.println(this.cursoToString(listaCursos.get(i)));//Escribo en el archivo de cursos.
 		}
 		
                 //Escribo los Semestres del ArrayList<Semestre> en el archivo de cursos.
@@ -467,7 +708,16 @@ public class CapaIOCursos
 		escritor.close();
 	}
 
-
+        /**
+         * Este método es usado cuando no se conoce el idInicial desde las clases Carrera, Curso, Semestre y Facultad
+         * Lee los id desde le archivo de cursos, si no encuentra uno, entonces el id vale 0
+         * Llama al otro método escribeCursos() que necesita los id.
+         * @param listaSemestres Es la lista de semestres que se desea escribir en el archivo de cursos
+         * @throws FileNotFoundException
+         * @throws SecurityException
+         * @throws IOException
+         * @throws HourOutOfRangeException
+         */
         public void escribeSemestres(ArrayList<Semestre> listaSemestres) throws FileNotFoundException, SecurityException, IOException, HourOutOfRangeException
         {       Integer idInicialCursosWrap = this.leeIDInicial("idCursos");
                 Integer idInicialCarrerasWrap = this.leeIDInicial("idCarreras");
@@ -496,10 +746,27 @@ public class CapaIOCursos
                 escribeSemestres(listaSemestres, idInicialCursos, idInicialCarreras, idInicialSemestres, idInicialFacultades);
         }
 
+        /**
+         * Este metodo recorre el Arraylist de Semestres proporcionado,
+         * transforma los semestres a String usando el método semestreToString()
+         * y escribe cada semestre en el archivo de cursos.
+         * Antes de escribir todo se leen los cursos, carreras y facultades
+         * para escribir estas listas tambien. Esto porque al escribir en el archivo se borra todo lo existente.
+         * En la primera linea escribe la cuenta de los id de cada clase.
+         * El metodo comprueba que se puede escribir en el archivo antes de usarlo.
+         * @param listaSemestres Es la lista de semestres que se desea escribir en e archivo de cursos.
+         * @param idInicialCursos Es el id inicial obtenido desde la clase Curso que lleva la cuenta de los id asignados.
+         * @param idInicialCarreras Es el id inicial obtenido desde la clase Carrera que lleva la cuenta de los id asignados.
+         * @param idInicialSemestres Es el id inicial obtenido desde la clase Semestre que lleva la cuenta de los id asignados.
+         * @param idInicialFacultades Es el id inicial obtenido desde la clase Facultad que lleva la cuenta de los id asignados.
+         * @throws FileNotFoundException
+         * @throws SecurityException
+         * @throws IOException
+         * @throws HourOutOfRangeException
+         */
         public void escribeSemestres(ArrayList<Semestre> listaSemestres, int idInicialCursos, int idInicialCarreras, int idInicialSemestres, int idInicialFacultades) throws FileNotFoundException, SecurityException, IOException, HourOutOfRangeException
 	{	PrintWriter escritor;
-                String aEscribir;
-		ArrayList<Carrera> listaCarreras = new ArrayList(CapaIOCursos.capacidadInicialVector);
+                ArrayList<Carrera> listaCarreras = new ArrayList(CapaIOCursos.capacidadInicialVector);
                 ArrayList<Curso> listaCursos = new ArrayList(CapaIOCursos.capacidadInicialVector);
 		ArrayList<Facultad> listaFacultades = new ArrayList(CapaIOCursos.capacidadInicialVector);
                 /** Leo todo el resto del contenido del archivo de cursos que no sea un "Curso" para no perder los datos.*/
@@ -553,99 +820,12 @@ public class CapaIOCursos
 		escritor.close();
 	}
 
-        public ArrayList<Semestre> leeSemestres() throws FileNotFoundException, SecurityException, IOException
-        {       ArrayList<Semestre> listaSemestres= new ArrayList(CapaIOCursos.capacidadInicialVector);
-		BufferedReader lector;
-		StringBuilder lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
-		int caracterLeido = 0;
-		long i, j;
-
-		/** Intento abrir el archivo de cursos */
-		try
-		{	lector = new BufferedReader(new FileReader(this.nombreArchivoCursos));
-		}
-		catch (FileNotFoundException FNFE)
-		{	throw FNFE; //<Devuelvo la excepción haca quien llame el método leeCursos.
-		}
-
-		/** Leo el archivo de cursos hasta el final */
-		for (i = 0; caracterLeido != -1; i++)
-		{	caracterLeido = lector.read();
-			/**Comienza a leer datos desde que encuentra un caracter '<' */
-			if (caracterLeido == '<')
-			{	for (j = 0; ((caracterLeido != -1) && (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
-				{	lineaDatos.append(String.valueOf((char)caracterLeido));
-                                        //lineaDatos.append(Character.forDigit(caracterLeido, 10));
-					caracterLeido = lector.read();
-				}
-				lineaDatos.append(String.valueOf((char)caracterLeido));//agrego el caracter '>' que no fue agregado en el bucle
-				i += j; //sumo los caracteres que ya se han leido a i, aun no se si esto pueda ser necesario a futuro.
-			}
-			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
-			Semestre semestreEncontrado = this.stringToSemestre(new String(lineaDatos.toString()));
-			if (semestreEncontrado != null)
-				listaSemestres.add(semestreEncontrado);
-			else
-				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un semestre");
-                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
-                }
-		/** Cierro el archivo*/
-		lector.close();
-
-		/**  Retorno la lista con los cursos leidos*/
-		return listaSemestres;
-
-
-                
-        }
-
-        public ArrayList<Facultad> leeFacultades() throws FileNotFoundException, SecurityException, IOException
-        {       ArrayList<Facultad> listaFacultades= new ArrayList(CapaIOCursos.capacidadInicialVector);
-		BufferedReader lector;
-		StringBuilder lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
-		int caracterLeido = 0;
-		long i, j;
-                Facultad facultadEncontrada;
-
-		/** Intento abrir el archivo de cursos */
-		try
-		{	lector = new BufferedReader(new FileReader(this.nombreArchivoCursos));
-		}
-		catch (FileNotFoundException FNFE)
-		{	throw FNFE; //<Devuelvo la excepción haca quien llame el método leeCursos.
-		}
-
-		/** Leo el archivo de cursos hasta el final */
-		for (i = 0; caracterLeido != -1; i++)
-		{	caracterLeido = lector.read();
-			/**Comienza a leer datos desde que encuentra un caracter '<' */
-			if (caracterLeido == '<')
-			{	for (j = 0; ((caracterLeido != -1) && (caracterLeido != '>')); j++) //ver que el -1 que se almacena si llego al final del archivo. en teoria no debe ocurrir se antes compruebo sintaxis.
-				{	lineaDatos.append(String.valueOf((char)caracterLeido));
-                                        //lineaDatos.append(Character.forDigit(caracterLeido, 10));
-					caracterLeido = lector.read();
-				}
-				lineaDatos.append(String.valueOf((char)caracterLeido));//agrego el caracter '>' que no fue agregado en el bucle
-				i += j; //sumo los caracteres que ya se han leido a i, aun no se si esto pueda ser necesario a futuro.
-			}
-			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
-                        facultadEncontrada = this.stringToFacultad(new String(lineaDatos.toString()));
-			if (facultadEncontrada != null)
-				listaFacultades.add(facultadEncontrada);
-			else
-				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un semestre");
-                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
-                }
-		/** Cierro el archivo*/
-		lector.close();
-
-		/**  Retorno la lista con los cursos leidos*/
-		return listaFacultades;
-
-
-
-        }
-
+        /**
+         * Este método crea una carrera usando los datos extraidos desde un String
+         * Crea un objeto Carrera y setea sus atributos.
+         * @param linea Es el string con la carrera que se desea modelar como objeto Carrera.
+         * @return Devuelve un objeto Carrera que fue modelado a partir del String linea.
+         */
         private Carrera stringToCarrera(String linea)
         {       String nomCarrera;
                 String descrip;
@@ -691,9 +871,13 @@ public class CapaIOCursos
                 else
                     return null;
         }
-	/** 
-	* Este método recibe un String que contiene especificado un objeto del tipo Curso, analiza este String y devuelve un objeto Curso.
-	*/
+	/**
+         * Este método crea un curso usando los datos extraidos desde un String
+         * Crea un objeto Curso y setean sus atributos.
+         * @param linea Es el string con el curso que se desea modelar como objeto Curso.
+         * @return Devuelve un objeto Curso que fue modelado a partir del String linea.
+         * @throws HourOutOfRangeException
+         */
 	private Curso stringToCurso(String linea) throws HourOutOfRangeException
         {
 		String nomCurso; //Nombre del curso
@@ -807,8 +991,10 @@ public class CapaIOCursos
 			return null;
 	}
 	/**
-	* Esté metodo recibe un objeto Curso y crea un string de como debe ser escrito en el archivo de cursos
-	*/
+         * Este metodo transforma un objeto Curso a un string para que pueda ser almacenado en el archivo de cursos.
+         * @param cursoAEscribir es un objeto Curso que se desea modelar como String.
+         * @return Devuelve el objeto Curso modelado como String según la sintaxis válida del archivo de cursos.
+         */
 	private String cursoToString(Curso cursoAEscribir)
 	{	String cursoString;
                 int idCurso = cursoAEscribir.getIdCurso();
@@ -824,6 +1010,11 @@ public class CapaIOCursos
 		return cursoString;
 	}
 
+        /**
+         * Este metodo transforma un objeto Facultad a un string para que pueda ser almacenado en el archivo de cursos.
+         * @param facultadAEscribir es un objeto Facultad que se desea modelar como String.
+         * @return Devuelve el objeto Facultad modelado como String según la sintaxis válida del archivo de cursos.
+         */
         private String facultadToString(Facultad facultadAEscribir)
         {       System.out.println("Se va a pasar una facultad a String...");
 		String nomFacultad = facultadAEscribir.getNombreFacultad();
@@ -833,6 +1024,12 @@ public class CapaIOCursos
 		return "<Facultad nomFacultad=\""+nomFacultad+"\" idFacultad=\""+idFacultad+"\" descrip=\""+descrip+"\" codCarreras=\""+codCarreras+"\" >";
         }
 
+        /**
+         * Este método crea una facultad usando los datos extraidos desde un String
+         * Crea un objeto Facultad y setea sus atributos.
+         * @param linea Es el string con la facultad que se desea modelar como objeto Facultad.
+         * @return Devuelve un objeto Facultad que fue modelado a partir del String linea.
+         */
         private Facultad stringToFacultad(String linea)
         {       String nomFacultad, descrip, codCarreras;
                 int comienzoDato, i, posicionBarra, idFacultad, codCarrera;
@@ -876,6 +1073,11 @@ public class CapaIOCursos
                     return null;
         }
 
+        /**
+         * Este metodo transforma un objeto Carrera a un string para que pueda ser almacenado en el archivo de cursos.
+         * @param carreraAEscribir es un objeto Carrera que se desea modelar como String.
+         * @return Devuelve el objeto Carrera modelado como String según la sintaxis válida del archivo de cursos.
+         */
 	private String carreraToString(Carrera carreraAEscribir)
 	{	System.out.println("Se va a pasar una carrera a String...");
 		String nomCarrera = carreraAEscribir.getNombreCarrera();
@@ -885,6 +1087,11 @@ public class CapaIOCursos
 		return "<Carrera nomCarrera=\""+nomCarrera+"\" descrip=\""+descrip+"\" codCarrera=\""+codCarrera+"\" idSemestres=\""+idSemestresStr+"\" >";
 	}
 
+        /**
+         * Este metodo transforma un objeto Semestre a un string para que pueda ser almacenado en el archivo de cursos.
+         * @param semestreAEscribir es un objeto Semestre que se desea modelar como String.
+         * @return Devuelve el objeto Semestre modelado como String según la sintaxis válida del archivo de cursos.
+         */
         private String semestreToString(Semestre semestreAEscribir)
 	{	System.out.println("Se va a pasar un semestre a String...");
 		int numSemestre = semestreAEscribir.getNumeroSemestre();
@@ -894,6 +1101,12 @@ public class CapaIOCursos
 		return "<Semestre numSemestre=\""+numSemestre+"\" idSemestre=\""+idSemestre+"\" enCarreraId=\""+enCarreraId+"\" codRamosDelSemestre=\""+codRamosDelSemestre+"\" >";
 	}
 
+        /**
+         * Este método crea un semestre usando los datos extraidos desde un String
+         * Crea un objeto Semestre y setea sus atributos.
+         * @param linea Es el string con el semestre que se desea modelar como objeto Semestre.
+         * @return Devuelve un objeto Semestre que fue modelado a partir del String linea.
+         */
         private Semestre stringToSemestre(String linea)
         {       String codRamosDelSemestre;
                 int comienzoDato, i, posicionBarra, numSemestre, idSemestre, enCarreraId, codRamo;
@@ -915,7 +1128,6 @@ public class CapaIOCursos
                         codRamosDelSemestre = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1));
 
                         Semestre semestreLeido = new Semestre(numSemestre, enCarreraId, idSemestre);
-                        //acá seteo los id de los semestres de carreraLeida!!!, alexis debes hacer un setter parar los id de semestre en las carreras
                         if (codRamosDelSemestre.length() != 0)
                         {       for (i = 0; codRamosDelSemestre.indexOf("|") != -1;i++)
                                 {       System.out.println(codRamosDelSemestre.substring(0, codRamosDelSemestre.indexOf("|")));

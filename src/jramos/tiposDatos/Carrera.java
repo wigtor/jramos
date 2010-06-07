@@ -1,11 +1,15 @@
 /**
-******************************************************
-* @file Profesor.java
-* @author AirZs
-* @date mayo 2010
-* @version 0.1
-* @brief En este archivo se especifica la clase del tipo Carrera.
-*****************************************************/
+ ******************************************************
+ * @file Profesor.java
+ * @author AirZs
+ * @date mayo 2010
+ * @version 0.1
+ * La clase Carrera representa una carrera de la universidad
+ * Cada carrera debe pertenecer a una facultad
+ * Cada carrera debe tener un codigo de carrera (equivalente a un id en otros objetos)
+ * Cada carrera posee distintas instancia de semestres.
+ * @brief En este archivo se especifica la clase del tipo Carrera.
+ *****************************************************/
 
 package jramos.tiposDatos;
 import java.util.ArrayList;

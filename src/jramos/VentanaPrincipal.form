@@ -364,6 +364,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar facultad"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEditarFacultadActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botonEliminarFacultad">
               <Properties>
@@ -377,6 +380,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar carrera"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEditarCarreraActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botonEliminarCarrera">
               <Properties>

@@ -21,12 +21,23 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
 
     private java.awt.Frame ventanaPadre;
     private ManipuladorListas listManager;
+    private int nuevaOEdita;
+    Facultad facultadAEditar;
     /** Creates new form DialogoFacultadNueva */
-    public DialogoFacultadNueva(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager) {
+    public DialogoFacultadNueva(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager, Facultad facultadAEditar,int nuevaOEdita) {
         super(ventanaPadre, modal);
         initComponents();
         this.ventanaPadre = ventanaPadre;
         this.listManager = listManager;
+        this.nuevaOEdita = nuevaOEdita;
+        if (nuevaOEdita == VentanaPrincipal.EDITA)
+        {       //Si el dialogo se abre en modo edicion, cambio el texto de un boton y el titulo del dialogo.
+                this.setTitle("Dialogo de edición de facultad");
+                this.botonAceptaAgregarFacultad.setText("aplicar cambios");
+                this.facultadAEditar = facultadAEditar;
+                this.campoNombreFacultadNueva.setText(facultadAEditar.getNombreFacultad());
+                this.textoDescripcionFacultadNueva.setText(facultadAEditar.getDescripcion());
+        }
     }
 
     /** This method is called from within the constructor to
@@ -130,19 +141,29 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
                 dialogoError = null;
                 return ;
         }
-        //Si ya existe una carrera con el mismo nombre tampoco se agrega.
-        ArrayList<Facultad> listaCompletaFacultades = this.listManager.getListaFacultades();
-        for (Facultad facultad : listaCompletaFacultades)
-        {       if (this.campoNombreFacultadNueva.getText().equals(facultad.getNombreFacultad()))
-                {       //abro nueva ventana de error.
-                        DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nombre de facultad ya existe.", "vuelva a escribir otro nombre para la facultad");
-                        dialogoError.setVisible(true);
-                        dialogoError = null;
-                        return ;
+        if (this.nuevaOEdita == VentanaPrincipal.NUEVA)
+        {       //Si ya existe una facultad con el mismo nombre tampoco se agrega.
+                ArrayList<Facultad> listaCompletaFacultades = this.listManager.getListaFacultades();
+                for (Facultad facultad : listaCompletaFacultades)
+                {       if (this.campoNombreFacultadNueva.getText().equals(facultad.getNombreFacultad()))
+                        {       //abro nueva ventana de error.
+                                DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nombre de facultad ya existe.", "vuelva a escribir otro nombre para la facultad");
+                                dialogoError.setVisible(true);
+                                dialogoError = null;
+                                return ;
+                        }
                 }
+                //Creo una facultad nueva
+                listManager.agregaFacultad(campoNombreFacultadNueva.getText(), textoDescripcionFacultadNueva.getText());
+                ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaFacultades();
         }
-        listManager.agregaFacultad(campoNombreFacultadNueva.getText(), textoDescripcionFacultadNueva.getText());
-        ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaFacultades();
+        else
+        {       //modifico la facultad
+                this.facultadAEditar.setNombre(this.campoNombreFacultadNueva.getText());
+                this.facultadAEditar.setDescripcion(this.textoDescripcionFacultadNueva.getText());
+                ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaFacultades();
+                ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
+        }
         this.setVisible(false);
 
     }//GEN-LAST:event_botonAceptaAgregarFacultadActionPerformed

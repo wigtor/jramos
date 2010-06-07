@@ -30,6 +30,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private DefaultListModel listModelCarreras;
     private DefaultListModel listModelProfesores;
     private DefaultListModel listModelCursos;
+    public static int NUEVA = 1;
+    public static int EDITA = 2;
 
     /** Creates new form VentanaPrincipal */
     public VentanaPrincipal(ManipuladorListas listManager, CapaIOCursos gestorIOCursos, CapaIOProfes gestorIOProfes) {
@@ -243,6 +245,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jButton7.setText("Ver Malla");
 
         botonEditarFacultad.setText("Editar facultad");
+        botonEditarFacultad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEditarFacultadActionPerformed(evt);
+            }
+        });
 
         botonEliminarFacultad.setText("Eliminar facultad");
         botonEliminarFacultad.addActionListener(new java.awt.event.ActionListener() {
@@ -252,6 +259,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonEditarCarrera.setText("Editar carrera");
+        botonEditarCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEditarCarreraActionPerformed(evt);
+            }
+        });
 
         botonEliminarCarrera.setText("Eliminar carrera");
         botonEliminarCarrera.addActionListener(new java.awt.event.ActionListener() {
@@ -801,7 +813,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonNuevaCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaCarreraActionPerformed
         //Acción a realizar cuando se presiona el boton "nueva carrera"
-        DialogoCarreraNueva dialogoCarreraNueva = new DialogoCarreraNueva(this, rootPaneCheckingEnabled, listManager);
+        DialogoCarreraNueva dialogoCarreraNueva = new DialogoCarreraNueva(this, rootPaneCheckingEnabled, listManager, null, VentanaPrincipal.NUEVA);
         dialogoCarreraNueva.setVisible(true);
         dialogoCarreraNueva = null;
     }//GEN-LAST:event_botonNuevaCarreraActionPerformed
@@ -868,7 +880,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonNuevaFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaFacultadActionPerformed
         //Acción a realizar cuando se presiona el boton "nueva facultad"
-        DialogoFacultadNueva dialogoFacultadNueva = new DialogoFacultadNueva(this, rootPaneCheckingEnabled, listManager);
+        DialogoFacultadNueva dialogoFacultadNueva = new DialogoFacultadNueva(this, rootPaneCheckingEnabled, listManager, null, VentanaPrincipal.NUEVA);
         dialogoFacultadNueva.setVisible(true);
         dialogoFacultadNueva = null;
     }//GEN-LAST:event_botonNuevaFacultadActionPerformed
@@ -975,7 +987,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_FACULTAD, facultadSeleccionada);
                 dialogoConfirmacion.setVisible(true);
                 dialogoConfirmacion = null;
-
                 return ;
         }
         else
@@ -1036,6 +1047,47 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void PanelVisualizadorGeneralMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PanelVisualizadorGeneralMouseClicked
 
     }//GEN-LAST:event_PanelVisualizadorGeneralMouseClicked
+
+    private void botonEditarFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarFacultadActionPerformed
+        // Acción a realizar cuando se presiona el boton "editar facultad"
+        Facultad facultadSeleccionada;
+        facultadSeleccionada = (Facultad)this.visualizadorListaFacultades.getSelectedValue();
+        if (facultadSeleccionada != null)
+        {       //Lanzo un dialogo para editar la facultad seleccionada
+                DialogoFacultadNueva dialogoFacultadNueva = new DialogoFacultadNueva(this, rootPaneCheckingEnabled, listManager, facultadSeleccionada,VentanaPrincipal.EDITA);
+                dialogoFacultadNueva.setVisible(true);
+                dialogoFacultadNueva = null;
+                return ;
+        }
+        else
+        {       //abro ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado una facultad para editar", "Seleccione una facultad desde la lista de facultades del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+        
+    }//GEN-LAST:event_botonEditarFacultadActionPerformed
+
+    private void botonEditarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarCarreraActionPerformed
+        // Acción a realizar cuando se presiona el boton "editar carrera"
+        Carrera carreraSeleccionada;
+        carreraSeleccionada = (Carrera)this.visualizadorListaCarreras.getSelectedValue();
+        if (carreraSeleccionada != null)
+        {       //Lanzo un dialogo para editar la carrera seleccionada
+                DialogoCarreraNueva dialogoCarreraNueva = new DialogoCarreraNueva(this, rootPaneCheckingEnabled, listManager, carreraSeleccionada, VentanaPrincipal.EDITA);
+                dialogoCarreraNueva.setVisible(true);
+                dialogoCarreraNueva = null;
+                return ;
+        }
+        else
+        {       //abro ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado una carrera para editar", "Seleccione una carrera desde la lista de carreras del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+    }//GEN-LAST:event_botonEditarCarreraActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

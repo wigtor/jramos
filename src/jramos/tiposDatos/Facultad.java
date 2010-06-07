@@ -144,6 +144,15 @@ public class Facultad {
     // Metodos de Modificar Variables
 
     /**
+     * Metodo para modificar el nombre de la facultad
+     *
+     * @param nomb String con el nuevo nombre de la facultad
+     */
+    public void setNombre(String nomb){
+        this.nomFacultad = nomb;
+    }
+
+    /**
      * Metodo para agregar una descripcion a la facultad
      *
      * @param desc String con la descripcion

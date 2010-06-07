@@ -26,9 +26,11 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
     private java.awt.Frame ventanaPadre;
     private ManipuladorListas listManager;
     private SpinnerNumberModel modelCantidadSemestres;
+    private int nuevaOEdita;
+    private Carrera carreraAEditar;
 
     /** Creates new form DialogoCarreraNueva */
-    public DialogoCarreraNueva(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager) {
+    public DialogoCarreraNueva(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager, Carrera carreraAEditar, int nuevaOEdita) {
         super(ventanaPadre, modal);
         initComponents();
         this.ventanaPadre = ventanaPadre;
@@ -41,6 +43,17 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
         }
         this.modelCantidadSemestres = new SpinnerNumberModel(4, 1, 20, 1);
         this.spinnerCantidadSemestres.setModel(this.modelCantidadSemestres);
+        this.nuevaOEdita = nuevaOEdita;
+        if (nuevaOEdita == VentanaPrincipal.EDITA)
+        {       this.carreraAEditar = carreraAEditar;
+                this.setTitle("Dialogo de edición de carrera");
+                this.botonAceptaAgregarCarrera.setText("Aplicar cambios");
+                this.campoNombreCarreraNueva.setText(carreraAEditar.getNombreCarrera());
+                this.textoDescripcionCarrera.setText(carreraAEditar.getDescripcion());
+                this.selectorListaFacultades.setSelectedItem(carreraAEditar.getFacultad());
+                this.selectorListaFacultades.setEnabled(false);
+                this.spinnerCantidadSemestres.setValue(new Integer(carreraAEditar.getIdSemestresArrayList().size()));
+        }
     }
 
     /** This method is called from within the constructor to
@@ -183,19 +196,27 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
                 dialogoError = null;
                 return ;
         }
-        //Si ya existe una carrera con el mismo nombre tampoco se agrega.
-        ArrayList<Carrera> listaCompletaCarreras = this.listManager.getListaCarreras();
-        for (Carrera carrera : listaCompletaCarreras)
-        {       if (this.campoNombreCarreraNueva.getText().equals(carrera.getNombreCarrera()))
-                {       //abro nueva ventana de error.
-                        DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nombre de carrera ya existe.", "vuelva a escribir otro nombre para la carrera");
-                        dialogoError.setVisible(true);
-                        dialogoError = null;
-                        return ;
+        if (nuevaOEdita == VentanaPrincipal.NUEVA)
+        {       //Si ya existe una carrera con el mismo nombre tampoco se agrega.
+                ArrayList<Carrera> listaCompletaCarreras = this.listManager.getListaCarreras();
+                for (Carrera carrera : listaCompletaCarreras)
+                {       if (this.campoNombreCarreraNueva.getText().equals(carrera.getNombreCarrera()))
+                        {       //abro nueva ventana de error.
+                                DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nombre de carrera ya existe.", "vuelva a escribir otro nombre para la carrera");
+                                dialogoError.setVisible(true);
+                                dialogoError = null;
+                                return ;
+                        }
                 }
+                this.listManager.agregaCarrera(this.campoNombreCarreraNueva.getText(), (Facultad)selectorListaFacultades.getSelectedItem(), textoDescripcionCarrera.getText(), this.modelCantidadSemestres.getNumber().intValue());
+                ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
         }
-        this.listManager.agregaCarrera(this.campoNombreCarreraNueva.getText(), (Facultad)selectorListaFacultades.getSelectedItem(), textoDescripcionCarrera.getText(), this.modelCantidadSemestres.getNumber().intValue());
-        ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
+        else
+        {       carreraAEditar.setDescripcion(this.textoDescripcionCarrera.getText());
+                carreraAEditar.setNombre(this.campoNombreCarreraNueva.getText());
+                ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
+                ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCursos();
+        }
         this.setVisible(false);
     }//GEN-LAST:event_botonAceptaAgregarCarreraActionPerformed
 

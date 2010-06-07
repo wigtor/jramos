@@ -138,6 +138,14 @@ public class Carrera {
     // Metodos de Modificar Variables
 
     /**
+     * Metodo para cambiar el nombre a la Carrera
+     *
+     * @param nomb String con el nuevo nombre de la Carrera
+     */
+    public void setNombre(String nomb){
+       this.nomCarrera = nomb;
+    }
+    /**
      * Metodo para agregar la descripcion a la Carrera
      *
      * @param desc String con la descripcion de la Carrera

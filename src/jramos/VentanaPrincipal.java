@@ -936,10 +936,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuVerManualActionPerformed
 
     private void botonNuevaCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaCarreraActionPerformed
-        //Acción a realizar cuando se presiona el boton "nueva carrera"
-        DialogoCarreraNueva dialogoCarreraNueva = new DialogoCarreraNueva(this, rootPaneCheckingEnabled, listManager, null, VentanaPrincipal.NUEVA);
-        dialogoCarreraNueva.setVisible(true);
-        dialogoCarreraNueva = null;
+        //compruebo que existen facultades antes de agregar carreras.
+        if (this.listManager.getListaFacultades().size() != 0)
+        {       //Acción a realizar cuando se presiona el boton "nueva carrera"
+                DialogoCarreraNueva dialogoCarreraNueva = new DialogoCarreraNueva(this, rootPaneCheckingEnabled, listManager, null, VentanaPrincipal.NUEVA);
+                dialogoCarreraNueva.setVisible(true);
+                dialogoCarreraNueva = null;
+        }
+        else
+        {       //lanzo dialogo de error cuando se intenta agregar carreras sin existir facultades
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No se pueden crear carreras si no existe al menos una facultad", "Agregue una facultad antes.");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
     }//GEN-LAST:event_botonNuevaCarreraActionPerformed
 
     public void actualizaJListListaProfes()

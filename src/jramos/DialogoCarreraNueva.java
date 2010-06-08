@@ -14,7 +14,6 @@ package jramos;
 import jramos.tiposDatos.Facultad;
 import jramos.tiposDatos.Carrera;
 import java.util.ArrayList;
-import javax.swing.SpinnerDateModel;
 import javax.swing.SpinnerNumberModel;
 
 /**
@@ -212,9 +211,25 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
                 this.listManager.agregaCarrera(this.campoNombreCarreraNueva.getText(), (Facultad)selectorListaFacultades.getSelectedItem(), textoDescripcionCarrera.getText(), this.modelCantidadSemestres.getNumber().intValue());
                 ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
         }
+        //FALTA AQUI!!!
         else
-        {       carreraAEditar.setDescripcion(this.textoDescripcionCarrera.getText());
-                carreraAEditar.setNombre(this.campoNombreCarreraNueva.getText());
+        {       String nuevaDescrip = this.textoDescripcionCarrera.getText();
+                String nuevoNombre = this.campoNombreCarreraNueva.getText();
+                int nuevaCantidadSemestres = this.modelCantidadSemestres.getNumber().intValue();
+
+                //Si modifico el nombre de la carrera, me aseguro que no hayan otras carreras con el nombre nuevo
+                if (!(carreraAEditar.getNombreCarrera().equals(nuevoNombre)))
+                {       for (Carrera carrera : this.listManager.getListaCarreras())
+                        {       if (carrera.getNombreCarrera().equals(nuevoNombre))
+                                {       //abro nueva ventana de error.
+                                        DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nombre de carrera ya existe.", "vuelva a escribir otro nombre para la carrera");
+                                        dialogoError.setVisible(true);
+                                        dialogoError = null;
+                                        return ;
+                                }
+                        }
+                }
+                this.listManager.editaCarrera(carreraAEditar, nuevoNombre, nuevaDescrip, nuevaCantidadSemestres);
                 ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
                 ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCursos();
         }

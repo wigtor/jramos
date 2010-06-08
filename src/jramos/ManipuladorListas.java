@@ -67,7 +67,33 @@ public class ManipuladorListas
         {       return this.listaProfesores;
         }
 
+        public void editaCarrera(Carrera carreraAEditar, String nuevoNombre, String nuevaDescrip, int nuevaCantidadSemestres)
+        {       //seteo el nuevo nombre y descripción
+                carreraAEditar.setDescripcion(nuevaDescrip);
+                carreraAEditar.setNombre(nuevoNombre);
+                int cantSemestresActuales = carreraAEditar.getIdSemestresArrayList().size();
+                //Si la nueva cantidad de semestres es la misma, dejo todo igual
+                //si la nueva cantidad de semestres es mayor, creo semestres nuevos y se los asigno a la carrera
+                if (cantSemestresActuales < nuevaCantidadSemestres)
+                {       int i;
+                        Semestre semestreNuevo;
+                        for (i = cantSemestresActuales; i < nuevaCantidadSemestres; i++)
+                        {       semestreNuevo = new Semestre(i+1, carreraAEditar);
+                                carreraAEditar.modSemestres(semestreNuevo, 1);
+                                this.listaSemestres.add(semestreNuevo);
+                        }
+                }
+                //Si la nueva cantidad de semestres es menor, elimino los ultimos semestres de la carrera y sus cursos
+                else if (carreraAEditar.getIdSemestresArrayList().size() > nuevaCantidadSemestres)
+                {       ArrayList<Semestre> listaSemestresAEliminar = new ArrayList(carreraAEditar.getListaSemestres().subList(nuevaCantidadSemestres, cantSemestresActuales));
+                        for (Semestre semestre : listaSemestresAEliminar)
+                        {       this.listaSemestres.remove(semestre);//< Acá elimino los semestres de la lista de semestres
+                                this.listaCursos.removeAll(semestre.getCursosArrayList()); //<Acá elimino los cursos que pertenecen a los semestres eliminados
+                                carreraAEditar.modSemestres(semestre, -1); //Acá elimino las referencias de los semestres eliminados que existan en la carrera.
+                        }
 
+                }
+        }
         public void eliminaCurso(Curso cursoABorrar)
         {       //Quito el curso a eliminar de la lista de cursos
                 this.listaCursos.remove(cursoABorrar);

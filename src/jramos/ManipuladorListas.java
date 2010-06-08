@@ -67,6 +67,15 @@ public class ManipuladorListas
         {       return this.listaProfesores;
         }
 
+
+        public void eliminaCurso(Curso cursoABorrar)
+        {
+            
+        }
+        public void agregaCurso(String nombreCurso, int codCurso, Carrera carreraAlQuePertenece)
+        {
+
+        }
         /**
          * Crea y agrega un objeto Facultad a la lista de facultades
          * @param nombreFacultad El string con el nombre de la facultad que se está creando.

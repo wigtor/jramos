@@ -33,6 +33,7 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
     public DialogoConfirmacion(VentanaPrincipal parent, boolean modal, int tipoAccion, Object objeto) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
         this.ventanaPadre = parent;
         this.tipoAccion = tipoAccion;
         this.objetoABorrar = objeto;
@@ -93,10 +94,10 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
             }
         });
 
-        labelAccionAConfirmar1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        labelAccionAConfirmar1.setFont(new java.awt.Font("Dialog", 1, 14));
         labelAccionAConfirmar1.setText("primerMensaje");
 
-        labelAccionAConfirmar2.setFont(new java.awt.Font("Dialog", 1, 14));
+        labelAccionAConfirmar2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         labelAccionAConfirmar2.setText("segundoMensaje");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,9 +115,7 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelAccionAConfirmar1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(labelAccionAConfirmar2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(labelAccionAConfirmar2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

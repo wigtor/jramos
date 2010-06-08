@@ -248,4 +248,8 @@ public class Semestre {
         Semestre.idSemestreActual = id;
     }
 
+    @Override
+    public String toString()
+    {   return this.getNumeroSemestre() + "° semestre";
+    }
 }

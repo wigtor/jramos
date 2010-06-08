@@ -33,6 +33,7 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
     public DialogoCarreraNueva(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager, Carrera carreraAEditar, int nuevaOEdita) {
         super(ventanaPadre, modal);
         initComponents();
+        this.setLocationRelativeTo(ventanaPadre);
         this.ventanaPadre = ventanaPadre;
         this.listManager = listManager;
         selectorListaFacultades.removeAllItems();

@@ -27,6 +27,7 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
     public DialogoFacultadNueva(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager, Facultad facultadAEditar,int nuevaOEdita) {
         super(ventanaPadre, modal);
         initComponents();
+        this.setLocationRelativeTo(ventanaPadre);
         this.ventanaPadre = ventanaPadre;
         this.listManager = listManager;
         this.nuevaOEdita = nuevaOEdita;

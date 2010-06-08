@@ -23,6 +23,7 @@ public class DialogoError extends javax.swing.JDialog {
     public DialogoError(java.awt.Frame parent, boolean modal, String detallesError, String solucionError) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
         this.labelSolucionError.setHorizontalAlignment(SwingConstants.CENTER);
         this.labelSolucionError.setText(solucionError);
         this.labelDetallesError.setHorizontalAlignment(SwingConstants.CENTER);

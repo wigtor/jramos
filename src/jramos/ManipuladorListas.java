@@ -69,8 +69,19 @@ public class ManipuladorListas
 
 
         public void eliminaCurso(Curso cursoABorrar)
-        {
-            
+        {       //Quito el curso a eliminar de la lista de cursos
+                this.listaCursos.remove(cursoABorrar);
+
+                //Quito las referencias al curso que puedan existir en los semestres
+                cursoABorrar.getEnSemestre().modRamos(cursoABorrar, -1);
+
+                //Quito las referencias al curso que puedan existir en los profesores que tenga asignados
+                for (Profesor profesor : this.listaProfesores)
+                {       if (cursoABorrar.getIdProfeAsig() == profesor.getIdProfesor())
+                        {       profesor.modCursosAsignados(cursoABorrar, -1);
+                                break ;
+                        }
+                }
         }
         /**
          * Este metodo crea un objeto Curso y lo agrega a la lista de cursos,

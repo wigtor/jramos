@@ -964,13 +964,15 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             this.cuadroInformacionCarrera.setText("Se ha eliminado correctamente la carrera de "+ carreraABorrar.getNombreCarrera()+"\nSe han eliminado también los semestres de esas carreras");
             this.listManager.eliminaCarrera(carreraABorrar.getCodigoCarrera());
             this.actualizaJListListaCarreras();
+            this.actualizaJListListaCursos();
     }
     public void borrarFacultad(Facultad facultadABorrar)
     {       //Borro la facultad del manipulador de listas, del Jlist y del visualizador
-            this.cuadroInfornacionFacultad.setText("Se ha eliminado correctamente la facultad de "+ facultadABorrar.getNombreFacultad()+"\nSe ha borrado ademas las carreras de esa facultad: \n"+facultadABorrar.getNombreCarreras()+"\nY se han eliminado los semestres de las carreras eliminadas\n");
+            this.cuadroInfornacionFacultad.setText("Se ha eliminado correctamente la facultad de "+ facultadABorrar.getNombreFacultad()+"\nSe ha borrado ademas las carreras de esa facultad: \n"+facultadABorrar.getNombreCarreras()+"\nSe han eliminado los semestres y cursos de las carreras eliminadas\n");
             this.listManager.eliminaFacultad(facultadABorrar);
             this.actualizaJListListaFacultades();
             this.actualizaJListListaCarreras();
+            this.actualizaJListListaCursos();
     }
     public void borrarCurso(Curso cursoABorrar)
     {       //Borro el curso del manipulador de listas, del Jlist y del visualizador

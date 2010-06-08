@@ -1,10 +1,10 @@
 /**
  ******************************************************
- * @file Referenciador.java
+ * @file ReferenciadorInicial.java
  * @author AirZs
  * @date mayo 2010
  * @version 0.1
- * @brief En este archivo se especifica la clase Referenciador
+ * @brief En este archivo se especifica la clase ReferenciadorInicial
  * La función de esta clase es hacer las referencias reales entre
  * los distintos objetos que interactuan entre si
  * Esta clase no puede ser instanciada, todos sus métodos son static.
@@ -18,16 +18,16 @@ import jramos.tiposDatos.Facultad;
 import jramos.tiposDatos.Profesor;
 import jramos.tiposDatos.Semestre;
 
-public class Referenciador {
+public class ReferenciadorInicial {
 
     ////////////////////////////////////////
     //Metodo Principal
     
     static public void crearReferencias(ArrayList<Carrera> listCarreras, ArrayList<Curso> listCursos, ArrayList<Facultad> listFacultades, ArrayList<Profesor> listProfesores, ArrayList<Semestre> listSemestres){
-        Referenciador.crearReferenciasCarrera(listCarreras, listSemestres);
-        Referenciador.crearReferenciasSemestre(listSemestres, listCursos);
-        Referenciador.crearReferenciasCurso(listCursos, listProfesores, listCarreras);
-        Referenciador.crearReferenciasFacultad(listFacultades, listCarreras);
+        ReferenciadorInicial.crearReferenciasCarrera(listCarreras, listSemestres);
+        ReferenciadorInicial.crearReferenciasSemestre(listSemestres, listCursos);
+        ReferenciadorInicial.crearReferenciasCurso(listCursos, listProfesores, listCarreras);
+        ReferenciadorInicial.crearReferenciasFacultad(listFacultades, listCarreras);
         
     }
 

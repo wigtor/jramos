@@ -9,7 +9,7 @@
  * Created on 30-05-2010, 04:50:43 PM
  */
 
-package jramos;
+package jramos.GUI;
 
 /**
  *

@@ -9,12 +9,13 @@
  * Created on 28-05-2010, 10:07:19 AM
  */
 
-package jramos;
+package jramos.GUI;
 
 import jramos.tiposDatos.Facultad;
 import jramos.tiposDatos.Carrera;
 import java.util.ArrayList;
 import javax.swing.SpinnerNumberModel;
+import jramos.ManipuladorListas;
 
 /**
  *

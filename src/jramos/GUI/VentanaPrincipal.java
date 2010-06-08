@@ -9,10 +9,11 @@
  * Created on 27-05-2010, 07:57:59 PM
  */
 
-package jramos;
+package jramos.GUI;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import jramos.ManipuladorListas;
 import jramos.tiposDatos.*;
 import jramos.capaIO.CapaIOCursos;
 import jramos.capaIO.CapaIOProfes;

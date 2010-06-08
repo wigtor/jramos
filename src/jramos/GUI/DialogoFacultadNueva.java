@@ -9,9 +9,10 @@
  * Created on 28-05-2010, 03:04:09 PM
  */
 
-package jramos;
+package jramos.GUI;
 import jramos.tiposDatos.Facultad;
 import java.util.ArrayList;
+import jramos.ManipuladorListas;
 
 /**
  *

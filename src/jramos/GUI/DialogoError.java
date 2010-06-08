@@ -9,7 +9,7 @@
  * Created on 05-06-2010, 05:11:07 PM
  */
 
-package jramos;
+package jramos.GUI;
 
 import javax.swing.SwingConstants;
 

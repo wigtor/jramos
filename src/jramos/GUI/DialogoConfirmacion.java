@@ -9,7 +9,7 @@
  * Created on 06-06-2010, 01:04:02 PM
  */
 
-package jramos;
+package jramos.GUI;
 import jramos.tiposDatos.Carrera;
 import jramos.tiposDatos.Curso;
 import jramos.tiposDatos.Facultad;
@@ -97,7 +97,7 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
         labelAccionAConfirmar1.setFont(new java.awt.Font("Dialog", 1, 14));
         labelAccionAConfirmar1.setText("primerMensaje");
 
-        labelAccionAConfirmar2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        labelAccionAConfirmar2.setFont(new java.awt.Font("Dialog", 1, 14));
         labelAccionAConfirmar2.setText("segundoMensaje");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

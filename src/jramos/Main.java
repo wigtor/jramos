@@ -5,6 +5,7 @@
 
 package jramos;
 
+import jramos.GUI.VentanaPrincipal;
 import jramos.tiposDatos.*;
 import jramos.capaIO.*;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class Main
                         Profesor.setIdProfesores(gestorIOProfes.leeIDInicial("idProfes"));
 
                         //Hago las conexiones de referencias entre las listas
-                        Referenciador.crearReferencias(listaCarreras, listaCursos, listaFacultades, listaProfesores, listaSemestres);
+                        ReferenciadorInicial.crearReferencias(listaCarreras, listaCursos, listaFacultades, listaProfesores, listaSemestres);
 
                         ManipuladorListas listManager = new ManipuladorListas(listaFacultades, listaCarreras, listaSemestres, listaCursos, listaProfesores);
                         VentanaPrincipal ventanaPadre = new VentanaPrincipal(listManager, gestorIOCursos, gestorIOProfes);

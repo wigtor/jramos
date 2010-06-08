@@ -24,10 +24,13 @@
                 <Property name="text" type="java.lang.String" value="Cargar archivo de cursos/carreras"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem3">
+            <MenuItem class="javax.swing.JMenuItem" name="menusalir">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menusalirActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

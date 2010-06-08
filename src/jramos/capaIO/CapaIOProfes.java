@@ -310,8 +310,7 @@ public class CapaIOProfes
                         }
 
                         /* Construyo el objeto cursoLeido con los datos recopilados */
-			profesorLeido = new Profesor(nombProfe, listaCursosParaImpartir, Integer.valueOf(idProfe));
-                        profesorLeido.setRutProfesor(Integer.valueOf(rutProfe));
+			profesorLeido = new Profesor(nombProfe, Integer.valueOf(rutProfe), listaCursosParaImpartir, Integer.valueOf(idProfe));
                         //Seteo la lista de horarios disponibles del profesor.
                         if (horasDisp.length() != 0)
                         {       for (i = 0; horasDisp.indexOf("|") != -1;i++)

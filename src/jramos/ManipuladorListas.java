@@ -199,19 +199,15 @@ public class ManipuladorListas
                 }
 
                 ArrayList<Semestre> semestresAEliminar = carreraAEliminar.getListaSemestres();
-                //elimino las referencias de los semestres eliminados que existan en los cursos
+                //Elimino los cursos que pertenecen a la carrera
                 for (Semestre semestre : semestresAEliminar)
-                {       for (Curso curso : this.listaCursos)
-                        {       curso.modSemestres(semestre, -1);
+                {       for (Curso curso : semestre.getCursosArrayList())
+                        {       this.listaCursos.remove(curso);
                         }
                 }
-                //elimino las referencias de la carreras eliminada que existan en los cursos
-                for (Curso curso : this.listaCursos)
-                {       if (curso.getEnCarrerasCodigosArrayList().contains(new Integer(carreraAEliminar.getCodigoCarrera())))
-                        {       curso.getEnCarrerasCodigosArrayList().remove(new Integer(carreraAEliminar.getCodigoCarrera()));
-                                curso.getEnCarrerasObj().remove(carreraAEliminar);
-                        }
-                }
+                //elimino las referencias de los cursos eliminados que existan en los profesores
+                //HACER ESTA PARTE DEL CODIGO!!!
+
                 //elimino los semestres que posee la carrera eliminada de la lista de semestres
                 for (Semestre semestre : semestresAEliminar)
                 {       this.listaSemestres.remove(semestre);

@@ -57,7 +57,7 @@ public class Profesor {
      * @param cursosParaImpartir ArrayList<Integer> con los codigos de los cursos que este profesor puede impartir
      * @param id int con el id del profesor
      */
-    public Profesor(String nombreProfesor, ArrayList<Integer> cursosParaImpartir, int id){
+    public Profesor(String nombreProfesor, int rut, ArrayList<Integer> cursosParaImpartir, int id){
         this.nomProfe = nombreProfesor;
         this.cursosDisp = cursosParaImpartir;
         this.horaDisp = new ArrayList<Hora>();
@@ -65,7 +65,7 @@ public class Profesor {
         this.cursosAsig = new ArrayList<Curso>();
         this.idCursosAsig =  new ArrayList<Integer>();
         this.idProfesor = id;
-
+        this.rutProfe = rut;
     }
 
     // Metodos de Obtener variables

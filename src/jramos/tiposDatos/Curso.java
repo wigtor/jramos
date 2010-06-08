@@ -23,15 +23,15 @@ public class Curso {
     private String descrip;
     private int codCurso;
     private String seccion;
-    private ArrayList<Carrera> enCarrera;
-    private ArrayList<Integer> codigosCarrera;
+    private Carrera enCarrera;
+    private int codigoCarrera;
     private Profesor profeAsig;
     private int idProfeAsig;
     private ArrayList<Integer> listSalas;
     private ArrayList<Hora> horario;
     private int idCurso;
-    private ArrayList<Semestre> listSemestres;
-    private ArrayList<Integer> listIdSemestres;
+    private Semestre enSemestre;
+    private int idSemestre;
 
 
     //////////////////////////////////////////////////////////////////////
@@ -49,13 +49,13 @@ public class Curso {
 
         this.nomCurso = nombreRamo;
         this.codCurso = codigoCurso;
-        this.enCarrera = new ArrayList<Carrera>();
-        this.codigosCarrera = new ArrayList<Integer>();
+        this.enCarrera = null;
+        this.codigoCarrera = 0;
         this.listSalas = new ArrayList<Integer>();
         this.horario = new ArrayList<Hora>();
         this.idCurso = ++idCursoActual;
-        this.listSemestres = new ArrayList<Semestre>();
-        this.listIdSemestres = new ArrayList<Integer>();
+        this.enSemestre = null;
+        this.idSemestre = 0;
         this.seccion = "0";
         this.descrip = "";
     }
@@ -72,13 +72,13 @@ public class Curso {
     public Curso(String nombreRamo, int codigoCurso, int id){
         this.nomCurso = nombreRamo;
         this.codCurso = codigoCurso;
-        this.enCarrera = new ArrayList<Carrera>();
-        this.codigosCarrera = new ArrayList<Integer>();
+        this.enCarrera = null;
+        this.codigoCarrera = 0;
         this.listSalas = new ArrayList<Integer>();
         this.horario = new ArrayList<Hora>();
         this.idCurso = id;
-        this.listSemestres = new ArrayList<Semestre>();
-        this.listIdSemestres = new ArrayList<Integer>();
+        this.enSemestre = null;
+        this.idSemestre = 0;
         this.seccion = "0";
         this.descrip = "";
     }
@@ -111,12 +111,12 @@ public class Curso {
     }
 
    /**
-    * Metodo que obtiene los id de los semestres a los cuales pertenece un curso.
+    * Metodo que obtiene el id del semestre al que pertenece el curso.
     *
     * @return Devuelve un ArrayList de Integer con los id de los semestres que tienen al curso.
     */
-   public ArrayList<Integer> getIdSemestresArray(){
-       return this.listIdSemestres;
+   public int getIdSemestre(){
+       return this.idSemestre;
    }
 
    /**
@@ -138,59 +138,44 @@ public class Curso {
     }
 
    /**
-    * Obtiene las carreras que contienen este curso
+    * Obtiene la carrera que contiene a este curso
     *
-    * @return Devuelve un String con los nombres de las carreras separados con un "|"
+    * @return Devuelve un String con el nombre de la carrera al cual pertenece el curso
     */
-   public String getEnCarreras(){
-        StringBuilder text = new StringBuilder();
-        if (this.enCarrera.size() != 0)
-        {   for (Carrera carrera: this.enCarrera){
-                text.append(carrera.getNombreCarrera()).append("|");
-            }
-            text.deleteCharAt(text.length()-1);
-            return text.toString();
+   public String getEnCarreraStr(){
+        if (this.enCarrera != null)
+        {   return this.enCarrera.toString();
         }
         else
             return "";
     }
 
    /**
-    * Obtiene los códigos de las carreras que poseen el curso
+    * Obtiene el código de la carrera que posee al curso
     *
-    * @return Devuelve un ArrayList de iInteger con los códigos de las carreras en que se dicta el curso.
+    * @return Devuelve un entero con el código de la carrera en que se dicta el curso.
     */
-   public ArrayList<Integer> getEnCarrerasCodigosArrayList(){
-       return this.codigosCarrera;
+   public int getEnCarreraCodigo(){
+       return this.codigoCarrera;
    }
 
    /**
-    * Obtiene las carreras a las que pertenece el curso.
+    * Obtiene la carrera a la que pertenece el curso.
     *
-    * @return Devuelve un ArrayList de objetos tipo Carrera con las carreras donde se dicta el curso.
+    * @return Devuelve un objeto tipo Carrera con la carrera donde se dicta el curso.
     */
-   public ArrayList<Carrera> getEnCarrerasObj()
+   public Carrera getEnCarrera()
    {        return this.enCarrera;
    }
 
    /**
-    * Metodo para obtener los codigos de las carreras que contienen este curso
-    *
-    * @return String con los codigos de la carrera separados con |
+    * Obtiene el semestre donde se dicta el curso.
+    * 
+    * @return Devuelve el objeto Semestre al cual pertenece este curso
     */
-   public String getEnCarreras_Codigo(){
-        StringBuilder text = new StringBuilder();
-        if (this.codigosCarrera.size() != 0 )
-        {   for (Integer codigo: this.codigosCarrera){
-                text.append(String.valueOf(codigo)).append("|");
-            }
-            text.deleteCharAt(text.length()-1);
-            return text.toString();
-        }
-        else
-            return "";
-    }
-
+   public Semestre getEnSemestre()
+   {        return this.enSemestre;
+   }
    /**
     * Obtiene el nombre del profesor al que esta asignado este curso
     * Si el curso no tiene profesor asignado devuelve un String vacio
@@ -273,23 +258,6 @@ public class Curso {
        return Curso.idCursoActual;
    }
 
-   /**
-    * Metodo para obtener los id de los semestres en los que esta
-    * este curso
-    *
-    * @return String con los id separados por |.
-    */
-   public String getIdSemestres(){
-      StringBuilder text = new StringBuilder();
-      if (!this.listIdSemestres.isEmpty()){
-        for (Integer id: this.listIdSemestres){
-          text.append(String.valueOf(id)).append("|");
-        }
-        text.deleteCharAt(text.length()-1);
-      }
-      return text.toString();
-   }
-
    //////////////////////////////////////////////////////////////////////
    // Metodos de Modificar Variables
 
@@ -350,62 +318,21 @@ public class Curso {
    }
 
    /**
-    * Metodo para agregar o quitar un codigo de las carrera que contienen este curso(Usese como referencia)
+    * Metodo para setear el código de la carrera que contiene a este curso (Usese como referencia)
     *
-    * @param codigo int con el codigo de la carrera
-    * @param selector 1: Agregar  -1: Quitar
+    * @param codigo int con el código de la carrera
     */
-   public void modCodigosCarrera(int codigo, int selector){
-       if (selector == 1){
-           if (!this.codigosCarrera.contains(codigo)){
-               this.codigosCarrera.add(new Integer(codigo));
-           }
-           else{
-               System.out.println("Ya existe el codigo de la carrera...");
-           }
-       }
-       else if (selector == -1){
-           if (this.codigosCarrera.contains(codigo)){
-               this.codigosCarrera.remove(new Integer (codigo));
-           }
-           else{
-               System.out.println("No existe ese codigo de la carrera...");
-           }
-       }
-       else{
-           System.out.println("Error en la seleccion...");
-       }
-
+   public void setCodigoEnCarrera(int codigo){
+       this.codigoCarrera = codigo;
    }
 
    /**
-    * Metodo para agregar o quitar una de las carrera que contienen este curso
+    * Metodo para setear la Carrera que contienen a este curso
     *
     * @param carrera Objeto carrera que se desea agregar o quitar
-    * @param selector 1: Agregar  -1: Quitar
     */
-   public void modCarrera(Carrera carreraToAsig, int selector){
-      if (selector == 1){
-          if (!this.enCarrera.contains(carreraToAsig)){
-              this.enCarrera.add(carreraToAsig);
-          }
-          else{
-              System.out.println("Ya existe la carrera...");
-          }
-          
-      }
-      else if (selector == -1){
-          if (this.enCarrera.contains(carreraToAsig)){
-              this.enCarrera.remove(carreraToAsig);
-          }
-          else{
-              System.out.println("Ya existe la carrera...");
-          }
-          
-      }
-      else{
-          System.out.println("Error en la seleccion.");
-      }
+   public void setCarrera(Carrera carreraToAsig){
+      this.enCarrera = carreraToAsig;
    }
 
    /**
@@ -466,64 +393,20 @@ public class Curso {
    }
 
    /**
-    * Metodo para agregar o quitar un id de la lista con id de semestre
+    * Metodo para setear el id del semestre al cual pertenece el curso.
     *
     * @param id int con el id para agregar o quitar
-    * @param selector 1: Agregar  -1: Quitar
     */
-   public void modIdSemestres(int id, int selector){
-       if (selector == 1){
-           if (!this.listIdSemestres.contains(id)){
-               this.listIdSemestres.add(id);
-           }
-           else{
-               System.out.println("Ya existe el id...");
-           }
-       }
-       else if (selector ==-1){
-           if (this.listIdSemestres.contains(id)){
-               this.listIdSemestres.remove(new Integer(id));
-           }
-           else{
-               System.out.println("No existe el id...");
-           }
-       }
-       else{
-           System.out.println("Seleccion erronea...");
-       }
+   public void modIdSemestre(int id, int selector){
+       this.idSemestre = id;
    }
 
    /**
-    * Metodo para agregar o quitar un semestre a la lista de semestres
+    * Metodo para setear el semestre al que pertenece el curso.
     *
     * @param semestreToAsig Objeto semestre que se quiere agregar o quitar
-    * @param selector 1: Agregar  -1: Quitar
     */
-   public void modSemestres(Semestre semestreToAsig, int selector){
-       if (selector == 1){
-           if (!this.listSemestres.contains(semestreToAsig)){
-               this.listSemestres.add(semestreToAsig);
-               if (!this.listIdSemestres.contains(new Integer(semestreToAsig.getIdSemestre()))){
-                   this.listIdSemestres.add(semestreToAsig.getIdSemestre());
-               }
-           }
-           else{
-               System.out.println("Ya existe el id...");
-           }
-       }
-       else if (selector ==-1){
-           if (this.listSemestres.contains(semestreToAsig)){
-               this.listSemestres.remove(semestreToAsig);
-               if (this.listIdSemestres.contains(new Integer(semestreToAsig.getIdSemestre()))){
-                   this.listIdSemestres.remove(new Integer(semestreToAsig.getIdSemestre()));
-               }
-           }
-           else{
-               System.out.println("No existe el id...");
-           }
-       }
-       else{
-           System.out.println("Seleccion erronea...");
-       }
+   public void setSemestre(Semestre semestreToAsig){
+       this.enSemestre = semestreToAsig;
    }
 }

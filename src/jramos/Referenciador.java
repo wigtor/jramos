@@ -41,13 +41,13 @@ public class Referenciador {
      * @param listaSemestres ArrayList con Semestres para crear referencias
      */
     static private void crearReferenciasCarrera(ArrayList<Carrera> listaCarreras, ArrayList<Semestre> listaSemestres){
-        int idActual;
+        int codActual;
         if (!listaCarreras.isEmpty() && !listaSemestres.isEmpty()){
             for (Carrera carrera : listaCarreras){
-                idActual = carrera.getCodigoCarrera();
+                codActual = carrera.getCodigoCarrera();
                 for (Semestre semestre : listaSemestres){
-                    if (semestre.getCodigoEnCarrera() == idActual){
-                        //Acá se
+                    if (semestre.getCodigoEnCarrera() == codActual){
+                        //Acá se hace la referencia
                         carrera.modSemestres(semestre, 1);
                         semestre.setEnCarrera(carrera);
                     }
@@ -63,17 +63,17 @@ public class Referenciador {
      * @param listaCursos ArrayList con Cursos para crear referencias
      */
     static private void crearReferenciasSemestre(ArrayList<Semestre> listaSemestres, ArrayList<Curso> listaCursos){
-        ArrayList<Integer> listaIdActual;
+        ArrayList<Integer> listaIdSemestreActual;
         if (!listaSemestres.isEmpty() && !listaCursos.isEmpty()){
             for (Semestre semestre: listaSemestres){
-                listaIdActual = semestre.getCodigosRamosArrayList();
-                for (Integer idActual : listaIdActual){
+                listaIdSemestreActual = semestre.getCodigosRamosArrayList();
+                for (Integer idActual : listaIdSemestreActual){
                     for (Curso curso: listaCursos){
                         if (curso.getIdCurso() == idActual.intValue())
                         {   //Acá se crean las referencias a los cursos en el atributo "ramos" de los objetos Semestre
                             semestre.modRamos(curso, 1);
-                            //Acá se crean las referencias a los semestres en el atributo "listSemestres" de los objetos Curso
-                            curso.modSemestres(semestre, 1);
+                            //Acá se crean las referencias a los semestres en el atributo "enSemestre" de los objetos Curso
+                            curso.setSemestre(semestre);
                             
                         }
                     }
@@ -90,8 +90,7 @@ public class Referenciador {
      * @param listaProfesores ArrayList con Profesores por crear referencias
      */
     static private void crearReferenciasCurso(ArrayList<Curso> listaCursos, ArrayList<Profesor> listaProfesores, ArrayList<Carrera> listaCarreras){
-        int idProfesorAsignado;
-        ArrayList<Integer> listaCodCarreras;
+        int idProfesorAsignado, codCarrera;
         if (!listaCursos.isEmpty() && !listaProfesores.isEmpty()){
             for (Curso curso: listaCursos){
                 idProfesorAsignado = curso.getIdProfeAsig();
@@ -103,14 +102,13 @@ public class Referenciador {
                     }
                 }
             }
-            //referencio las carreras a las que pertenece un curso.
+            //referencio la carrera a la que pertenece un curso.
             for (Curso curso: listaCursos){
-                listaCodCarreras = curso.getEnCarrerasCodigosArrayList();
-                for (Integer codCarrera: listaCodCarreras){
-                    for (Carrera carrera : listaCarreras){
-                        if (carrera.getCodigoCarrera() == codCarrera.intValue()){
-                            curso.modCarrera(carrera, 1);
-                        }
+                codCarrera = curso.getEnCarreraCodigo();
+                for (Carrera carrera : listaCarreras){
+                    if (carrera.getCodigoCarrera() == codCarrera){
+                        curso.setCarrera(carrera);
+                        break ;
                     }
                 }
             }

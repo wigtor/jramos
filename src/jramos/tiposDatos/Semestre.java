@@ -14,7 +14,7 @@ public class Semestre {
 
     private int numSemestre;
     private ArrayList<Curso> ramos;
-    private ArrayList<Integer> listCodRamos;
+    private ArrayList<Integer> listIdRamos;
     private Carrera enCarrera;
     private int codEnCarrera;
     private int idSemestre;
@@ -36,7 +36,7 @@ public class Semestre {
         this.codEnCarrera = codEnLaCarrera;
         this.idSemestre = ++Semestre.idSemestreActual;
         this.ramos = new ArrayList<Curso>();
-        this.listCodRamos = new ArrayList<Integer>();
+        this.listIdRamos = new ArrayList<Integer>();
     }
 
     /**
@@ -52,7 +52,7 @@ public class Semestre {
         this.codEnCarrera = codEnLaCarrera;
         this.idSemestre = id;
         this.ramos = new ArrayList<Curso>();
-        this.listCodRamos = new ArrayList<Integer>();
+        this.listIdRamos = new ArrayList<Integer>();
     }
 
     /**
@@ -69,7 +69,7 @@ public class Semestre {
         this.codEnCarrera = enLaCarrera.getCodigoCarrera();
         this.idSemestre = ++Semestre.idSemestreActual;
         this.ramos = new ArrayList<Curso>();
-        this.listCodRamos = new ArrayList<Integer>();
+        this.listIdRamos = new ArrayList<Integer>();
         this.enCarrera = enLaCarrera;
     }
 
@@ -107,8 +107,8 @@ public class Semestre {
      */
     public String getCodigosRamos(){
         StringBuilder text = new StringBuilder();
-        if (this.listCodRamos.size() != 0){
-            for (Integer codigo: this.listCodRamos){
+        if (this.listIdRamos.size() != 0){
+            for (Integer codigo: this.listIdRamos){
                 text.append(String.valueOf(codigo)).append("|");
             }
             text.deleteCharAt(text.length()-1);
@@ -123,7 +123,7 @@ public class Semestre {
      * @return Devuelve un ArrayList de Integer con los codigos de ramos que posee el semestre
      */
     public ArrayList<Integer> getCodigosRamosArrayList()
-    {       return this.listCodRamos;
+    {       return this.listIdRamos;
     }
 
 
@@ -146,12 +146,33 @@ public class Semestre {
     }
 
     /**
+     * Obtiene los cursos que posee el semestre
+     * 
+     * @return Devuelve los cursos del semestre en un Arraylist de cursos.
+     */
+    public ArrayList<Curso> getCursosArrayList()
+    {       return this.ramos;
+    }
+    /**
      * Metodo para obtener el id de este semestre
      *
      * @return int con el id de este semestre
      */
     public int getIdSemestre(){
         return this.idSemestre;
+    }
+
+    public String getIdCursosStr()
+    {   StringBuilder text = new StringBuilder();
+        if (this.listIdRamos.size() != 0){
+            for (Integer codigo: this.listIdRamos){
+                text.append(String.valueOf(codigo)).append("|");
+            }
+            text.deleteCharAt(text.length()-1);
+            return text.toString();
+        }
+        else
+            return "";
     }
 
     /**
@@ -185,7 +206,7 @@ public class Semestre {
         else if (selector == -1){
             if (this.ramos.contains(cursoToAsig)){
                 this.ramos.remove(cursoToAsig);
-                this.modCodRamos(cursoToAsig.getCodigoCurso(), -1);
+                this.modIdRamos(cursoToAsig.getCodigoCurso(), -1);
             }
             else{
                 System.out.println("No existe ese curso...");
@@ -203,11 +224,11 @@ public class Semestre {
      * @param codRamo código del ramo que se quiere agregar o quitar del semestre
      * @param selector 1: Agregar  -1: Quitar
      */
-    public void modCodRamos(int codRamo, int selector){
-        Integer codRamoWrap = new Integer(codRamo);
+    public void modIdRamos(int idRamo, int selector){
+        Integer idRamoWrap = new Integer(idRamo);
         if (selector == 1){
-            if (!this.listCodRamos.contains(codRamoWrap)){
-                this.listCodRamos.add(codRamoWrap);
+            if (!this.listIdRamos.contains(idRamoWrap)){
+                this.listIdRamos.add(idRamoWrap);
             }
             else{
                 System.out.println("el semestre ya contiene este ramo en su listado de cursos");
@@ -215,8 +236,8 @@ public class Semestre {
             }
         }
         else if (selector == -1){
-            if (this.listCodRamos.contains(codRamoWrap)){
-                this.listCodRamos.remove(codRamoWrap);
+            if (this.listIdRamos.contains(idRamoWrap)){
+                this.listIdRamos.remove(idRamoWrap);
             }
             else{
                 System.out.println("No existe ese curso...");

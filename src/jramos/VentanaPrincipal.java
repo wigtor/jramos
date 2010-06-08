@@ -170,7 +170,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuArchivo = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menusalir = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         menuVerManual = new javax.swing.JMenuItem();
         menuAcercaDe = new javax.swing.JMenuItem();
@@ -703,8 +703,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jMenuItem2.setText("Cargar archivo de cursos/carreras");
         menuArchivo.add(jMenuItem2);
 
-        jMenuItem3.setText("Salir");
-        menuArchivo.add(jMenuItem3);
+        menusalir.setText("Salir");
+        menusalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menusalirActionPerformed(evt);
+            }
+        });
+        menuArchivo.add(menusalir);
 
         barraMenu.add(menuArchivo);
 
@@ -747,7 +752,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonAgregarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarProfesorActionPerformed
         // Acción a realizar cuando se presiona el boton "agregar profesor"
-        int rut = 0, i, tamLista, posicionBarra;;
+        int rut = 0, i, tamLista, posicionBarra;
         ArrayList<Hora> listaHorasDisponibles = new ArrayList();
         ArrayList<Integer> listaCodCursosDisponibles = new ArrayList();
         if (this.campoNombreProfesorNuevo.getText().trim().equals(""))
@@ -761,7 +766,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //Compruebo si el rut es válido
         try
         {       rut = Integer.valueOf(this.campoRutProfesor.getText());
-                if ((rut < 1000000) || (rut > 50000000))
+                if ((rut < 2000000) || (rut > 25000000))
                     throw new NumberFormatException();
         }
         catch (NumberFormatException NFE)
@@ -1144,7 +1149,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cursoSeleccionado = (Curso)this.visualizadorListaCursos.getSelectedValue();
         if (cursoSeleccionado != null)
         {       horarioConSalas = "L5-L6(546), M3-M4(546), J1-J2(546)"; //Es un ejemplo, debe ser implementado
-                this.cuadroInformacionCurso.setText("Nombre del curso: " + cursoSeleccionado.getNombreCurso()+"\nCódigo del curso: "+cursoSeleccionado.getCodigoCurso()+"\nSección: "+cursoSeleccionado.getSeccion()+"\nProfesor asignado: "+cursoSeleccionado.getNombreProfesor()+"\nCarrera en que se dicta: "+cursoSeleccionado.getEnCarreras()+"\nHorario: "+horarioConSalas+"\nDescripción del curso: "+cursoSeleccionado.getDescripcion());
+                this.cuadroInformacionCurso.setText("Nombre del curso: " + cursoSeleccionado.getNombreCurso()+"\nCódigo del curso: "+cursoSeleccionado.getCodigoCurso()+"\nSección: "+cursoSeleccionado.getSeccion()+"\nProfesor asignado: "+cursoSeleccionado.getNombreProfesor()+"\nCarrera en que se dicta: "+cursoSeleccionado.getEnCarreraStr()+"\nSemestre en que se dicta: "+cursoSeleccionado.getEnSemestre()+"\nHorario: "+horarioConSalas+"\nDescripción del curso: "+cursoSeleccionado.getDescripcion());
         }
         else
                 this.cuadroInformacionCurso.setText("Seleccione una carrera del listado del costado para ver su información");
@@ -1242,6 +1247,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_selectorListaCarrerasItemStateChanged
 
+    //Sale del programa al clickear el menu "salir", guarda las listas antes de salir.
+    private void menusalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menusalirActionPerformed
+        // cierro el programa
+        this.formWindowClosing(null);
+        System.exit(0);
+    }//GEN-LAST:event_menusalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVisualizadorCarreras;
@@ -1296,7 +1308,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1312,6 +1323,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenuItem menuVerManual;
+    private javax.swing.JMenuItem menusalir;
     private javax.swing.JPanel panelVisualizadorCursos;
     private javax.swing.JComboBox selectorListaCarreras;
     private javax.swing.JComboBox selectorListaSemestres;

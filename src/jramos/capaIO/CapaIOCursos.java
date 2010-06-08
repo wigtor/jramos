@@ -884,7 +884,7 @@ public class CapaIOCursos
 		String descrip; //Descripción del curso
 		String codCurso; //Código del ramo
 		String seccion; //código de sección
-		String enCarreras; //Carreras en que se dicta.
+		String enCarrera; //Carrera en que se dicta.
 		String idProfeAsig; //id del profesor que dicta el curso.
 		String listSalas; //Salas donde se dicta el ramo.
 		String horario; //Horas en que se dicta e la semana.
@@ -894,7 +894,7 @@ public class CapaIOCursos
 		/* Si es un curso lo que está espeficado en la linea, creo un objeto "Curso" */
 		if ((linea.indexOf("<Curso") != -1))
 		{	/* Busco errores de sintaxis en la linea analizada*/
-			if ((linea.indexOf("idCurso=") == -1) || (linea.indexOf("nomCurso=") == -1) || (linea.indexOf("descrip=") == -1) || (linea.indexOf("codCurso=") == -1) || (linea.indexOf("seccion=") == -1) || (linea.indexOf("enCarreras=") == -1) || (linea.indexOf("idProfeAsig=") == -1) || (linea.indexOf("listSalas=") == -1) || (linea.indexOf("horario=") == -1))
+			if ((linea.indexOf("idCurso=") == -1) || (linea.indexOf("nomCurso=") == -1) || (linea.indexOf("descrip=") == -1) || (linea.indexOf("codCurso=") == -1) || (linea.indexOf("seccion=") == -1) || (linea.indexOf("enCarrera=") == -1) || (linea.indexOf("idProfeAsig=") == -1) || (linea.indexOf("listSalas=") == -1) || (linea.indexOf("horario=") == -1))
                         {       System.out.println("ERROR: La linea leida desde el archivo de cursos es incorrecta");
                                 return null;
                         }
@@ -920,8 +920,8 @@ public class CapaIOCursos
 			seccion = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
 
 			/* Busco las carreras del curso en la linea*/
-			comienzoDato = linea.indexOf("enCarreras=") + "enCarreras=".length();
-			enCarreras = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
+			comienzoDato = linea.indexOf("enCarrera=") + "enCarrera=".length();
+			enCarrera = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)); //confirmar que debo sumar 1 !!!
 
 			/* Busco el profesor del curso en la linea*/
 			comienzoDato = linea.indexOf("idProfeAsig=") + "idProfeAsig=".length();
@@ -940,19 +940,7 @@ public class CapaIOCursos
                         cursoLeido.setDescripcion(descrip);
                         cursoLeido.setSeccion(seccion);
                         cursoLeido.setIdProfeAsig(Integer.valueOf(idProfeAsig));
-                        if (enCarreras.length() != 0)
-                        {       for (i = 0; enCarreras.indexOf("|") != -1;i++)
-                                {       System.out.println(enCarreras.substring(0, enCarreras.indexOf("|")));
-                                        codigoCarrera = Integer.valueOf(enCarreras.substring(0, enCarreras.indexOf("|")));
-                                        posicionBarra = enCarreras.indexOf("|");
-                                        enCarreras = enCarreras.substring(posicionBarra+1);
-                                        cursoLeido.modCodigosCarrera(codigoCarrera, 1);
-                                        System.out.println("En carrera: " + codigoCarrera);
-                                }
-                                //Agrego el ultimo que no fue agregado en el bucle:
-                                cursoLeido.modCodigosCarrera(Integer.valueOf(enCarreras), 1);
-                                System.out.println("En carrera: " +enCarreras);
-                        }
+                        cursoLeido.setCodigoEnCarrera(Integer.valueOf(enCarrera));
                         
                         //Seteo la lista de salas asignadas al curso
                         if (listSalas.length() != 0)
@@ -962,11 +950,11 @@ public class CapaIOCursos
                                         posicionBarra = listSalas.indexOf("|");
                                         listSalas = listSalas.substring(posicionBarra+1);
                                         cursoLeido.modListaSalas(sala, 1);
-                                        System.out.println("En carrera: " + sala);
+                                        System.out.println("En sala: " + sala);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
                                 cursoLeido.modListaSalas(Integer.valueOf(listSalas), 1);
-                                System.out.println("En carrera: " +listSalas);
+                                System.out.println("En sala: " +listSalas);
                         }
 
                         //Seteo la lista de horarios asignadas al curso
@@ -977,11 +965,11 @@ public class CapaIOCursos
                                         posicionBarra = horario.indexOf("|");
                                         horario = horario.substring(posicionBarra+1);
                                         cursoLeido.modHorario(objHora, 1);
-                                        System.out.println("En carrera: " + objHora);
+                                        System.out.println("En hora: " + objHora);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
                                 cursoLeido.modHorario(new Hora(horario), 1);
-                                System.out.println("En carrera: " +horario);
+                                System.out.println("En hora: " +horario);
                         }
                         
 			return cursoLeido;
@@ -1002,11 +990,11 @@ public class CapaIOCursos
 		String descrip = cursoAEscribir.getDescripcion(); //Descripción del curso
 		int codCurso = cursoAEscribir.getCodigoCurso(); //Código del ramo
 		String seccion = cursoAEscribir.getSeccion(); //código de sección
-		String enCarreras = cursoAEscribir.getEnCarreras_Codigo(); //Carreras en que se dicta.
+		int enCarrera = cursoAEscribir.getEnCarreraCodigo(); //Carrera en que se dicta.
 		int idProfeAsig = cursoAEscribir.getIdProfeAsig(); //rut del profesor
 		String listSalas = cursoAEscribir.getSalas(); //Salas donde se dicta el ramo.
 		String horario = cursoAEscribir.getHorario(); //Horas en que se dicta e la semana.
-		cursoString = "<Curso nomCurso=\""+nomCurso+"\" idCurso=\""+idCurso+"\" descrip=\""+descrip+"\" codCurso=\""+codCurso+"\" seccion=\""+seccion+"\" enCarreras=\""+enCarreras+"\" idProfeAsig=\""+idProfeAsig+"\" listSalas=\""+listSalas+"\" horario=\""+horario+"\" >";
+		cursoString = "<Curso nomCurso=\""+nomCurso+"\" idCurso=\""+idCurso+"\" descrip=\""+descrip+"\" codCurso=\""+codCurso+"\" seccion=\""+seccion+"\" enCarrera=\""+enCarrera+"\" idProfeAsig=\""+idProfeAsig+"\" listSalas=\""+listSalas+"\" horario=\""+horario+"\" >";
 		return cursoString;
 	}
 
@@ -1097,8 +1085,8 @@ public class CapaIOCursos
 		int numSemestre = semestreAEscribir.getNumeroSemestre();
 		int idSemestre = semestreAEscribir.getIdSemestre();
 		int enCarreraId = semestreAEscribir.getCodigoEnCarrera();
-                String codRamosDelSemestre = semestreAEscribir.getCodigosRamos();
-		return "<Semestre numSemestre=\""+numSemestre+"\" idSemestre=\""+idSemestre+"\" enCarreraId=\""+enCarreraId+"\" codRamosDelSemestre=\""+codRamosDelSemestre+"\" >";
+                String idCursosDelSemestre = semestreAEscribir.getIdCursosStr();
+		return "<Semestre numSemestre=\""+numSemestre+"\" idSemestre=\""+idSemestre+"\" enCarreraId=\""+enCarreraId+"\" idCursosDelSemestre=\""+idCursosDelSemestre+"\" >";
 	}
 
         /**
@@ -1108,10 +1096,10 @@ public class CapaIOCursos
          * @return Devuelve un objeto Semestre que fue modelado a partir del String linea.
          */
         private Semestre stringToSemestre(String linea)
-        {       String codRamosDelSemestre;
+        {       String idRamosDelSemestre;
                 int comienzoDato, i, posicionBarra, numSemestre, idSemestre, enCarreraId, codRamo;
                 if ((linea.indexOf("<Semestre") != -1))
-                {       if ((linea.indexOf("numSemestre=") == -1) || (linea.indexOf("idSemestre=") == -1) || (linea.indexOf("enCarreraId=") == -1) || (linea.indexOf("codRamosDelSemestre=") == -1))
+                {       if ((linea.indexOf("numSemestre=") == -1) || (linea.indexOf("idSemestre=") == -1) || (linea.indexOf("enCarreraId=") == -1) || (linea.indexOf("idCursosDelSemestre=") == -1))
                         {       System.out.println("ERROR: La linea leida desde el archivo de cursos es incorrecta");
                                 return null;
                         }
@@ -1124,22 +1112,22 @@ public class CapaIOCursos
                         comienzoDato = linea.indexOf("enCarreraId=") + "enCarreraId=".length();
                         enCarreraId = Integer.valueOf(linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1)));
 
-                        comienzoDato = linea.indexOf("codRamosDelSemestre=") + "codRamosDelSemestre=".length();
-                        codRamosDelSemestre = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1));
+                        comienzoDato = linea.indexOf("idCursosDelSemestre=") + "idCursosDelSemestre=".length();
+                        idRamosDelSemestre = linea.substring(comienzoDato+1, linea.indexOf("\"", comienzoDato+1));
 
                         Semestre semestreLeido = new Semestre(numSemestre, enCarreraId, idSemestre);
-                        if (codRamosDelSemestre.length() != 0)
-                        {       for (i = 0; codRamosDelSemestre.indexOf("|") != -1;i++)
-                                {       System.out.println(codRamosDelSemestre.substring(0, codRamosDelSemestre.indexOf("|")));
-                                        codRamo = Integer.valueOf(codRamosDelSemestre.substring(0, codRamosDelSemestre.indexOf("|")));
-                                        posicionBarra = codRamosDelSemestre.indexOf("|");
-                                        codRamosDelSemestre = codRamosDelSemestre.substring(posicionBarra+1);
-                                        semestreLeido.modCodRamos(codRamo, 1);
-                                        System.out.println("codigo del semestre: " + codRamo);
+                        if (idRamosDelSemestre.length() != 0)
+                        {       for (i = 0; idRamosDelSemestre.indexOf("|") != -1;i++)
+                                {       System.out.println(idRamosDelSemestre.substring(0, idRamosDelSemestre.indexOf("|")));
+                                        codRamo = Integer.valueOf(idRamosDelSemestre.substring(0, idRamosDelSemestre.indexOf("|")));
+                                        posicionBarra = idRamosDelSemestre.indexOf("|");
+                                        idRamosDelSemestre = idRamosDelSemestre.substring(posicionBarra+1);
+                                        semestreLeido.modIdRamos(codRamo, 1);
+                                        System.out.println("id ramo del semestre: " + codRamo);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
-                                semestreLeido.modCodRamos(Integer.valueOf(codRamosDelSemestre), 1);
-                                System.out.println("En carrera: " + codRamosDelSemestre);
+                                semestreLeido.modIdRamos(Integer.valueOf(idRamosDelSemestre), 1);
+                                System.out.println("id ramo del semestre: " + idRamosDelSemestre);
                         }
 
                         return semestreLeido;

@@ -854,7 +854,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         // Acción a realizar cuando se presiona el boton "agregar curso"
         int i, tamLista, codCurso;
         //Compruebo que existan carreras y semestres disponibles para agregar un curso
-        if (this.selectorListaCarreras == null)
+        if (this.selectorListaCarreras.getSelectedItem() == null)
         {       //abro nueva ventana
                 DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Al parecer no existen carreras disponibles", "Agregue una carrera antes de un curso");
                 dialogoError.setVisible(true);

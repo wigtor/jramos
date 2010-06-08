@@ -870,7 +870,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return ;
         }
 
-        //Compruebo el campo de el codigo de curso si es válido y si ya existe otro curso con el mismo codigo
+        //Compruebo el campo de el codigo de curso si es válido
         try
         {       codCurso = Integer.valueOf(this.campoCodigoCursoNuevo.getText());
         }
@@ -880,9 +880,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 dialogoError = null;
                 return ;
         }
+
         //Compruebo que el código de curso leido no se encuentra répetido entre los otros cursos, a excepción de cursos con el mismo nombre.
-        
-        //Compruebo si el campo seccion no es un string vacio
+        for (Curso curso : this.listManager.getListaCursos())
+        {       if ((curso.getCodigoCurso() == codCurso) && !(curso.getNombreCurso().equals(this.campoNombreCursoNuevo.getText())))
+                {       //abro nueva ventana
+                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Existe un curso con el mismo código y distinto nombre", "Escriba otro código de curso");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+                //Si el codigo de curso es igual, el nombre es igual y la seccion es igual, lanzo dialogo de error.
+                if ((curso.getCodigoCurso() == codCurso) && (curso.getNombreCurso().equals(this.campoNombreCursoNuevo.getText())) && (this.campoSeccionCursoNuevo.getText().equals(curso.getSeccion())))
+                {       //abro nueva ventana
+                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Existe un curso con el mismo nombre, código y sección", "Escriba otro código de curso o sección");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+                //Si el codigo de curso o el nombres son iguales, en la misma carrera, lanzo dialogo de error
+                if (((curso.getCodigoCurso() == codCurso) || (curso.getNombreCurso().equals(this.campoNombreCursoNuevo.getText()))) && (curso.getEnCarrera() == this.selectorListaCarreras.getSelectedItem()) && (this.campoSeccionCursoNuevo.getText().equals(curso.getSeccion())))
+                {       //abro nueva ventana
+                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Existe un curso con el mismo nombre y sección en esta carrera", "Seleccione otra carrera u otra sección");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+        }
+        //Compruebo si el campo de texto "seccion" no es un string vacio
         if (this.campoSeccionCursoNuevo.getText().trim().equals(""))
         {       //abro nueva ventana
                 DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay una sección escrita", "Debe darle una sección al curso");
@@ -891,20 +916,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return ;
         }
 
-        //Si ya existe un curso con el mismo nombre y en el mismo curso tampoco se agrega.
-        ArrayList<Curso> listaCompletaCursos = this.listManager.getListaCursos();
-        for (Curso curso : listaCompletaCursos)
-        {       if ((this.campoNombreCursoNuevo.getText().equals(curso.getNombreCurso())) && (true))//hacer que vea si es la misma carrera!!!!
-                {       //abro nueva ventana de error.
-                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "El nombre del curso ya existe en esta carrera.", "vuelva a escribir otro nombre del curso o seleccione otra carrera");
-                        dialogoError.setVisible(true);
-                        dialogoError = null;
-                        return ;
-                }
-        }
-
-        Carrera carreraAlQuePertenece = (Carrera)selectorListaCarreras.getSelectedItem();
-        this.listManager.agregaCurso(this.campoNombreCursoNuevo.getText(), codCurso, carreraAlQuePertenece);
+        Carrera carreraAlQuePertenece = (Carrera)this.selectorListaCarreras.getSelectedItem();
+        Semestre semestreAlquePertenece = (Semestre)this.selectorListaSemestres.getSelectedItem();
+        this.listManager.agregaCurso(this.campoNombreCursoNuevo.getText(), codCurso, this.campoSeccionCursoNuevo.getText(), carreraAlQuePertenece, semestreAlquePertenece);
         this.listModelCursos = new DefaultListModel();
         tamLista = this.listManager.getListaCursos().size();
         for (i = 0; i < tamLista; i++)
@@ -992,7 +1006,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             //Actualiza el selector de lista de carreras de la pestaña "cursos" de la ventana principal
             selectorListaCarreras.removeAllItems();
             ArrayList<Carrera> listaCarreras = listManager.getListaCarreras();
-            int i, cantidadCarreras = this.listManager.listaCarreras.size();
+            int i, cantidadCarreras = this.listManager.getListaCarreras().size();
             for (i = 0; i < cantidadCarreras; i++)
             {       selectorListaCarreras.addItem(listaCarreras.get(i));
             }

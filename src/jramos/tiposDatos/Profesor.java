@@ -318,7 +318,7 @@ public class Profesor {
             if (this.cursosAsig.contains(cursoToAsig)){
                 this.cursosAsig.remove(cursoToAsig);
                 if (this.idCursosAsig.contains(codigoActual))
-                this.idCursosAsig.remove(codigoActual);
+                    this.idCursosAsig.remove(codigoActual);
             }
             else{
                 System.out.println("No existe ese curso...");

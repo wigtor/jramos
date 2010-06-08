@@ -24,11 +24,11 @@ import java.util.ArrayList;
 
 public class ManipuladorListas
 {       /* ATRIBUTOS */
-        ArrayList<Facultad> listaFacultades;
-        ArrayList<Carrera> listaCarreras;
-        ArrayList<Semestre> listaSemestres;
-        ArrayList<Curso> listaCursos;
-        ArrayList<Profesor> listaProfesores;
+        private ArrayList<Facultad> listaFacultades;
+        private ArrayList<Carrera> listaCarreras;
+        private ArrayList<Semestre> listaSemestres;
+        private ArrayList<Curso> listaCursos;
+        private ArrayList<Profesor> listaProfesores;
         
         /* CONSTRUCTOR */
         /**
@@ -72,9 +72,26 @@ public class ManipuladorListas
         {
             
         }
-        public void agregaCurso(String nombreCurso, int codCurso, Carrera carreraAlQuePertenece)
-        {
+        /**
+         * Este metodo crea un objeto Curso y lo agrega a la lista de cursos,
+         * ademas referencia al curso en la lista de cursos del semestre al cual pertenece
+         * @param nombreCurso es el nombre del curso nuevo
+         * @param codCurso es el codigo del curso nuevo
+         * @param seccion es la seccion del curso nuevo, un String, por ejemplo: A01
+         * @param carreraAlQuePertenece es un objeto Carrera con la carrera a la cual pertenece el curso
+         * @param semestreAlQuePertenece es un objeto Semestre con el semestre al cual pertenece el curso
+         */
+        public void agregaCurso(String nombreCurso, int codCurso, String seccion, Carrera carreraAlQuePertenece, Semestre semestreAlQuePertenece)
+        {       //Creo el nuevo objeto curso y los agrego a la lista de cursos.
+                Curso cursoNuevo = new Curso(nombreCurso, codCurso);
+                cursoNuevo.modIdSemestre(semestreAlQuePertenece.getIdSemestre());
+                cursoNuevo.setSemestre(semestreAlQuePertenece);
+                cursoNuevo.setCarrera(carreraAlQuePertenece);
+                cursoNuevo.setSeccion(seccion);
+                this.listaCursos.add(cursoNuevo);
 
+                //Referencio el curso en la lista de cursos del semestre al cual pertenece
+                semestreAlQuePertenece.modRamos(cursoNuevo, 1);
         }
         /**
          * Crea y agrega un objeto Facultad a la lista de facultades
@@ -96,7 +113,7 @@ public class ManipuladorListas
          * @param facultadAEliminar Es el objeto Facultad que se desea eliminar de la lista de facultades
          */
         public void eliminaFacultad(Facultad facultadAEliminar)
-        {       //Elimino todoas las carreras que pertenecen a esa facultad.
+        {       //Elimino todoas las carreras que pertenecen a esa facultad de la lista de carreras
                 ArrayList<Carrera> carrerasAEliminar = new ArrayList();
                 for (Carrera carrera : this.listaCarreras)
                 {       if (carrera.getFacultad().equals(facultadAEliminar))
@@ -106,6 +123,7 @@ public class ManipuladorListas
                 for (Carrera carrera : carrerasAEliminar) //Esto es para evitar un error en el acceso al ArrayList al ir eliminando elementos
                 {       this.eliminaCarrera(carrera.getCodigoCarrera());
                 }
+                
                 //Elimino la facultad de la lista de facultades
                 for (Facultad facultad :this.listaFacultades)
                 {       if (facultadAEliminar.equals(facultad))
@@ -199,14 +217,21 @@ public class ManipuladorListas
                 }
 
                 ArrayList<Semestre> semestresAEliminar = carreraAEliminar.getListaSemestres();
+                ArrayList<Curso> cursosAEliminar = new ArrayList();
                 //Elimino los cursos que pertenecen a la carrera
                 for (Semestre semestre : semestresAEliminar)
                 {       for (Curso curso : semestre.getCursosArrayList())
                         {       this.listaCursos.remove(curso);
+                                cursosAEliminar.add(curso);
                         }
                 }
                 //elimino las referencias de los cursos eliminados que existan en los profesores
-                //HACER ESTA PARTE DEL CODIGO!!!
+                for (Curso curso : cursosAEliminar)
+                {       for (Profesor profesor : this.listaProfesores)
+                        {       if (profesor.getIdCursosAsignadosArrayList().contains(new Integer(curso.getIdCurso())))
+                                        profesor.modCursosAsignados(curso, -1);
+                        }
+                }
 
                 //elimino los semestres que posee la carrera eliminada de la lista de semestres
                 for (Semestre semestre : semestresAEliminar)

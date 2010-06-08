@@ -395,9 +395,9 @@ public class Curso {
    /**
     * Metodo para setear el id del semestre al cual pertenece el curso.
     *
-    * @param id int con el id para agregar o quitar
+    * @param id int con el id del semestre que se desea setear
     */
-   public void modIdSemestre(int id, int selector){
+   public void modIdSemestre(int id){
        this.idSemestre = id;
    }
 

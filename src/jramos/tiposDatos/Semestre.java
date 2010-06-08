@@ -197,7 +197,7 @@ public class Semestre {
         if (selector == 1){
             if (!this.ramos.contains(cursoToAsig)){
                 this.ramos.add(cursoToAsig);
-                //this.modCodRamos(cursoToAsig.getCodigoCurso(), 1); //Creo que esa linea sobre, pues esa acción la realiza el referenciador
+                this.modIdRamos(cursoToAsig.getIdCurso(), 1); //Creo que esa linea sobre, pues esa acción la realiza el referenciador
             }
             else{
 

@@ -105,7 +105,7 @@ public class Curso {
             return this.descrip;
         }
         else{
-            return "No Hay Descripción Disponible...";
+            return "";
         }
         
     }
@@ -332,7 +332,9 @@ public class Curso {
     * @param carrera Objeto carrera que se desea agregar o quitar
     */
    public void setCarrera(Carrera carreraToAsig){
-      this.enCarrera = carreraToAsig;
+        this.enCarrera = carreraToAsig;
+        if (this.codigoCarrera == 0)
+            this.setCodigoEnCarrera(carreraToAsig.getCodigoCarrera());
    }
 
    /**

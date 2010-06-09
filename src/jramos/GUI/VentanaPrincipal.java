@@ -18,6 +18,8 @@ import jramos.ManipuladorListas;
 import jramos.tiposDatos.*;
 import jramos.capaIO.CapaIOCursos;
 import jramos.capaIO.CapaIOProfes;
+import jramos.excepciones.StringVacioException;
+import jramos.excepciones.nombreRepetidoException;
 
 /**
  *
@@ -774,90 +776,48 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonAgregarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarProfesorActionPerformed
         // Acción a realizar cuando se presiona el boton "agregar profesor"
-        int rut = 0, i, tamLista, posicionBarra;
-        ArrayList<Hora> listaHorasDisponibles = new ArrayList();
-        ArrayList<Integer> listaCodCursosDisponibles = new ArrayList();
-        if (this.campoNombreProfesorNuevo.getText().trim().equals(""))
-        {       //abro nueva ventana
+        int i, tamLista;
+        //Intento agregar un profesor nuevo.
+        try
+        {       this.listManager.agregaProfesor(this.campoNombreProfesorNuevo.getText(), this.campoRutProfesor.getText(), this.campoRamosQueDicta.getText(), this.campoHorasDisponibles.getText());
+        }
+        catch (nombreRepetidoException nombreRepetido)
+        {       //abro nuevo dialogo de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "El nombre del profesor ya existe.", "vuelva a escribir otro nombre para el profesor");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+        catch (StringVacioException nombreVacio)
+        {       //abro nuevo dialogo de error.
                 DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay un nombre de profesor escrito", "Debe escribir un nombre de profesor");
                 dialogoError.setVisible(true);
                 dialogoError = null;
                 return ;
         }
-
-        //Compruebo si el rut es válido
-        try
-        {       rut = Integer.valueOf(this.campoRutProfesor.getText());
-                if ((rut < 2000000) || (rut > 25000000))
-                    throw new NumberFormatException();
-        }
         catch (NumberFormatException NFE)
-        {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "El rut introducido no es válido", "vuelva a escribir el rut del profesor");
-                dialogoError.setVisible(true);
-                dialogoError = null;
-                return ;
-        }
-
-        //Transformo el string con los cursos que puede dictar a un ArrayList de Integer
-        try
-        {       int codCurso;
-                String codCursosDisp = this.campoRamosQueDicta.getText();
-                if (codCursosDisp.length() != 0) //Seteo los codigos de curso que puede impartir
-                        {       for (i = 0; codCursosDisp.indexOf(" ") != -1;i++)
-                                {       System.out.println(codCursosDisp.substring(0, codCursosDisp.indexOf(" ")));
-                                        codCurso = Integer.valueOf(codCursosDisp.substring(0, codCursosDisp.indexOf(" ")));
-                                        posicionBarra = codCursosDisp.indexOf(" ");
-                                        codCursosDisp = codCursosDisp.substring(posicionBarra+1);
-                                        listaCodCursosDisponibles.add(new Integer(Integer.valueOf(codCurso)));
-                                }
-                                //Agrego el ultimo que no fue agregado en el bucle:
-                                listaCodCursosDisponibles.add(new Integer(Integer.valueOf(codCursosDisp)));
-                        }
-        }
-        catch (NumberFormatException NFE)
-        {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Los codigos de curso introducidos no son válidos", "vuelva a escribir los cursos disponibles del profesor");
-                dialogoError.setVisible(true);
-                dialogoError = null;
-                return ;
-        }//modifica esto!!!
-
-        //Transformo el string de horas a un ArrayList de Hora
-        try
-        {       String horasDisp = this.campoHorasDisponibles.getText();
-                Hora objHora;
-                if (horasDisp.length() != 0)
-                        {       for (i = 0; horasDisp.indexOf(" ") != -1;i++)
-                                {       System.out.println(horasDisp.substring(0, horasDisp.indexOf(" ")));
-                                        objHora = new Hora(horasDisp.substring(0, horasDisp.indexOf(" ")));
-                                        posicionBarra = horasDisp.indexOf(" ");
-                                        horasDisp = horasDisp.substring(posicionBarra+1);
-                                        listaHorasDisponibles.add(objHora);
-                                }
-                                //Agrego el ultimo que no fue agregado en el bucle:
-                                listaHorasDisponibles.add(new Hora(horasDisp));
-                        }
-            
-        } 
-        catch (HourOutOfRangeException HOORE)
-        {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Las horas introducidas no son válidas.", "Revise las horas escritas y vuelva a escribirlas");
-                dialogoError.setVisible(true);
-                dialogoError = null;
-                return ;
-
-        }
-
-        //Si ya existe un profesor con el mismo nombre tampoco se agrega.
-        ArrayList<Profesor> listaCompletaProfesores = this.listManager.getListaProfesores();
-        for (Profesor profesor : listaCompletaProfesores)
-        {       if (this.campoNombreProfesorNuevo.getText().equals(profesor.getNombreProfesor()))
-                {       //abro nueva ventana de error.
-                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "El nombre del profesor ya existe.", "vuelva a escribir otro nombre para el profesor");
+        {       if (NFE.getMessage().equals("rut"))
+                {       //Abro nuevo dialogo de error.
+                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "El rut introducido no es válido", "vuelva a escribir el rut del profesor");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+                if (NFE.getMessage().equals("codCurso"))
+                {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Los codigos de curso introducidos no son válidos", "vuelva a escribir los cursos disponibles del profesor");
                         dialogoError.setVisible(true);
                         dialogoError = null;
                         return ;
                 }
         }
-        this.listManager.agregaProfesor(this.campoNombreProfesorNuevo.getText(), rut, listaCodCursosDisponibles, listaHorasDisponibles);
+        catch (HourOutOfRangeException HOORE)
+        {       //Abro dialogo de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Las horas introducidas no son válidas.", "Revise las horas escritas y vuelva a escribirlas");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+
         this.listModelProfesores = new DefaultListModel();
         tamLista = this.listManager.getListaProfesores().size();
         for (i = 0; i < tamLista; i++)
@@ -874,54 +834,31 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonAgregarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarCursoActionPerformed
         // Acción a realizar cuando se presiona el boton "agregar curso"
-        int i, tamLista, codCurso;
-        //Compruebo que existan carreras y semestres disponibles para agregar un curso
-        if (this.selectorListaCarreras.getSelectedItem() == null)
-        {       //abro nueva ventana
-                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Al parecer no existen carreras disponibles", "Agregue una carrera antes de un curso");
-                dialogoError.setVisible(true);
-                dialogoError = null;
-                return ;
-        }
-        //Compruebo que el campo "nombre del curso"  no sea un string vacio
-        if (this.campoNombreCursoNuevo.getText().trim().equals(""))
-        {       //abro nueva ventana
-                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay un nombre de curso escrito", "Debe escribir un nombre de curso");
-                dialogoError.setVisible(true);
-                dialogoError = null;
-                return ;
-        }
+        int i, tamLista;
 
-        //Compruebo el campo de el codigo de curso si es válido
+        //Agrego la carrera
         try
-        {       codCurso = Integer.valueOf(this.campoCodigoCursoNuevo.getText());
+        {       Carrera carreraAlQuePertenece = (Carrera)this.selectorListaCarreras.getSelectedItem();
+                Semestre semestreAlquePertenece = (Semestre)this.selectorListaSemestres.getSelectedItem();
+                this.listManager.agregaCurso(this.campoNombreCursoNuevo.getText(), this.campoCodigoCursoNuevo.getText(), this.campoSeccionCursoNuevo.getText(), carreraAlQuePertenece, semestreAlquePertenece);
         }
-        catch (NumberFormatException NFE)
-        {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "El código de curso introducido no es válido", "vuelva a escribir el código del curso");
-                dialogoError.setVisible(true);
-                dialogoError = null;
-                return ;
-        }
-
-        //Compruebo que el código de curso leido no se encuentra répetido entre los otros cursos, a excepción de cursos con el mismo nombre.
-        for (Curso curso : this.listManager.getListaCursos())
-        {       if ((curso.getCodigoCurso() == codCurso) && !(curso.getNombreCurso().equals(this.campoNombreCursoNuevo.getText())))
+        catch (nombreRepetidoException nombreRepetido)
+        {
+                if (nombreRepetido.getCodigoError() == 1)
                 {       //abro nueva ventana
                         DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Existe un curso con el mismo código y distinto nombre", "Escriba otro código de curso");
                         dialogoError.setVisible(true);
                         dialogoError = null;
                         return ;
                 }
-                //Si el codigo de curso es igual, el nombre es igual y la seccion es igual, lanzo dialogo de error.
-                if ((curso.getCodigoCurso() == codCurso) && (curso.getNombreCurso().equals(this.campoNombreCursoNuevo.getText())) && (this.campoSeccionCursoNuevo.getText().equals(curso.getSeccion())))
+                if (nombreRepetido.getCodigoError() == 2)
                 {       //abro nueva ventana
                         DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Existe un curso con el mismo nombre, código y sección", "Escriba otro código de curso o sección");
                         dialogoError.setVisible(true);
                         dialogoError = null;
                         return ;
                 }
-                //Si el codigo de curso o el nombres son iguales, en la misma carrera, lanzo dialogo de error
-                if (((curso.getCodigoCurso() == codCurso) || (curso.getNombreCurso().equals(this.campoNombreCursoNuevo.getText()))) && (curso.getEnCarrera() == this.selectorListaCarreras.getSelectedItem()) && (this.campoSeccionCursoNuevo.getText().equals(curso.getSeccion())))
+                if (nombreRepetido.getCodigoError() == 3)
                 {       //abro nueva ventana
                         DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Existe un curso con el mismo nombre y sección en esta carrera", "Seleccione otra carrera u otra sección");
                         dialogoError.setVisible(true);
@@ -929,18 +866,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         return ;
                 }
         }
-        //Compruebo si el campo de texto "seccion" no es un string vacio
-        if (this.campoSeccionCursoNuevo.getText().trim().equals(""))
-        {       //abro nueva ventana
-                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay una sección escrita", "Debe darle una sección al curso");
+        catch (StringVacioException excepcionStringVacio)
+        {       if (excepcionStringVacio.getCodigoString() == ManipuladorListas.ERROR_SECCION)
+                {       //abro nueva ventana de error
+                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay una sección escrita", "Debe darle una sección al curso");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+                if (excepcionStringVacio.getCodigoString() == ManipuladorListas.ERROR_NOMBRE)
+                {       //abro nueva ventana de error
+                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay un nombre de curso escrito", "Debe escribir un nombre de curso");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+
+        }
+        catch (NumberFormatException NFE)
+        {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "El código de curso introducido no es válido", "vuelva a escribir el código del curso");
                 dialogoError.setVisible(true);
                 dialogoError = null;
                 return ;
         }
-
-        Carrera carreraAlQuePertenece = (Carrera)this.selectorListaCarreras.getSelectedItem();
-        Semestre semestreAlquePertenece = (Semestre)this.selectorListaSemestres.getSelectedItem();
-        this.listManager.agregaCurso(this.campoNombreCursoNuevo.getText(), codCurso, this.campoSeccionCursoNuevo.getText(), carreraAlQuePertenece, semestreAlquePertenece);
+        catch (NullPointerException e)
+        {       //Abro dialogo de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Al parecer no existen carreras disponibles", "Agregue una carrera antes de un curso");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
         this.listModelCursos = new DefaultListModel();
         tamLista = this.listManager.getListaCursos().size();
         for (i = 0; i < tamLista; i++)
@@ -1363,7 +1318,22 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
     private void botonEditarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarCursoActionPerformed
         // Acción a realizar cuando se presiona el boton "editar curso"
-        
+        Curso cursoSeleccionado;
+        cursoSeleccionado = (Curso)this.visualizadorListaCursos.getSelectedValue();
+        if (cursoSeleccionado != null)
+        {       //Lanzo un dialogo para editar el profesor seleccionado
+                DialogoEdicionCurso dialogoEdicionCurso = new DialogoEdicionCurso(this, rootPaneCheckingEnabled);
+                dialogoEdicionCurso.setVisible(true);
+                dialogoEdicionCurso = null;
+                return ;
+        }
+        else
+        {       //abro ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado un curso para editar", "Seleccione un curso desde la lista de cursos del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
     }//GEN-LAST:event_botonEditarCursoActionPerformed
 
 

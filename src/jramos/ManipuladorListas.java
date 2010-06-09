@@ -21,11 +21,14 @@ import jramos.tiposDatos.Semestre;
 import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Profesor;
 import java.util.ArrayList;
+import jramos.excepciones.HourOutOfRangeException;
 import jramos.excepciones.StringVacioException;
 import jramos.excepciones.nombreRepetidoException;
 
 public class ManipuladorListas
 {       /* ATRIBUTOS */
+        public static final int ERROR_SECCION = 3;
+        public static final int ERROR_NOMBRE = 0;
         private ArrayList<Facultad> listaFacultades;
         private ArrayList<Carrera> listaCarreras;
         private ArrayList<Semestre> listaSemestres;
@@ -76,10 +79,12 @@ public class ManipuladorListas
          * cambia la cantidad de semestres de la carrera:
          * si la nueva cantidad de semestres es mayor a la existente, crea nuevos objetos Semestre y los referencia
          * si la nueva cantidad de semestres es menor a la existente, elimina los semestres finales y los cursos que posean estos semestres
-         * @param carreraAEditar
-         * @param nuevoNombre
-         * @param nuevaDescrip
-         * @param nuevaCantidadSemestres
+         * @param carreraAEditar 
+         * @param nuevoNombre Corresponde al nuevo nombre que tendrá la  carrera.
+         * @param nuevaDescrip Corresponde a la nueva descripción de la carrera.
+         * @param nuevaCantidadSemestres Corresponde a la nueva cantidad de semestres que poseerá la carrera.
+         * @throws nombreRepetidoException Se lanza está excepción cuando el nuevo nombre de la carrera que se desea editar se encuentra repetido con alguna de las demás carreras.
+         * @throws StringVacioException Se lanza esta excepción cuando el nuevo nombre de la carrera que se desea editar es un string vacio.
          */
         public void editaCarrera(Carrera carreraAEditar, String nuevoNombre, String nuevaDescrip, int nuevaCantidadSemestres) throws nombreRepetidoException, StringVacioException
         {       //Compuebo que el nuevo nombre no sea String vacio
@@ -148,14 +153,62 @@ public class ManipuladorListas
         /**
          * Este metodo crea un objeto Curso y lo agrega a la lista de cursos,
          * ademas referencia al curso en la lista de cursos del semestre al cual pertenece
-         * @param nombreCurso es el nombre del curso nuevo
-         * @param codCurso es el codigo del curso nuevo
-         * @param seccion es la seccion del curso nuevo, un String, por ejemplo: A01
-         * @param carreraAlQuePertenece es un objeto Carrera con la carrera a la cual pertenece el curso
-         * @param semestreAlQuePertenece es un objeto Semestre con el semestre al cual pertenece el curso
+         * @param nombreCurso es el nombre del curso nuevo.
+         * @param codCurso es el codigo del curso nuevo.
+         * @param seccion es la seccion del curso nuevo, un String, por ejemplo: A01.
+         * @param carreraAlQuePertenece es un objeto Carrera con la carrera a la cual pertenece el curso.
+         * @param semestreAlQuePertenece es un objeto Semestre con el semestre al cual pertenece el curso.
+         * @throws nombreRepetidoException Se lanza esta excepción cuando el nombre del curso se encuentra repetido con algún nombre de los demás cursos.
+         * @throws StringVacioException Se lanza está excepción cuando el nombre o la sección son Strings Vacios
+         * Se lanzan con un codigo de error especificado en los atributos estaticos de está clase: ERROR_NOMBRE o ERROR_SECCION
+         * @throws NullPointerException Se lanza esta excepción cuando se intenta agregar un curso sin que existan semestres y por ende carreras.
+         * @throws NumberFormatException Se lanza esta excepción cuando el codigo de curso no es un número.
          */
-        public void agregaCurso(String nombreCurso, int codCurso, String seccion, Carrera carreraAlQuePertenece, Semestre semestreAlQuePertenece)
-        {       //Creo el nuevo objeto curso y los agrego a la lista de cursos.
+        public void agregaCurso(String nombreCurso, String codCursoStr, String seccion, Carrera carreraAlQuePertenece, Semestre semestreAlQuePertenece) throws nombreRepetidoException, StringVacioException, NumberFormatException, NullPointerException
+        {       int codCurso;
+                //Compruebo que existan carreras y semestres disponibles para agregar un curso
+                if (this.listaSemestres.size() == 0)
+                {       throw new NullPointerException();
+                }
+                //Compruebo que el campo "nombre del curso"  no sea un string vacio
+                if (nombreCurso.trim().equals(""))
+                {       throw new StringVacioException(ManipuladorListas.ERROR_NOMBRE);
+                }
+                
+                //Compruebo el campo de el codigo de curso si es válido
+                try
+                {       codCurso = Integer.valueOf(codCursoStr);
+                }
+                catch (NumberFormatException NFE)
+                {       throw NFE;
+                }
+
+
+                //Compruebo que el código de curso leido no se encuentra répetido entre los otros cursos, a excepción de cursos con el mismo nombre.
+                for (Curso curso : this.listaCursos)
+                {       if ((curso.getCodigoCurso() == codCurso) && !(curso.getNombreCurso().equals(nombreCurso)))
+                        {       //Lanzo excepcion de nombre repetido con codigo 1
+                                throw new nombreRepetidoException(1);
+                        }
+                        //Si el codigo de curso es igual, el nombre es igual y la seccion es igual, lanzo dialogo de error.
+                        if ((curso.getCodigoCurso() == codCurso) && (curso.getNombreCurso().equals(nombreCurso)) && (seccion.equals(curso.getSeccion())))
+                        {       //Lanzo excepcion de nombre repetido con codigo 2
+                                throw new nombreRepetidoException(2);
+                        }
+                        //Si el codigo de curso o el nombres son iguales, en la misma carrera, lanzo dialogo de error
+                        if (((curso.getCodigoCurso() == codCurso) || (curso.getNombreCurso().equals(nombreCurso))) && (curso.getEnCarrera() == carreraAlQuePertenece) && (seccion.equals(curso.getSeccion())))
+                        {       //Lanzo excepcion de nombre repetido con codigo 3
+                                throw new nombreRepetidoException(3);
+                        }
+                }
+
+                //Compruebo si el campo de texto "seccion" no es un string vacio
+                if (seccion.trim().equals(""))
+                {       //lanzo una excepcion de string vacio con codigo ERROR_SECCION, para referirme a un error en la seccion
+                        throw new StringVacioException(ManipuladorListas.ERROR_SECCION);
+                }
+
+                //Creo el nuevo objeto curso y los agrego a la lista de cursos.
                 Curso cursoNuevo = new Curso(nombreCurso, codCurso);
                 cursoNuevo.modIdSemestre(semestreAlQuePertenece.getIdSemestre());
                 cursoNuevo.setSemestre(semestreAlQuePertenece);
@@ -167,9 +220,11 @@ public class ManipuladorListas
                 semestreAlQuePertenece.modRamos(cursoNuevo, 1);
         }
         /**
-         * Crea y agrega un objeto Facultad a la lista de facultades
+         * Crea y agrega un objeto Facultad a la lista de facultades.
          * @param nombreFacultad El string con el nombre de la facultad que se está creando.
-         * @param descripcion El string con la descripción de la facultad que se está creando
+         * @param descripcion El string con la descripción de la facultad que se está creando.
+         * @throws StringVacioException Se lanza está excepción cuando el nombre de la facultad que se quiere crear es un string vacio.
+         * @throws nombreRepetidoException Se lanza esta excepcion cuando el nombre de la facultad que se quiere crear está repetido con alguna de las demás facultades.
          */
         public void agregaFacultad(String nombreFacultad, String descripcion) throws StringVacioException, nombreRepetidoException
         {       if (nombreFacultad.trim().equals(""))
@@ -190,6 +245,14 @@ public class ManipuladorListas
                 this.listaFacultades.add(facultadNueva);
         }
 
+        /**
+         * Este método edita el nombre o descripción de la facultad que se pase como parametro
+         * Se encarga de comprobar si el nuevo nombre que se le está dand oa la facultad se encuentra repetido con las demás facultades
+         * @param facultadAEditar Es el objeto Facultad al cual se quiere editar sus atributos.
+         * @param nuevoNombre Es el nuevo nombre que se le quiere setear a la facultad.
+         * @param nuevaDescripcion Es la nueva descripción que se le quiere setear a la facultad.
+         * @throws nombreRepetidoException Lanza esta excepción cuando el nuevo nombre de la facultad está repetido con alguno de las demás facultades.
+         */
         public void editarFacultad(Facultad facultadAEditar, String nuevoNombre, String nuevaDescripcion) throws nombreRepetidoException
         {       //Compruebo que el nuevo nombre de la facultad no es igual al nombre de otra facultad
                 ArrayList<Facultad> listaCompletaFacultades = this.listaFacultades;
@@ -242,10 +305,75 @@ public class ManipuladorListas
          * @param rut es el entero con el rut del profesor, sin dígito verificador
          * @param cursosDisponibles Es un Arraylist de Integer con los códigos de curso que puede dictar el profesor
          * @param horasDisponibles Es un ArrayList de Hora con las horas disponibles del profesor para hacer clases
+         * @throws StringVacioException Lanza esta excepción cuando el nombre del profesor es un string vacio
+         * @throws nombreRepetidoException Lanza esta excepción cuando el nombre del profesor está repetido entre los demas profesores
+         * @throws NumberFormatException Lanza esta excepción cuando el codigo de curso no es un número o cuando el rut no es válido
+         * para reconocer la diferencia, el método getMessage() de NumberFormatException contiene el String "rut" si el problema está en el rut
+         * o el String "codCurso" si el problema fue originado por el codigo de curso incorrecto.
+         * @throws HourOutOfRangeException Lanza esta excepción cuando las horas disponibles introducidas no son válidas
          */
-        public void agregaProfesor(String nombreProfesor, int rut, ArrayList<Integer> cursosDisponibles, ArrayList<Hora> horasDisponibles)
-        {       Profesor profesorNuevo = new Profesor(nombreProfesor, rut, cursosDisponibles);
-                for (Hora hora : horasDisponibles)
+        public void agregaProfesor(String nombreProfesor, String rutStr, String cursosDisponibles, String horasDisp) throws StringVacioException, nombreRepetidoException, NumberFormatException, HourOutOfRangeException
+        {       int rut, codCurso, i, posicionEspacio;
+                ArrayList<Hora> listaHorasDisponibles = new ArrayList();
+                ArrayList<Integer> listaCodCursosDisponibles = new ArrayList();
+                //Si el nombre es un string vacio no se agrega y lanzo excepcion
+                if (nombreProfesor.trim().equals(""))
+                {       //Lanzo excepción
+                        throw new StringVacioException();
+                }
+
+                //Si ya existe un profesor con el mismo nombre tampoco se agrega.
+                for (Profesor profesor : this.listaProfesores)
+                {       if (nombreProfesor.equals(profesor.getNombreProfesor()))
+                        {       //Lanzo excepcion
+                                throw new nombreRepetidoException();
+                        }
+                }
+
+                //Compruebo si el rut es válido
+                try
+                {       rut = Integer.valueOf(rutStr); //Esto puede lanzar excepcion por no ser numero
+                        if ((rut < 2000000) || (rut > 25000000))
+                            throw new NumberFormatException("rut"); //hago que lanze excepcion por no estar en el rango
+                }
+                catch (NumberFormatException NFE)
+                {       throw new NumberFormatException("rut");
+                }
+                //Transformo el string con los cursos que puede dictar a un ArrayList de Integer
+                try
+                {       //String codCursosDisp = this.campoRamosQueDicta.getText();
+                        if (cursosDisponibles.length() != 0) //Seteo los codigos de curso que puede impartir
+                        {       for (i = 0; cursosDisponibles.indexOf(" ") != -1;i++)
+                                {       System.out.println(cursosDisponibles.substring(0, cursosDisponibles.indexOf(" ")));
+                                        codCurso = Integer.valueOf(cursosDisponibles.substring(0, cursosDisponibles.indexOf(" ")));
+                                        posicionEspacio = cursosDisponibles.indexOf(" ");
+                                        cursosDisponibles = cursosDisponibles.substring(posicionEspacio+1);
+                                        listaCodCursosDisponibles.add(new Integer(Integer.valueOf(codCurso)));
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                listaCodCursosDisponibles.add(new Integer(Integer.valueOf(cursosDisponibles)));
+                        }
+                }
+                catch (NumberFormatException NFE)
+                {   throw new NumberFormatException("codCurso"); 
+                }
+
+                //Transformo el string de horas a un ArrayList de Hora, estó puede lanzar HourOutOfRangeException
+                Hora objHora;
+                if (horasDisp.length() != 0)
+                {       for (i = 0; horasDisp.indexOf(" ") != -1;i++)
+                        {       System.out.println(horasDisp.substring(0, horasDisp.indexOf(" ")));
+                                objHora = new Hora(horasDisp.substring(0, horasDisp.indexOf(" ")));
+                                posicionEspacio = horasDisp.indexOf(" ");
+                                horasDisp = horasDisp.substring(posicionEspacio+1);
+                                listaHorasDisponibles.add(objHora);
+                        }
+                        //Agrego el ultimo que no fue agregado en el bucle:
+                        listaHorasDisponibles.add(new Hora(horasDisp));
+                }
+
+                Profesor profesorNuevo = new Profesor(nombreProfesor, rut, listaCodCursosDisponibles);
+                for (Hora hora : listaHorasDisponibles)
                         profesorNuevo.modHorasDisponibles(hora, 1);
                 this.listaProfesores.add(profesorNuevo);
         }
@@ -275,6 +403,8 @@ public class ManipuladorListas
          * @param facultadALaQuePertenece Objeto Facultad a la que va a pertenecer esta nueva carrera
          * @param descripcion La descripción de la carrera.
          * @param cantidadSemestres El número de semestres que tendrá la carrera
+         * @throws StringVacioException Lanza esta excepción cuando el nombre de carrera es un string vacio
+         * @throws nombreRepetidoException Lanza esta excepcion cuando el nombre de la carrera está repetido entre las demas carreras
          */
         public void agregaCarrera(String nombreCarrera, Facultad facultadALaQuePertenece, String descripcion, int cantidadSemestres) throws StringVacioException, nombreRepetidoException
         {       //si lo que se ha escrito es nada, entonces no se agrega la carrera

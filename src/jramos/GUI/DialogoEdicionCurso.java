@@ -4,9 +4,9 @@
  */
 
 /*
- * DialogoEdicionProfesor.java
+ * DialogoEdicionCurso.java
  *
- * Created on 08-06-2010, 08:01:48 PM
+ * Created on 09-06-2010, 12:25:43 AM
  */
 
 package jramos.GUI;
@@ -15,10 +15,10 @@ package jramos.GUI;
  *
  * @author victor
  */
-public class DialogoEdicionProfesor extends javax.swing.JDialog {
+public class DialogoEdicionCurso extends javax.swing.JDialog {
 
-    /** Creates new form DialogoEdicionProfesor */
-    public DialogoEdicionProfesor(java.awt.Frame parent, boolean modal) {
+    /** Creates new form DialogoEdicionCurso */
+    public DialogoEdicionCurso(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -33,7 +33,7 @@ public class DialogoEdicionProfesor extends javax.swing.JDialog {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Dialogo de edición de un profesor - ");
+        setTitle("Dialogo de edición de un curso - ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

@@ -213,7 +213,6 @@ public class DialogoCarreraNueva extends javax.swing.JDialog {
                 //Actualizo la lista de carreras de la GUI
                 ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
         }
-        //FALTA AQUI!!!
         //Si se quiere editar una facultad existente
         else
         {       try

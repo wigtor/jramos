@@ -11,16 +11,34 @@
 
 package jramos.GUI;
 
+import java.util.ArrayList;
+import jramos.ManipuladorListas;
+import jramos.excepciones.StringVacioException;
+import jramos.excepciones.nombreRepetidoException;
+import jramos.tiposDatos.Carrera;
+import jramos.tiposDatos.Curso;
+import jramos.tiposDatos.Semestre;
+
 /**
  *
  * @author victor
  */
 public class DialogoEdicionCurso extends javax.swing.JDialog {
-
+    private java.awt.Frame ventanaPadre;
+    private Curso cursoAEditar;
+    private ManipuladorListas listManager;
     /** Creates new form DialogoEdicionCurso */
-    public DialogoEdicionCurso(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DialogoEdicionCurso(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager, Curso cursoAEditar) {
+        super(ventanaPadre, modal);
         initComponents();
+        this.ventanaPadre = ventanaPadre;
+        this.cursoAEditar = cursoAEditar;
+        this.listManager = listManager;
+        this.setTitle(this.getTitle()+ cursoAEditar.getNombreCurso());
+        this.campoNombreCursoNuevo.setText(cursoAEditar.getNombreCurso());
+        this.campoCodigoCursoNuevo.setText((new Integer(cursoAEditar.getCodigoCurso())).toString());
+        this.campoSeccionCursoNuevo.setText(cursoAEditar.getSeccion());
+        
     }
 
     /** This method is called from within the constructor to
@@ -32,24 +50,213 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel15 = new javax.swing.JLabel();
+        campoNombreCursoNuevo = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        campoCodigoCursoNuevo = new javax.swing.JTextField();
+        campoSeccionCursoNuevo = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        selectorListaCarreras = new javax.swing.JComboBox();
+        selectorListaSemestres = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        botonAplicarCambiosCurso = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dialogo de edición de un curso - ");
+
+        jLabel15.setText("Nombre del curso:");
+
+        jLabel21.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel21.setText("Editar la información de un curso:");
+
+        jLabel16.setText("Código del curso:");
+
+        jLabel18.setText("Sección:");
+
+        jLabel19.setText("Carrera en que se dicta:");
+
+        selectorListaCarreras.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectorListaCarreras.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectorListaCarrerasItemStateChanged(evt);
+            }
+        });
+
+        selectorListaSemestres.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setText("¿En que semestre? ");
+
+        botonAplicarCambiosCurso.setText("Aplicar cambios");
+        botonAplicarCambiosCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAplicarCambiosCursoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(121, Short.MAX_VALUE)
+                .addComponent(botonAplicarCambiosCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(118, 118, 118))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel15)
+                                .addComponent(jLabel16)
+                                .addComponent(jLabel18)
+                                .addComponent(jLabel19)
+                                .addComponent(jLabel1))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(selectorListaSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(campoSeccionCursoNuevo)
+                                    .addComponent(campoCodigoCursoNuevo)
+                                    .addComponent(campoNombreCursoNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(249, Short.MAX_VALUE)
+                .addComponent(botonAplicarCambiosCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(75, 75, 75)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel15)
+                        .addComponent(campoNombreCursoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel16)
+                        .addComponent(campoCodigoCursoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel18)
+                        .addComponent(campoSeccionCursoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel19))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(selectorListaSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(76, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void selectorListaCarrerasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectorListaCarrerasItemStateChanged
+        // Cuando se selecciona una carrera:
+        // En el selectorListaSemestres se deben mostrar solo los semestres de esa carrera
+        this.selectorListaSemestres.removeAllItems();
+        ArrayList<Semestre> listaSemestres = listManager.getListaSemestres();
+        if (this.selectorListaCarreras.getSelectedItem() == null)
+            return ;
+        int i, cantidadSemestres = listaSemestres.size();
+        for (i = 0; i < cantidadSemestres; i++) {
+            if(listaSemestres.get(i).getCodigoEnCarrera() == ((Carrera)this.selectorListaCarreras.getSelectedItem()).getCodigoCarrera()) {
+                this.selectorListaSemestres.addItem(listaSemestres.get(i));
+            }
+        }
+}//GEN-LAST:event_selectorListaCarrerasItemStateChanged
+
+    private void botonAplicarCambiosCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAplicarCambiosCursoActionPerformed
+        // Acción a realizar cuando se presiona el boton "agregar curso"
+        int i, tamLista;
+
+        //Agrego la carrera
+        try {
+            Carrera carreraAlQuePertenece = (Carrera)this.selectorListaCarreras.getSelectedItem();
+            Semestre semestreAlquePertenece = (Semestre)this.selectorListaSemestres.getSelectedItem();
+            this.listManager.agregaCurso(this.campoNombreCursoNuevo.getText(), this.campoCodigoCursoNuevo.getText(), this.campoSeccionCursoNuevo.getText(), carreraAlQuePertenece, semestreAlquePertenece);
+        } catch (nombreRepetidoException nombreRepetido) {
+            if (nombreRepetido.getCodigoError() == 1) {       //abro nueva ventana
+                DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "Existe un curso con el mismo código y distinto nombre", "Escriba otro código de curso");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+            }
+            if (nombreRepetido.getCodigoError() == 2) {       //abro nueva ventana
+                DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "Existe un curso con el mismo nombre, código y sección", "Escriba otro código de curso o sección");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+            }
+            if (nombreRepetido.getCodigoError() == 3) {       //abro nueva ventana
+                DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "Existe un curso con el mismo nombre y sección en esta carrera", "Seleccione otra carrera u otra sección");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+            }
+        } catch (StringVacioException excepcionStringVacio) {
+            if (excepcionStringVacio.getCodigoString() == ManipuladorListas.ERROR_SECCION) {       //abro nueva ventana de error
+                DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "No hay una sección escrita", "Debe darle una sección al curso");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+            }
+            if (excepcionStringVacio.getCodigoString() == ManipuladorListas.ERROR_NOMBRE) {       //abro nueva ventana de error
+                DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "No hay un nombre de curso escrito", "Debe escribir un nombre de curso");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+            }
+
+        } catch (NumberFormatException NFE) {
+            DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "El código de curso introducido no es válido", "vuelva a escribir el código del curso");
+            dialogoError.setVisible(true);
+            dialogoError = null;
+            return ;
+        } catch (NullPointerException e) {       //Abro dialogo de error.
+            DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "Al parecer no existen carreras disponibles", "Agregue una carrera antes de un curso");
+            dialogoError.setVisible(true);
+            dialogoError = null;
+            return ;
+        }
+
+        /**ACTUALIZO GUI DE VENTANA PRINCIPAL, CAMBIAR ESTA PARTE!!!
+        this.listModelCursos = new DefaultListModel();
+        tamLista = this.listManager.getListaCursos().size();
+        for (i = 0; i < tamLista; i++) {
+            this.listModelCursos.addElement(this.listManager.getListaCursos().get(i));
+        }
+        this.visualizadorListaCursos.setModel(this.listModelCursos);
+        this.visualizadorListaCursosValueChanged(null);
+        this.cuadroInformacionCurso.setText("Se ha agregado correctamente el curso: "  + this.campoNombreCursoNuevo.getText());
+
+        */
+        //BORRAR HASTA AQUI!
+    }//GEN-LAST:event_botonAplicarCambiosCursoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonAplicarCambiosCurso;
+    private javax.swing.JTextField campoCodigoCursoNuevo;
+    private javax.swing.JTextField campoNombreCursoNuevo;
+    private javax.swing.JTextField campoSeccionCursoNuevo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JComboBox selectorListaCarreras;
+    private javax.swing.JComboBox selectorListaSemestres;
     // End of variables declaration//GEN-END:variables
 
 }

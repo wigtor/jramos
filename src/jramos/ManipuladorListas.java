@@ -72,6 +72,16 @@ public class ManipuladorListas
         {       return this.listaProfesores;
         }
 
+        public void editaProfesor(Profesor profesorAEditar, String nuevonombre, String nuevoRut, String ramosDisponibles, String horasDisp) throws StringVacioException, nombreRepetidoException, HourOutOfRangeException
+        {
+
+        }
+        
+        public void editaCurso() throws StringVacioException, nombreRepetidoException
+        {
+
+        }
+
         /**
          * Edita los atributos de una carrera y ademas modifica los objetos que dependan de la carrera
          * Cambia el nombre de la carrera

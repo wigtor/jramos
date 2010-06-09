@@ -1264,7 +1264,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         profesorSeleccionado = (Profesor)this.visualizadorListaProfes.getSelectedValue();
         if (profesorSeleccionado != null)
         {       //Lanzo un dialogo para editar el profesor seleccionado
-                DialogoEdicionProfesor dialogoEdicionProfesor = new DialogoEdicionProfesor(this, rootPaneCheckingEnabled);
+                DialogoEdicionProfesor dialogoEdicionProfesor = new DialogoEdicionProfesor(this, rootPaneCheckingEnabled, this.listManager, profesorSeleccionado);
                 dialogoEdicionProfesor.setVisible(true);
                 dialogoEdicionProfesor = null;
                 return ;
@@ -1322,7 +1322,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cursoSeleccionado = (Curso)this.visualizadorListaCursos.getSelectedValue();
         if (cursoSeleccionado != null)
         {       //Lanzo un dialogo para editar el profesor seleccionado
-                DialogoEdicionCurso dialogoEdicionCurso = new DialogoEdicionCurso(this, rootPaneCheckingEnabled);
+                DialogoEdicionCurso dialogoEdicionCurso = new DialogoEdicionCurso(this, rootPaneCheckingEnabled, this.listManager, cursoSeleccionado);
                 dialogoEdicionCurso.setVisible(true);
                 dialogoEdicionCurso = null;
                 return ;

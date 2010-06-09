@@ -18,7 +18,7 @@ package jramos.GUI;
 public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
 
     /** Creates new form VisualizadorHorarioObjeto */
-    public VisualizadorHorarioObjeto(java.awt.Frame parent, boolean modal) {
+    public VisualizadorHorarioObjeto(java.awt.Frame parent, boolean modal, Object objetoQueVerHorario) {
         super(parent, modal);
         initComponents();
     }
@@ -39,12 +39,13 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         panelCursos = new javax.swing.JScrollPane();
         tablaCursos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        botonCerrarHorario = new javax.swing.JButton();
         labelClaseObjeto = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         labelNombreObjeto = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Horario");
 
         horarioMostrado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,10 +95,10 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
 
         jLabel2.setText("Horario de clases ");
 
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonCerrarHorario.setText("Cerrar");
+        botonCerrarHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonCerrarHorarioActionPerformed(evt);
             }
         });
 
@@ -129,7 +130,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                                 .addComponent(labelNombreObjeto)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVisualizadorHorarioLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(botonCerrarHorario)
                         .addGap(341, 341, 341))))
         );
         PanelVisualizadorHorarioLayout.setVerticalGroup(
@@ -148,7 +149,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(botonCerrarHorario)
                 .addContainerGap())
         );
 
@@ -176,15 +177,16 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void botonCerrarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCerrarHorarioActionPerformed
+        //Al presionar el boton "cerrar" hago invisible la ventana
+        this.setVisible(false);
+    }//GEN-LAST:event_botonCerrarHorarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVisualizadorHorario;
+    private javax.swing.JButton botonCerrarHorario;
     private javax.swing.JTable horarioMostrado;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

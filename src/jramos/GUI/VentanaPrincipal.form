@@ -450,7 +450,7 @@
                                   </Group>
                                   <Component id="jLabel14" alignment="0" min="-2" pref="227" max="-2" attributes="0"/>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="jButton5" min="-2" max="-2" attributes="0"/>
+                                      <Component id="botonVerHorarioProfesor" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="botonEditarProfesor" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
@@ -471,7 +471,7 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel20" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="botonEditarProfesor" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton5" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="botonVerHorarioProfesor" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="botonEliminarProfesor" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -629,6 +629,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar profesor"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEditarProfesorActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botonEliminarProfesor">
               <Properties>
@@ -648,10 +651,13 @@
                 <Property name="text" type="java.lang.String" value="Agregar un nuevo profesor al registro: "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton5">
+            <Component class="javax.swing.JButton" name="botonVerHorarioProfesor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ver su horario"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVerHorarioProfesorActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -890,6 +896,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar curso"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEditarCursoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="botonEliminarCurso">
               <Properties>
@@ -911,6 +920,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ver su horario"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVerHorarioCursoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>

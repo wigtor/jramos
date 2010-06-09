@@ -144,7 +144,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonEliminarProfesor = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        botonVerHorarioProfesor = new javax.swing.JButton();
         panelVisualizadorCursos = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         visualizadorListaCursos = new javax.swing.JList();
@@ -241,7 +241,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10));
+        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         botonNuevaFacultad.setText("Nueva facultad...");
         botonNuevaFacultad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -428,6 +428,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel20.setText("Listado de profesores");
 
         botonEditarProfesor.setText("Editar profesor");
+        botonEditarProfesor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEditarProfesorActionPerformed(evt);
+            }
+        });
 
         botonEliminarProfesor.setText("Eliminar profesor");
         botonEliminarProfesor.addActionListener(new java.awt.event.ActionListener() {
@@ -439,7 +444,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 10));
         jLabel14.setText("Agregar un nuevo profesor al registro: ");
 
-        jButton5.setText("Ver su horario");
+        botonVerHorarioProfesor.setText("Ver su horario");
+        botonVerHorarioProfesor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVerHorarioProfesorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PanelVisualizadorProfesoresLayout = new javax.swing.GroupLayout(PanelVisualizadorProfesores);
         PanelVisualizadorProfesores.setLayout(PanelVisualizadorProfesoresLayout);
@@ -480,7 +490,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                 .addGap(29, 29, 29))
                             .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVisualizadorProfesoresLayout.createSequentialGroup()
-                                .addComponent(jButton5)
+                                .addComponent(botonVerHorarioProfesor)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(botonEditarProfesor)
                                 .addGap(44, 44, 44)
@@ -495,7 +505,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(botonEditarProfesor)
-                    .addComponent(jButton5)
+                    .addComponent(botonVerHorarioProfesor)
                     .addComponent(botonEliminarProfesor))
                 .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelVisualizadorProfesoresLayout.createSequentialGroup()
@@ -585,6 +595,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonEditarCurso.setText("Editar curso");
+        botonEditarCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEditarCursoActionPerformed(evt);
+            }
+        });
 
         botonEliminarCurso.setText("Eliminar curso");
         botonEliminarCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -597,6 +612,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel21.setText("Agregar un nuevo curso al registro:");
 
         botonVerHorarioCurso.setText("Ver su horario");
+        botonVerHorarioCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVerHorarioCursoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("¿En que semestre? ");
 
@@ -1011,6 +1031,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
             this.visualizadorListaFacultades.setModel(this.listModelFacultades);
             visualizadorListaFacultadesValueChanged(null);
+            this.cuadroInfornacionFacultad.setText("Seleccione una facultad del listado del costado para ver su información");
     }
 
     public void actualizaJListListaCarreras()
@@ -1281,6 +1302,69 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_menusalirActionPerformed
 
+    private void botonEditarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarProfesorActionPerformed
+        // Acción a realizar cuando se presiona el boton "editar profesor"
+        Profesor profesorSeleccionado;
+        profesorSeleccionado = (Profesor)this.visualizadorListaProfes.getSelectedValue();
+        if (profesorSeleccionado != null)
+        {       //Lanzo un dialogo para editar el profesor seleccionado
+                DialogoEdicionProfesor dialogoEdicionProfesor = new DialogoEdicionProfesor(this, rootPaneCheckingEnabled);
+                dialogoEdicionProfesor.setVisible(true);
+                dialogoEdicionProfesor = null;
+                return ;
+        }
+        else
+        {       //abro ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado un profesor para editar", "Seleccione un profesor desde la lista de profesores del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+    }//GEN-LAST:event_botonEditarProfesorActionPerformed
+
+    private void botonVerHorarioProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerHorarioProfesorActionPerformed
+        // Muestro el visualizador de horario del profesor seleccionado
+        Profesor profesorSeleccionado;
+        profesorSeleccionado = (Profesor)this.visualizadorListaProfes.getSelectedValue();
+        if (profesorSeleccionado != null)
+        {       VisualizadorHorarioObjeto ventanaHorario = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, profesorSeleccionado);
+                ventanaHorario.setVisible(true);
+                ventanaHorario = null;
+                return ;
+        }
+        else
+        {       //abro ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado un profesor para ver su horario", "Seleccione un profesor desde la lista de profesores del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+    }//GEN-LAST:event_botonVerHorarioProfesorActionPerformed
+
+    private void botonVerHorarioCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerHorarioCursoActionPerformed
+        // Muestro el visualizador de horario del curso seleccionado.
+        Curso cursoSeleccionado;
+        cursoSeleccionado = (Curso)this.visualizadorListaCursos.getSelectedValue();
+        if (cursoSeleccionado != null)
+        {       VisualizadorHorarioObjeto ventanaHorario = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, null);
+                ventanaHorario.setVisible(true);
+                ventanaHorario = null;
+                return ;
+        }
+        else
+        {       //abro ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado un curso para ver su horario", "Seleccione un curso desde la lista de cursos del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+    }//GEN-LAST:event_botonVerHorarioCursoActionPerformed
+
+    private void botonEditarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarCursoActionPerformed
+        // Acción a realizar cuando se presiona el boton "editar curso"
+        
+    }//GEN-LAST:event_botonEditarCursoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVisualizadorCarreras;
@@ -1300,6 +1384,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonNuevaCarrera;
     private javax.swing.JButton botonNuevaFacultad;
     private javax.swing.JButton botonVerHorarioCurso;
+    private javax.swing.JButton botonVerHorarioProfesor;
     private javax.swing.JTextField campoCodigoCursoNuevo;
     private javax.swing.JTextField campoHorasDisponibles;
     private javax.swing.JTextField campoNombreCursoNuevo;
@@ -1311,7 +1396,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea cuadroInformacionCurso;
     private javax.swing.JTextArea cuadroInformacionProfes;
     private javax.swing.JTextArea cuadroInfornacionFacultad;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

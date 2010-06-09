@@ -67,6 +67,18 @@ public class ManipuladorListas
         {       return this.listaProfesores;
         }
 
+        /**
+         * Edita los atributos de una carrera y ademas modifica los objetos que dependan de la carrera
+         * Cambia el nombre de la carrera
+         * Cambia la descripción de la carrera
+         * cambia la cantidad de semestres de la carrera:
+         * si la nueva cantidad de semestres es mayor a la existente, crea nuevos objetos Semestre y los referencia
+         * si la nueva cantidad de semestres es menor a la existente, elimina los semestres finales y los cursos que posean estos semestres
+         * @param carreraAEditar
+         * @param nuevoNombre
+         * @param nuevaDescrip
+         * @param nuevaCantidadSemestres
+         */
         public void editaCarrera(Carrera carreraAEditar, String nuevoNombre, String nuevaDescrip, int nuevaCantidadSemestres)
         {       //seteo el nuevo nombre y descripción
                 carreraAEditar.setDescripcion(nuevaDescrip);
@@ -94,6 +106,12 @@ public class ManipuladorListas
 
                 }
         }
+        /**
+         * Este método elimina un curso desde la lista de cursos
+         * Quita las referencias existentes del curso que existan en los semestres de la lista de semestres
+         * Quita las referencias existentes del curso que existan en el profesor que tenga asignado
+         * @param cursoABorrar el objeto Curso que se quiere eliminar de las listas
+         */
         public void eliminaCurso(Curso cursoABorrar)
         {       //Quito el curso a eliminar de la lista de cursos
                 this.listaCursos.remove(cursoABorrar);

@@ -160,7 +160,20 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
                 ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaFacultades();
         }
         else
-        {       //modifico la facultad
+        {       //Compruebo que el nuevo nombre de la facultad no es igual al nombre de otra facultad
+                ArrayList<Facultad> listaCompletaFacultades = this.listManager.getListaFacultades();
+                for (Facultad facultad : listaCompletaFacultades)
+                {       //si el nombre nuevo de la facultad es igual algun nombre de las facultades de la lista de facultades (A excepción de la facultad que se está modificando), lanzo dialogo de error.
+                        if ((this.campoNombreFacultadNueva.getText().equals(facultad.getNombreFacultad())) && !(facultad.equals(this.facultadAEditar)))
+                        {       //abro nueva ventana de error.
+                                DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nuevo nombre de facultad introducido ya existe.", "vuelva a escribir otro nombre para la facultad");
+                                dialogoError.setVisible(true);
+                                dialogoError = null;
+                                return ;
+                        }
+                }
+
+                //modifico la facultad
                 this.facultadAEditar.setNombre(this.campoNombreFacultadNueva.getText());
                 this.facultadAEditar.setDescripcion(this.textoDescripcionFacultadNueva.getText());
                 ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaFacultades();

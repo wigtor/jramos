@@ -14,7 +14,7 @@ package jramos.capaIO;
 
 import jramos.tiposDatos.Profesor;
 import jramos.tiposDatos.Hora;
-import jramos.tiposDatos.HourOutOfRangeException;
+import jramos.excepciones.HourOutOfRangeException;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.BufferedReader;

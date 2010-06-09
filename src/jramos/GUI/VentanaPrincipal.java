@@ -11,6 +11,7 @@
 
 package jramos.GUI;
 
+import jramos.excepciones.HourOutOfRangeException;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import jramos.ManipuladorListas;

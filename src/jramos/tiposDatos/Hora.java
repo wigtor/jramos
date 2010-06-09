@@ -9,6 +9,9 @@
 
 package jramos.tiposDatos;
 
+import jramos.excepciones.HourOutOfRangeException;
+import jramos.excepciones.HourNotInicializatedException;
+
 /** La hora puede ser mostrada según distintos formatos
 * El primer formato es como un entero que comienza a contar desde la primera hora del dia lunes, hasta la ultima hora del dia sábado
 * Cada dia tiene 9 horas y a la semana hay 6 dias de clases. 54 horas maximas a la semana.

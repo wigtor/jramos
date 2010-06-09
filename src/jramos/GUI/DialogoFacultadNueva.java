@@ -13,6 +13,8 @@ package jramos.GUI;
 import jramos.tiposDatos.Facultad;
 import java.util.ArrayList;
 import jramos.ManipuladorListas;
+import jramos.excepciones.StringVacioException;
+import jramos.excepciones.nombreRepetidoException;
 
 /**
  *
@@ -136,46 +138,38 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
 
     private void botonAceptaAgregarFacultadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAceptaAgregarFacultadActionPerformed
         // Accion a realizar cuando se aprieta el boton "agregar facultad"
-        if (this.campoNombreFacultadNueva.getText().trim().equals(""))
-        {       //abro nueva ventana
-                DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "No hay un nombre de facultad escrito", "Debe escribir un nombre de facultad");
-                dialogoError.setVisible(true);
-                dialogoError = null;
-                return ;
-        }
+        //Si lo que se desea es crear una facultad Nueva:
         if (this.nuevaOEdita == VentanaPrincipal.NUEVA)
-        {       //Si ya existe una facultad con el mismo nombre tampoco se agrega.
-                ArrayList<Facultad> listaCompletaFacultades = this.listManager.getListaFacultades();
-                for (Facultad facultad : listaCompletaFacultades)
-                {       if (this.campoNombreFacultadNueva.getText().equals(facultad.getNombreFacultad()))
-                        {       //abro nueva ventana de error.
-                                DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nombre de facultad ya existe.", "vuelva a escribir otro nombre para la facultad");
-                                dialogoError.setVisible(true);
-                                dialogoError = null;
-                                return ;
-                        }
+        {       try
+                {       //Creo una facultad nueva
+                        listManager.agregaFacultad(campoNombreFacultadNueva.getText(), textoDescripcionFacultadNueva.getText());
                 }
-                //Creo una facultad nueva
-                listManager.agregaFacultad(campoNombreFacultadNueva.getText(), textoDescripcionFacultadNueva.getText());
+                catch (nombreRepetidoException nombreFacultadRepetido)
+                {       DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nombre de facultad ya existe.", "vuelva a escribir otro nombre para la facultad");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+                catch (StringVacioException nombreFacultadVacio)
+                {       DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "No hay un nombre de facultad escrito", "Debe escribir un nombre de facultad");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
                 ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaFacultades();
         }
+        //Si lo que se desea es editar una facultad:
         else
-        {       //Compruebo que el nuevo nombre de la facultad no es igual al nombre de otra facultad
-                ArrayList<Facultad> listaCompletaFacultades = this.listManager.getListaFacultades();
-                for (Facultad facultad : listaCompletaFacultades)
-                {       //si el nombre nuevo de la facultad es igual algun nombre de las facultades de la lista de facultades (A excepción de la facultad que se está modificando), lanzo dialogo de error.
-                        if ((this.campoNombreFacultadNueva.getText().equals(facultad.getNombreFacultad())) && !(facultad.equals(this.facultadAEditar)))
-                        {       //abro nueva ventana de error.
-                                DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nuevo nombre de facultad introducido ya existe.", "vuelva a escribir otro nombre para la facultad");
-                                dialogoError.setVisible(true);
-                                dialogoError = null;
-                                return ;
-                        }
+        {       try
+                {       this.listManager.editarFacultad(facultadAEditar, this.campoNombreFacultadNueva.getText(), this.textoDescripcionFacultadNueva.getText());
                 }
-
-                //modifico la facultad
-                this.facultadAEditar.setNombre(this.campoNombreFacultadNueva.getText());
-                this.facultadAEditar.setDescripcion(this.textoDescripcionFacultadNueva.getText());
+                catch (nombreRepetidoException nombreFacultadVacio)
+                {       DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nuevo nombre de facultad introducido ya existe.", "vuelva a escribir otro nombre para la facultad");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
+                //Actualizo las listas que se muestran en la GUI
                 ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaFacultades();
                 ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCarreras();
         }

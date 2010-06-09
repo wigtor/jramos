@@ -21,6 +21,8 @@ import jramos.tiposDatos.Semestre;
 import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Profesor;
 import java.util.ArrayList;
+import jramos.excepciones.StringVacioException;
+import jramos.excepciones.nombreRepetidoException;
 
 public class ManipuladorListas
 {       /* ATRIBUTOS */
@@ -79,8 +81,24 @@ public class ManipuladorListas
          * @param nuevaDescrip
          * @param nuevaCantidadSemestres
          */
-        public void editaCarrera(Carrera carreraAEditar, String nuevoNombre, String nuevaDescrip, int nuevaCantidadSemestres)
-        {       //seteo el nuevo nombre y descripción
+        public void editaCarrera(Carrera carreraAEditar, String nuevoNombre, String nuevaDescrip, int nuevaCantidadSemestres) throws nombreRepetidoException, StringVacioException
+        {       //Compuebo que el nuevo nombre no sea String vacio
+                if (nuevoNombre.trim().equals(""))
+                {       //Lando Excepcion
+                        throw new StringVacioException();
+                }
+
+                //Si modifico el nombre de la carrera, me aseguro que no hayan otras carreras con el nombre nuevo
+                if (!(carreraAEditar.getNombreCarrera().equals(nuevoNombre)))
+                {       for (Carrera carrera : this.listaCarreras)
+                        {       if (carrera.getNombreCarrera().equals(nuevoNombre))
+                                {       //lanzo excepcion
+                                        throw new nombreRepetidoException();
+                                }
+                        }
+                }
+
+                //seteo el nuevo nombre y descripción
                 carreraAEditar.setDescripcion(nuevaDescrip);
                 carreraAEditar.setNombre(nuevoNombre);
                 int cantSemestresActuales = carreraAEditar.getIdSemestresArrayList().size();
@@ -153,11 +171,39 @@ public class ManipuladorListas
          * @param nombreFacultad El string con el nombre de la facultad que se está creando.
          * @param descripcion El string con la descripción de la facultad que se está creando
          */
-        public void agregaFacultad(String nombreFacultad, String descripcion)
-        {       
+        public void agregaFacultad(String nombreFacultad, String descripcion) throws StringVacioException, nombreRepetidoException
+        {       if (nombreFacultad.trim().equals(""))
+                {       //Si el nombre de la facultad es un string vacio, lanzo excepcion
+                        throw new StringVacioException();
+                }
+
+                //Si ya existe una facultad con el mismo nombre tampoco se agrega.
+                ArrayList<Facultad> listaCompletaFacultades = this.listaFacultades;
+                for (Facultad facultad : listaCompletaFacultades)
+                {       if (nombreFacultad.equals(facultad.getNombreFacultad()))
+                        {       //lanzo error: ya existe una facultad con ese nombre
+                                throw new nombreRepetidoException();
+                        }
+                }
                 Facultad facultadNueva = new Facultad(nombreFacultad);
                 facultadNueva.setDescripcion(descripcion);
                 this.listaFacultades.add(facultadNueva);
+        }
+
+        public void editarFacultad(Facultad facultadAEditar, String nuevoNombre, String nuevaDescripcion) throws nombreRepetidoException
+        {       //Compruebo que el nuevo nombre de la facultad no es igual al nombre de otra facultad
+                ArrayList<Facultad> listaCompletaFacultades = this.listaFacultades;
+                for (Facultad facultad : listaCompletaFacultades)
+                {       //si el nombre nuevo de la facultad es igual algun nombre de las facultades de la lista de facultades (A excepción de la facultad que se está modificando), lanzo dialogo de error.
+                        if ((nuevoNombre.equals(facultad.getNombreFacultad())) && !(facultad.equals(facultadAEditar)))
+                        {       //abro nueva ventana de error.
+                                throw new nombreRepetidoException();
+                        }
+                }
+
+                //modifico la facultad
+                facultadAEditar.setNombre(nuevoNombre);
+                facultadAEditar.setDescripcion(nuevaDescripcion);
         }
 
         /**
@@ -230,8 +276,23 @@ public class ManipuladorListas
          * @param descripcion La descripción de la carrera.
          * @param cantidadSemestres El número de semestres que tendrá la carrera
          */
-        public void agregaCarrera(String nombreCarrera, Facultad facultadALaQuePertenece, String descripcion, int cantidadSemestres)
-        {       int i;
+        public void agregaCarrera(String nombreCarrera, Facultad facultadALaQuePertenece, String descripcion, int cantidadSemestres) throws StringVacioException, nombreRepetidoException
+        {       //si lo que se ha escrito es nada, entonces no se agrega la carrera
+                if (nombreCarrera.trim().equals(""))
+                {       //Lando Excepcion
+                        throw new StringVacioException();
+                }
+
+                //Si ya existe una carrera con el mismo nombre tampoco se agrega.
+                ArrayList<Carrera> listaCompletaCarreras = this.listaCarreras;
+                for (Carrera carrera : listaCompletaCarreras)
+                {       if (nombreCarrera.equals(carrera.getNombreCarrera()))
+                        {       //lanzo excepcion
+                                throw new nombreRepetidoException();
+                        }
+                }
+
+                int i;
                 Carrera carreraNueva = new Carrera(nombreCarrera);
                 Semestre semestreNuevo;
                 carreraNueva.setFacultad(facultadALaQuePertenece);

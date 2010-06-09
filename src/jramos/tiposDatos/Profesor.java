@@ -14,6 +14,7 @@
 *****************************************************/
 
 package jramos.tiposDatos;
+import jramos.excepciones.HourOutOfRangeException;
 import java.util.ArrayList;
 public class Profesor {
     static int idProfesorActual = 0;

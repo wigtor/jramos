@@ -17,7 +17,7 @@ import jramos.tiposDatos.Curso;
 import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Facultad;
 import jramos.tiposDatos.Semestre;
-import jramos.tiposDatos.HourOutOfRangeException;
+import jramos.excepciones.HourOutOfRangeException;
 import java.util.ArrayList;
 import java.io.File;
 import java.io.BufferedReader;

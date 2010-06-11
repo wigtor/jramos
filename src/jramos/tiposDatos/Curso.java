@@ -119,6 +119,11 @@ public class Curso {
        return this.idSemestre;
    }
 
+   
+   public ArrayList<Hora> getHorasAsigArrayList()
+   {        return this.horario;
+   }
+
    /**
     * Obtiene el código del curso
     *
@@ -186,6 +191,15 @@ public class Curso {
             return this.profeAsig.getNombreProfesor();
        else
            return "";
+   }
+
+   /**
+    * Obtiene el objeto Profesor asignado al curso
+    * @return Devuelve un objeto tipo Profesor con el profesor asignado al curso, si no tiene profesor asignado devuelve null.
+    */
+   public Profesor getProfeAsig()
+   {        return this.profeAsig;
+
    }
 
    /**

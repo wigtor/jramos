@@ -700,19 +700,21 @@
                                               <Group type="103" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel18" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                                   <Component id="selectorListaSemestres" min="-2" max="-2" attributes="0"/>
-                                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="campoSeccionCursoNuevo" max="32767" attributes="1"/>
-                                                      <Component id="campoCodigoCursoNuevo" alignment="0" max="32767" attributes="1"/>
-                                                      <Component id="campoNombreCursoNuevo" alignment="0" pref="270" max="32767" attributes="1"/>
-                                                      <Component id="selectorListaCarreras" alignment="0" min="-2" max="-2" attributes="1"/>
+                                                  <Component id="selectorListaCarreras" alignment="0" min="-2" max="-2" attributes="1"/>
+                                                  <Group type="102" alignment="0" attributes="1">
+                                                      <Component id="selectorLetraSeccion" min="-2" max="-2" attributes="0"/>
+                                                      <EmptySpace max="-2" attributes="0"/>
+                                                      <Component id="selectorNumeroSeccion" min="-2" max="-2" attributes="0"/>
                                                   </Group>
+                                                  <Component id="campoCodigoCursoNuevo" alignment="0" pref="299" max="32767" attributes="1"/>
+                                                  <Component id="campoNombreCursoNuevo" alignment="0" max="32767" attributes="1"/>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -767,9 +769,10 @@
                                   <Component id="campoCodigoCursoNuevo" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                                  <Component id="campoSeccionCursoNuevo" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="selectorLetraSeccion" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="selectorNumeroSeccion" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -781,7 +784,7 @@
                                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="selectorListaSemestres" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="19" max="32767" attributes="0"/>
                               <Component id="botonAgregarCurso" min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -789,7 +792,7 @@
                               <Component id="jScrollPane6" min="-2" pref="397" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                      <EmptySpace pref="13" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -865,8 +868,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="campoCodigoCursoNuevo">
             </Component>
-            <Component class="javax.swing.JTextField" name="campoSeccionCursoNuevo">
-            </Component>
             <Component class="javax.swing.JComboBox" name="selectorListaCarreras">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -937,6 +938,32 @@
                     <StringItem index="1" value="Item 2"/>
                     <StringItem index="2" value="Item 3"/>
                     <StringItem index="3" value="Item 4"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="selectorLetraSeccion">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="A"/>
+                    <StringItem index="1" value="B"/>
+                    <StringItem index="2" value="C"/>
+                    <StringItem index="3" value="D"/>
+                  </StringArray>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="selectorNumeroSeccion">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="6">
+                    <StringItem index="0" value="1"/>
+                    <StringItem index="1" value="2"/>
+                    <StringItem index="2" value="3"/>
+                    <StringItem index="3" value="4"/>
+                    <StringItem index="4" value="5"/>
+                    <StringItem index="5" value="6"/>
                   </StringArray>
                 </Property>
               </Properties>

@@ -27,8 +27,6 @@ import jramos.excepciones.nombreRepetidoException;
 
 public class ManipuladorListas
 {       /* ATRIBUTOS */
-        public static final int ERROR_SECCION = 3;
-        public static final int ERROR_NOMBRE = 0;
         private ArrayList<Facultad> listaFacultades;
         private ArrayList<Carrera> listaCarreras;
         private ArrayList<Semestre> listaSemestres;
@@ -77,9 +75,13 @@ public class ManipuladorListas
 
         }
         
-        public void editaCurso() throws StringVacioException, nombreRepetidoException
-        {
-
+        public void editaCurso(Curso cursoAEditar, Profesor profesorAAsignarle, ArrayList<Hora> horasQueAsignarle) throws HourOutOfRangeException
+        {       for (Hora hora : horasQueAsignarle)
+                {       cursoAEditar.modHorario(hora, 1);
+                        profesorAAsignarle.modHorasAsignadas(hora, 1);
+                }
+                cursoAEditar.setProfesor(profesorAAsignarle);
+                profesorAAsignarle.modCursosAsignados(cursoAEditar, 1);
         }
 
         /**
@@ -182,7 +184,7 @@ public class ManipuladorListas
                 }
                 //Compruebo que el campo "nombre del curso"  no sea un string vacio
                 if (nombreCurso.trim().equals(""))
-                {       throw new StringVacioException(ManipuladorListas.ERROR_NOMBRE);
+                {       throw new StringVacioException();
                 }
                 
                 //Compruebo el campo de el codigo de curso si es válido
@@ -200,22 +202,29 @@ public class ManipuladorListas
                         {       //Lanzo excepcion de nombre repetido con codigo 1
                                 throw new nombreRepetidoException(1);
                         }
+                        //if ((curso.getCodigoCurso() == codCurso) && (curso.getNombreCurso().equals(nombreCurso)) && (curso.getEnCarrera().equals(carreraAlQuePertenece)))
+                        //{       //Lanzo excepcion de nombre repetido con codigo 1
+                        //        throw new nombreRepetidoException(2);
+                        //}
                         //Si el codigo de curso es igual, el nombre es igual y la seccion es igual, lanzo dialogo de error.
                         if ((curso.getCodigoCurso() == codCurso) && (curso.getNombreCurso().equals(nombreCurso)) && (seccion.equals(curso.getSeccion())))
                         {       //Lanzo excepcion de nombre repetido con codigo 2
                                 throw new nombreRepetidoException(2);
                         }
+
+                        if ((((curso.getCodigoCurso() == codCurso) && !(curso.getNombreCurso().equals(nombreCurso))) || (!(curso.getCodigoCurso() == codCurso) && (curso.getNombreCurso().equals(nombreCurso)))) && (curso.getEnCarrera() == carreraAlQuePertenece))
+                        {       //Lanzo excepcion de nombre repetido con codigo 3
+                                throw new nombreRepetidoException(4);
+                        }
                         //Si el codigo de curso o el nombres son iguales, en la misma carrera, lanzo dialogo de error
-                        if (((curso.getCodigoCurso() == codCurso) || (curso.getNombreCurso().equals(nombreCurso))) && (curso.getEnCarrera() == carreraAlQuePertenece) && (seccion.equals(curso.getSeccion())))
+                        if (((curso.getCodigoCurso() == codCurso) || (curso.getNombreCurso().equals(nombreCurso))) && (curso.getEnCarrera() == carreraAlQuePertenece) && !(semestreAlQuePertenece.equals(curso.getEnSemestre())))
+                        {       //Lanzo excepcion de nombre repetido con codigo 3
+                                throw new nombreRepetidoException(4);
+                        }
+                        if (((curso.getCodigoCurso() == codCurso) || (curso.getNombreCurso().equals(nombreCurso))) && (curso.getEnCarrera() == carreraAlQuePertenece) && (semestreAlQuePertenece.equals(curso.getEnSemestre()) && (seccion.equals(curso.getSeccion()))))
                         {       //Lanzo excepcion de nombre repetido con codigo 3
                                 throw new nombreRepetidoException(3);
                         }
-                }
-
-                //Compruebo si el campo de texto "seccion" no es un string vacio
-                if (seccion.trim().equals(""))
-                {       //lanzo una excepcion de string vacio con codigo ERROR_SECCION, para referirme a un error en la seccion
-                        throw new StringVacioException(ManipuladorListas.ERROR_SECCION);
                 }
 
                 //Creo el nuevo objeto curso y los agrego a la lista de cursos.

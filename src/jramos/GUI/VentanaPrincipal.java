@@ -56,11 +56,24 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         this.selectorListaSemestres.removeAllItems();
         this.selectorListaCarreras.removeAllItems();
+        this.selectorLetraSeccion.removeAllItems();
+        this.selectorNumeroSeccion.removeAllItems();
+        
         //Muestro las carreras en el selector de lista de carreras de la pestaña "curso"
         ArrayList<Carrera> listaCarreras = listManager.getListaCarreras();
         int cantidadCarreras = listaCarreras.size();
         for (i = 0; i < cantidadCarreras; i++)
         {       this.selectorListaCarreras.addItem(listaCarreras.get(i));
+        }
+        //listo las letras y numeros de seccion en los selectores de la pestaña "curso" de la GUI
+        char c;
+        //Usando la tabla ASCII listo los numeros de 1 a 9 como string
+        for(c = 49; c<58; c++)
+        {       this.selectorNumeroSeccion.addItem((new Character(c)).toString());
+        }
+        //Usando la tabla ASCII listo las letras de A a la Z como string
+        for (c = 65; c <91; c++)
+        {       this.selectorLetraSeccion.addItem((new Character(c)).toString());
         }
         /*
         //Muestro los semestres en el selector de semestres de la pestaña "curso"
@@ -160,7 +173,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         campoNombreCursoNuevo = new javax.swing.JTextField();
         campoCodigoCursoNuevo = new javax.swing.JTextField();
-        campoSeccionCursoNuevo = new javax.swing.JTextField();
         selectorListaCarreras = new javax.swing.JComboBox();
         botonAgregarCurso = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
@@ -170,6 +182,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonVerHorarioCurso = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         selectorListaSemestres = new javax.swing.JComboBox();
+        selectorLetraSeccion = new javax.swing.JComboBox();
+        selectorNumeroSeccion = new javax.swing.JComboBox();
         barraMenu = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -244,7 +258,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10));
         botonNuevaFacultad.setText("Nueva facultad...");
         botonNuevaFacultad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -625,6 +639,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         selectorListaSemestres.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        selectorLetraSeccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D" }));
+
+        selectorNumeroSeccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6" }));
+
         javax.swing.GroupLayout panelVisualizadorCursosLayout = new javax.swing.GroupLayout(panelVisualizadorCursos);
         panelVisualizadorCursos.setLayout(panelVisualizadorCursosLayout);
         panelVisualizadorCursosLayout.setHorizontalGroup(
@@ -645,17 +663,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                         .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel15)
                                             .addComponent(jLabel16)
-                                            .addComponent(jLabel18)
                                             .addComponent(jLabel19)
-                                            .addComponent(jLabel1))
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel18))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(selectorListaSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(campoSeccionCursoNuevo)
-                                                .addComponent(campoCodigoCursoNuevo)
-                                                .addComponent(campoNombreCursoNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                                                .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                            .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
+                                                .addComponent(selectorLetraSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(selectorNumeroSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(campoCodigoCursoNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                                            .addComponent(campoNombreCursoNuevo)))))
                             .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
                                 .addGap(182, 182, 182)
                                 .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -696,9 +716,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel16)
                             .addComponent(campoCodigoCursoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(selectorLetraSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel18)
-                            .addComponent(campoSeccionCursoNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(selectorNumeroSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -707,12 +728,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(selectorListaSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
                         .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         PanelVisualizadorGeneral.addTab("Cursos", panelVisualizadorCursos);
@@ -840,7 +861,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         try
         {       Carrera carreraAlQuePertenece = (Carrera)this.selectorListaCarreras.getSelectedItem();
                 Semestre semestreAlquePertenece = (Semestre)this.selectorListaSemestres.getSelectedItem();
-                this.listManager.agregaCurso(this.campoNombreCursoNuevo.getText(), this.campoCodigoCursoNuevo.getText(), this.campoSeccionCursoNuevo.getText(), carreraAlQuePertenece, semestreAlquePertenece);
+                String seccion = (String)this.selectorLetraSeccion.getSelectedItem() + "0" + (String)this.selectorNumeroSeccion.getSelectedItem();
+                this.listManager.agregaCurso(this.campoNombreCursoNuevo.getText(), this.campoCodigoCursoNuevo.getText(), seccion, carreraAlQuePertenece, semestreAlquePertenece);
         }
         catch (nombreRepetidoException nombreRepetido)
         {
@@ -865,23 +887,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         dialogoError = null;
                         return ;
                 }
+                if (nombreRepetido.getCodigoError() == 4)
+                {       //abro nueva ventana
+                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Existe un curso igual en otro semestre de la carrera", "Seleccione otra carrera u otro nombre de curso.");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
+                }
         }
         catch (StringVacioException excepcionStringVacio)
-        {       if (excepcionStringVacio.getCodigoString() == ManipuladorListas.ERROR_SECCION)
-                {       //abro nueva ventana de error
-                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay una sección escrita", "Debe darle una sección al curso");
-                        dialogoError.setVisible(true);
-                        dialogoError = null;
-                        return ;
-                }
-                if (excepcionStringVacio.getCodigoString() == ManipuladorListas.ERROR_NOMBRE)
-                {       //abro nueva ventana de error
-                        DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay un nombre de curso escrito", "Debe escribir un nombre de curso");
-                        dialogoError.setVisible(true);
-                        dialogoError = null;
-                        return ;
-                }
-
+        {       //abro nueva ventana de error
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No hay un nombre de curso escrito", "Debe escribir un nombre de curso");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
         }
         catch (NumberFormatException NFE)
         {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "El código de curso introducido no es válido", "vuelva a escribir el código del curso");
@@ -1283,7 +1302,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Profesor profesorSeleccionado;
         profesorSeleccionado = (Profesor)this.visualizadorListaProfes.getSelectedValue();
         if (profesorSeleccionado != null)
-        {       VisualizadorHorarioObjeto ventanaHorario = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, profesorSeleccionado);
+        {       VisualizadorHorarioObjeto ventanaHorario = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, profesorSeleccionado, VisualizadorHorarioObjeto.VISUALIZACION);
                 ventanaHorario.setVisible(true);
                 ventanaHorario = null;
                 return ;
@@ -1302,7 +1321,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Curso cursoSeleccionado;
         cursoSeleccionado = (Curso)this.visualizadorListaCursos.getSelectedValue();
         if (cursoSeleccionado != null)
-        {       VisualizadorHorarioObjeto ventanaHorario = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, null);
+        {       VisualizadorHorarioObjeto ventanaHorario = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, cursoSeleccionado,  VisualizadorHorarioObjeto.VISUALIZACION);
                 ventanaHorario.setVisible(true);
                 ventanaHorario = null;
                 return ;
@@ -1362,7 +1381,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField campoNombreProfesorNuevo;
     private javax.swing.JTextField campoRamosQueDicta;
     private javax.swing.JTextField campoRutProfesor;
-    private javax.swing.JTextField campoSeccionCursoNuevo;
     private javax.swing.JTextArea cuadroInformacionCarrera;
     private javax.swing.JTextArea cuadroInformacionCurso;
     private javax.swing.JTextArea cuadroInformacionProfes;
@@ -1407,8 +1425,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuVerManual;
     private javax.swing.JMenuItem menusalir;
     private javax.swing.JPanel panelVisualizadorCursos;
+    private javax.swing.JComboBox selectorLetraSeccion;
     private javax.swing.JComboBox selectorListaCarreras;
     private javax.swing.JComboBox selectorListaSemestres;
+    private javax.swing.JComboBox selectorNumeroSeccion;
     private javax.swing.JList visualizadorListaCarreras;
     private javax.swing.JList visualizadorListaCursos;
     private javax.swing.JList visualizadorListaFacultades;

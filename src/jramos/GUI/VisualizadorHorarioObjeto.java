@@ -11,16 +11,60 @@
 
 package jramos.GUI;
 
+import java.awt.Dimension;
+import java.util.ArrayList;
+import jramos.excepciones.HourOutOfRangeException;
+import jramos.tiposDatos.Curso;
+import jramos.tiposDatos.Hora;
+import jramos.tiposDatos.Profesor;
+
 /**
  *
  * @author victor
  */
 public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
-
+    public static final int EDICION = 1;
+    public static final int VISUALIZACION = 2;
+    private ArrayList<Hora> horasAMostrar;
     /** Creates new form VisualizadorHorarioObjeto */
-    public VisualizadorHorarioObjeto(java.awt.Frame parent, boolean modal, Object objetoQueVerHorario) {
+    public VisualizadorHorarioObjeto(java.awt.Frame parent, boolean modal, Object objetoQueVerHorario, int modo) {
         super(parent, modal);
         initComponents();
+        int i, j;
+        if (objetoQueVerHorario.getClass().equals(Curso.class))
+        {       horasAMostrar = ((Curso)objetoQueVerHorario).getHorasAsigArrayList();
+                this.labelClaseObjeto.setText("Curso");
+                this.labelNombreObjeto.setText(((Curso)objetoQueVerHorario).getNombreCurso());
+        }
+        if (objetoQueVerHorario.getClass().equals(Profesor.class))
+        {       horasAMostrar = ((Profesor)objetoQueVerHorario).getHorasAsigArrayList();
+                this.labelClaseObjeto.setText("Profesor");
+                this.labelNombreObjeto.setText(((Profesor)objetoQueVerHorario).getNombreProfesor());
+        }
+        if (modo == VisualizadorHorarioObjeto.VISUALIZACION)
+        {       this.horarioMostrado.setCellSelectionEnabled(false);
+
+        }
+        if (modo == VisualizadorHorarioObjeto.EDICION)
+        {       this.horarioMostrado.setCellSelectionEnabled(true);
+                this.panelCursos.setVisible(false);
+                this.labelCursos.setVisible(false);
+                this.setSize(782, 300);
+                this.botonCerrarHorario.setText("Aceptar");
+        }
+        try
+        {   for(i = 1; i < 7; i++)
+            {       for (j = 0; j < 9; j++)
+                    {       horarioMostrado.setValueAt(new Hora((i-1)*9 + j+1), j, i);
+
+                    }
+            }
+        }
+        catch (HourOutOfRangeException e)
+        {
+            System.out.println("Error al mostrar la hora en la tabla");
+        }
+        
     }
 
     /** This method is called from within the constructor to
@@ -35,7 +79,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         PanelVisualizadorHorario = new javax.swing.JPanel();
         panelHorario = new javax.swing.JScrollPane();
         horarioMostrado = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        labelCursos = new javax.swing.JLabel();
         panelCursos = new javax.swing.JScrollPane();
         tablaCursos = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
@@ -73,8 +117,8 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         });
         panelHorario.setViewportView(horarioMostrado);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14));
-        jLabel1.setText("Cursos");
+        labelCursos.setFont(new java.awt.Font("Dialog", 1, 14));
+        labelCursos.setText("Cursos");
 
         tablaCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,7 +137,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         ));
         panelCursos.setViewportView(tablaCursos);
 
-        jLabel2.setText("Horario de clases ");
+        jLabel2.setText("Horario");
 
         botonCerrarHorario.setText("Cerrar");
         botonCerrarHorario.addActionListener(new java.awt.event.ActionListener() {
@@ -115,37 +159,44 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
             .addGroup(PanelVisualizadorHorarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelVisualizadorHorarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PanelVisualizadorHorarioLayout.createSequentialGroup()
-                        .addGroup(PanelVisualizadorHorarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(panelHorario, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
-                            .addComponent(panelCursos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
-                            .addGroup(PanelVisualizadorHorarioLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelClaseObjeto)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(labelNombreObjeto)))
-                        .addContainerGap())
+                    .addGroup(PanelVisualizadorHorarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanelVisualizadorHorarioLayout.createSequentialGroup()
+                            .addGroup(PanelVisualizadorHorarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(labelCursos)
+                                .addComponent(panelHorario, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+                                .addComponent(panelCursos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 758, Short.MAX_VALUE)
+                                .addGroup(PanelVisualizadorHorarioLayout.createSequentialGroup()
+                                    .addGap(27, 27, 27)
+                                    .addComponent(labelClaseObjeto)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(labelNombreObjeto)))
+                            .addContainerGap())
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVisualizadorHorarioLayout.createSequentialGroup()
+                            .addComponent(botonCerrarHorario)
+                            .addGap(341, 341, 341)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVisualizadorHorarioLayout.createSequentialGroup()
-                        .addComponent(botonCerrarHorario)
-                        .addGap(341, 341, 341))))
+                        .addComponent(jLabel2)
+                        .addGap(349, 349, 349))))
         );
         PanelVisualizadorHorarioLayout.setVerticalGroup(
             PanelVisualizadorHorarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PanelVisualizadorHorarioLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addGroup(PanelVisualizadorHorarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(labelClaseObjeto)
-                    .addComponent(jLabel3)
-                    .addComponent(labelNombreObjeto))
+                .addGroup(PanelVisualizadorHorarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelVisualizadorHorarioLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(PanelVisualizadorHorarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(labelNombreObjeto)
+                            .addComponent(labelClaseObjeto)))
+                    .addGroup(PanelVisualizadorHorarioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(labelCursos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panelCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
@@ -187,10 +238,10 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
     private javax.swing.JPanel PanelVisualizadorHorario;
     private javax.swing.JButton botonCerrarHorario;
     private javax.swing.JTable horarioMostrado;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel labelClaseObjeto;
+    private javax.swing.JLabel labelCursos;
     private javax.swing.JLabel labelNombreObjeto;
     private javax.swing.JScrollPane panelCursos;
     private javax.swing.JScrollPane panelHorario;

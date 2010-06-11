@@ -344,5 +344,16 @@ public final class Hora
 		}
 		return diaStr + ", " + horaStr;
 	}
+
+    @Override
+        public String toString()
+        {       try
+                {       return this.getHoraStr();
+                }
+                catch (HourNotInicializatedException HNIE)
+                {       return "";
+                }
+        }
+
 	/* FIN DE LOS MÉTODOS DE LA CLASE */
 }

@@ -81,6 +81,14 @@ public class Profesor {
     }
 
     /**
+     * Obtiene la lista de Integer con los codigos de cursos que el profesor puede impartir
+     * @return Devuelve un ArrayList con los codigos de curso que el profesor puede impartir.
+     */
+    public ArrayList<Integer> getCodCursosQueImparteArrayList()
+    {       return this.cursosDisp;
+    }
+
+    /**
      * Obtiene las horas que el profesor tiene disponibles
      * Las horas son devueltas según el 2° formato de hora especificado en la clase Hora
      * @return String con las horas en el 2° formato separadas por un "|"
@@ -99,6 +107,9 @@ public class Profesor {
         return text.toString();
     }
 
+    public ArrayList<Hora> getHorasAsigArrayList()
+    {       return this.horaOcup;
+    }
     /**
      * Obtiene las horas que el profesor ya tiene asignadas para trabajar en la universidad
      *

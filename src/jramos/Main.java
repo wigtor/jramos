@@ -56,7 +56,7 @@ public class Main
                 }
                 catch (Exception e)
                 {
-                        System.out.println("ERROR");
+                        System.out.println("ERROR: \n"+ e.getMessage());
                 }
 
 	}

@@ -280,8 +280,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuadroInformacionCarrera.setText("Seleccione una carrera del listado del costado para ver su información");
         jScrollPane8.setViewportView(cuadroInformacionCarrera);
 
-        jButton7.setFont(new java.awt.Font("Dialog", 1, 14));
+        jButton7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton7.setText("Ver Malla");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         botonEditarFacultad.setText("Editar facultad");
         botonEditarFacultad.addActionListener(new java.awt.event.ActionListener() {
@@ -1354,6 +1359,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 return ;
         }
     }//GEN-LAST:event_botonEditarCursoActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // Acción a realizar cuando se presiona el boton "Ver malla"
+        Carrera carreraSeleccionada;
+        carreraSeleccionada = (Carrera)this.visualizadorListaCarreras.getSelectedValue();
+        if (carreraSeleccionada != null)
+        {       //Lanzo un dialogo para editar el profesor seleccionado
+                DialogoMalla dialogoMalla = new DialogoMalla(this, rootPaneCheckingEnabled, carreraSeleccionada);
+                dialogoMalla.setVisible(true);
+                dialogoMalla = null;
+                return ;
+        }
+        else
+        {       //abro ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado una carrera para ver su malla", "Seleccione un curso desde la lista de cursos del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

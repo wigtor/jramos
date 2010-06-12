@@ -33,6 +33,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
     public VisualizadorHorarioObjeto(java.awt.Frame parent, boolean modal, Object objetoQueVerHorario, int modo) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(parent);
         int i, j;
         if (objetoQueVerHorario.getClass().equals(Curso.class))
         {       horasAMostrar = ((Curso)objetoQueVerHorario).getHorasAsigArrayList();

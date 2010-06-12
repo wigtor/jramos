@@ -13,10 +13,13 @@ package jramos.GUI;
 
 import java.awt.Dimension;
 import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 import jramos.excepciones.HourOutOfRangeException;
 import jramos.tiposDatos.Curso;
 import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Profesor;
+import jramos.tiposDatos.Semestre;
 
 /**
  *
@@ -35,15 +38,45 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         {       horasAMostrar = ((Curso)objetoQueVerHorario).getHorasAsigArrayList();
                 this.labelClaseObjeto.setText("Curso");
                 this.labelNombreObjeto.setText(((Curso)objetoQueVerHorario).getNombreCurso());
+                this.panelCursos.setVisible(false);
+                this.labelCursos.setVisible(false);
+                this.setSize(782, 300);
+                this.botonCerrarHorario.setText("Aceptar");
         }
         if (objetoQueVerHorario.getClass().equals(Profesor.class))
         {       horasAMostrar = ((Profesor)objetoQueVerHorario).getHorasAsigArrayList();
                 this.labelClaseObjeto.setText("Profesor");
                 this.labelNombreObjeto.setText(((Profesor)objetoQueVerHorario).getNombreProfesor());
+
+                //muestor los cursos que tenga asignados el profesor en la tabla de cursos
+                DefaultTableModel modelo = new DefaultTableModel(new Object [][] {},new String [] {"Curso", "Asignatura"});
+                Vector vectorFila = new Vector(3);
+                for (Curso curso :((Profesor)objetoQueVerHorario).getCursosAsigArrayList())
+                {       vectorFila.add(curso.getCodigoCurso()+" - " +curso.getSeccion());
+                        vectorFila.add(curso.getNombreCurso());
+                        modelo.addRow(vectorFila);
+                        vectorFila = new Vector(3);
+                }
+                this.tablaCursos.setModel(modelo);
+                
         }
         if (modo == VisualizadorHorarioObjeto.VISUALIZACION)
         {       this.horarioMostrado.setCellSelectionEnabled(false);
-
+        }
+        if (objetoQueVerHorario.getClass().equals(Semestre.class))
+        {       horasAMostrar = ((Profesor)objetoQueVerHorario).getHorasAsigArrayList();
+                this.labelClaseObjeto.setText("Semestre");
+                this.labelNombreObjeto.setText("N° "+((Semestre)objetoQueVerHorario).getNumeroSemestre());
+                //muestor los cursos que tenga asignados el profesor en la tabla de cursos
+                DefaultTableModel modelo = new DefaultTableModel(new Object [][] {},new String [] {"Curso", "Asignatura"});
+                Vector vectorFila = new Vector(3);
+                for (Curso curso :((Semestre)objetoQueVerHorario).getCursosArrayList())
+                {       vectorFila.add(curso.getCodigoCurso()+" - " +curso.getSeccion());
+                        vectorFila.add(curso.getNombreCurso());
+                        modelo.addRow(vectorFila);
+                        vectorFila = new Vector(3);
+                }
+                this.tablaCursos.setModel(modelo);
         }
         if (modo == VisualizadorHorarioObjeto.EDICION)
         {       this.horarioMostrado.setCellSelectionEnabled(true);
@@ -55,8 +88,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         try
         {   for(i = 1; i < 7; i++)
             {       for (j = 0; j < 9; j++)
-                    {       horarioMostrado.setValueAt(new Hora((i-1)*9 + j+1), j, i);
-
+                    {       this.horarioMostrado.setValueAt(new Hora((i-1)*9 + j+1), j, i);
                     }
             }
         }
@@ -122,14 +154,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
 
         tablaCursos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Curso", "Asignatura"

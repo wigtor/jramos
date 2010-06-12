@@ -171,6 +171,9 @@ public class Profesor {
         else
             return "";
     }
+    public ArrayList<Curso> getCursosAsigArrayList()
+    {       return this.cursosAsig;
+    }
 
     /**
      * Obtiene los códigos de los cursos asignados

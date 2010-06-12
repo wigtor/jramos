@@ -14,7 +14,6 @@
 *****************************************************/
 
 package jramos.tiposDatos;
-import jramos.excepciones.HourOutOfRangeException;
 import java.util.ArrayList;
 public class Profesor {
     static int idProfesorActual = 0;
@@ -110,6 +109,11 @@ public class Profesor {
     public ArrayList<Hora> getHorasAsigArrayList()
     {       return this.horaOcup;
     }
+
+    public ArrayList<Hora> getHorasDispArrayList()
+    {       return this.horaDisp;
+    }
+
     /**
      * Obtiene las horas que el profesor ya tiene asignadas para trabajar en la universidad
      *
@@ -255,7 +259,7 @@ public class Profesor {
      * @param horaToAsig Objeto Hora que se quiere agregar o quitar
      * @param selector 1: Agregar  -1:Quitar
      */
-    public void modHorasAsignadas(Hora horaToAsig, int selector) throws HourOutOfRangeException {
+    public void modHorasAsignadas(Hora horaToAsig, int selector){
         if (selector == 1)
         {       if (!this.horaOcup.contains(horaToAsig))
                 {       this.horaOcup.add(horaToAsig);

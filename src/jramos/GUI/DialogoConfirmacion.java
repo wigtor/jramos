@@ -10,6 +10,7 @@
  */
 
 package jramos.GUI;
+import jramos.excepciones.HoraNoDisponibleException;
 import jramos.tiposDatos.Carrera;
 import jramos.tiposDatos.Curso;
 import jramos.tiposDatos.Facultad;
@@ -25,13 +26,16 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
     public static final int BORRA_FACULTAD = 2;
     public static final int BORRA_CARRERA = 3;
     public static final int BORRA_CURSO = 4;
+    public static final int CONFIRMA_AGREGAR_TOPE_NIVEL_SIG = 5;
+    public static final int CONFIRMA_AGREGAR_TOPE_NIVEL_ANT = 5;
+
     private int tipoAccion;
-    VentanaPrincipal ventanaPadre;
+    java.awt.Window ventanaPadre;
     private Object objetoABorrar;
 
     /** Creates new form DialogoConfirmacion */
-    public DialogoConfirmacion(VentanaPrincipal parent, boolean modal, int tipoAccion, Object objeto) {
-        super(parent, modal);
+    public DialogoConfirmacion(java.awt.Window parent, boolean modal, int tipoAccion, Object objeto) {
+        super((java.awt.Frame)parent, modal);
         initComponents();
         this.setLocationRelativeTo(parent);
         this.ventanaPadre = parent;
@@ -57,6 +61,18 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
                 this.labelAccionAConfirmar1.setText("borrar el curso: ");
                 this.labelAccionAConfirmar2.setText(((Curso)objeto).getNombreCurso() + " ?");
         }
+        if (tipoAccion == DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_ANT)
+        {       //MENSAJE A MOSTRAR CUANDO HAY TOPE HORARIO CON EL SEMESTRE ANTERIOR
+                this.label1DialogoConfirmacion.setText(((HoraNoDisponibleException)objeto).getMessage());
+                this.labelAccionAConfirmar1.setVisible(false);
+                this.labelAccionAConfirmar2.setText("¿Desea agregar estas horas igualmente?");
+        }
+        if (tipoAccion == DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_SIG)
+        {       //MENSAJE A MOSTRAR CUANDO HAY TOPE HORARIO CON EL SEMESTRE SIGUIENTE
+                this.label1DialogoConfirmacion.setText(((HoraNoDisponibleException)objeto).getMessage());
+                this.labelAccionAConfirmar1.setVisible(false);
+                this.labelAccionAConfirmar2.setText("¿Desea agregar estas horas igualmente?");
+        }
     }
 
     /** This method is called from within the constructor to
@@ -68,7 +84,7 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        label1DialogoConfirmacion = new javax.swing.JLabel();
         botonSi = new javax.swing.JButton();
         botonNo = new javax.swing.JButton();
         labelAccionAConfirmar1 = new javax.swing.JLabel();
@@ -77,8 +93,8 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dialogo de confirmación");
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14));
-        jLabel1.setText("¿Está seguro que desea");
+        label1DialogoConfirmacion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        label1DialogoConfirmacion.setText("¿Está seguro que desea");
 
         botonSi.setText("Si");
         botonSi.addActionListener(new java.awt.event.ActionListener() {
@@ -112,7 +128,7 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 301, Short.MAX_VALUE)
                         .addComponent(botonNo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(label1DialogoConfirmacion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(labelAccionAConfirmar1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(labelAccionAConfirmar2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -123,7 +139,7 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(label1DialogoConfirmacion)
                     .addComponent(labelAccionAConfirmar1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelAccionAConfirmar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,20 +162,29 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
         //borro un objeto distinto dependiendo de la acción a realizar
         if (this.tipoAccion == DialogoConfirmacion.BORRA_PROFESOR)
         {       //Acciones para borrar un profesor
-                this.ventanaPadre.borrarProfesor((Profesor)this.objetoABorrar);
+                ((VentanaPrincipal)this.ventanaPadre).borrarProfesor((Profesor)this.objetoABorrar);
         }
         if (this.tipoAccion == DialogoConfirmacion.BORRA_FACULTAD)
         {       //Acciones para borrar una facultad
-                this.ventanaPadre.borrarFacultad((Facultad)this.objetoABorrar);
+                ((VentanaPrincipal)this.ventanaPadre).borrarFacultad((Facultad)this.objetoABorrar);
         }
         if (this.tipoAccion == DialogoConfirmacion.BORRA_CARRERA)
         {       //Acciones para borrar una carrera
-                this.ventanaPadre.borrarCarrera((Carrera)this.objetoABorrar);
+                ((VentanaPrincipal)this.ventanaPadre).borrarCarrera((Carrera)this.objetoABorrar);
         }
         if (this.tipoAccion == DialogoConfirmacion.BORRA_CURSO)
         {       //Acciones para borrar un curso
-                this.ventanaPadre.borrarCurso((Curso)this.objetoABorrar);
+                ((VentanaPrincipal)this.ventanaPadre).borrarCurso((Curso)this.objetoABorrar);
         }
+        if (this.tipoAccion == DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_SIG)
+        {
+                ((DialogoEdicionCurso)this.ventanaPadre).aplicarCambiosEdicion(false, true);
+        }
+        if (this.tipoAccion == DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_ANT)
+        {
+                ((DialogoEdicionCurso)this.ventanaPadre).aplicarCambiosEdicion(true, false);
+        }
+
         this.setVisible(false);
     }//GEN-LAST:event_botonSiActionPerformed
 
@@ -167,7 +192,7 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonNo;
     private javax.swing.JButton botonSi;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel label1DialogoConfirmacion;
     private javax.swing.JLabel labelAccionAConfirmar1;
     private javax.swing.JLabel labelAccionAConfirmar2;
     // End of variables declaration//GEN-END:variables

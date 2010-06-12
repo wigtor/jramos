@@ -21,6 +21,7 @@ import jramos.tiposDatos.Semestre;
 import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Profesor;
 import java.util.ArrayList;
+import jramos.excepciones.HoraNoDisponibleException;
 import jramos.excepciones.HourOutOfRangeException;
 import jramos.excepciones.StringVacioException;
 import jramos.excepciones.nombreRepetidoException;
@@ -75,13 +76,84 @@ public class ManipuladorListas
 
         }
         
-        public void editaCurso(Curso cursoAEditar, Profesor profesorAAsignarle, ArrayList<Hora> horasQueAsignarle) throws HourOutOfRangeException
-        {       for (Hora hora : horasQueAsignarle)
-                {       cursoAEditar.modHorario(hora, 1);
-                        profesorAAsignarle.modHorasAsignadas(hora, 1);
+        public void editaCurso(Curso cursoAEditar, Profesor profesorAAsignarle, ArrayList<Hora> horasQueAsignarle, boolean comprobarHorarioSemestreAnterior, boolean comprobarHorarioSemestreSiguiente) throws HoraNoDisponibleException
+        {       //compruebo que las horas asignadas estan dentro de las horas disponibles del profesor y fuera de las horas ya asignadas del profesor
+                for (Hora hora : horasQueAsignarle)
+                {       //Si no contiene las horas que se desean asignar en las horas disponibles del profesor o si las horas que se desean asignar existen en las horas ya asignadas:
+                        if (!(profesorAAsignarle.getHorasDispArrayList().contains(hora)))
+                        {       //Lanzo excepcion de horario no compatible
+                                throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_HORAS_DISP_PROFE, "Tope horario con las horas disponibles del profesor");
+                        }
+                        if (profesorAAsignarle.getHorasAsigArrayList().contains(hora))
+                        {       //Lanzo excepcion de horario no compatible
+                                throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_HORAS_OCUP_PROFE, "Tope horario con  las horas ya asignadas del profesor");
+                        }
                 }
+                
+                //Compruebo que las horas asignadas no coinciden con horas asignadas de cursos del mismo semestre
+                for (Hora hora : horasQueAsignarle)
+                {       for (Curso cursoDelSemestre : cursoAEditar.getEnSemestre().getCursosArrayList())
+                        {       if (cursoDelSemestre.getHorasAsigArrayList().contains(hora))
+                                {       //Lanzo excepcion de tope horario
+                                        throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL, "Tope horario con cursos del mismo semestre");
+                                }
+                        }
+                }
+
+                if (comprobarHorarioSemestreAnterior)
+                {   //Compruebo que las horas asignadas idealmente no coinciden con horas asignadas de cursos del nivel siguiente
+                    for (Hora hora :horasQueAsignarle)
+                    {       for (Semestre semestreDeCarrera : cursoAEditar.getEnCarrera().getListaSemestres())
+                            {       if (semestreDeCarrera.getNumeroSemestre() == cursoAEditar.getEnSemestre().getNumeroSemestre()+1)
+                                    {       for (Curso cursoDelSemestreSiguiente : semestreDeCarrera.getCursosArrayList())
+                                            {       if (cursoDelSemestreSiguiente.getHorasAsigArrayList().contains(hora))
+                                                    {       //Lanzo excepcion de tope horario
+                                                            throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL_SIG,"Tope horario con cursos del semestre siguiente");
+                                                    }
+                                            }
+                                    }
+                                    break;
+                            }
+                    }
+                }
+                if (comprobarHorarioSemestreSiguiente)
+                {   //compruebo que las horas asignadas idealmente no coinciden con horas asignadas de cursos del nivel anterior
+                    for (Hora hora :horasQueAsignarle)
+                    {       for (Semestre semestreDeCarrera : cursoAEditar.getEnCarrera().getListaSemestres())
+                            {       if (semestreDeCarrera.getNumeroSemestre() == cursoAEditar.getEnSemestre().getNumeroSemestre()-1)
+                                    {       for (Curso cursoDelSemestreSiguiente : semestreDeCarrera.getCursosArrayList())
+                                            {       if (cursoDelSemestreSiguiente.getHorasAsigArrayList().contains(hora))
+                                                    {       //Lanzo excepcion de tope horario
+                                                            throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL_ANT, "Tope horario con cursos del semestre anterior");
+                                                    }
+                                            }
+                                    }
+                                    break;
+                            }
+                    }
+                }
+
+                
+                //Antes almaceno los valores antiguos del profesor asignado que posea el curso, si es que tenia uno ya asignado
+                if (cursoAEditar.getProfeAsig() != null)
+                {       //quito las referencias al curso que posee el profesor que tiene asignado de antes
+                        Profesor antiguoProfeAsig = cursoAEditar.getProfeAsig();
+                        for (Hora hora : cursoAEditar.getHorasAsigArrayList())
+                        {       antiguoProfeAsig.modHorasAsignadas(hora, -1);
+                        }
+                }
+
                 cursoAEditar.setProfesor(profesorAAsignarle);
-                profesorAAsignarle.modCursosAsignados(cursoAEditar, 1);
+                //en caso que lo que se haya modificado es desAsignar un profesor:
+                if (profesorAAsignarle != null)
+                {       //agrego el curso a los cursos asignados del profesor
+                        profesorAAsignarle.modCursosAsignados(cursoAEditar, 1);
+                        //Si no ocurrió ningun problema con las condiciones para modificar el curso, se modifica:
+                        for (Hora hora : horasQueAsignarle)
+                        {       cursoAEditar.modHorario(hora, 1);
+                                profesorAAsignarle.modHorasAsignadas(hora, 1);
+                        }
+                }
         }
 
         /**

@@ -13,6 +13,7 @@ package jramos.GUI;
 
 import java.util.ArrayList;
 import jramos.ManipuladorListas;
+import jramos.excepciones.HoraNoDisponibleException;
 import jramos.tiposDatos.Carrera;
 import jramos.tiposDatos.Curso;
 import jramos.tiposDatos.Hora;
@@ -241,36 +242,74 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
         }
 }//GEN-LAST:event_selectorListaCarrerasItemStateChanged
 
-    private void botonAplicarCambiosCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAplicarCambiosCursoActionPerformed
-        // Acción a realizar cuando se presiona el boton "agregar curso"
-        //DEBO IDEAR LA FORMA DE LEER LAS HORAS A ASIGNAR
-
-        //edito el curso.
+    public void aplicarCambiosEdicion(boolean comprobarHorarioSemestreAnterior, boolean comprobarHorarioSemestreSiguiente)
+    {   //edito el curso.
         try {
             Profesor profesorAsignarle = (Profesor)this.selectorListaProfesores.getSelectedItem();
-            this.listManager.editaCurso(this.cursoAEditar, profesorAsignarle, this.horasElegidas);
+            this.listManager.editaCurso(this.cursoAEditar, profesorAsignarle, this.horasElegidas, comprobarHorarioSemestreAnterior, comprobarHorarioSemestreSiguiente);
         }
-        catch (Exception e)
-        {       System.out.println("ERROR: problema al editar cursos");
-            
+        catch (HoraNoDisponibleException HNDE)
+        {       if (HNDE.getCodigoError() == HoraNoDisponibleException.TOPE_NIVEL)
+                {       DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, HNDE.getMessage(), "Elija otras horas");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return;
+                }
+                if (HNDE.getCodigoError() == HoraNoDisponibleException.TOPE_HORAS_DISP_PROFE)
+                {       DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, HNDE.getMessage(), "Elija otras horas");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return;
+                }
+                if (HNDE.getCodigoError() == HoraNoDisponibleException.TOPE_HORAS_OCUP_PROFE)
+                {       DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, HNDE.getMessage(), "Elija otras horas");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return;
+                }
+                if (HNDE.getCodigoError() == HoraNoDisponibleException.TOPE_NIVEL_ANT)
+                {       DialogoConfirmacion dialogoAviso = new DialogoConfirmacion((VentanaPrincipal)this.ventanaPadre, rootPaneCheckingEnabled, DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_ANT, HNDE);
+                        dialogoAviso.setVisible(true);
+                        dialogoAviso = null;
+                        return ;
+                }
+                if (HNDE.getCodigoError() == HoraNoDisponibleException.TOPE_NIVEL_SIG)
+                {       DialogoConfirmacion dialogoAviso = new DialogoConfirmacion((java.awt.Window)this, rootPaneCheckingEnabled, DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_SIG, HNDE);
+                        dialogoAviso.setVisible(true);
+                        dialogoAviso = null;
+                        return ;
+                }
+
         }
 
-        /**ACTUALIZO GUI DE VENTANA PRINCIPAL, CAMBIAR ESTA PARTE!!!
+
+        //ACTUALIZO GUI DE VENTANA PRINCIPAL
+        ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCursos();
+        ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaProfes();
+
+        /*Borrar desde aqui
         this.listModelCursos = new DefaultListModel();
-        tamLista = this.listManager.getListaCursos().size();
-        for (i = 0; i < tamLista; i++) {
-            this.listModelCursos.addElement(this.listManager.getListaCursos().get(i));
+        for (Curso curso : this.listManager.getListaCursos()) {
+            this.listModelCursos.addElement(curso);
         }
         this.visualizadorListaCursos.setModel(this.listModelCursos);
         this.visualizadorListaCursosValueChanged(null);
         this.cuadroInformacionCurso.setText("Se ha agregado correctamente el curso: "  + this.campoNombreCursoNuevo.getText());
-
         */
         //BORRAR HASTA AQUI!
+
+    }
+
+    private void botonAplicarCambiosCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAplicarCambiosCursoActionPerformed
+        // Acción a realizar cuando se presiona el boton "agregar curso"
+        //DEBO IDEAR LA FORMA DE LEER LAS HORAS A ASIGNAR
+        this.aplicarCambiosEdicion(true, true);
+        
     }//GEN-LAST:event_botonAplicarCambiosCursoActionPerformed
 
     void asignarHorasElegidas(ArrayList <Hora> horasElegidas)
-    {       this.horasElegidas = horasElegidas;
+    {
+            this.horasElegidas = horasElegidas;
     }
     private void selectorListaProfesoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectorListaProfesoresActionPerformed
         // TODO add your handling code here:

@@ -1307,7 +1307,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Profesor profesorSeleccionado;
         profesorSeleccionado = (Profesor)this.visualizadorListaProfes.getSelectedValue();
         if (profesorSeleccionado != null)
-        {       VisualizadorHorarioObjeto ventanaHorario = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, profesorSeleccionado, VisualizadorHorarioObjeto.VISUALIZACION);
+        {       VisualizadorHorarioObjeto ventanaHorario = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, profesorSeleccionado, VisualizadorHorarioObjeto.VISUALIZACION, null);
                 ventanaHorario.setVisible(true);
                 ventanaHorario = null;
                 return ;
@@ -1326,7 +1326,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Curso cursoSeleccionado;
         cursoSeleccionado = (Curso)this.visualizadorListaCursos.getSelectedValue();
         if (cursoSeleccionado != null)
-        {       VisualizadorHorarioObjeto ventanaHorario = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, cursoSeleccionado,  VisualizadorHorarioObjeto.VISUALIZACION);
+        {       VisualizadorHorarioObjeto ventanaHorario = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, cursoSeleccionado,  VisualizadorHorarioObjeto.VISUALIZACION, null);
                 ventanaHorario.setVisible(true);
                 ventanaHorario = null;
                 return ;

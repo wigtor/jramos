@@ -318,9 +318,10 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
     private void botonElegirHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonElegirHorasActionPerformed
         // Acción a realizar cuando se presiona el boton "elegir horas"
         //Debo mostrar un cuadro con las horas disponibles del profesor que se pueden asignar a ese curso.
-        ArrayList<Hora> listaDeHorasQueAsignar = null;
-        VisualizadorHorarioObjeto dialogoElegirHorasDisp = new VisualizadorHorarioObjeto(ventanaPadre, rootPaneCheckingEnabled, cursoAEditar, VisualizadorHorarioObjeto.EDICION);
+        VisualizadorHorarioObjeto dialogoElegirHorasDisp = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, cursoAEditar, VisualizadorHorarioObjeto.EDICION, (Profesor)this.selectorListaProfesores.getSelectedItem());
         dialogoElegirHorasDisp.setVisible(true);
+        dialogoElegirHorasDisp = null;
+        return ;
     }//GEN-LAST:event_botonElegirHorasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

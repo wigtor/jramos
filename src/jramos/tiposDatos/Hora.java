@@ -9,6 +9,7 @@
 
 package jramos.tiposDatos;
 
+import com.sun.org.apache.xpath.internal.operations.Equals;
 import jramos.excepciones.HourOutOfRangeException;
 import jramos.excepciones.HourNotInicializatedException;
 
@@ -355,5 +356,28 @@ public final class Hora
                 }
         }
 
+    @Override
+        public boolean equals(Object objetoAcomparar)
+        {   if (objetoAcomparar.getClass() == this.getClass())
+            {       try
+                    {   if (((Hora)objetoAcomparar).getHora() == this.horaInt)
+                            return true;
+                        else
+                            return false;
+                    }
+                    catch (HourNotInicializatedException HNIE)
+                    {       return false;
+                    }
+            }
+            else
+                return false;
+        }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 31 * hash + this.horaInt;
+        return hash;
+    }
 	/* FIN DE LOS MÉTODOS DE LA CLASE */
 }

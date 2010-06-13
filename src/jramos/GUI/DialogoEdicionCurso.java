@@ -304,7 +304,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
         // Acción a realizar cuando se presiona el boton "agregar curso"
         //DEBO IDEAR LA FORMA DE LEER LAS HORAS A ASIGNAR
         this.aplicarCambiosEdicion(true, true);
-        
+        this.setVisible(false);
     }//GEN-LAST:event_botonAplicarCambiosCursoActionPerformed
 
     void asignarHorasElegidas(ArrayList <Hora> horasElegidas)

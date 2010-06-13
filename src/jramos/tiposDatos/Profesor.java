@@ -321,12 +321,12 @@ public class Profesor {
      * @param selector 1: Agregar  -1:Quitar
      */
     public void modCursosAsignados(Curso cursoToAsig,  int selector){
-        Integer codigoActual = new Integer(cursoToAsig.getCodigoCurso());
+        Integer idActual = new Integer(cursoToAsig.getIdCurso());
         if (selector == 1){
             if (!this.cursosAsig.contains(cursoToAsig)){
                 this.cursosAsig.add(cursoToAsig);
-                if(this.idCursosAsig.contains(codigoActual)){
-                    this.idCursosAsig.add(codigoActual);
+                if(!this.idCursosAsig.contains(idActual)){
+                    this.idCursosAsig.add(idActual);
                 }
             }
             else{
@@ -336,8 +336,8 @@ public class Profesor {
         else if (selector == -1){
             if (this.cursosAsig.contains(cursoToAsig)){
                 this.cursosAsig.remove(cursoToAsig);
-                if (this.idCursosAsig.contains(codigoActual))
-                    this.idCursosAsig.remove(codigoActual);
+                if (this.idCursosAsig.contains(idActual))
+                    this.idCursosAsig.remove(idActual);
             }
             else{
                 System.out.println("No existe ese curso...");

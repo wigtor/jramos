@@ -1,2 +1,2 @@
 <idProfesInicial="7" >
-<Profesor nombProfe="david cooper" idProfe="3" rutProfe="5854323" idCursosAsig="2" codCursosDisp="10008|10011" horasDisp="L4|L5|M1|M2|M3|W4|W5|S7|S8" horasAsig="L4|L5|W4|W5" >
+<Profesor nombProfe="david cooper" idProfe="3" rutProfe="5854323" idCursosAsig="30|25" codCursosDisp="10013|10014" horasDisp="L4|L5|M1|M2|M3|W4|W5|S7|S8" horasAsig="" >

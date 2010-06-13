@@ -141,6 +141,7 @@ public class ManipuladorListas
                         for (Hora hora : cursoAEditar.getHorasAsigArrayList())
                         {       antiguoProfeAsig.modHorasAsignadas(hora, -1);
                         }
+                        antiguoProfeAsig.modCursosAsignados(cursoAEditar, -1);
                 }
 
                 cursoAEditar.setProfesor(profesorAAsignarle);

@@ -96,14 +96,33 @@ public class ManipuladorListas
                         return ;
                 }
 
+                //elimino temporalmente de las listas de horas del profesor las horas que ya posee asignado el curso, lugo las vuelvo a agregar
+                ArrayList<Hora> horasAsigTemp = new ArrayList();
+                horasAsigTemp.addAll(cursoAEditar.getHorasAsigArrayList());
+                Profesor antiguoProfeAsig = cursoAEditar.getProfeAsig();
+                for (Hora horaTemp : horasAsigTemp)
+                {       antiguoProfeAsig.modHorasAsignadas(horaTemp, -1);
+                        cursoAEditar.modHorario(horaTemp, -1);
+
+                }
                 for (Hora hora : horasQueAsignarle)
                 {       //Si no contiene las horas que se desean asignar en las horas disponibles del profesor o si las horas que se desean asignar existen en las horas ya asignadas:
                         if (!(profesorAAsignarle.getHorasDispArrayList().contains(hora)))
-                        {       //Lanzo excepcion de horario no compatible
+                        {       //agrego las horas que eliminé temporalmente antes de lanzar la excepcion
+                                for (Hora horaTemp : horasAsigTemp)
+                                {       antiguoProfeAsig.modHorasAsignadas(horaTemp, 1);
+                                        cursoAEditar.modHorario(horaTemp, 1);
+                                }
+                                //Lanzo excepcion de horario no compatible
                                 throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_HORAS_DISP_PROFE, "Tope horario con las horas disponibles del profesor");
                         }
                         if (profesorAAsignarle.getHorasAsigArrayList().contains(hora))
-                        {       //Lanzo excepcion de horario no compatible
+                        {       //agrego las horas que eliminé temporalmente antes de lanzar la excepcion
+                                for (Hora horaTemp : horasAsigTemp)
+                                {       antiguoProfeAsig.modHorasAsignadas(horaTemp, 1);
+                                        cursoAEditar.modHorario(horaTemp, 1);
+                                }
+                                //Lanzo excepcion de horario no compatible
                                 throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_HORAS_OCUP_PROFE, "Tope horario con  las horas ya asignadas del profesor");
                         }
                 }
@@ -112,7 +131,12 @@ public class ManipuladorListas
                 for (Hora hora : horasQueAsignarle)
                 {       for (Curso cursoDelSemestre : cursoAEditar.getEnSemestre().getCursosArrayList())
                         {       if (cursoDelSemestre.getHorasAsigArrayList().contains(hora))
-                                {       //Lanzo excepcion de tope horario
+                                {       //agrego las horas que eliminé temporalmente antes de lanzar la excepcion
+                                        for (Hora horaTemp : horasAsigTemp)
+                                        {       antiguoProfeAsig.modHorasAsignadas(horaTemp, 1);
+                                                cursoAEditar.modHorario(horaTemp, 1);
+                                        }
+                                        //Lanzo excepcion de tope horario
                                         throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL, "Tope horario con cursos del mismo semestre");
                                 }
                         }
@@ -125,7 +149,12 @@ public class ManipuladorListas
                             {       if (semestreDeCarrera.getNumeroSemestre() == cursoAEditar.getEnSemestre().getNumeroSemestre()+1)
                                     {       for (Curso cursoDelSemestreSiguiente : semestreDeCarrera.getCursosArrayList())
                                             {       if (cursoDelSemestreSiguiente.getHorasAsigArrayList().contains(hora))
-                                                    {       //Lanzo excepcion de tope horario
+                                                    {       //agrego las horas que eliminé temporalmente antes de lanzar la excepcion
+                                                            for (Hora horaTemp : horasAsigTemp)
+                                                            {       antiguoProfeAsig.modHorasAsignadas(horaTemp, 1);
+                                                                    cursoAEditar.modHorario(horaTemp, 1);
+                                                            }
+                                                            //Lanzo excepcion de tope horario
                                                             throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL_SIG,"Tope horario con cursos del semestre siguiente");
                                                     }
                                             }
@@ -141,7 +170,12 @@ public class ManipuladorListas
                             {       if (semestreDeCarrera.getNumeroSemestre() == cursoAEditar.getEnSemestre().getNumeroSemestre()-1)
                                     {       for (Curso cursoDelSemestreSiguiente : semestreDeCarrera.getCursosArrayList())
                                             {       if (cursoDelSemestreSiguiente.getHorasAsigArrayList().contains(hora))
-                                                    {       //Lanzo excepcion de tope horario
+                                                    {       //agrego las horas que eliminé temporalmente antes de lanzar la excepcion
+                                                            for (Hora horaTemp : horasAsigTemp)
+                                                            {       antiguoProfeAsig.modHorasAsignadas(horaTemp, 1);
+                                                                    cursoAEditar.modHorario(horaTemp, 1);
+                                                            }
+                                                            //Lanzo excepcion de tope horario
                                                             throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL_ANT, "Tope horario con cursos del semestre anterior");
                                                     }
                                             }
@@ -151,13 +185,20 @@ public class ManipuladorListas
                     }
                 }
 
-                
+
+                //agrego las horas que eliminé temporalmente si todo salió bien hasta aquí.
+                for (Hora horaTemp : horasAsigTemp)
+                {       antiguoProfeAsig.modHorasAsignadas(horaTemp, 1);
+                        cursoAEditar.modHorario(horaTemp, 1);
+                }
+
                 //Antes almaceno los valores antiguos del profesor asignado que posea el curso, si es que tenia uno ya asignado
                 if (cursoAEditar.getProfeAsig() != null)
                 {       //quito las referencias al curso que posee el profesor que tiene asignado de antes
-                        Profesor antiguoProfeAsig = cursoAEditar.getProfeAsig();
-                        for (Hora hora : cursoAEditar.getHorasAsigArrayList())
+                        horasAsigTemp.addAll(cursoAEditar.getHorasAsigArrayList());
+                        for (Hora hora : horasAsigTemp)
                         {       antiguoProfeAsig.modHorasAsignadas(hora, -1);
+                                cursoAEditar.modHorario(hora, -1);
                         }
                         antiguoProfeAsig.modCursosAsignados(cursoAEditar, -1);
                 }

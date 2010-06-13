@@ -296,6 +296,11 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         );
 
         JListHorasSeleccionadas.setEnabled(false);
+        JListHorasSeleccionadas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JListHorasSeleccionadasKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(JListHorasSeleccionadas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -340,6 +345,19 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         {       System.out.println("No se ha podido seleccionar una hora válida de la tabla");
         }
     }//GEN-LAST:event_horarioMostradoMouseClicked
+
+    private void JListHorasSeleccionadasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JListHorasSeleccionadasKeyPressed
+        //hago que cuando se presiona la tecla "suprimir" sobre un elemento seleccionado del jlist, este elemento sea eliminado
+        Hora horaSeleccionada;
+        horaSeleccionada = (Hora)this.JListHorasSeleccionadas.getSelectedValue();
+        //Si existe una hora seleccionada en el jlist y la tecla presionada es la tecla "suprimir":
+        if ((horaSeleccionada != null) && (evt.getKeyCode() == java.awt.event.KeyEvent.VK_DELETE))
+        {       int indiceAborrar = this.JListHorasSeleccionadas.getSelectedIndex();
+                //Elimino a esa hora de la lista de horas seleccionadas
+                this.listModelHoras.remove(indiceAborrar);
+                this.listaHorasSeleccionadas.remove(indiceAborrar);
+        }
+    }//GEN-LAST:event_JListHorasSeleccionadasKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

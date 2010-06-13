@@ -129,13 +129,15 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane4" min="-2" pref="166" max="-2" attributes="1"/>
                           <Component id="botonNuevaFacultad" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" alignment="0" min="-2" pref="166" max="-2" attributes="1"/>
                           <Component id="botonNuevaCarrera" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" alignment="0" min="-2" pref="166" max="-2" attributes="1"/>
+                          <Component id="botonBuscarCarrera" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
@@ -200,7 +202,7 @@
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="labelCarreraSeleccionada" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
@@ -210,21 +212,22 @@
                               <Component id="jButton7" min="-2" pref="27" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane8" min="-2" pref="129" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="botonEditarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="botonEliminarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="1">
                               <Component id="botonNuevaCarrera" min="-2" pref="15" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" min="-2" pref="175" max="-2" attributes="1"/>
+                              <Component id="jScrollPane4" max="32767" attributes="1"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="botonEditarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="botonEliminarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="botonBuscarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -398,6 +401,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEliminarCarreraActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="botonBuscarCarrera">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buscar carrera"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonBuscarCarreraActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="PanelVisualizadorProfesores">
@@ -417,14 +428,12 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="164" max="-2" attributes="0"/>
+                          <Component id="botonBuscarProfesor" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
-                              <Component id="botonAgregarProfesor" min="-2" pref="239" max="-2" attributes="1"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jSeparator1" alignment="0" min="-2" pref="584" max="-2" attributes="0"/>
                                   <Component id="jScrollPane2" alignment="0" min="-2" pref="531" max="-2" attributes="0"/>
@@ -437,10 +446,10 @@
                                       </Group>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="campoRutProfesor" alignment="0" pref="194" max="32767" attributes="1"/>
-                                          <Component id="campoNombreProfesorNuevo" alignment="0" pref="194" max="32767" attributes="1"/>
-                                          <Component id="campoRamosQueDicta" alignment="0" pref="194" max="32767" attributes="1"/>
-                                          <Component id="campoHorasDisponibles" alignment="0" pref="194" max="32767" attributes="1"/>
+                                          <Component id="campoRutProfesor" alignment="0" pref="189" max="32767" attributes="1"/>
+                                          <Component id="campoNombreProfesorNuevo" alignment="0" pref="189" max="32767" attributes="1"/>
+                                          <Component id="campoRamosQueDicta" alignment="0" pref="189" max="32767" attributes="1"/>
+                                          <Component id="campoHorasDisponibles" alignment="0" pref="189" max="32767" attributes="1"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -461,6 +470,10 @@
                                       <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="181" max="-2" attributes="0"/>
+                              <Component id="botonAgregarProfesor" min="-2" pref="239" max="-2" attributes="1"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -512,12 +525,14 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="botonAgregarProfesor" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" pref="403" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="371" max="-2" attributes="0"/>
+                              <EmptySpace pref="8" max="32767" attributes="0"/>
+                              <Component id="botonBuscarProfesor" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -662,6 +677,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVerHorarioProfesorActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="botonBuscarProfesor">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buscar profesor"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonBuscarProfesorActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="panelVisualizadorCursos">
@@ -691,7 +714,11 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPane6" min="-2" pref="164" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPane6" min="-2" pref="164" max="-2" attributes="0"/>
+                                  <Component id="botonBuscarCurso" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" attributes="0">
                                       <EmptySpace max="-2" attributes="0"/>
@@ -753,8 +780,8 @@
                           <Component id="botonEditarCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="botonEliminarCurso" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Component id="jScrollPane7" min="-2" pref="166" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
@@ -787,15 +814,17 @@
                                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="selectorListaSemestres" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="19" max="32767" attributes="0"/>
+                              <EmptySpace pref="20" max="32767" attributes="0"/>
                               <Component id="botonAgregarCurso" min="-2" pref="39" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane6" min="-2" pref="397" max="-2" attributes="0"/>
+                              <Component id="jScrollPane6" min="-2" pref="373" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="botonBuscarCurso" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="13" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -970,6 +999,14 @@
                   </StringArray>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="botonBuscarCurso">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buscar curso"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonBuscarCursoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

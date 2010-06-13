@@ -57,7 +57,10 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                 }
         }
         if ((modo == VisualizadorHorarioObjeto.VISUALIZACION) && (objetoQueVerHorario.getClass() == Curso.class))
-                this.botonCerrarHorario.setAlignmentY(TOP_ALIGNMENT);
+        {       this.botonCerrarHorario.setAlignmentY(TOP_ALIGNMENT);
+                this.jLabel1.setVisible(false);
+                this.jLabel4.setVisible(false);
+        }
         if (objetoQueVerHorario.getClass().equals(Curso.class))
         {       horasAMostrar = ((Curso)objetoQueVerHorario).getHorasAsigArrayList();
                 this.labelClaseObjeto.setText("Curso");
@@ -77,7 +80,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                 DefaultTableModel modelo = new DefaultTableModel(new Object [][] {},new String [] {"Curso", "Asignatura"});
                 Vector vectorFila = new Vector(3);
                 for (Curso curso :((Profesor)objetoQueVerHorario).getCursosAsigArrayList())
-                {       vectorFila.add(curso.getCodigoCurso()+" - " +curso.getSeccion());
+                {       vectorFila.add(curso.getCodigoCurso()+" - " +curso.getSeccion() + " - "+ curso.getHorario());
                         vectorFila.add(curso.getNombreCurso());
                         modelo.addRow(vectorFila);
                         vectorFila = new Vector(3);
@@ -111,7 +114,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         {       this.horarioMostrado.setCellSelectionEnabled(false);
                 this.panelCursos.setVisible(false);
                 this.labelCursos.setVisible(false);
-                this.setSize(852, 300);
+                this.setSize(860, 300);
                 this.botonCerrarHorario.setText("Aceptar");
                 this.JListHorasSeleccionadas.setEnabled(true);
                 this.JListHorasSeleccionadas.setVisible(true);
@@ -180,6 +183,8 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         labelNombreObjeto = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         JListHorasSeleccionadas = new javax.swing.JList();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Horario");
@@ -303,6 +308,12 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(JListHorasSeleccionadas);
 
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel1.setText("Horas");
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel4.setText("elegidas:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -310,14 +321,21 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(PanelVisualizadorHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(PanelVisualizadorHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
@@ -365,8 +383,10 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
     private javax.swing.JPanel PanelVisualizadorHorario;
     private javax.swing.JButton botonCerrarHorario;
     private javax.swing.JTable horarioMostrado;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelClaseObjeto;
     private javax.swing.JLabel labelCursos;

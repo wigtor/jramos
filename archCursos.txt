@@ -19,7 +19,7 @@ pero al final de nada" codCarrera="1864" idSemestres="29|30|31|32|33|34|36|37|38
 <Curso nomCurso="calculo" idCurso="19" descrip="" codCurso="10001" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="introduccion a la quimica" idCurso="20" descrip="" codCurso="10004" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="introduccion a la quimica" idCurso="22" descrip="" codCurso="10004" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
-<Curso nomCurso="microeconomia" idCurso="27" descrip="" codCurso="10013" seccion="C03" enCarrera="1863" idProfeAsig="3" listSalas="" horario="S7|S8" >
+<Curso nomCurso="microeconomia" idCurso="27" descrip="" codCurso="10013" seccion="C03" enCarrera="1863" idProfeAsig="3" listSalas="" horario="S7|S8|W5" >
 <Curso nomCurso="microeconomia" idCurso="28" descrip="" codCurso="10013" seccion="D04" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="microeconomia" idCurso="29" descrip="" codCurso="10013" seccion="B02" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="macroeconomia" idCurso="30" descrip="" codCurso="10014" seccion="A01" enCarrera="1863" idProfeAsig="3" listSalas="" horario="L4|M3|M1" >

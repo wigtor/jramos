@@ -51,6 +51,10 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         this.setLocationRelativeTo(parent);
         if ((modo == VisualizadorHorarioObjeto.EDICION) && (objetoQueVerHorario.getClass() == Curso.class))
         {       this.dialogoEdicionCursoPadre = (DialogoEdicionCurso)parent;
+                //for (Hora hora : ((Curso)objetoQueVerHorario).getHorasAsigArrayList())
+                //{       this.listaHorasSeleccionadas.add(hora);
+                //        this.listModelHoras.addElement(hora);
+                //}
         }
         if ((modo == VisualizadorHorarioObjeto.VISUALIZACION) && (objetoQueVerHorario.getClass() == Curso.class))
                 this.botonCerrarHorario.setAlignmentY(TOP_ALIGNMENT);

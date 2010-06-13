@@ -1173,11 +1173,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         //Acá se muestra la información del curso seleccionado
         //Acá se muestra el nombre de la carrera seleccionada en el jlabel "labelCarreraSeleccionada"
         Curso cursoSeleccionado;
-        String horarioConSalas;
+        String horarioStr;
         cursoSeleccionado = (Curso)this.visualizadorListaCursos.getSelectedValue();
         if (cursoSeleccionado != null)
-        {       horarioConSalas = "L5-L6(546), M3-M4(546), J1-J2(546)"; //Es un ejemplo, debe ser implementado
-                this.cuadroInformacionCurso.setText("Nombre del curso: " + cursoSeleccionado.getNombreCurso()+"\nCódigo del curso: "+cursoSeleccionado.getCodigoCurso()+"\nSección: "+cursoSeleccionado.getSeccion()+"\nProfesor asignado: "+cursoSeleccionado.getNombreProfesor()+"\nCarrera en que se dicta: "+cursoSeleccionado.getEnCarreraStr()+"\nSemestre en que se dicta: "+cursoSeleccionado.getEnSemestre()+"\nHorario: "+horarioConSalas+"\nDescripción del curso: "+cursoSeleccionado.getDescripcion());
+        {       horarioStr = cursoSeleccionado.getHorario(); //Es un ejemplo, debe ser implementado
+                this.cuadroInformacionCurso.setText("Nombre del curso: " + cursoSeleccionado.getNombreCurso()+"\nCódigo del curso: "+cursoSeleccionado.getCodigoCurso()+"\nSección: "+cursoSeleccionado.getSeccion()+"\nProfesor asignado: "+cursoSeleccionado.getNombreProfesor()+"\nCarrera en que se dicta: "+cursoSeleccionado.getEnCarreraStr()+"\nSemestre en que se dicta: "+cursoSeleccionado.getEnSemestre()+"\nHorario: "+horarioStr+"\nDescripción del curso: "+cursoSeleccionado.getDescripcion());
         }
         else
                 this.cuadroInformacionCurso.setText("Seleccione una carrera del listado del costado para ver su información");

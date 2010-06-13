@@ -318,10 +318,21 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
     private void botonElegirHorasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonElegirHorasActionPerformed
         // Acción a realizar cuando se presiona el boton "elegir horas"
         //Debo mostrar un cuadro con las horas disponibles del profesor que se pueden asignar a ese curso.
-        VisualizadorHorarioObjeto dialogoElegirHorasDisp = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, cursoAEditar, VisualizadorHorarioObjeto.EDICION, (Profesor)this.selectorListaProfesores.getSelectedItem());
-        dialogoElegirHorasDisp.setVisible(true);
-        dialogoElegirHorasDisp = null;
-        return ;
+        Profesor profesorSeleccionado;
+        profesorSeleccionado = (Profesor)this.selectorListaProfesores.getSelectedItem();
+        if (profesorSeleccionado != null)
+        {   VisualizadorHorarioObjeto dialogoElegirHorasDisp = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, cursoAEditar, VisualizadorHorarioObjeto.EDICION, (Profesor)this.selectorListaProfesores.getSelectedItem());
+            dialogoElegirHorasDisp.setVisible(true);
+            dialogoElegirHorasDisp = null;
+            return ;
+        }
+        else
+        {       //abro nueva ventana de error.
+                DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "no hay profesor para asignar horas", "Seleccione un profesor desde la lista de profesores");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
     }//GEN-LAST:event_botonElegirHorasActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

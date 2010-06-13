@@ -78,6 +78,24 @@ public class ManipuladorListas
         
         public void editaCurso(Curso cursoAEditar, Profesor profesorAAsignarle, ArrayList<Hora> horasQueAsignarle, boolean comprobarHorarioSemestreAnterior, boolean comprobarHorarioSemestreSiguiente) throws HoraNoDisponibleException
         {       //compruebo que las horas asignadas estan dentro de las horas disponibles del profesor y fuera de las horas ya asignadas del profesor
+                if (profesorAAsignarle == null)
+                {       if (cursoAEditar.getProfeAsig() != null)
+                        {       //quito las referencias al curso que posee el profesor que tiene asignado de antes
+                                Profesor antiguoProfeAsig = cursoAEditar.getProfeAsig();
+                                for (Hora hora : cursoAEditar.getHorasAsigArrayList())
+                                {       antiguoProfeAsig.modHorasAsignadas(hora, -1);
+                                }
+                                antiguoProfeAsig.modCursosAsignados(cursoAEditar, -1);
+                        }
+                        ArrayList<Hora> listaHorasAEliminar = new ArrayList();
+                        listaHorasAEliminar.addAll(cursoAEditar.getHorasAsigArrayList());
+                        for (Hora hora : listaHorasAEliminar)
+                        {       cursoAEditar.modHorario(hora, -1);
+                        }
+                        cursoAEditar.setProfesor(profesorAAsignarle);
+                        return ;
+                }
+
                 for (Hora hora : horasQueAsignarle)
                 {       //Si no contiene las horas que se desean asignar en las horas disponibles del profesor o si las horas que se desean asignar existen en las horas ya asignadas:
                         if (!(profesorAAsignarle.getHorasDispArrayList().contains(hora)))

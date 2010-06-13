@@ -119,11 +119,25 @@ public class Semestre {
     }
 
     /**
-     *
-     * @return Devuelve un ArrayList de Integer con los codigos de ramos que posee el semestre
+     * Este metodo obtiene los id de los cursos que posee el semestre.
+     * @return Devuelve un ArrayList de Integer con los id de los ramos que posee el semestre
      */
     public ArrayList<Integer> getCodigosRamosArrayList()
     {       return this.listIdRamos;
+    }
+
+    /**
+     * Este método retorna un arraylist con los codigos de cursos que contiene el semestre, 
+     * se encarga de que los codigos de curso no se repitan, ya que pueden haber varios cursos iguales, pero de distinta sección en un semestre
+     * @return Devuelve el arraylist con los codigos de cursos que contiene el semestre sin repetirse.
+     */
+    public ArrayList<Integer> getCodigoCursos()
+    {       ArrayList<Integer> listCodCursos = new ArrayList();
+            for (Curso curso : this.getCursosArrayList())
+            {       if (!listCodCursos.contains(new Integer(curso.getCodigoCurso())))
+                        listCodCursos.add(new Integer(curso.getCodigoCurso()));
+            }
+            return listCodCursos;
     }
 
 

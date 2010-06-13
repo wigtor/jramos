@@ -11,9 +11,11 @@
 
 package jramos.GUI;
 
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.table.TableColumn;
 import jramos.tiposDatos.Carrera;
+import jramos.tiposDatos.Curso;
 import jramos.tiposDatos.Semestre;
 
 /**
@@ -34,7 +36,16 @@ public class DialogoMalla extends javax.swing.JDialog {
         Vector vectorCursosEnSemestre;
         for (Semestre semestreEnCarrera : carreraAVerMalla.getListaSemestres())
         {       vectorCursosEnSemestre = new Vector(3, 1);
-                vectorCursosEnSemestre.addAll(semestreEnCarrera.getCursosArrayList());
+                //Agrego los cursos al vector, excepto los cursos iguales de diferente sección
+                ArrayList<Integer> listaCodCursosDelSemestre = semestreEnCarrera.getCodigoCursos();
+                for (Integer integer : listaCodCursosDelSemestre)
+                {   for (Curso curso : semestreEnCarrera.getCursosArrayList())
+                    {       if (curso.getCodigoCurso() == integer.intValue())
+                            {       vectorCursosEnSemestre.add(curso);
+                                    break;
+                            }
+                    }
+                }
                 modeloTabla.addColumn("Semestre N°"+semestreEnCarrera.getNumeroSemestre(), vectorCursosEnSemestre);
         }
         this.tablaMalla.setModel(modeloTabla);

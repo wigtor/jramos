@@ -1,29 +1,38 @@
-<idFacultadesInicial="39" >
+<idFacultadesInicial="40" >
 <idCarrerasInicial="1865" >
-<idCursosInicial="7" >
+<idCursosInicial="22" >
 <idSemestresInicial="49" >
 <Facultad nomFacultad="ingenieria" idFacultad="38" descrip="Esta es la grandiosa facultad de injenieria!, 
 donde los estudiantes saben sumar y restar, pero no escribir bien." codCarreras="1863|1864" >
+<Facultad nomFacultad="humanidades" idFacultad="40" descrip="Facultad de humanidades, una wea llena de wns que le hacen
+a la marijuana." codCarreras="" >
 <Carrera nomCarrera="ingenieria civil informatica" descrip="pta, la descripcion de informatica po wn!" codCarrera="1863" idSemestres="23|24|25|26|27|28|42|43|44|45|48|49" >
 <Carrera nomCarrera="ingenieria civil industrial" descrip="una carrera lleno de wns que saben de todo, 
-pero al final de nada" codCarrera="1864" idSemestres="29|30|31|32|33|34|36|37|38|39|40|41" >
+pero al final de nada" codCarrera="1864" idSemestres="29|30|31|32|33|34|36|37|38|39" >
 <Curso nomCurso="microeconomia" idCurso="2" descrip="curso en que se aprende las nociones basicas
 de economia y comportamiento de los actores del mercado
-" codCurso="10013" seccion="A04" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+" codCurso="10008" seccion="A04" enCarrera="1863" idProfeAsig="3" listSalas="" horario="" >
 <Curso nomCurso="macroeconomia" idCurso="3" descrip="curso en que se aprende las nociones 
-de economia a gran nivel" codCurso="10014" seccion="A01" enCarrera="1863" idProfeAsig="3" listSalas="756|768" horario="L3|M3" >
+de economia a gran nivel" codCurso="10011" seccion="A01" enCarrera="1863" idProfeAsig="3" listSalas="756|768" horario="L3|M3" >
 <Curso nomCurso="calculo" idCurso="5" descrip="" codCurso="10001" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="taller de paralelismo" idCurso="6" descrip="" codCurso="13045" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="trabajo de titulacion" idCurso="7" descrip="" codCurso="13051" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
-<Semestre numSemestre="1" idSemestre="23" enCarreraId="1863" idCursosDelSemestre="2|3|5" >
-<Semestre numSemestre="2" idSemestre="24" enCarreraId="1863" idCursosDelSemestre="" >
+<Curso nomCurso="algebra" idCurso="15" descrip="" codCurso="10002" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="algebra" idCurso="16" descrip="" codCurso="10002" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="fisica 1" idCurso="17" descrip="" codCurso="10003" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="fisica 1" idCurso="18" descrip="" codCurso="10003" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="calculo" idCurso="19" descrip="" codCurso="10001" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="introduccion a la quimica" idCurso="20" descrip="" codCurso="10004" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="introduccion a la quimica" idCurso="22" descrip="" codCurso="10004" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
+<Semestre numSemestre="1" idSemestre="23" enCarreraId="1863" idCursosDelSemestre="2|3|5|8|12|13|14|15|17|20|21" >
+<Semestre numSemestre="2" idSemestre="24" enCarreraId="1863" idCursosDelSemestre="11" >
 <Semestre numSemestre="3" idSemestre="25" enCarreraId="1863" idCursosDelSemestre="" >
 <Semestre numSemestre="4" idSemestre="26" enCarreraId="1863" idCursosDelSemestre="" >
 <Semestre numSemestre="5" idSemestre="27" enCarreraId="1863" idCursosDelSemestre="" >
 <Semestre numSemestre="6" idSemestre="28" enCarreraId="1863" idCursosDelSemestre="" >
-<Semestre numSemestre="1" idSemestre="29" enCarreraId="1864" idCursosDelSemestre="" >
-<Semestre numSemestre="2" idSemestre="30" enCarreraId="1864" idCursosDelSemestre="" >
-<Semestre numSemestre="3" idSemestre="31" enCarreraId="1864" idCursosDelSemestre="" >
+<Semestre numSemestre="1" idSemestre="29" enCarreraId="1864" idCursosDelSemestre="16|18|19|22" >
+<Semestre numSemestre="2" idSemestre="30" enCarreraId="1864" idCursosDelSemestre="10" >
+<Semestre numSemestre="3" idSemestre="31" enCarreraId="1864" idCursosDelSemestre="9" >
 <Semestre numSemestre="4" idSemestre="32" enCarreraId="1864" idCursosDelSemestre="" >
 <Semestre numSemestre="5" idSemestre="33" enCarreraId="1864" idCursosDelSemestre="" >
 <Semestre numSemestre="6" idSemestre="34" enCarreraId="1864" idCursosDelSemestre="" >
@@ -31,8 +40,6 @@ de economia a gran nivel" codCurso="10014" seccion="A01" enCarrera="1863" idProf
 <Semestre numSemestre="8" idSemestre="37" enCarreraId="1864" idCursosDelSemestre="" >
 <Semestre numSemestre="9" idSemestre="38" enCarreraId="1864" idCursosDelSemestre="" >
 <Semestre numSemestre="10" idSemestre="39" enCarreraId="1864" idCursosDelSemestre="" >
-<Semestre numSemestre="11" idSemestre="40" enCarreraId="1864" idCursosDelSemestre="" >
-<Semestre numSemestre="12" idSemestre="41" enCarreraId="1864" idCursosDelSemestre="" >
 <Semestre numSemestre="7" idSemestre="42" enCarreraId="1863" idCursosDelSemestre="" >
 <Semestre numSemestre="8" idSemestre="43" enCarreraId="1863" idCursosDelSemestre="" >
 <Semestre numSemestre="9" idSemestre="44" enCarreraId="1863" idCursosDelSemestre="" >

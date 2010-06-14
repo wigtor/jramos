@@ -98,7 +98,7 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="PanelVisualizadorGeneral" min="-2" pref="483" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -129,45 +129,40 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane4" min="-2" pref="166" max="-2" attributes="1"/>
                           <Component id="botonNuevaFacultad" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" alignment="0" min="-2" pref="166" max="-2" attributes="1"/>
                           <Component id="botonNuevaCarrera" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="botonBuscarCarrera" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane4" min="-2" pref="166" max="-2" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
+                              <Component id="botonEditarFacultad" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="160" max="32767" attributes="0"/>
+                              <Component id="botonEliminarFacultad" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                                      <Component id="botonEditarFacultad" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="160" max="32767" attributes="0"/>
-                                      <Component id="botonEliminarFacultad" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jScrollPane8" alignment="0" pref="520" max="32767" attributes="1"/>
-                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                              <Component id="jScrollPane5" alignment="0" max="32767" attributes="1"/>
-                                              <Group type="102" alignment="0" attributes="0">
-                                                  <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="jButton7" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                                                      <Component id="labelCarreraSeleccionada" alignment="0" min="-2" pref="383" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                  <Component id="jScrollPane8" alignment="0" pref="520" max="32767" attributes="1"/>
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="jScrollPane5" alignment="0" max="32767" attributes="1"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel22" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="jButton7" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                                              <Component id="labelCarreraSeleccionada" alignment="0" min="-2" pref="383" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <EmptySpace pref="38" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace pref="38" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
@@ -202,7 +197,7 @@
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="labelCarreraSeleccionada" alignment="3" min="-2" pref="15" max="-2" attributes="0"/>
@@ -218,14 +213,16 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane4" max="32767" attributes="1"/>
+                              <Component id="jScrollPane4" min="-2" pref="142" max="-2" attributes="1"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="botonEditarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="botonEliminarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="botonBuscarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="botonEditarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="botonEliminarCarrera" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="botonBuscarCarrera" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
@@ -253,14 +250,9 @@
                 <Component class="javax.swing.JList" name="visualizadorListaFacultades">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                        <StringItem index="4" value="Item 5"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Lista de facultades, seleccione una facultad para ver sus detalles y carreras"/>
                   </Properties>
                   <Events>
                     <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="visualizadorListaFacultadesValueChanged"/>
@@ -279,14 +271,9 @@
                 <Component class="javax.swing.JList" name="visualizadorListaCarreras">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                        <StringItem index="4" value="Item 5"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Lista de carreras, seleccione una carrera para ver sus detalles"/>
                   </Properties>
                   <Events>
                     <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="visualizadorListaCarrerasValueChanged"/>
@@ -300,6 +287,7 @@
                   <Font name="Dialog" size="10" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nueva carrera..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para agregar una carrera al registro"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonNuevaCarreraActionPerformed"/>
@@ -311,6 +299,7 @@
                   <Font name="Dialog" size="10" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nueva facultad..."/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para agregar una facultad al registro"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonNuevaFacultadActionPerformed"/>
@@ -338,6 +327,7 @@
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="text" type="java.lang.String" value="Seleccione una facultad del listado del costado para ver su informaci&#xf3;n"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Informaci&#xf3;n de la facultad seleccionada"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -354,6 +344,7 @@
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="text" type="java.lang.String" value="Seleccione una carrera del listado del costado para ver su informaci&#xf3;n"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Informaci&#xf3;n de la carrera seleccionada"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -364,6 +355,7 @@
                   <Font name="Dialog" size="14" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Ver Malla"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para ver la malla de la carrera seleccionada"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
@@ -372,6 +364,7 @@
             <Component class="javax.swing.JButton" name="botonEditarFacultad">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar facultad"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para editar la facultad seleccionada"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEditarFacultadActionPerformed"/>
@@ -380,6 +373,7 @@
             <Component class="javax.swing.JButton" name="botonEliminarFacultad">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar facultad"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para eliminar la facultad seleccionada"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEliminarFacultadActionPerformed"/>
@@ -388,6 +382,7 @@
             <Component class="javax.swing.JButton" name="botonEditarCarrera">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar carrera"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para editar la carrera seleccionada"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEditarCarreraActionPerformed"/>
@@ -396,6 +391,7 @@
             <Component class="javax.swing.JButton" name="botonEliminarCarrera">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar carrera"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para eliminar la carrera seleccionada"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEliminarCarreraActionPerformed"/>
@@ -404,6 +400,7 @@
             <Component class="javax.swing.JButton" name="botonBuscarCarrera">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar carrera"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para buscar una carrera"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonBuscarCarreraActionPerformed"/>
@@ -427,8 +424,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel20" min="-2" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="164" max="-2" attributes="0"/>
                           <Component id="botonBuscarProfesor" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" min="-2" pref="164" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -525,10 +522,10 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="botonAgregarProfesor" min="-2" pref="38" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane1" min="-2" pref="371" max="-2" attributes="0"/>
-                              <EmptySpace pref="8" max="32767" attributes="0"/>
+                              <Component id="jScrollPane1" pref="373" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="botonBuscarProfesor" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -548,14 +545,9 @@
                 <Component class="javax.swing.JList" name="visualizadorListaProfes">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                        <StringItem index="4" value="Item 5"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Lista de profesores, seleccione un profesor para ver sus detalles"/>
                   </Properties>
                   <Events>
                     <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="visualizadorListaProfesValueChanged"/>
@@ -575,6 +567,7 @@
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="text" type="java.lang.String" value="Seleccione un profesor del listado del costado para ver su informaci&#xf3;n"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Informaci&#xf3;n del profesor seleccionado"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -588,6 +581,9 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="campoNombreProfesorNuevo">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Escriba aqu&#xed; el nombre del profesor que desea agregar"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
@@ -610,6 +606,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="campoRutProfesor">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Escriba aqu&#xed; el rut del profesor que desea agregar, sin d&#xed;gito verificador"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="campoRamosQueDicta">
             </Component>
@@ -646,6 +645,7 @@
             <Component class="javax.swing.JButton" name="botonEditarProfesor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar profesor"/>
+                <Property name="toolTipText" type="java.lang.String" value=""/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEditarProfesorActionPerformed"/>
@@ -654,6 +654,7 @@
             <Component class="javax.swing.JButton" name="botonEliminarProfesor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar profesor"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para eliminar el profesor seleccionado"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEliminarProfesorActionPerformed"/>
@@ -672,6 +673,7 @@
             <Component class="javax.swing.JButton" name="botonVerHorarioProfesor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ver su horario"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para ver el horario del profesor seleccionado"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVerHorarioProfesorActionPerformed"/>
@@ -680,6 +682,7 @@
             <Component class="javax.swing.JButton" name="botonBuscarProfesor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar profesor"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para buscar un profesor"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonBuscarProfesorActionPerformed"/>
@@ -720,33 +723,28 @@
                               </Group>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jSeparator2" alignment="0" min="-2" pref="582" max="-2" attributes="0"/>
+                                  <Component id="jLabel21" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
+                                  <Component id="jScrollPane7" alignment="0" min="-2" pref="531" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jSeparator2" alignment="0" min="-2" pref="582" max="-2" attributes="0"/>
-                                          <Component id="jLabel21" alignment="0" min="-2" pref="270" max="-2" attributes="0"/>
-                                          <Component id="jScrollPane7" alignment="0" min="-2" pref="531" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
-                                              </Group>
+                                          <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="selectorListaSemestres" min="-2" max="-2" attributes="0"/>
+                                          <Component id="selectorListaCarreras" alignment="0" min="-2" max="-2" attributes="1"/>
+                                          <Group type="102" alignment="0" attributes="1">
+                                              <Component id="selectorLetraSeccion" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                  <Component id="selectorListaSemestres" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="selectorListaCarreras" alignment="0" min="-2" max="-2" attributes="1"/>
-                                                  <Group type="102" alignment="0" attributes="1">
-                                                      <Component id="selectorLetraSeccion" min="-2" max="-2" attributes="0"/>
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="selectorNumeroSeccion" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Component id="campoCodigoCursoNuevo" alignment="0" pref="299" max="32767" attributes="1"/>
-                                                  <Component id="campoNombreCursoNuevo" alignment="0" max="32767" attributes="1"/>
-                                              </Group>
+                                              <Component id="selectorNumeroSeccion" min="-2" max="-2" attributes="0"/>
                                           </Group>
+                                          <Component id="campoCodigoCursoNuevo" alignment="0" pref="299" max="32767" attributes="1"/>
+                                          <Component id="campoNombreCursoNuevo" alignment="0" max="32767" attributes="1"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
@@ -840,14 +838,9 @@
                 <Component class="javax.swing.JList" name="visualizadorListaCursos">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                      <StringArray count="5">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                        <StringItem index="4" value="Item 5"/>
-                      </StringArray>
+                      <StringArray count="0"/>
                     </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Lista de cursos, seleccione un curso para ver sus detalles"/>
                   </Properties>
                   <Events>
                     <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="visualizadorListaCursosValueChanged"/>
@@ -872,6 +865,7 @@
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                     <Property name="text" type="java.lang.String" value="Seleccione un curso del listado del costado para ver su informaci&#xf3;n"/>
+                    <Property name="toolTipText" type="java.lang.String" value="Informaci&#xf3;n del curso seleccionado"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -897,8 +891,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="campoNombreCursoNuevo">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Escriba aqu&#xed; el nombre del curso que desea agregar"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="campoCodigoCursoNuevo">
+              <Properties>
+                <Property name="toolTipText" type="java.lang.String" value="Escriba aqu&#xed; el c&#xf3;digo del curso que desea agregar"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="selectorListaCarreras">
               <Properties>
@@ -910,6 +910,7 @@
                     <StringItem index="3" value="Item 4"/>
                   </StringArray>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Elija aqu&#xed; la carrera donde ser&#xe1; dictado el curso"/>
               </Properties>
               <Events>
                 <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="selectorListaCarrerasItemStateChanged"/>
@@ -928,6 +929,7 @@
             <Component class="javax.swing.JButton" name="botonEditarCurso">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Editar curso"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para editar el curso seleccionado, asignarle un profesor y/o asignarle horario"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEditarCursoActionPerformed"/>
@@ -936,6 +938,7 @@
             <Component class="javax.swing.JButton" name="botonEliminarCurso">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar curso"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para eliminar el curso seleccionado"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonEliminarCursoActionPerformed"/>
@@ -952,6 +955,7 @@
             <Component class="javax.swing.JButton" name="botonVerHorarioCurso">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ver su horario"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para ver el horario del curso seleccionado"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonVerHorarioCursoActionPerformed"/>
@@ -972,6 +976,7 @@
                     <StringItem index="3" value="Item 4"/>
                   </StringArray>
                 </Property>
+                <Property name="toolTipText" type="java.lang.String" value="Elija aqu&#xed; en que semestre o nivel de la carrera es dictado el curso"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="selectorLetraSeccion">
@@ -1003,6 +1008,7 @@
             <Component class="javax.swing.JButton" name="botonBuscarCurso">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Buscar curso"/>
+                <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para buscar un curso"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonBuscarCursoActionPerformed"/>

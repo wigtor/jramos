@@ -224,11 +224,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel4.setText("Carrera: ");
 
-        visualizadorListaFacultades.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        visualizadorListaFacultades.setToolTipText("Lista de facultades, seleccione una facultad para ver sus detalles y carreras");
         visualizadorListaFacultades.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 visualizadorListaFacultadesValueChanged(evt);
@@ -241,11 +237,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(visualizadorListaFacultades);
 
-        visualizadorListaCarreras.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        visualizadorListaCarreras.setToolTipText("Lista de carreras, seleccione una carrera para ver sus detalles");
         visualizadorListaCarreras.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 visualizadorListaCarrerasValueChanged(evt);
@@ -253,16 +245,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(visualizadorListaCarreras);
 
-        botonNuevaCarrera.setFont(new java.awt.Font("Dialog", 1, 10));
+        botonNuevaCarrera.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         botonNuevaCarrera.setText("Nueva carrera...");
+        botonNuevaCarrera.setToolTipText("Haga click aquí para agregar una carrera al registro");
         botonNuevaCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonNuevaCarreraActionPerformed(evt);
             }
         });
 
-        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10));
+        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         botonNuevaFacultad.setText("Nueva facultad...");
+        botonNuevaFacultad.setToolTipText("Haga click aquí para agregar una facultad al registro");
         botonNuevaFacultad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonNuevaFacultadActionPerformed(evt);
@@ -276,15 +270,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuadroInfornacionFacultad.setColumns(20);
         cuadroInfornacionFacultad.setRows(5);
         cuadroInfornacionFacultad.setText("Seleccione una facultad del listado del costado para ver su información");
+        cuadroInfornacionFacultad.setToolTipText("Información de la facultad seleccionada");
         jScrollPane5.setViewportView(cuadroInfornacionFacultad);
 
         cuadroInformacionCarrera.setColumns(20);
         cuadroInformacionCarrera.setRows(5);
         cuadroInformacionCarrera.setText("Seleccione una carrera del listado del costado para ver su información");
+        cuadroInformacionCarrera.setToolTipText("Información de la carrera seleccionada");
         jScrollPane8.setViewportView(cuadroInformacionCarrera);
 
-        jButton7.setFont(new java.awt.Font("Dialog", 1, 14));
+        jButton7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jButton7.setText("Ver Malla");
+        jButton7.setToolTipText("Haga click aquí para ver la malla de la carrera seleccionada");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -292,6 +289,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonEditarFacultad.setText("Editar facultad");
+        botonEditarFacultad.setToolTipText("Haga click aquí para editar la facultad seleccionada");
         botonEditarFacultad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEditarFacultadActionPerformed(evt);
@@ -299,6 +297,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonEliminarFacultad.setText("Eliminar facultad");
+        botonEliminarFacultad.setToolTipText("Haga click aquí para eliminar la facultad seleccionada");
         botonEliminarFacultad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEliminarFacultadActionPerformed(evt);
@@ -306,6 +305,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonEditarCarrera.setText("Editar carrera");
+        botonEditarCarrera.setToolTipText("Haga click aquí para editar la carrera seleccionada");
         botonEditarCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEditarCarreraActionPerformed(evt);
@@ -313,6 +313,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonEliminarCarrera.setText("Eliminar carrera");
+        botonEliminarCarrera.setToolTipText("Haga click aquí para eliminar la carrera seleccionada");
         botonEliminarCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEliminarCarreraActionPerformed(evt);
@@ -320,6 +321,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonBuscarCarrera.setText("Buscar carrera");
+        botonBuscarCarrera.setToolTipText("Haga click aquí para buscar una carrera");
         botonBuscarCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonBuscarCarreraActionPerformed(evt);
@@ -333,37 +335,34 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonNuevaFacultad)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonNuevaCarrera)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(botonBuscarCarrera))
+                    .addComponent(botonBuscarCarrera)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(72, 72, 72)
+                        .addComponent(botonEditarFacultad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                        .addComponent(botonEliminarFacultad)
+                        .addGap(82, 82, 82))
+                    .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
                         .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addComponent(botonEditarFacultad)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
-                                .addComponent(botonEliminarFacultad)
-                                .addGap(82, 82, 82))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                                .addGap(46, 46, 46)
-                                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
-                                            .addComponent(jLabel22)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addContainerGap(38, Short.MAX_VALUE))))
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                                    .addComponent(jLabel22)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(38, Short.MAX_VALUE))
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(botonEditarCarrera)
@@ -389,7 +388,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                         .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -403,22 +402,19 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4)))
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonEditarCarrera)
-                    .addComponent(botonEliminarCarrera)
+                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botonEditarCarrera)
+                        .addComponent(botonEliminarCarrera))
                     .addComponent(botonBuscarCarrera))
                 .addGap(29, 29, 29))
         );
 
         PanelVisualizadorGeneral.addTab("Carreras", PanelVisualizadorCarreras);
 
-        visualizadorListaProfes.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        visualizadorListaProfes.setToolTipText("Lista de profesores, seleccione un profesor para ver sus detalles");
         visualizadorListaProfes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 visualizadorListaProfesValueChanged(evt);
@@ -429,6 +425,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuadroInformacionProfes.setColumns(20);
         cuadroInformacionProfes.setRows(5);
         cuadroInformacionProfes.setText("Seleccione un profesor del listado del costado para ver su información");
+        cuadroInformacionProfes.setToolTipText("Información del profesor seleccionado");
         jScrollPane2.setViewportView(cuadroInformacionProfes);
 
         botonAgregarProfesor.setText("Agregar profesor");
@@ -438,6 +435,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        campoNombreProfesorNuevo.setToolTipText("Escriba aquí el nombre del profesor que desea agregar");
+
         jLabel5.setText("Nombre Profesor:");
 
         jLabel6.setText("RUT:");
@@ -445,6 +444,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel7.setText("Ramos que puede dictar:");
 
         jLabel8.setText("Horas disponibles:");
+
+        campoRutProfesor.setToolTipText("Escriba aquí el rut del profesor que desea agregar, sin dígito verificador");
 
         campoHorasDisponibles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -463,6 +464,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel20.setText("Listado de profesores");
 
         botonEditarProfesor.setText("Editar profesor");
+        botonEditarProfesor.setToolTipText("");
         botonEditarProfesor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEditarProfesorActionPerformed(evt);
@@ -470,6 +472,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonEliminarProfesor.setText("Eliminar profesor");
+        botonEliminarProfesor.setToolTipText("Haga click aquí para eliminar el profesor seleccionado");
         botonEliminarProfesor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEliminarProfesorActionPerformed(evt);
@@ -480,6 +483,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel14.setText("Agregar un nuevo profesor al registro: ");
 
         botonVerHorarioProfesor.setText("Ver su horario");
+        botonVerHorarioProfesor.setToolTipText("Haga click aquí para ver el horario del profesor seleccionado");
         botonVerHorarioProfesor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVerHorarioProfesorActionPerformed(evt);
@@ -487,6 +491,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonBuscarProfesor.setText("Buscar profesor");
+        botonBuscarProfesor.setToolTipText("Haga click aquí para buscar un profesor");
         botonBuscarProfesor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonBuscarProfesorActionPerformed(evt);
@@ -501,8 +506,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel20)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonBuscarProfesor))
+                    .addComponent(botonBuscarProfesor)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(PanelVisualizadorProfesoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(PanelVisualizadorProfesoresLayout.createSequentialGroup()
@@ -581,10 +586,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonAgregarProfesor, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PanelVisualizadorProfesoresLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelVisualizadorProfesoresLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 373, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(botonBuscarProfesor)))
                 .addContainerGap())
         );
@@ -599,11 +604,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        visualizadorListaCursos.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
+        visualizadorListaCursos.setToolTipText("Lista de cursos, seleccione un curso para ver sus detalles");
         visualizadorListaCursos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 visualizadorListaCursosValueChanged(evt);
@@ -616,6 +617,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuadroInformacionCurso.setColumns(20);
         cuadroInformacionCurso.setRows(5);
         cuadroInformacionCurso.setText("Seleccione un curso del listado del costado para ver su información");
+        cuadroInformacionCurso.setToolTipText("Información del curso seleccionado");
         jScrollPane7.setViewportView(cuadroInformacionCurso);
 
         jLabel15.setText("Nombre del curso:");
@@ -626,7 +628,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jLabel19.setText("Carrera en que se dicta:");
 
+        campoNombreCursoNuevo.setToolTipText("Escriba aquí el nombre del curso que desea agregar");
+
+        campoCodigoCursoNuevo.setToolTipText("Escriba aquí el código del curso que desea agregar");
+
         selectorListaCarreras.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectorListaCarreras.setToolTipText("Elija aquí la carrera donde será dictado el curso");
         selectorListaCarreras.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 selectorListaCarrerasItemStateChanged(evt);
@@ -641,6 +648,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonEditarCurso.setText("Editar curso");
+        botonEditarCurso.setToolTipText("Haga click aquí para editar el curso seleccionado, asignarle un profesor y/o asignarle horario");
         botonEditarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEditarCursoActionPerformed(evt);
@@ -648,6 +656,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         botonEliminarCurso.setText("Eliminar curso");
+        botonEliminarCurso.setToolTipText("Haga click aquí para eliminar el curso seleccionado");
         botonEliminarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonEliminarCursoActionPerformed(evt);
@@ -658,6 +667,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel21.setText("Agregar un nuevo curso al registro:");
 
         botonVerHorarioCurso.setText("Ver su horario");
+        botonVerHorarioCurso.setToolTipText("Haga click aquí para ver el horario del curso seleccionado");
         botonVerHorarioCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVerHorarioCursoActionPerformed(evt);
@@ -667,12 +677,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel1.setText("¿En que semestre? ");
 
         selectorListaSemestres.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectorListaSemestres.setToolTipText("Elija aquí en que semestre o nivel de la carrera es dictado el curso");
 
         selectorLetraSeccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D" }));
 
         selectorNumeroSeccion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6" }));
 
         botonBuscarCurso.setText("Buscar curso");
+        botonBuscarCurso.setToolTipText("Haga click aquí para buscar un curso");
         botonBuscarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonBuscarCursoActionPerformed(evt);
@@ -692,29 +704,26 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(botonBuscarCurso))
                         .addGap(12, 12, 12)
                         .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel15)
+                                    .addComponent(jLabel16)
+                                    .addComponent(jLabel19)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel18))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(selectorListaSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
-                                        .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel15)
-                                            .addComponent(jLabel16)
-                                            .addComponent(jLabel19)
-                                            .addComponent(jLabel1)
-                                            .addComponent(jLabel18))
+                                        .addComponent(selectorLetraSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(panelVisualizadorCursosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(selectorListaSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
-                                                .addComponent(selectorLetraSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(selectorNumeroSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(campoCodigoCursoNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                                            .addComponent(campoNombreCursoNuevo)))))
+                                        .addComponent(selectorNumeroSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(campoCodigoCursoNuevo, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                                    .addComponent(campoNombreCursoNuevo)))
                             .addGroup(panelVisualizadorCursosLayout.createSequentialGroup()
                                 .addGap(182, 182, 182)
                                 .addComponent(botonAgregarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -828,7 +837,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
+                .addContainerGap()
                 .addComponent(PanelVisualizadorGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

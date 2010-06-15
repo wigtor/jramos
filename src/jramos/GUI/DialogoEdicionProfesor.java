@@ -156,7 +156,7 @@ public class DialogoEdicionProfesor extends javax.swing.JDialog {
         int i, tamLista;
         //Intento agregar un profesor nuevo.
         try {
-            this.listManager.editaProfesor(this.profesorAEditar, this.campoNombreProfesorNuevo.getText(), this.campoRutProfesor.getText(), this.campoRamosQueDicta.getText(), this.campoHorasDisponibles.getText());
+            this.listManager.editaProfesor(this.profesorAEditar, this.campoNombreProfesorNuevo.getText(), this.campoRamosQueDicta.getText(), this.campoHorasDisponibles.getText());
         } catch (nombreRepetidoException nombreRepetido) {       //abro nuevo dialogo de error.
             DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "El nombre del profesor ya existe.", "vuelva a escribir otro nombre para el profesor");
             dialogoError.setVisible(true);

@@ -71,7 +71,7 @@ public class ManipuladorListas
         {       return this.listaProfesores;
         }
 
-        public void editaProfesor(Profesor profesorAEditar, String ramosDisponibles, String horasDisp) throws StringVacioException, nombreRepetidoException, HourOutOfRangeException
+        public void editaProfesor(Profesor profesorAEditar, String nuevoNombreProfe, String ramosDisponibles, String horasDisp) throws StringVacioException, nombreRepetidoException, HourOutOfRangeException
         {
 
         }

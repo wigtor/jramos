@@ -71,7 +71,7 @@ public class ManipuladorListas
         {       return this.listaProfesores;
         }
 
-        public void editaProfesor(Profesor profesorAEditar, String nuevonombre, String nuevoRut, String ramosDisponibles, String horasDisp) throws StringVacioException, nombreRepetidoException, HourOutOfRangeException
+        public void editaProfesor(Profesor profesorAEditar, String ramosDisponibles, String horasDisp) throws StringVacioException, nombreRepetidoException, HourOutOfRangeException
         {
 
         }
@@ -414,7 +414,7 @@ public class ManipuladorListas
                                 throw new nombreRepetidoException();
                         }
                 }
-
+                //FALTA COMPROBAR QUE EL NUEVO NOMBRE NO SEA VACIO!!!
                 //modifico la facultad
                 facultadAEditar.setNombre(nuevoNombre);
                 facultadAEditar.setDescripcion(nuevaDescripcion);
@@ -543,6 +543,7 @@ public class ManipuladorListas
                                 {       curso.setProfesor(null);
                                 }
                 }
+                //FALTA DESASIGNAR LAS HORAS QUE TENIA EL CURSO CON ESE PROFESOR!!!
         }
 
         /**
@@ -629,6 +630,8 @@ public class ManipuladorListas
                                         profesor.modCursosAsignados(curso, -1);
                         }
                 }
+                //CREO QUE FALTA QUITAR LAS REFERENCIAS DE LAS HORAS ASIGNADAS QUE TENIA EL PROFESOR AL ELIMINAR EL CURSO!!!
+                
 
                 //elimino los semestres que posee la carrera eliminada de la lista de semestres
                 for (Semestre semestre : semestresAEliminar)

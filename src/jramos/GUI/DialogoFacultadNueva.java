@@ -11,7 +11,6 @@
 
 package jramos.GUI;
 import jramos.tiposDatos.Facultad;
-import java.util.ArrayList;
 import jramos.ManipuladorListas;
 import jramos.excepciones.StringVacioException;
 import jramos.excepciones.nombreRepetidoException;
@@ -162,6 +161,12 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
         else
         {       try
                 {       this.listManager.editarFacultad(facultadAEditar, this.campoNombreFacultadNueva.getText(), this.textoDescripcionFacultadNueva.getText());
+                }
+                catch (StringVacioException nombreFacultadVacio)
+                {       DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "No hay un nombre de facultad escrito", "Debe escribir un nombre de facultad");
+                        dialogoError.setVisible(true);
+                        dialogoError = null;
+                        return ;
                 }
                 catch (nombreRepetidoException nombreFacultadVacio)
                 {       DialogoError dialogoError = new DialogoError(ventanaPadre, rootPaneCheckingEnabled, "El nuevo nombre de facultad introducido ya existe.", "vuelva a escribir otro nombre para la facultad");

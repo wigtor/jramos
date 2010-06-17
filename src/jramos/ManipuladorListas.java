@@ -290,6 +290,10 @@ public class ManipuladorListas
                 for (Profesor profesor : this.listaProfesores)
                 {       if (cursoABorrar.getIdProfeAsig() == profesor.getIdProfesor())
                         {       profesor.modCursosAsignados(cursoABorrar, -1);
+                                //Quito las horas que tenia asignado el curso de la lista de cursos asignados del profesor que tenía asignado
+                                for (Hora hora : cursoABorrar.getHorasAsigArrayList())
+                                {       profesor.modHorasAsignadas(hora, -1);
+                                }
                                 break ;
                         }
                 }
@@ -404,8 +408,13 @@ public class ManipuladorListas
          * @param nuevaDescripcion Es la nueva descripción que se le quiere setear a la facultad.
          * @throws nombreRepetidoException Lanza esta excepción cuando el nuevo nombre de la facultad está repetido con alguno de las demás facultades.
          */
-        public void editarFacultad(Facultad facultadAEditar, String nuevoNombre, String nuevaDescripcion) throws nombreRepetidoException
-        {       //Compruebo que el nuevo nombre de la facultad no es igual al nombre de otra facultad
+        public void editarFacultad(Facultad facultadAEditar, String nuevoNombre, String nuevaDescripcion) throws nombreRepetidoException, StringVacioException
+        {       if (nuevoNombre.trim().equals(""))
+                {       //Si el nombre de la facultad es un string vacio, lanzo excepcion
+                        throw new StringVacioException();
+                }
+
+                //Compruebo que el nuevo nombre de la facultad no es igual al nombre de otra facultad
                 ArrayList<Facultad> listaCompletaFacultades = this.listaFacultades;
                 for (Facultad facultad : listaCompletaFacultades)
                 {       //si el nombre nuevo de la facultad es igual algun nombre de las facultades de la lista de facultades (A excepción de la facultad que se está modificando), lanzo dialogo de error.
@@ -414,7 +423,6 @@ public class ManipuladorListas
                                 throw new nombreRepetidoException();
                         }
                 }
-                //FALTA COMPROBAR QUE EL NUEVO NOMBRE NO SEA VACIO!!!
                 //modifico la facultad
                 facultadAEditar.setNombre(nuevoNombre);
                 facultadAEditar.setDescripcion(nuevaDescripcion);
@@ -537,13 +545,16 @@ public class ManipuladorListas
         public void eliminaProfesor(Profesor profeABorrar)
         {       //Elimino al profesor de la lista de profesores
                 this.listaProfesores.remove(profeABorrar);
-                //elimino las rederencias al profesor que puedan existir en sus cursos asignados
+                //elimino las referencias al profesor que puedan existir en sus cursos asignados
                 for (Curso curso : this.listaCursos)
                 {       if (curso.getIdProfeAsig() == profeABorrar.getIdProfesor())
-                                {       curso.setProfesor(null);
+                        {       curso.setProfesor(null);
+                                ArrayList<Hora> listaHorasAEliminar = curso.getHorasAsigArrayList();
+                                for(Hora hora : listaHorasAEliminar)
+                                {       curso.modHorario(hora, -1);
                                 }
+                        }
                 }
-                //FALTA DESASIGNAR LAS HORAS QUE TENIA EL CURSO CON ESE PROFESOR!!!
         }
 
         /**
@@ -623,15 +634,18 @@ public class ManipuladorListas
                                 cursosAEliminar.add(curso);
                         }
                 }
+                
                 //elimino las referencias de los cursos eliminados que existan en los profesores
                 for (Curso curso : cursosAEliminar)
                 {       for (Profesor profesor : this.listaProfesores)
                         {       if (profesor.getIdCursosAsignadosArrayList().contains(new Integer(curso.getIdCurso())))
                                         profesor.modCursosAsignados(curso, -1);
+                                //Quito las horas que tenia asignado el curso de la lista de cursos asignados del profesor que tenía asignado
+                                for (Hora hora : curso.getHorasAsigArrayList())
+                                {       profesor.modHorasAsignadas(hora, -1);
+                                }
                         }
                 }
-                //CREO QUE FALTA QUITAR LAS REFERENCIAS DE LAS HORAS ASIGNADAS QUE TENIA EL PROFESOR AL ELIMINAR EL CURSO!!!
-                
 
                 //elimino los semestres que posee la carrera eliminada de la lista de semestres
                 for (Semestre semestre : semestresAEliminar)

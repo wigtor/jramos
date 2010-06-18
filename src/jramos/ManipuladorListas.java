@@ -164,6 +164,9 @@ public class ManipuladorListas
                 }
                 */
 
+                //Modifico el nombre del profesor
+                if (!profesorAEditar.getNombreProfesor().equals(nuevoNombreProfe))
+                    profesorAEditar.setNombre(nuevoNombreProfe);
 
         }
         

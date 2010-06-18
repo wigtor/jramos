@@ -396,4 +396,12 @@ public class Profesor {
         Profesor.idProfesorActual = id;
     }
 
+    /**
+     * Metodo para modificar el nombre del profesor
+     * setea el atributo nombre del profesor.
+     * @param nombreProfe String con el nuevo nombre del profesor.
+     */
+    public void setNombre(String nombreProfe)
+    {   this.nomProfe = nombreProfe;
     }
+}

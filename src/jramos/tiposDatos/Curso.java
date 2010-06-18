@@ -311,8 +311,8 @@ public class Curso {
    /**
     * Metodo para hacer la conexion al profesor que esta asignado a este curso.
     * Actualiza automaticamente el rut del profesor
-    *
-    * @param profesorToAsign Objeto Profesor
+    * Si desea desAsignar el profesor del curso debe usar null como parametro
+    * @param profesorToAsign Objeto Profesor o null para desAsignarlo.
     */
    public void setProfesor(Profesor profesorToAsig){
        this.profeAsig = profesorToAsig;

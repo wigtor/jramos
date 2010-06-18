@@ -231,12 +231,12 @@ public class ManipuladorListas
                                                 cursoAEditar.modHorario(horaTemp, 1);
                                         }
                                         //Lanzo excepcion de tope horario
-                                        throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL, "Tope horario con cursos del mismo semestre");
+                                        throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL, "Tope horario con: " +cursoDelSemestre+". Del mismo semestre");
                                 }
                         }
                 }
 
-                if (comprobarHorarioSemestreAnterior)
+                if (comprobarHorarioSemestreSiguiente)
                 {   //Compruebo que las horas asignadas idealmente no coinciden con horas asignadas de cursos del nivel siguiente
                     for (Hora hora :horasQueAsignarle)
                     {       for (Semestre semestreDeCarrera : cursoAEditar.getEnCarrera().getListaSemestres())
@@ -249,7 +249,7 @@ public class ManipuladorListas
                                                                     cursoAEditar.modHorario(horaTemp, 1);
                                                             }
                                                             //Lanzo excepcion de tope horario
-                                                            throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL_SIG,"Tope horario con cursos del semestre siguiente");
+                                                            throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL_SIG,"Tope horario con: "+cursoDelSemestreSiguiente+ ". Del semestre siguiente");
                                                     }
                                             }
                                     }
@@ -257,20 +257,20 @@ public class ManipuladorListas
                             }
                     }
                 }
-                if (comprobarHorarioSemestreSiguiente)
+                if (comprobarHorarioSemestreAnterior)
                 {   //compruebo que las horas asignadas idealmente no coinciden con horas asignadas de cursos del nivel anterior
                     for (Hora hora :horasQueAsignarle)
                     {       for (Semestre semestreDeCarrera : cursoAEditar.getEnCarrera().getListaSemestres())
                             {       if (semestreDeCarrera.getNumeroSemestre() == cursoAEditar.getEnSemestre().getNumeroSemestre()-1)
-                                    {       for (Curso cursoDelSemestreSiguiente : semestreDeCarrera.getCursosArrayList())
-                                            {       if (cursoDelSemestreSiguiente.getHorasAsigArrayList().contains(hora))
+                                    {       for (Curso cursoDelSemestreAnterior : semestreDeCarrera.getCursosArrayList())
+                                            {       if (cursoDelSemestreAnterior.getHorasAsigArrayList().contains(hora))
                                                     {       //agrego las horas que eliminé temporalmente antes de lanzar la excepcion
                                                             for (Hora horaTemp : horasAsigTemp)
                                                             {       antiguoProfeAsig.modHorasAsignadas(horaTemp, 1);
                                                                     cursoAEditar.modHorario(horaTemp, 1);
                                                             }
                                                             //Lanzo excepcion de tope horario
-                                                            throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL_ANT, "Tope horario con cursos del semestre anterior");
+                                                            throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL_ANT, "Tope horario con: "+cursoDelSemestreAnterior+".Del semestre anterior");
                                                     }
                                             }
                                     }

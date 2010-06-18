@@ -364,8 +364,10 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         int columna = this.horarioMostrado.columnAtPoint(evt.getPoint());
         try
         {       Hora horaTemp = new Hora((columna-1)*9 + fila+1);
-                this.listaHorasSeleccionadas.add(horaTemp);
-                this.listModelHoras.addElement(horaTemp);
+                if (!this.listaHorasSeleccionadas.contains(horaTemp))
+                {       this.listaHorasSeleccionadas.add(horaTemp);
+                        this.listModelHoras.addElement(horaTemp);
+                }
         }
         catch (HourOutOfRangeException HOORE)
         {       System.out.println("No se ha podido seleccionar una hora válida de la tabla");

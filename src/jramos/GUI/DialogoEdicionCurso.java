@@ -282,7 +282,8 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
                 }
 
         }
-
+        
+        this.setVisible(false);
 
         //ACTUALIZO GUI DE VENTANA PRINCIPAL
         ((VentanaPrincipal)this.ventanaPadre).actualizaJListListaCursos();
@@ -303,9 +304,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
 
     private void botonAplicarCambiosCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAplicarCambiosCursoActionPerformed
         // Acción a realizar cuando se presiona el boton "agregar curso"
-        //DEBO IDEAR LA FORMA DE LEER LAS HORAS A ASIGNAR
         this.aplicarCambiosEdicion(true, true);
-        this.setVisible(false);
     }//GEN-LAST:event_botonAplicarCambiosCursoActionPerformed
 
     void asignarHorasElegidas(ArrayList <Hora> horasElegidas)

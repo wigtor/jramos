@@ -49,25 +49,42 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         this.listModelHoras = new DefaultListModel();
         this.claseDelObjeto = objetoQueVerHorario.getClass();
         this.setLocationRelativeTo(parent);
-        if ((modo == VisualizadorHorarioObjeto.EDICION) && (objetoQueVerHorario.getClass() == Curso.class))
-        {       this.dialogoEdicionCursoPadre = (DialogoEdicionCurso)parent;
-                for (Hora hora : ((Curso)objetoQueVerHorario).getHorasAsigArrayList())
-                {       this.listaHorasSeleccionadas.add(hora);
-                        this.listModelHoras.addElement(hora);
+        
+        if (modo == VisualizadorHorarioObjeto.VISUALIZACION)
+        {       this.horarioMostrado.setCellSelectionEnabled(false);
+                this.scrollPanelHorasElegidas.setVisible(false);
+                this.scrollPanelHorasElegidas.setEnabled(false);
+                this.JListHorasSeleccionadas.setVisible(false);
+                this.JListHorasSeleccionadas.setEnabled(false);
+                this.labelElegidas.setVisible(false);
+                this.labelHoras.setVisible(false);
+                this.labelElegidas.setEnabled(false);
+                this.labelHoras.setEnabled(false);
+                this.setSize(782, 460);
+        }
+        if (modo == VisualizadorHorarioObjeto.EDICION)
+        {       this.horarioMostrado.setCellSelectionEnabled(false);
+                this.panelCursos.setVisible(false);
+                this.labelCursos.setVisible(false);
+                this.setSize(860, 300);
+                this.botonCerrarHorario.setText("Aceptar");
+                this.JListHorasSeleccionadas.setEnabled(true);
+                this.JListHorasSeleccionadas.setVisible(true);
+                this.JListHorasSeleccionadas.setModel(this.listModelHoras);
+                if (profesorAAsignar != null)
+                {       this.horasAMostrar = profesorAAsignar.getHorasDispArrayList();
+                        this.horasOcupadasDelProfe = profesorAAsignar.getHorasAsigArrayList();
+                        this.horasDispDelProfe = profesorAAsignar.getHorasDispArrayList();
                 }
+
         }
-        if ((modo == VisualizadorHorarioObjeto.VISUALIZACION) && (objetoQueVerHorario.getClass() == Curso.class))
-        {       this.botonCerrarHorario.setAlignmentY(TOP_ALIGNMENT);
-                this.jLabel1.setVisible(false);
-                this.jLabel4.setVisible(false);
-        }
+
         if (objetoQueVerHorario.getClass().equals(Curso.class))
         {       horasAMostrar = ((Curso)objetoQueVerHorario).getHorasAsigArrayList();
                 this.labelClaseObjeto.setText("Curso");
                 this.labelNombreObjeto.setText(((Curso)objetoQueVerHorario).getNombreCurso());
                 this.panelCursos.setVisible(false);
                 this.labelCursos.setVisible(false);
-                this.setSize(782, 300);
                 this.botonCerrarHorario.setText("Aceptar");
         }
         if (objetoQueVerHorario.getClass().equals(Profesor.class))
@@ -105,27 +122,18 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                 this.tablaCursos.setModel(modelo);
         }
         
-        if (modo == VisualizadorHorarioObjeto.VISUALIZACION)
-        {       this.horarioMostrado.setCellSelectionEnabled(false);
-                this.JListHorasSeleccionadas.setVisible(false);
-                this.JListHorasSeleccionadas.setEnabled(false);
-        }
-        if (modo == VisualizadorHorarioObjeto.EDICION)
-        {       this.horarioMostrado.setCellSelectionEnabled(false);
-                this.panelCursos.setVisible(false);
-                this.labelCursos.setVisible(false);
-                this.setSize(860, 300);
-                this.botonCerrarHorario.setText("Aceptar");
-                this.JListHorasSeleccionadas.setEnabled(true);
-                this.JListHorasSeleccionadas.setVisible(true);
-                this.JListHorasSeleccionadas.setModel(this.listModelHoras);
-                if (profesorAAsignar != null)
-                {       this.horasAMostrar = profesorAAsignar.getHorasDispArrayList();
-                        this.horasOcupadasDelProfe = profesorAAsignar.getHorasAsigArrayList();
-                        this.horasDispDelProfe = profesorAAsignar.getHorasDispArrayList();
+        if ((modo == VisualizadorHorarioObjeto.EDICION) && (objetoQueVerHorario.getClass() == Curso.class))
+        {       this.dialogoEdicionCursoPadre = (DialogoEdicionCurso)parent;
+                for (Hora hora : ((Curso)objetoQueVerHorario).getHorasAsigArrayList())
+                {       this.listaHorasSeleccionadas.add(hora);
+                        this.listModelHoras.addElement(hora);
                 }
-
         }
+        if ((modo == VisualizadorHorarioObjeto.VISUALIZACION) && (objetoQueVerHorario.getClass() == Curso.class))
+        {       this.botonCerrarHorario.setAlignmentY(TOP_ALIGNMENT);
+                this.setSize(782, 300);
+        }
+
         Hora horaTemp;
 
         //dibujo las horas en las celdas de la tabla
@@ -181,10 +189,10 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         labelClaseObjeto = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         labelNombreObjeto = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollPanelHorasElegidas = new javax.swing.JScrollPane();
         JListHorasSeleccionadas = new javax.swing.JList();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        labelHoras = new javax.swing.JLabel();
+        labelElegidas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Horario");
@@ -306,13 +314,13 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                 JListHorasSeleccionadasKeyPressed(evt);
             }
         });
-        jScrollPane1.setViewportView(JListHorasSeleccionadas);
+        scrollPanelHorasElegidas.setViewportView(JListHorasSeleccionadas);
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        jLabel1.setText("Horas");
+        labelHoras.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        labelHoras.setText("Horas");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        jLabel4.setText("elegidas:");
+        labelElegidas.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        labelElegidas.setText("elegidas:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -322,21 +330,21 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                 .addComponent(PanelVisualizadorHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labelElegidas)
+                    .addComponent(labelHoras)
+                    .addComponent(scrollPanelHorasElegidas, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1)
+                .addComponent(labelHoras)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4)
+                .addComponent(labelElegidas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(PanelVisualizadorHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(scrollPanelHorasElegidas, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(PanelVisualizadorHorario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -383,16 +391,16 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
     private javax.swing.JPanel PanelVisualizadorHorario;
     private javax.swing.JButton botonCerrarHorario;
     private javax.swing.JTable horarioMostrado;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelClaseObjeto;
     private javax.swing.JLabel labelCursos;
+    private javax.swing.JLabel labelElegidas;
+    private javax.swing.JLabel labelHoras;
     private javax.swing.JLabel labelNombreObjeto;
     private javax.swing.JScrollPane panelCursos;
     private javax.swing.JScrollPane panelHorario;
+    private javax.swing.JScrollPane scrollPanelHorasElegidas;
     private javax.swing.JTable tablaCursos;
     // End of variables declaration//GEN-END:variables
 

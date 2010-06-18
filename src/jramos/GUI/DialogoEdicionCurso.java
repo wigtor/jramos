@@ -33,6 +33,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
     public DialogoEdicionCurso(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager, Curso cursoAEditar) {
         super(ventanaPadre, modal);
         initComponents();
+        this.setLocationRelativeTo(ventanaPadre);
         this.ventanaPadre = ventanaPadre;
         this.cursoAEditar = cursoAEditar;
         this.listManager = listManager;

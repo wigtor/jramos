@@ -71,8 +71,99 @@ public class ManipuladorListas
         {       return this.listaProfesores;
         }
 
-        public void editaProfesor(Profesor profesorAEditar, String nuevoNombreProfe, String ramosDisponibles, String horasDisp) throws StringVacioException, nombreRepetidoException, HourOutOfRangeException
-        {
+        public void editaProfesor(Profesor profesorAEditar, String nuevoNombreProfe, String cursosDisponibles, String horasDisp) throws StringVacioException, nombreRepetidoException, HourOutOfRangeException
+        {       //Me aseguro que el nuevov nombre del profesor no es un string vacio.
+                if (nuevoNombreProfe.trim().equals(""))
+                {       //Lanzo excepción
+                        throw new StringVacioException();
+                }
+                //Si modifico el nombre del profesor, me aseguro que no hayan otros profesores con el nombre nuevo
+                if (!(profesorAEditar.getNombreProfesor().equals(nuevoNombreProfe)))
+                {       for (Profesor profesor : this.listaProfesores)
+                        {       if ((profesor.getNombreProfesor().equals(nuevoNombreProfe)) && (!profesorAEditar.equals(profesor)))
+                                {       //lanzo excepcion
+                                        throw new nombreRepetidoException();
+                                }
+                        }
+                }
+
+                int codCurso, i, posicionEspacio;
+                ArrayList<Hora> listaHorasDisponibles = new ArrayList();
+                ArrayList<Integer> listaCodCursosDisponibles = new ArrayList();
+
+                //Transformo el string con los cursos que puede dictar a un ArrayList de Integer
+                try
+                {       cursosDisponibles = cursosDisponibles.trim();
+                        if (cursosDisponibles.length() != 0) //Seteo los codigos de curso que puede impartir
+                        {       for (i = 0; cursosDisponibles.indexOf(" ") != -1;i++)
+                                {       System.out.println(cursosDisponibles.substring(0, cursosDisponibles.indexOf(" ")));
+                                        codCurso = Integer.valueOf(cursosDisponibles.substring(0, cursosDisponibles.indexOf(" ")));
+                                        posicionEspacio = cursosDisponibles.indexOf(" ");
+                                        cursosDisponibles = cursosDisponibles.substring(posicionEspacio+1);
+                                        listaCodCursosDisponibles.add(new Integer(Integer.valueOf(codCurso)));
+                                }
+                                //Agrego el ultimo que no fue agregado en el bucle:
+                                listaCodCursosDisponibles.add(new Integer(Integer.valueOf(cursosDisponibles)));
+                        }
+                }
+                catch (NumberFormatException NFE)
+                {   throw new NumberFormatException("codCurso");
+                }
+                //Transformo el string de horas a un ArrayList de Hora, estó puede lanzar HourOutOfRangeException
+                Hora objHora;
+                horasDisp = horasDisp.trim();
+                if (horasDisp.length() != 0)
+                {       for (i = 0; horasDisp.indexOf(" ") != -1;i++)
+                        {       System.out.println(horasDisp.substring(0, horasDisp.indexOf(" ")));
+                                objHora = new Hora(horasDisp.substring(0, horasDisp.indexOf(" ")));
+                                posicionEspacio = horasDisp.indexOf(" ");
+                                horasDisp = horasDisp.substring(posicionEspacio+1);
+                                listaHorasDisponibles.add(objHora);
+                        }
+                        //Agrego el ultimo que no fue agregado en el bucle:
+                        listaHorasDisponibles.add(new Hora(horasDisp));
+                }
+
+                //quito temporalmente la lista de horas disponibles que poseia el profesor
+                ArrayList<Hora> horasDispTemp = new ArrayList(), horasCursoDesAsig;
+                horasDispTemp.addAll(profesorAEditar.getHorasDispArrayList());
+                //compruebo que cada nueva hora disponible se encuentra en las horas que ya tenía disponible el profesor
+                for (Hora horaEnProfe : horasDispTemp)
+                {       //significa que se eliminó alguna hora
+                        System.out.println(listaHorasDisponibles.contains(horaEnProfe));
+                        if (!listaHorasDisponibles.contains(horaEnProfe))
+                        {       //recorro los cursos asignados buscando el que tiene la hora que había sido eliminada
+                                for (Curso cursoAsig : profesorAEditar.getCursosAsigArrayList())
+                                {       if (cursoAsig.getHorasAsigArrayList().contains(horaEnProfe))
+                                        {       profesorAEditar.modCursosAsignados(cursoAsig, -1);
+                                                //DesAsigno el profesor del curso
+                                                cursoAsig.setProfesor(null);
+                                                //Elimino las demás horas que tenía asignado ese curso con el profesor
+                                                horasCursoDesAsig = new ArrayList(cursoAsig.getHorasAsigArrayList());
+                                                for (Hora horaCurso : horasCursoDesAsig)
+                                                {       cursoAsig.modHorario(horaCurso, -1);
+                                                        profesorAEditar.modHorasAsignadas(horaCurso, -1);
+                                                }
+                                                break ;
+                                        }
+                                }
+
+                        }
+
+                }
+
+                //Agrego las nuevas horas disponibles al profesor
+                for (Hora hora : listaHorasDisponibles)
+                {       profesorAEditar.modHorasDisponibles(hora, 1);
+                }
+
+                /*
+                for (Curso curso : profesorAEditar.getCursosAsigArrayList())
+                {
+
+                }
+                */
+
 
         }
         
@@ -96,7 +187,7 @@ public class ManipuladorListas
                         return ;
                 }
 
-                //elimino temporalmente de las listas de horas del profesor las horas que ya posee asignado el curso, lugo las vuelvo a agregar
+                //elimino temporalmente de las listas de horas del profesor las horas que ya posee asignado el curso, luego las vuelvo a agregar
                 ArrayList<Hora> horasAsigTemp = new ArrayList();
                 horasAsigTemp.addAll(cursoAEditar.getHorasAsigArrayList());
                 Profesor antiguoProfeAsig = cursoAEditar.getProfeAsig();
@@ -240,7 +331,7 @@ public class ManipuladorListas
                 //Si modifico el nombre de la carrera, me aseguro que no hayan otras carreras con el nombre nuevo
                 if (!(carreraAEditar.getNombreCarrera().equals(nuevoNombre)))
                 {       for (Carrera carrera : this.listaCarreras)
-                        {       if (carrera.getNombreCarrera().equals(nuevoNombre))
+                        {       if ((carrera.getNombreCarrera().equals(nuevoNombre)) && (!carreraAEditar.equals(carrera)))
                                 {       //lanzo excepcion
                                         throw new nombreRepetidoException();
                                 }
@@ -549,7 +640,7 @@ public class ManipuladorListas
                 for (Curso curso : this.listaCursos)
                 {       if (curso.getIdProfeAsig() == profeABorrar.getIdProfesor())
                         {       curso.setProfesor(null);
-                                ArrayList<Hora> listaHorasAEliminar = curso.getHorasAsigArrayList();
+                                ArrayList<Hora> listaHorasAEliminar = new ArrayList(curso.getHorasAsigArrayList());
                                 for(Hora hora : listaHorasAEliminar)
                                 {       curso.modHorario(hora, -1);
                                 }

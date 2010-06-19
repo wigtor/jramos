@@ -13,6 +13,10 @@ package jramos.GUI;
 
 import javax.swing.DefaultListModel;
 import jramos.ManipuladorListas;
+import jramos.tiposDatos.Carrera;
+import jramos.tiposDatos.Curso;
+import jramos.tiposDatos.Facultad;
+import jramos.tiposDatos.Profesor;
 
 /**
  *
@@ -33,8 +37,16 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         this.listObjFound.removeAll();
         this.modeloListaObj = new DefaultListModel();
         this.listObjFound.setModel(modeloListaObj);
+        this.selectorTipoObj.addItem("Carrera");
+        this.selectorTipoObj.addItem("Curso");
+        this.selectorTipoObj.addItem("Profesor");
+        if (tipoObjeto == Carrera.class)
+            this.selectorTipoObj.setSelectedItem("Carrera");
+        if (tipoObjeto == Curso.class)
+            this.selectorTipoObj.setSelectedItem("Curso");
+        if (tipoObjeto == Profesor.class)
+            this.selectorTipoObj.setSelectedItem("Profesor");
         
-
     }
 
     /** This method is called from within the constructor to
@@ -59,42 +71,63 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         areaInfoObj = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         botonCerrar = new javax.swing.JButton();
+        botonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dialogo de busqueda");
 
         selectorTipoObj.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "tipo de dato a buscar" }));
+        selectorTipoObj.setToolTipText("Seleccione que es lo que está buscando");
+        selectorTipoObj.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                selectorTipoObjItemStateChanged(evt);
+            }
+        });
         selectorTipoObj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectorTipoObjActionPerformed(evt);
             }
         });
 
+        campoPalabrasBusq.setToolTipText("Escriba aquí las palabras de su busqueda");
+
+        listObjFound.setToolTipText("Listado con los resultados de la busqueda");
         jScrollPane1.setViewportView(listObjFound);
 
         jLabel1.setText("Resultados busqueda:");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 10));
         jLabel2.setText("Seleccione que está buscando");
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 10));
         jLabel3.setText("Seleccione criterio de busqueda");
 
         selectorCriterioBusq.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "criterio de busqueda" }));
+        selectorCriterioBusq.setToolTipText("Seleccione el criterio de busqueda");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 10));
         jLabel4.setText("Palabras clave de busqueda");
 
         areaInfoObj.setColumns(20);
         areaInfoObj.setRows(5);
+        areaInfoObj.setToolTipText("Información del objeto encontrado");
         jScrollPane2.setViewportView(areaInfoObj);
 
         jLabel5.setText("Información de objeto: ");
 
         botonCerrar.setText("Cerrar");
+        botonCerrar.setToolTipText("Cerrar el dialogo de busqueda");
         botonCerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCerrarActionPerformed(evt);
+            }
+        });
+
+        botonBuscar.setText("Buscar ya!");
+        botonBuscar.setToolTipText("Haga click aquí para comenzar a buscar");
+        botonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBuscarActionPerformed(evt);
             }
         });
 
@@ -103,28 +136,32 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane1, 0, 0, Short.MAX_VALUE)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(selectorCriterioBusq, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(selectorTipoObj, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(campoPalabrasBusq)))
-                            .addComponent(jLabel5)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(141, 141, 141)
-                        .addComponent(botonCerrar)))
-                .addContainerGap())
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(selectorCriterioBusq, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(selectorTipoObj, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4)
+                            .addComponent(campoPalabrasBusq)
+                            .addComponent(botonBuscar))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botonCerrar)
+                        .addGap(176, 176, 176))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addContainerGap(273, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addContainerGap(277, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +169,7 @@ public class DialogoBusqueda extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -144,12 +181,14 @@ public class DialogoBusqueda extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addGap(4, 4, 4)
-                        .addComponent(campoPalabrasBusq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
-                .addGap(18, 18, 18)
+                        .addComponent(campoPalabrasBusq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botonBuscar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonCerrar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -167,8 +206,42 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         this.setVisible(false);
     }//GEN-LAST:event_botonCerrarActionPerformed
 
+    private void selectorTipoObjItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_selectorTipoObjItemStateChanged
+        // modifico el otro selector dependiendo del tipo de objeto buscado
+        this.selectorCriterioBusq.removeAllItems();
+        if (this.selectorTipoObj.getSelectedItem() == null)
+            return ;
+        if (this.selectorTipoObj.getSelectedItem().equals("Curso"))
+        {   this.selectorCriterioBusq.addItem("Nombre curso");
+            this.selectorCriterioBusq.addItem("Carrera");
+            this.selectorCriterioBusq.addItem("Semestre/nivel");
+            this.selectorCriterioBusq.addItem("Código de curso");
+            this.selectorCriterioBusq.addItem("Sección");
+            this.selectorCriterioBusq.addItem("Nombre del profesor asignado");
+
+        }
+        if (this.selectorTipoObj.getSelectedItem().equals("Carrera"))
+        {   this.selectorCriterioBusq.addItem("Nombre de carrera");
+            this.selectorCriterioBusq.addItem("nombre de la Facultad");
+            this.selectorCriterioBusq.addItem("Nombre de un curso que posea");
+
+        }
+        if (this.selectorTipoObj.getSelectedItem().equals("Profesor"))
+        {   this.selectorCriterioBusq.addItem("Nombre del profesor");
+            this.selectorCriterioBusq.addItem("Nombre de curso asignado");
+            this.selectorCriterioBusq.addItem("Carrera en que hace clases");
+        }
+        
+    }//GEN-LAST:event_selectorTipoObjItemStateChanged
+
+    private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
+        // Acción a realizar cuando se presiona el boton "buscar ya!"
+        
+    }//GEN-LAST:event_botonBuscarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaInfoObj;
+    private javax.swing.JButton botonBuscar;
     private javax.swing.JButton botonCerrar;
     private javax.swing.JTextField campoPalabrasBusq;
     private javax.swing.JLabel jLabel1;

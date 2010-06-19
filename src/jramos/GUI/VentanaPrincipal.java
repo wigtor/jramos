@@ -26,7 +26,7 @@ import jramos.excepciones.nombreRepetidoException;
  * @author victor
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-
+    public static final String MANUAL_PDF = "Manual_Usuario.pdf";
     private ManipuladorListas listManager;
     private CapaIOCursos gestorIOCursos;
     private CapaIOProfes gestorIOProfes;
@@ -975,7 +975,29 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonAgregarCursoActionPerformed
 
     private void menuVerManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVerManualActionPerformed
-        // TODO add your handling code here:
+        // Acción a realizar cuando se presiona el menu "ver manual de usuario"
+        // Ejecuto el visor de pdf por defecto del sistema operativo abriendo el manual de usuario
+        Runtime visorPDF = Runtime.getRuntime();
+        String ficheroPDF;
+        try
+        {       //Intengo abrir en el entorno de escritorio KDE
+                if (System.getProperty("os.name").equals("Linux"))
+                {       ficheroPDF = System.getProperty("user.dir") + System.getProperty("file.separator") + VentanaPrincipal.MANUAL_PDF;
+                        System.out.println("Intentando abrir el fichero: "+ficheroPDF);
+                        visorPDF.exec("kfmclient exec " + ficheroPDF);
+                        //Intento abrir en el entorno de escritorio GNOME
+                        visorPDF.exec("gnome-open " + ficheroPDF);
+                }
+                if (System.getProperty("os.name").startsWith("Windows"))
+                {       //Intento abrir en windows
+                        ficheroPDF = "\""+ System.getProperty("user.dir") + System.getProperty("file.separator") + VentanaPrincipal.MANUAL_PDF +"\"";
+                        System.out.println("Intentando abrir el fichero: "+ficheroPDF);
+                        visorPDF.exec("C:\\Archivos de programa\\Adobe\\Reader 9.0\\Reader\\AcroRd32.exe "+ ficheroPDF);
+                }
+        }
+        catch (Exception e)
+        {       System.out.println("No se puede lanzar el visor pdf");
+        }
     }//GEN-LAST:event_menuVerManualActionPerformed
 
     private void botonNuevaCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevaCarreraActionPerformed

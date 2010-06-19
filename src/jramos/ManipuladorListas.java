@@ -130,7 +130,6 @@ public class ManipuladorListas
                 //compruebo que cada nueva hora disponible se encuentra en las horas que ya tenía disponible el profesor
                 for (Hora horaEnProfe : horasDispTemp)
                 {       //significa que se eliminó alguna hora
-                        System.out.println(listaHorasDisponibles.contains(horaEnProfe));
                         if (!listaHorasDisponibles.contains(horaEnProfe))
                         {       //recorro los cursos asignados buscando el que tiene la hora que había sido eliminada
                                 for (Curso cursoAsig : profesorAEditar.getCursosAsigArrayList())
@@ -157,12 +156,38 @@ public class ManipuladorListas
                 {       profesorAEditar.modHorasDisponibles(hora, 1);
                 }
 
-                /*
-                for (Curso curso : profesorAEditar.getCursosAsigArrayList())
-                {
+
+                //Verifico si el profesor posee menos cursos disponibles (que puede dictar) que antes
+                ArrayList<Integer> listaCursosDispTemp = new ArrayList(profesorAEditar.getCodCursosQueImparteArrayList());
+                ArrayList<Curso> listCursosAsig;
+                ArrayList<Hora> listHorasAsig;
+                for (Integer codCursoAntes : listaCursosDispTemp)
+                {       //significa que se eliminó algun curso disponible del profesor
+                        if (!listaCodCursosDisponibles.contains(codCursoAntes))
+                        {       //Recorro la lista de cursos asignados viendo cual tiene como código el que se ha eliminado
+                                listCursosAsig = new ArrayList(profesorAEditar.getCursosAsigArrayList());
+                                for (Curso curso : listCursosAsig)
+                                {       //quito el curso que tenga ese codigo de los cursos asignados del profesor
+                                        if (curso.getCodigoCurso() == codCursoAntes)
+                                        {       profesorAEditar.modCursosAsignados(curso, -1);
+                                                profesorAEditar.modCursosParaImpartir(codCursoAntes.intValue(), -1);
+                                                //quito le referencia del profesor existente en el curso
+                                                curso.setProfesor(null);
+                                                //Desasigno las horas del curso que poseia el profesor
+                                                listHorasAsig = new ArrayList(curso.getHorasAsigArrayList());
+                                                for (Hora hora : listHorasAsig)
+                                                {       curso.modHorario(hora, -1);
+                                                        profesorAEditar.modHorasAsignadas(hora, -1);
+                                                }
+                                        }
+                                }
+                        }
 
                 }
-                */
+                //Modifico la lista de cursos disponibles para dictar, si es que son mas de los que habia antes
+                for (Integer codCursoNuevo : listaCodCursosDisponibles)
+                {       profesorAEditar.modCursosParaImpartir(codCursoNuevo.intValue(), 1);
+                }
 
                 //Modifico el nombre del profesor
                 if (!profesorAEditar.getNombreProfesor().equals(nuevoNombreProfe))
@@ -298,7 +323,7 @@ public class ManipuladorListas
                 }
 
                 cursoAEditar.setProfesor(profesorAAsignarle);
-                //en caso que lo que se haya modificado es desAsignar un profesor:
+                //en casursoo que lo que se haya modificado es desAsignar un profesor:
                 if (profesorAAsignarle != null)
                 {       //agrego el curso a los cursos asignados del profesor
                         profesorAAsignarle.modCursosAsignados(cursoAEditar, 1);

@@ -132,7 +132,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuadroInfornacionFacultad = new javax.swing.JTextArea();
         jScrollPane8 = new javax.swing.JScrollPane();
         cuadroInformacionCarrera = new javax.swing.JTextArea();
-        jButton7 = new javax.swing.JButton();
+        botonVerMalla = new javax.swing.JButton();
         botonEditarFacultad = new javax.swing.JButton();
         botonEliminarFacultad = new javax.swing.JButton();
         botonEditarCarrera = new javax.swing.JButton();
@@ -189,9 +189,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonBuscarCurso = new javax.swing.JButton();
         barraMenu = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        menusalir = new javax.swing.JMenuItem();
+        menuSalir = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         menuVerManual = new javax.swing.JMenuItem();
         menuAcercaDe = new javax.swing.JMenuItem();
@@ -245,7 +243,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(visualizadorListaCarreras);
 
-        botonNuevaCarrera.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        botonNuevaCarrera.setFont(new java.awt.Font("Dialog", 1, 10));
         botonNuevaCarrera.setText("Nueva carrera...");
         botonNuevaCarrera.setToolTipText("Haga click aquí para agregar una carrera al registro");
         botonNuevaCarrera.addActionListener(new java.awt.event.ActionListener() {
@@ -254,7 +252,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        botonNuevaFacultad.setFont(new java.awt.Font("Dialog", 1, 10));
         botonNuevaFacultad.setText("Nueva facultad...");
         botonNuevaFacultad.setToolTipText("Haga click aquí para agregar una facultad al registro");
         botonNuevaFacultad.addActionListener(new java.awt.event.ActionListener() {
@@ -279,12 +277,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuadroInformacionCarrera.setToolTipText("Información de la carrera seleccionada");
         jScrollPane8.setViewportView(cuadroInformacionCarrera);
 
-        jButton7.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton7.setText("Ver Malla");
-        jButton7.setToolTipText("Haga click aquí para ver la malla de la carrera seleccionada");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        botonVerMalla.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botonVerMalla.setText("Ver Malla");
+        botonVerMalla.setToolTipText("Haga click aquí para ver la malla de la carrera seleccionada");
+        botonVerMalla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                botonVerMallaActionPerformed(evt);
             }
         });
 
@@ -360,7 +358,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                                     .addComponent(jLabel22)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(botonVerMalla, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap(38, Short.MAX_VALUE))
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
@@ -394,7 +392,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botonVerMalla, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
@@ -792,19 +790,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuArchivo.setText("Archivo");
 
-        jMenuItem1.setText("Cargar archivo de profesores");
-        menuArchivo.add(jMenuItem1);
-
-        jMenuItem2.setText("Cargar archivo de cursos/carreras");
-        menuArchivo.add(jMenuItem2);
-
-        menusalir.setText("Salir");
-        menusalir.addActionListener(new java.awt.event.ActionListener() {
+        menuSalir.setText("Salir");
+        menuSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menusalirActionPerformed(evt);
+                menuSalirActionPerformed(evt);
             }
         });
-        menuArchivo.add(menusalir);
+        menuArchivo.add(menuSalir);
 
         barraMenu.add(menuArchivo);
 
@@ -819,6 +811,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         menuAyuda.add(menuVerManual);
 
         menuAcercaDe.setText("Acerca de...");
+        menuAcercaDe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAcercaDeActionPerformed(evt);
+            }
+        });
         menuAyuda.add(menuAcercaDe);
 
         barraMenu.add(menuAyuda);
@@ -1321,11 +1318,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_selectorListaCarrerasItemStateChanged
 
     //Sale del programa al clickear el menu "salir", guarda las listas antes de salir.
-    private void menusalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menusalirActionPerformed
+    private void menuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSalirActionPerformed
         // cierro el programa
         this.formWindowClosing(null);
         System.exit(0);
-    }//GEN-LAST:event_menusalirActionPerformed
+    }//GEN-LAST:event_menuSalirActionPerformed
 
     private void botonEditarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarProfesorActionPerformed
         // Acción a realizar cuando se presiona el boton "editar profesor"
@@ -1405,7 +1402,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonEditarCursoActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void botonVerMallaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVerMallaActionPerformed
         // Acción a realizar cuando se presiona el boton "Ver malla"
         Carrera carreraSeleccionada;
         carreraSeleccionada = (Carrera)this.visualizadorListaCarreras.getSelectedValue();
@@ -1423,22 +1420,35 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 dialogoError = null;
                 return ;
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_botonVerMallaActionPerformed
 
     private void botonBuscarCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarCarreraActionPerformed
         // Acción a realizar cuando se presiona el boton "buscar carrera"
-
+        DialogoBusqueda dialogoBusqueda = new DialogoBusqueda(this, rootPaneCheckingEnabled, this.listManager, Carrera.class);
+        dialogoBusqueda.setVisible(true);
+        dialogoBusqueda = null;
     }//GEN-LAST:event_botonBuscarCarreraActionPerformed
 
     private void botonBuscarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarProfesorActionPerformed
         // Acción a realizar cuando se presiona el boton "buscar profesor"
-
+        DialogoBusqueda dialogoBusqueda = new DialogoBusqueda(this, rootPaneCheckingEnabled, this.listManager, Profesor.class);
+        dialogoBusqueda.setVisible(true);
+        dialogoBusqueda = null;
     }//GEN-LAST:event_botonBuscarProfesorActionPerformed
 
     private void botonBuscarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarCursoActionPerformed
         // Acción a realizar cuando se presiona el boton "buscar curso"
-        
+        DialogoBusqueda dialogoBusqueda = new DialogoBusqueda(this, rootPaneCheckingEnabled, this.listManager, Curso.class);
+        dialogoBusqueda.setVisible(true);
+        dialogoBusqueda = null;
     }//GEN-LAST:event_botonBuscarCursoActionPerformed
+
+    private void menuAcercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAcercaDeActionPerformed
+        //Acción a realizar cuando se presiona el menu "acerca de...". Muestro dialogo de información de los creadores de JRamos
+        DialogoAcercaDe dialogoAcercaDe = new DialogoAcercaDe(this, rootPaneCheckingEnabled);
+        dialogoAcercaDe.setVisible(true);
+        dialogoAcercaDe = null;
+    }//GEN-LAST:event_menuAcercaDeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1463,6 +1473,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonNuevaFacultad;
     private javax.swing.JButton botonVerHorarioCurso;
     private javax.swing.JButton botonVerHorarioProfesor;
+    private javax.swing.JButton botonVerMalla;
     private javax.swing.JTextField campoCodigoCursoNuevo;
     private javax.swing.JTextField campoHorasDisponibles;
     private javax.swing.JTextField campoNombreCursoNuevo;
@@ -1473,7 +1484,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea cuadroInformacionCurso;
     private javax.swing.JTextArea cuadroInformacionProfes;
     private javax.swing.JTextArea cuadroInfornacionFacultad;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1494,8 +1504,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1510,8 +1518,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuAcercaDe;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuAyuda;
+    private javax.swing.JMenuItem menuSalir;
     private javax.swing.JMenuItem menuVerManual;
-    private javax.swing.JMenuItem menusalir;
     private javax.swing.JPanel panelVisualizadorCursos;
     private javax.swing.JComboBox selectorLetraSeccion;
     private javax.swing.JComboBox selectorListaCarreras;

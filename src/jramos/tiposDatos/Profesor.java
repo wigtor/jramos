@@ -292,17 +292,18 @@ public class Profesor {
      * @param selector 1: Agregar  -1:Quitar
      */
     public void modCursosParaImpartir(int codCursoToAsig, int selector){
+        Integer codCursoToAsigWrap = new Integer(codCursoToAsig);
         if (selector == 1){
-            if (!this.cursosDisp.contains(codCursoToAsig)){
-                this.cursosDisp.add(codCursoToAsig);
+            if (!this.cursosDisp.contains(codCursoToAsigWrap)){
+                this.cursosDisp.add(codCursoToAsigWrap);
             }
             else{
                 System.out.println("Ya existe ese curso...");
             }
         }
         else if (selector == -1){
-            if (this.cursosDisp.contains(codCursoToAsig)){
-                this.cursosDisp.remove(codCursoToAsig);
+            if (this.cursosDisp.contains(codCursoToAsigWrap)){
+                this.cursosDisp.remove(codCursoToAsigWrap);
             }
             else{
                 System.out.println("No existe ese curso...");

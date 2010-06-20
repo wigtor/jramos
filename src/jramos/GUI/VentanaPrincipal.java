@@ -910,7 +910,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         return ;
                 }
                 if (NFE.getMessage().equals("codCurso"))
-                {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Los codigos de curso introducidos no son válidos", "vuelva a escribir los cursos disponibles del profesor");
+                {       DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "Los códigos de curso no son válidos o no existen", "vuelva a escribir los cursos disponibles del profesor");
                         dialogoError.setVisible(true);
                         dialogoError = null;
                         return ;
@@ -1212,7 +1212,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         profesorSeleccionado = (Profesor)this.visualizadorListaProfes.getSelectedValue();
         if (profesorSeleccionado != null)
         {       //Lanzo un dialogo pidiendo confirmación para eliminar el profesor seleccionado
-                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_PROFESOR, profesorSeleccionado);
+                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_PROFESOR, profesorSeleccionado, false);
                 dialogoConfirmacion.setVisible(true);
                 dialogoConfirmacion = null; 
                 return ;
@@ -1234,7 +1234,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         facultadSeleccionada = (Facultad)this.visualizadorListaFacultades.getSelectedValue();
         if (facultadSeleccionada != null)
         {       //Lanzo un dialogo pidiendo confirmación para eliminar la facultad seleccionada
-                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_FACULTAD, facultadSeleccionada);
+                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_FACULTAD, facultadSeleccionada, false);
                 dialogoConfirmacion.setVisible(true);
                 dialogoConfirmacion = null;
                 return ;
@@ -1256,7 +1256,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         carreraSeleccionada = (Carrera)this.visualizadorListaCarreras.getSelectedValue();
         if (carreraSeleccionada != null)
         {       //Lanzo un dialogo pidiendo confirmación para eliminar la facultad seleccionada
-                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_CARRERA, carreraSeleccionada);
+                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_CARRERA, carreraSeleccionada, false);
                 dialogoConfirmacion.setVisible(true);
                 dialogoConfirmacion = null;
 
@@ -1347,7 +1347,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cursoSeleccionado = (Curso)this.visualizadorListaCursos.getSelectedValue();
         if (cursoSeleccionado != null)
         {       //Lanzo un dialogo pidiendo confirmación para eliminar la facultad seleccionada
-                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_CURSO, cursoSeleccionado);
+                DialogoConfirmacion dialogoConfirmacion = new DialogoConfirmacion(this, rootPaneCheckingEnabled, DialogoConfirmacion.BORRA_CURSO, cursoSeleccionado, false);
                 dialogoConfirmacion.setVisible(true);
                 dialogoConfirmacion = null;
 

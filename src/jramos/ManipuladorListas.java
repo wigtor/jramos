@@ -93,17 +93,40 @@ public class ManipuladorListas
 
                 //Transformo el string con los cursos que puede dictar a un ArrayList de Integer
                 try
-                {       cursosDisponibles = cursosDisponibles.trim();
+                {       Integer cod;
+                        Boolean existe = false;
+                        cursosDisponibles = cursosDisponibles.trim();
                         if (cursosDisponibles.length() != 0) //Seteo los codigos de curso que puede impartir
                         {       for (i = 0; cursosDisponibles.indexOf(" ") != -1;i++)
                                 {       System.out.println(cursosDisponibles.substring(0, cursosDisponibles.indexOf(" ")));
                                         codCurso = Integer.valueOf(cursosDisponibles.substring(0, cursosDisponibles.indexOf(" ")));
                                         posicionEspacio = cursosDisponibles.indexOf(" ");
                                         cursosDisponibles = cursosDisponibles.substring(posicionEspacio+1);
-                                        listaCodCursosDisponibles.add(new Integer(Integer.valueOf(codCurso)));
+                                        cod = new Integer(Integer.valueOf(codCurso));
+                                        //Compruebo que el código que se va a agregar existe en la lista de cursos
+                                        for (Curso curso : this.listaCursos)
+                                        {       if (curso.getCodigoCurso() == cod.intValue())
+                                                {   existe = true;
+                                                    break ;
+                                                }
+                                        }
+                                        if (existe == false)
+                                            throw new NumberFormatException();
+                                        existe = false;
+                                        listaCodCursosDisponibles.add(cod);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
-                                listaCodCursosDisponibles.add(new Integer(Integer.valueOf(cursosDisponibles)));
+                                cod = new Integer(Integer.valueOf(cursosDisponibles));
+                                //Compruebo que el código que se va a agregar existe en la lista de cursos
+                                        for (Curso curso : this.listaCursos)
+                                        {       if (curso.getCodigoCurso() == cod.intValue())
+                                                {   existe = true;
+                                                    break ;
+                                                }
+                                        }
+                                        if (existe == false)
+                                            throw new NumberFormatException();
+                                listaCodCursosDisponibles.add(cod);
                         }
                 }
                 catch (NumberFormatException NFE)
@@ -287,8 +310,8 @@ public class ManipuladorListas
                                                             throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL_SIG,"Tope horario con: "+cursoDelSemestreSiguiente+ ". Del semestre siguiente");
                                                     }
                                             }
-                                    }
                                     break;
+                                    }
                             }
                     }
                 }
@@ -308,8 +331,8 @@ public class ManipuladorListas
                                                             throw new HoraNoDisponibleException(HoraNoDisponibleException.TOPE_NIVEL_ANT, "Tope horario con: "+cursoDelSemestreAnterior+".Del semestre anterior");
                                                     }
                                             }
-                                    }
                                     break;
+                                    }
                             }
                     }
                 }
@@ -656,16 +679,39 @@ public class ManipuladorListas
                 //Transformo el string con los cursos que puede dictar a un ArrayList de Integer
                 try
                 {       //String codCursosDisp = this.campoRamosQueDicta.getText();
+                        Integer cod;
+                        boolean existe = false;
                         if (cursosDisponibles.length() != 0) //Seteo los codigos de curso que puede impartir
                         {       for (i = 0; cursosDisponibles.indexOf(" ") != -1;i++)
                                 {       System.out.println(cursosDisponibles.substring(0, cursosDisponibles.indexOf(" ")));
                                         codCurso = Integer.valueOf(cursosDisponibles.substring(0, cursosDisponibles.indexOf(" ")));
                                         posicionEspacio = cursosDisponibles.indexOf(" ");
                                         cursosDisponibles = cursosDisponibles.substring(posicionEspacio+1);
-                                        listaCodCursosDisponibles.add(new Integer(Integer.valueOf(codCurso)));
+                                        cod = new Integer(Integer.valueOf(codCurso));
+                                        //Compruebo que el código que se va a agregar existe en la lista de cursos
+                                        for (Curso curso : this.listaCursos)
+                                        {       if (curso.getCodigoCurso() == cod.intValue())
+                                                {   existe = true;
+                                                    break ;
+                                                }
+                                        }
+                                        if (existe == false)
+                                            throw new NumberFormatException();
+                                        existe = false;
+                                        listaCodCursosDisponibles.add(cod);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
-                                listaCodCursosDisponibles.add(new Integer(Integer.valueOf(cursosDisponibles)));
+                                cod = new Integer(Integer.valueOf(cursosDisponibles));
+                                //Compruebo que el código que se va a agregar existe en la lista de cursos
+                                        for (Curso curso : this.listaCursos)
+                                        {       if (curso.getCodigoCurso() == cod.intValue())
+                                                {   existe = true;
+                                                    break ;
+                                                }
+                                        }
+                                        if (existe == false)
+                                            throw new NumberFormatException();
+                                listaCodCursosDisponibles.add(cod);
                         }
                 }
                 catch (NumberFormatException NFE)

@@ -29,11 +29,11 @@ ingenierias civiles." codCurso="10003" seccion="A02" enCarrera="1864" idProfeAsi
 <Curso nomCurso="microeconomia" idCurso="28" descrip="" codCurso="10013" seccion="D04" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="microeconomia" idCurso="29" descrip="" codCurso="10013" seccion="B02" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="macroeconomia" idCurso="30" descrip="" codCurso="10014" seccion="A01" enCarrera="1863" idProfeAsig="3" listSalas="" horario="L4|M3|M1" >
-<Curso nomCurso="lenguajes y paradigmas" idCurso="32" descrip="" codCurso="13007" seccion="A01" enCarrera="1863" idProfeAsig="13" listSalas="" horario="M6|W5|J2" >
+<Curso nomCurso="lenguajes y paradigmas" idCurso="32" descrip="" codCurso="13007" seccion="A01" enCarrera="1863" idProfeAsig="13" listSalas="" horario="L5|W4|J2" >
 <Curso nomCurso="fundamentos de programacion" idCurso="33" descrip="" codCurso="13006" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="calculo avanzado" idCurso="34" descrip="" codCurso="10007" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="ecuaciones diferenciales" idCurso="35" descrip="" codCurso="10008" seccion="A01" enCarrera="1863" idProfeAsig="12" listSalas="" horario="W6|W7|J5|M5" >
-<Curso nomCurso="electromagnetismo y fisica moderna" idCurso="36" descrip="" codCurso="10010" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="electromagnetismo y fisica moderna" idCurso="36" descrip="" codCurso="10010" seccion="A01" enCarrera="1863" idProfeAsig="9" listSalas="" horario="L6|M6|V5" >
 <Curso nomCurso="probabilidad y estadistica" idCurso="37" descrip="" codCurso="10009" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="topicos de matematicas 1" idCurso="38" descrip="" codCurso="13008" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="estructuras de datos y algoritmos" idCurso="39" descrip="" codCurso="13009" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >

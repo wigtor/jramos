@@ -190,7 +190,7 @@ public class DialogoEdicionProfesor extends javax.swing.JDialog {
             return ;
         } catch (NumberFormatException NFE) {
             if (NFE.getMessage().equals("codCurso")) {
-                DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "Los codigos de curso introducidos no son válidos", "vuelva a escribir los cursos disponibles del profesor");
+                DialogoError dialogoError = new DialogoError(this.ventanaPadre, rootPaneCheckingEnabled, "Los codigos de curso no son válidos o no existen", "vuelva a escribir los cursos disponibles del profesor");
                 dialogoError.setVisible(true);
                 dialogoError = null;
                 return ;

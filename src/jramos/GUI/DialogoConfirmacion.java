@@ -27,20 +27,22 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
     public static final int BORRA_CARRERA = 3;
     public static final int BORRA_CURSO = 4;
     public static final int CONFIRMA_AGREGAR_TOPE_NIVEL_SIG = 5;
-    public static final int CONFIRMA_AGREGAR_TOPE_NIVEL_ANT = 5;
+    public static final int CONFIRMA_AGREGAR_TOPE_NIVEL_ANT = 6;
 
     private int tipoAccion;
     java.awt.Window ventanaPadre;
     private Object objetoABorrar;
+    private boolean anteriormenteConfirmado;
 
     /** Creates new form DialogoConfirmacion */
-    public DialogoConfirmacion(java.awt.Window parent, boolean modal, int tipoAccion, Object objeto) {
-        super((java.awt.Frame)parent, modal);
+    public DialogoConfirmacion(java.awt.Window parent, boolean modal, int tipoAccion, Object objeto, boolean anteriormenteConfirmado) {
+        super(parent);
         initComponents();
         this.setLocationRelativeTo(parent);
         this.ventanaPadre = parent;
         this.tipoAccion = tipoAccion;
         this.objetoABorrar = objeto;
+        this.anteriormenteConfirmado = anteriormenteConfirmado;
         if (tipoAccion == DialogoConfirmacion.BORRA_PROFESOR)
         {       //MENSAJE A MOSTRAR PARA BORRAR UN PROFESOR
                 this.labelAccionAConfirmar1.setText("borrar al profesor: ");
@@ -93,7 +95,7 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dialogo de confirmación");
 
-        label1DialogoConfirmacion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        label1DialogoConfirmacion.setFont(new java.awt.Font("Dialog", 1, 14));
         label1DialogoConfirmacion.setText("¿Está seguro que desea");
 
         botonSi.setText("Si");
@@ -123,16 +125,19 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(botonSi, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 301, Short.MAX_VALUE)
-                        .addComponent(botonNo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(label1DialogoConfirmacion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labelAccionAConfirmar1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(labelAccionAConfirmar2, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addComponent(botonSi, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 436, Short.MAX_VALUE)
+                        .addComponent(botonNo, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(label1DialogoConfirmacion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelAccionAConfirmar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(labelAccionAConfirmar2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(87, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,10 +148,10 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
                     .addComponent(labelAccionAConfirmar1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelAccionAConfirmar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonNo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botonSi, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(botonSi, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonNo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -177,12 +182,16 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
                 ((VentanaPrincipal)this.ventanaPadre).borrarCurso((Curso)this.objetoABorrar);
         }
         if (this.tipoAccion == DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_SIG)
-        {
-                ((DialogoEdicionCurso)this.ventanaPadre).aplicarCambiosEdicion(false, true);
+        {       if (anteriormenteConfirmado)
+                    ((DialogoEdicionCurso)this.ventanaPadre).aplicarCambiosEdicion(false, false);
+                else
+                    ((DialogoEdicionCurso)this.ventanaPadre).aplicarCambiosEdicion(true, false);
         }
         if (this.tipoAccion == DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_ANT)
-        {
-                ((DialogoEdicionCurso)this.ventanaPadre).aplicarCambiosEdicion(true, false);
+        {       if (anteriormenteConfirmado)
+                    ((DialogoEdicionCurso)this.ventanaPadre).aplicarCambiosEdicion(false, false);
+                else
+                    ((DialogoEdicionCurso)this.ventanaPadre).aplicarCambiosEdicion(false, true);
         }
 
         this.setVisible(false);

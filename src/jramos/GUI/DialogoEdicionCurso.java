@@ -297,13 +297,13 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
                         return;
                 }
                 if (HNDE.getCodigoError() == HoraNoDisponibleException.TOPE_NIVEL_ANT)
-                {       DialogoConfirmacion dialogoAviso = new DialogoConfirmacion((VentanaPrincipal)this.ventanaPadre, rootPaneCheckingEnabled, DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_ANT, HNDE);
+                {       DialogoConfirmacion dialogoAviso = new DialogoConfirmacion((java.awt.Window)this, rootPaneCheckingEnabled, DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_ANT, HNDE, !comprobarHorarioSemestreSiguiente);
                         dialogoAviso.setVisible(true);
                         dialogoAviso = null;
                         return ;
                 }
                 if (HNDE.getCodigoError() == HoraNoDisponibleException.TOPE_NIVEL_SIG)
-                {       DialogoConfirmacion dialogoAviso = new DialogoConfirmacion((java.awt.Window)this, rootPaneCheckingEnabled, DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_SIG, HNDE);
+                {       DialogoConfirmacion dialogoAviso = new DialogoConfirmacion((java.awt.Window)this, rootPaneCheckingEnabled, DialogoConfirmacion.CONFIRMA_AGREGAR_TOPE_NIVEL_SIG, HNDE, !comprobarHorarioSemestreAnterior);
                         dialogoAviso.setVisible(true);
                         dialogoAviso = null;
                         return ;

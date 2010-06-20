@@ -1,32 +1,38 @@
-<idFacultadesInicial="40" >
-<idCarrerasInicial="1865" >
-<idCursosInicial="54" >
-<idSemestresInicial="49" >
+<idFacultadesInicial="41" >
+<idCarrerasInicial="1866" >
+<idCursosInicial="56" >
+<idSemestresInicial="63" >
 <Facultad nomFacultad="ingenieria" idFacultad="38" descrip="Esta es la grandiosa facultad de injenieria!, 
 donde los estudiantes saben sumar y restar, pero no escribir bien." codCarreras="1863|1864" >
 <Facultad nomFacultad="humanidades" idFacultad="40" descrip="Facultad de humanidades, una wea llena de wns que le hacen
 a la marijuana." codCarreras="" >
+<Facultad nomFacultad="Ciencias médicas" idFacultad="41" descrip="" codCarreras="1866" >
 <Carrera nomCarrera="ingenieria civil informatica" descrip="pta, la descripcion de informatica po wn!" codCarrera="1863" idSemestres="23|24|25|26|27|28|42|43|44|45|48|49" >
 <Carrera nomCarrera="ingenieria civil industrial" descrip="una carrera lleno de wns que saben de todo, 
 pero al final de nada" codCarrera="1864" idSemestres="29|30|31|32|33|34|36|37|38|39" >
-<Curso nomCurso="calculo" idCurso="5" descrip="" codCurso="10001" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+<Carrera nomCarrera="medicina" descrip="No Hay Descripción Disponible..." codCarrera="1866" idSemestres="50|51|52|53|54|55|56|57|58|59|60|61|62|63" >
+<Curso nomCurso="calculo" idCurso="5" descrip="curso de calculo 1 y 2 para
+ingenierias civiles" codCurso="10001" seccion="A01" enCarrera="1863" idProfeAsig="8" listSalas="" horario="L2|M1|J3|V2" >
 <Curso nomCurso="taller de paralelismo" idCurso="6" descrip="" codCurso="13045" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="trabajo de titulacion" idCurso="7" descrip="" codCurso="13051" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
-<Curso nomCurso="algebra" idCurso="15" descrip="" codCurso="10002" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="algebra" idCurso="15" descrip="Curso básico de algebra lineal y
+vectorial para ingenierias civiles" codCurso="10002" seccion="A01" enCarrera="1863" idProfeAsig="11" listSalas="" horario="L3|M2|J1|V1" >
 <Curso nomCurso="algebra" idCurso="16" descrip="" codCurso="10002" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
-<Curso nomCurso="fisica 1" idCurso="17" descrip="" codCurso="10003" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
-<Curso nomCurso="fisica 1" idCurso="18" descrip="" codCurso="10003" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="fisica 1" idCurso="17" descrip="curso de mecánica en su nivel básico para 
+ingenierias civiles." codCurso="10003" seccion="A01" enCarrera="1863" idProfeAsig="9" listSalas="" horario="L1|W1|V3" >
+<Curso nomCurso="fisica 1" idCurso="18" descrip="curso de mecánica en su nivel básico para 
+ingenierias civiles." codCurso="10003" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="calculo" idCurso="19" descrip="" codCurso="10001" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
-<Curso nomCurso="introduccion a la quimica" idCurso="20" descrip="" codCurso="10004" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="introduccion a la quimica" idCurso="20" descrip="" codCurso="10004" seccion="A01" enCarrera="1863" idProfeAsig="10" listSalas="" horario="M3|W2" >
 <Curso nomCurso="introduccion a la quimica" idCurso="22" descrip="" codCurso="10004" seccion="A02" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
-<Curso nomCurso="microeconomia" idCurso="27" descrip="" codCurso="10013" seccion="C03" enCarrera="1863" idProfeAsig="3" listSalas="" horario="S7|S8|W5" >
+<Curso nomCurso="microeconomia" idCurso="27" descrip="" codCurso="10013" seccion="C03" enCarrera="1863" idProfeAsig="3" listSalas="" horario="S7|S8|W4" >
 <Curso nomCurso="microeconomia" idCurso="28" descrip="" codCurso="10013" seccion="D04" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="microeconomia" idCurso="29" descrip="" codCurso="10013" seccion="B02" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="macroeconomia" idCurso="30" descrip="" codCurso="10014" seccion="A01" enCarrera="1863" idProfeAsig="3" listSalas="" horario="L4|M3|M1" >
-<Curso nomCurso="lenguajes y paradigmas" idCurso="32" descrip="" codCurso="13007" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="lenguajes y paradigmas" idCurso="32" descrip="" codCurso="13007" seccion="A01" enCarrera="1863" idProfeAsig="13" listSalas="" horario="M6|W5|J2" >
 <Curso nomCurso="fundamentos de programacion" idCurso="33" descrip="" codCurso="13006" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="calculo avanzado" idCurso="34" descrip="" codCurso="10007" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
-<Curso nomCurso="ecuaciones diferenciales" idCurso="35" descrip="" codCurso="10008" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="ecuaciones diferenciales" idCurso="35" descrip="" codCurso="10008" seccion="A01" enCarrera="1863" idProfeAsig="12" listSalas="" horario="W6|W7|J5|M5" >
 <Curso nomCurso="electromagnetismo y fisica moderna" idCurso="36" descrip="" codCurso="10010" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="probabilidad y estadistica" idCurso="37" descrip="" codCurso="10009" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="topicos de matematicas 1" idCurso="38" descrip="" codCurso="13008" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
@@ -46,13 +52,16 @@ pero al final de nada" codCarrera="1864" idSemestres="29|30|31|32|33|34|36|37|38
 <Curso nomCurso="ingenieria de sistemas" idCurso="52" descrip="" codCurso="13021" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="computacion paralela" idCurso="53" descrip="" codCurso="13020" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
 <Curso nomCurso="metodos de optimizacion" idCurso="54" descrip="" codCurso="13019" seccion="A01" enCarrera="1863" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="Medicina forence" idCurso="55" descrip="" codCurso="39" seccion="A01" enCarrera="1866" idProfeAsig="0" listSalas="" horario="" >
+<Curso nomCurso="fisica 1" idCurso="56" descrip="curso de mecánica en su nivel básico para 
+ingenierias civiles." codCurso="10003" seccion="A03" enCarrera="1864" idProfeAsig="0" listSalas="" horario="" >
 <Semestre numSemestre="1" idSemestre="23" enCarreraId="1863" idCursosDelSemestre="2|3|5|8|12|13|14|15|17|20|21|23|24" >
 <Semestre numSemestre="2" idSemestre="24" enCarreraId="1863" idCursosDelSemestre="11|33" >
 <Semestre numSemestre="3" idSemestre="25" enCarreraId="1863" idCursosDelSemestre="32|34|35|36" >
 <Semestre numSemestre="4" idSemestre="26" enCarreraId="1863" idCursosDelSemestre="25|26|27|28|29|37|38|39|40" >
 <Semestre numSemestre="5" idSemestre="27" enCarreraId="1863" idCursosDelSemestre="30|41|42|43|44" >
 <Semestre numSemestre="6" idSemestre="28" enCarreraId="1863" idCursosDelSemestre="31|45|46|47|48|49" >
-<Semestre numSemestre="1" idSemestre="29" enCarreraId="1864" idCursosDelSemestre="16|18|19|22" >
+<Semestre numSemestre="1" idSemestre="29" enCarreraId="1864" idCursosDelSemestre="16|18|19|22|56" >
 <Semestre numSemestre="2" idSemestre="30" enCarreraId="1864" idCursosDelSemestre="10" >
 <Semestre numSemestre="3" idSemestre="31" enCarreraId="1864" idCursosDelSemestre="9" >
 <Semestre numSemestre="4" idSemestre="32" enCarreraId="1864" idCursosDelSemestre="" >
@@ -68,3 +77,17 @@ pero al final de nada" codCarrera="1864" idSemestres="29|30|31|32|33|34|36|37|38
 <Semestre numSemestre="10" idSemestre="45" enCarreraId="1863" idCursosDelSemestre="6" >
 <Semestre numSemestre="11" idSemestre="48" enCarreraId="1863" idCursosDelSemestre="" >
 <Semestre numSemestre="12" idSemestre="49" enCarreraId="1863" idCursosDelSemestre="7" >
+<Semestre numSemestre="1" idSemestre="50" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="2" idSemestre="51" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="3" idSemestre="52" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="4" idSemestre="53" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="5" idSemestre="54" enCarreraId="1866" idCursosDelSemestre="55" >
+<Semestre numSemestre="6" idSemestre="55" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="7" idSemestre="56" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="8" idSemestre="57" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="9" idSemestre="58" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="10" idSemestre="59" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="11" idSemestre="60" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="12" idSemestre="61" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="13" idSemestre="62" enCarreraId="1866" idCursosDelSemestre="" >
+<Semestre numSemestre="14" idSemestre="63" enCarreraId="1866" idCursosDelSemestre="" >

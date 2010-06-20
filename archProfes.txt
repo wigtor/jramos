@@ -1,2 +1,8 @@
-<idProfesInicial="7" >
-<Profesor nombProfe="david cooper" idProfe="3" rutProfe="5854323" idCursosAsig="30|27" codCursosDisp="10013|10014" horasDisp="L4|L5|M1|M2|M3|W4|W5|S7|S8" horasAsig="L4|M3|M1|S7|S8|W5" >
+<idProfesInicial="13" >
+<Profesor nombProfe="david cooper" idProfe="3" rutProfe="5854323" idCursosAsig="30|27" codCursosDisp="10013|10014" horasDisp="L4|L5|M1|M2|M3|W4|W5|S7|S8" horasAsig="L4|M3|M1|S7|S8|W4" >
+<Profesor nombProfe="emilia castro" idProfe="8" rutProfe="4563421" idCursosAsig="5" codCursosDisp="10001|10002" horasDisp="L1|L2|M3|M4|W2|J2|V1|L3|M1|M2|J1|J3|V2" horasAsig="L2|M1|J3|V2" >
+<Profesor nombProfe="luis hernandez" idProfe="9" rutProfe="5730432" idCursosAsig="17" codCursosDisp="10003|10010" horasDisp="L3|L6|M4|M5|W3|W5|V3|L1|L2|L4|L5|M1|M2|W1|W2|V1|V2|V5|V6|V4" horasAsig="L1|W1|V3" >
+<Profesor nombProfe="schifferli" idProfe="10" rutProfe="2500000" idCursosAsig="20" codCursosDisp="10004" horasDisp="L2|L6|M2|V2|L3|M3|W2|W3|V1|J2|V6|V7" horasAsig="M3|W2" >
+<Profesor nombProfe="julian cortez" idProfe="11" rutProfe="4582002" idCursosAsig="15" codCursosDisp="10001|10002" horasDisp="L2|M2|M3|W2|W3|J1|V1|V2|L1|M4|J2|L3|M1|J3" horasAsig="L3|M2|J1|V1" >
+<Profesor nombProfe="lida mendoza" idProfe="12" rutProfe="12303340" idCursosAsig="35" codCursosDisp="10008" horasDisp="M5|W6|W7|J5" horasAsig="W6|W7|J5|M5" >
+<Profesor nombProfe="alberto ceballos" idProfe="13" rutProfe="5383432" idCursosAsig="32" codCursosDisp="13007|13009" horasDisp="M6|M7|W5|J2" horasAsig="M6|W5|J2" >

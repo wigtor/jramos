@@ -138,6 +138,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonEditarCarrera = new javax.swing.JButton();
         botonEliminarCarrera = new javax.swing.JButton();
         botonBuscarCarrera = new javax.swing.JButton();
+        botonHorarioCarrera = new javax.swing.JButton();
         PanelVisualizadorProfesores = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         visualizadorListaProfes = new javax.swing.JList();
@@ -199,7 +200,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JRamos- Planificación horaria");
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(780, 528));
         setName("JRamos - Planificación horaria"); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -280,7 +281,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         cuadroInformacionCarrera.setToolTipText("Información de la carrera seleccionada");
         jScrollPane8.setViewportView(cuadroInformacionCarrera);
 
-        botonVerMalla.setFont(new java.awt.Font("Dialog", 1, 14));
+        botonVerMalla.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         botonVerMalla.setText("Ver Malla");
         botonVerMalla.setToolTipText("Haga click aquí para ver la malla de la carrera seleccionada");
         botonVerMalla.addActionListener(new java.awt.event.ActionListener() {
@@ -329,6 +330,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        botonHorarioCarrera.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botonHorarioCarrera.setText("Ver horario de carrera");
+        botonHorarioCarrera.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonHorarioCarreraActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout PanelVisualizadorCarrerasLayout = new javax.swing.GroupLayout(PanelVisualizadorCarreras);
         PanelVisualizadorCarreras.setLayout(PanelVisualizadorCarrerasLayout);
         PanelVisualizadorCarrerasLayout.setHorizontalGroup(
@@ -348,25 +357,28 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(botonEditarFacultad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                         .addComponent(botonEliminarFacultad)
                         .addGap(126, 126, 126))
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
                                 .addComponent(jLabel22)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(botonVerMalla, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane8))
-                        .addContainerGap(15, Short.MAX_VALUE))
+                                .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PanelVisualizadorCarrerasLayout.createSequentialGroup()
+                                .addGap(22, 22, 22)
+                                .addComponent(botonVerMalla, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(botonHorarioCarrera)))
+                        .addContainerGap(21, Short.MAX_VALUE))
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(botonEditarCarrera)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                         .addComponent(botonEliminarCarrera)
                         .addGap(123, 123, 123))))
         );
@@ -394,7 +406,9 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                             .addComponent(labelCarreraSeleccionada, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel22))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(botonVerMalla, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(PanelVisualizadorCarrerasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(botonVerMalla, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botonHorarioCarrera, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(PanelVisualizadorCarrerasLayout.createSequentialGroup()
@@ -1453,7 +1467,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Carrera carreraSeleccionada;
         carreraSeleccionada = (Carrera)this.visualizadorListaCarreras.getSelectedValue();
         if (carreraSeleccionada != null)
-        {       //Lanzo un dialogo para editar el profesor seleccionado
+        {       //Lanzo un dialogo para ver la malla de la carrera seleccionada
                 DialogoMalla dialogoMalla = new DialogoMalla(this, rootPaneCheckingEnabled, carreraSeleccionada);
                 dialogoMalla.setVisible(true);
                 dialogoMalla = null;
@@ -1461,7 +1475,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         }
         else
         {       //abro ventana de error.
-                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado una carrera para ver su malla", "Seleccione un curso desde la lista de cursos del costado");
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado una carrera para ver su malla", "Seleccione una carrera desde la lista de carreras del costado");
                 dialogoError.setVisible(true);
                 dialogoError = null;
                 return ;
@@ -1496,6 +1510,27 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         dialogoAcercaDe = null;
     }//GEN-LAST:event_menuAcercaDeActionPerformed
 
+    private void botonHorarioCarreraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonHorarioCarreraActionPerformed
+        // Acción a realizar cuando se presiona el boton "ver horario carrera"
+        Carrera carreraSeleccionada;
+        carreraSeleccionada = (Carrera)this.visualizadorListaCarreras.getSelectedValue();
+        if (carreraSeleccionada != null)
+        {       //Lanzo un dialogo para ver el horario de la carrera
+                
+                VisualizadorHorarioObjeto dialogoHorarioCarrera = new VisualizadorHorarioObjeto(this, rootPaneCheckingEnabled, carreraSeleccionada, VisualizadorHorarioObjeto.VISUALIZACION, null);
+                dialogoHorarioCarrera.setVisible(true);
+                dialogoHorarioCarrera = null;
+                return ;
+        }
+        else
+        {       //abro ventana de error.
+                DialogoError dialogoError = new DialogoError(this, rootPaneCheckingEnabled, "No ha seleccionado una carrera para ver su horario", "Seleccione una carrera desde la lista de carreras del costado");
+                dialogoError.setVisible(true);
+                dialogoError = null;
+                return ;
+        }
+    }//GEN-LAST:event_botonHorarioCarreraActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel PanelVisualizadorCarreras;
@@ -1515,6 +1550,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonEliminarCurso;
     private javax.swing.JButton botonEliminarFacultad;
     private javax.swing.JButton botonEliminarProfesor;
+    private javax.swing.JButton botonHorarioCarrera;
     private javax.swing.JButton botonNuevaCarrera;
     private javax.swing.JButton botonNuevaFacultad;
     private javax.swing.JButton botonVerHorarioCurso;

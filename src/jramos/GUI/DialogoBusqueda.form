@@ -129,6 +129,9 @@
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Listado con los resultados de la busqueda"/>
           </Properties>
+          <Events>
+            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listObjFoundValueChanged"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

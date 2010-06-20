@@ -195,6 +195,16 @@ public class ManipuladorListas
 
         }
         
+        public void editaCurso(Curso cursoAEditar, Profesor profesorAAsignarle, ArrayList<Hora> horasQueAsignarle, String newDescrip, boolean comprobarHorarioSemestreAnterior, boolean comprobarHorarioSemestreSiguiente) throws HoraNoDisponibleException
+        {   this.editaCurso(cursoAEditar, profesorAAsignarle, horasQueAsignarle, comprobarHorarioSemestreAnterior, comprobarHorarioSemestreSiguiente);
+            for (Curso curso : this.listaCursos)
+            {       if (curso.equals(cursoAEditar))
+                    {       curso.setDescripcion(newDescrip);
+                            break ;
+                    }
+            }
+        }
+
         public void editaCurso(Curso cursoAEditar, Profesor profesorAAsignarle, ArrayList<Hora> horasQueAsignarle, boolean comprobarHorarioSemestreAnterior, boolean comprobarHorarioSemestreSiguiente) throws HoraNoDisponibleException
         {       //compruebo que las horas asignadas estan dentro de las horas disponibles del profesor y fuera de las horas ya asignadas del profesor
                 if (profesorAAsignarle == null)
@@ -417,6 +427,32 @@ public class ManipuladorListas
                         }
                 }
         }
+
+        /**
+         * Agrega un curso al igual que el otro método existente, pero ademas agrega una descripción al nuevo curso.
+         * 
+         * @param descrip
+         * @param nombreCurso es el nombre del curso nuevo.
+         * @param codCurso es el codigo del curso nuevo.
+         * @param seccion es la seccion del curso nuevo, un String, por ejemplo: A01.
+         * @param carreraAlQuePertenece es un objeto Carrera con la carrera a la cual pertenece el curso.
+         * @param semestreAlQuePertenece es un objeto Semestre con el semestre al cual pertenece el curso.
+         * @throws nombreRepetidoException Se lanza esta excepción cuando el nombre del curso se encuentra repetido con algún nombre de los demás cursos.
+         * @throws StringVacioException Se lanza está excepción cuando el nombre o la sección son Strings Vacios
+         * Se lanzan con un codigo de error especificado en los atributos estaticos de está clase: ERROR_NOMBRE o ERROR_SECCION
+         * @throws NullPointerException Se lanza esta excepción cuando se intenta agregar un curso sin que existan semestres y por ende carreras.
+         * @throws NumberFormatException Se lanza esta excepción cuando el codigo de curso no es un número.
+         */
+        public void agregaCurso(String nombreCurso, String codCursoStr, String seccion, Carrera carreraPert, Semestre semestPert, String descrip) throws nombreRepetidoException, StringVacioException, NumberFormatException, NullPointerException
+        {       agregaCurso(nombreCurso, codCursoStr, seccion, carreraPert, semestPert);
+                for (Curso curso : this.listaCursos)
+                {       if ((curso.getCodigoCurso() == Integer.valueOf(codCursoStr)) && (curso.getSeccion().equals(seccion)) && (curso.getEnCarrera() == carreraPert))
+                        {       curso.setDescripcion(descrip);
+                                break ;
+                        }
+                }
+        }
+
         /**
          * Este metodo crea un objeto Curso y lo agrega a la lista de cursos,
          * ademas referencia al curso en la lista de cursos del semestre al cual pertenece

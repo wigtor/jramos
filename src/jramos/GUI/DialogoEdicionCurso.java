@@ -41,6 +41,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
         this.campoNombreCurso.setText(cursoAEditar.getNombreCurso());
         this.campoCodigoCurso.setText((new Integer(cursoAEditar.getCodigoCurso())).toString());
         this.campoSeccionCurso.setText(cursoAEditar.getSeccion());
+        this.cuadroDescripCurso.setText(cursoAEditar.getDescripcion());
         this.horasElegidas = cursoAEditar.getHorasAsigArrayList();
         
         this.selectorListaCarreras.removeAllItems();
@@ -98,6 +99,9 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         botonElegirHoras = new javax.swing.JButton();
         botonCancelar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cuadroDescripCurso = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Dialogo de edición de un curso - ");
@@ -131,6 +135,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
         jLabel1.setText("¿En que semestre? ");
 
         botonAplicarCambiosCurso.setText("Aplicar cambios");
+        botonAplicarCambiosCurso.setToolTipText("Haga click aquí para aplicar los cambios al curso");
         botonAplicarCambiosCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAplicarCambiosCursoActionPerformed(evt);
@@ -139,7 +144,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
 
         jLabel2.setText("Profesor Asignado");
 
-        selectorListaProfesores.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        selectorListaProfesores.setToolTipText("Seleccione aquí el profesor asignado al curso");
         selectorListaProfesores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selectorListaProfesoresActionPerformed(evt);
@@ -149,6 +154,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
         jLabel3.setText("Horas Asignadas");
 
         botonElegirHoras.setText("Elegir horas...");
+        botonElegirHoras.setToolTipText("Haga click aquí para seleccionar la asignación horaria del curso");
         botonElegirHoras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonElegirHorasActionPerformed(evt);
@@ -156,54 +162,59 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
         });
 
         botonCancelar.setText("Cancelar");
+        botonCancelar.setToolTipText("Haga click aquí para descartar los cambios y cerrar este dialogo");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);
             }
         });
 
+        cuadroDescripCurso.setColumns(20);
+        cuadroDescripCurso.setRows(3);
+        cuadroDescripCurso.setToolTipText("Escriba aquí una descripción del curso");
+        jScrollPane1.setViewportView(cuadroDescripCurso);
+
+        jLabel4.setText("Descripción del curso:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel15)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel18)
-                                    .addComponent(jLabel19)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(selectorListaSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(campoCodigoCurso)
-                                        .addComponent(campoSeccionCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                        .addComponent(campoNombreCurso))
-                                    .addComponent(selectorListaProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(botonElegirHoras)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(botonAplicarCambiosCurso)
-                        .addGap(18, 18, 18)
-                        .addComponent(botonCancelar)))
+                            .addComponent(jLabel15)
+                            .addComponent(jLabel16)
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(selectorListaSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(campoCodigoCurso)
+                                .addComponent(campoSeccionCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                .addComponent(selectorListaProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(botonElegirHoras)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(botonAplicarCambiosCurso)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(botonCancelar))
+                                .addComponent(campoNombreCurso))))
+                    .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,29 +229,31 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
                     .addComponent(jLabel18)
                     .addComponent(campoSeccionCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectorListaCarreras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(selectorListaSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(selectorListaProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(botonElegirHoras))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(selectorListaSemestres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(selectorListaProfesores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(botonElegirHoras))
-                        .addGap(57, 57, 57))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(botonCancelar)
-                            .addComponent(botonAplicarCambiosCurso))
-                        .addContainerGap())))
+                            .addComponent(botonAplicarCambiosCurso)))
+                    .addComponent(jLabel4))
+                .addContainerGap())
         );
 
         pack();
@@ -262,7 +275,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
     {   //edito el curso.
         try {
             Profesor profesorAsignarle = (Profesor)this.selectorListaProfesores.getSelectedItem();
-            this.listManager.editaCurso(this.cursoAEditar, profesorAsignarle, this.horasElegidas, comprobarHorarioSemestreAnterior, comprobarHorarioSemestreSiguiente);
+            this.listManager.editaCurso(this.cursoAEditar, profesorAsignarle, this.horasElegidas, this.cuadroDescripCurso.getText(), comprobarHorarioSemestreAnterior, comprobarHorarioSemestreSiguiente);
         }
         catch (HoraNoDisponibleException HNDE)
         {       if (HNDE.getCodigoError() == HoraNoDisponibleException.TOPE_NIVEL)
@@ -362,6 +375,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
     private javax.swing.JTextField campoCodigoCurso;
     private javax.swing.JTextField campoNombreCurso;
     private javax.swing.JTextField campoSeccionCurso;
+    private javax.swing.JTextArea cuadroDescripCurso;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -370,6 +384,8 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox selectorListaCarreras;
     private javax.swing.JComboBox selectorListaProfesores;
     private javax.swing.JComboBox selectorListaSemestres;

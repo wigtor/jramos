@@ -15,7 +15,6 @@ import javax.swing.DefaultListModel;
 import jramos.ManipuladorListas;
 import jramos.tiposDatos.Carrera;
 import jramos.tiposDatos.Curso;
-import jramos.tiposDatos.Facultad;
 import jramos.tiposDatos.Profesor;
 
 /**
@@ -36,7 +35,7 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         this.selectorCriterioBusq.removeAllItems();
         this.listObjFound.removeAll();
         this.modeloListaObj = new DefaultListModel();
-        this.listObjFound.setModel(modeloListaObj);
+        this.listObjFound.setModel(this.modeloListaObj);
         this.selectorTipoObj.addItem("Carrera");
         this.selectorTipoObj.addItem("Curso");
         this.selectorTipoObj.addItem("Profesor");
@@ -92,6 +91,11 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         campoPalabrasBusq.setToolTipText("Escriba aquí las palabras de su busqueda");
 
         listObjFound.setToolTipText("Listado con los resultados de la busqueda");
+        listObjFound.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listObjFoundValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(listObjFound);
 
         jLabel1.setText("Resultados busqueda:");
@@ -214,7 +218,6 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         if (this.selectorTipoObj.getSelectedItem().equals("Curso"))
         {   this.selectorCriterioBusq.addItem("Nombre curso");
             this.selectorCriterioBusq.addItem("Carrera");
-            this.selectorCriterioBusq.addItem("Semestre/nivel");
             this.selectorCriterioBusq.addItem("Código de curso");
             this.selectorCriterioBusq.addItem("Sección");
             this.selectorCriterioBusq.addItem("Nombre del profesor asignado");
@@ -236,8 +239,111 @@ public class DialogoBusqueda extends javax.swing.JDialog {
 
     private void botonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBuscarActionPerformed
         // Acción a realizar cuando se presiona el boton "buscar ya!"
-        
+        String tipoObj = (String)this.selectorTipoObj.getSelectedItem();
+        String criterioBusq = (String)this.selectorCriterioBusq.getSelectedItem();
+        String palabraBusq = this.campoPalabrasBusq.getText().trim();
+        this.listObjFound.removeAll();
+        this.modeloListaObj.removeAllElements();
+        if (tipoObj.equals("Carrera"))
+        {       if (criterioBusq.equals("Nombre de carrera"))
+                {       for (Carrera carrera :this.listManager.getListaCarreras())
+                        {       if (carrera.getNombreCarrera().contains(palabraBusq) && (!this.modeloListaObj.contains(carrera)))
+                                        this.modeloListaObj.addElement(carrera);
+                        }
+                }
+                if (criterioBusq.equals("nombre de la Facultad"))
+                {       for (Carrera carrera :this.listManager.getListaCarreras())
+                        {       if (carrera.getFacultad().getNombreFacultad().contains(palabraBusq) && (!this.modeloListaObj.contains(carrera)))
+                                        this.modeloListaObj.addElement(carrera);
+                        }
+                }
+                if (criterioBusq.equals("Nombre de un curso que posea"))
+                {       for (Curso curso : this.listManager.getListaCursos())
+                        {       if ((curso.getNombreCurso().contains(palabraBusq)) && (!this.modeloListaObj.contains(curso.getEnCarrera())))
+                                        this.modeloListaObj.addElement(curso.getEnCarrera());
+                        }
+                }
+        }
+        if (tipoObj.equals("Curso"))
+        {       if (criterioBusq.equals("Nombre curso"))
+                {       for (Curso curso: this.listManager.getListaCursos())
+                        {       if ((curso.getNombreCurso().contains(palabraBusq)) && (!this.modeloListaObj.contains(curso)))
+                                    this.modeloListaObj.addElement(curso);
+                        }
+                }
+                if (criterioBusq.equals("Carrera"))
+                {       for (Curso curso: this.listManager.getListaCursos())
+                        {       if ((curso.getEnCarreraStr().contains(palabraBusq)) && (!this.modeloListaObj.contains(curso)))
+                                    this.modeloListaObj.addElement(curso);
+                        }
+                }
+                if (criterioBusq.equals("Código de curso"))
+                {       for (Curso curso: this.listManager.getListaCursos())
+                        {       if (((""+curso.getCodigoCurso()).contains(palabraBusq)) && (!this.modeloListaObj.contains(curso)))
+                                    this.modeloListaObj.addElement(curso);
+                        }
+                }
+                if (criterioBusq.equals("Sección"))
+                {       for (Curso curso: this.listManager.getListaCursos())
+                        {       if ((curso.getSeccion().contains(palabraBusq)) && (!this.modeloListaObj.contains(curso)))
+                                    this.modeloListaObj.addElement(curso);
+                        }
+                }
+                if (criterioBusq.equals("Nombre del profesor asignado"))
+                {       for (Curso curso: this.listManager.getListaCursos())
+                        {       if ((curso.getNombreProfesor().contains(palabraBusq)) && (!this.modeloListaObj.contains(curso)))
+                                    this.modeloListaObj.addElement(curso);
+                        }
+                }
+
+        }
+        if (tipoObj.equals("Profesor"))
+        {       if (criterioBusq.equals("Nombre del profesor"))
+                {       for (Profesor profe :this.listManager.getListaProfesores())
+                        {       if (profe.getNombreProfesor().contains(palabraBusq) && (!this.modeloListaObj.contains(profe)))
+                                        this.modeloListaObj.addElement(profe);
+                        }
+                }
+                if (criterioBusq.equals("Nombre de curso asignado"))
+                {       for (Profesor profe :this.listManager.getListaProfesores())
+                        {       if (profe.getCursosAsignados().contains(palabraBusq) && (!this.modeloListaObj.contains(profe)))
+                                        this.modeloListaObj.addElement(profe);
+                        }
+                }
+                if (criterioBusq.equals("Carrera en que hace clases"))
+                {       for (Profesor profe :this.listManager.getListaProfesores())
+                        {       for (Curso curso : profe.getCursosAsigArrayList())
+                                {       if (curso.getEnCarrera().getNombreCarrera().contains(palabraBusq) && (!this.modeloListaObj.contains(profe)))
+                                                this.modeloListaObj.addElement(profe);
+
+                                }
+                        }
+
+                }
+        }
+        this.listObjFound.setModel(this.modeloListaObj);
     }//GEN-LAST:event_botonBuscarActionPerformed
+
+    private void listObjFoundValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listObjFoundValueChanged
+        // Acción a realizar cuando se selecciona un elemento de la busqueda
+        if (this.listObjFound.getSelectedValue() == null)
+            return ;
+        Class claseObjeto = this.listObjFound.getSelectedValue().getClass();
+        if (claseObjeto == Carrera.class)
+        {       Carrera carreraSeleccionada = (Carrera)this.listObjFound.getSelectedValue();
+                this.areaInfoObj.setText("Nombre de Carrera: " + carreraSeleccionada.getNombreCarrera()+"\nFacultad de "+carreraSeleccionada.getFacultad()+"\nCantidad de semestres : "+carreraSeleccionada.getListaSemestres().size()+"\nDescripción de la carrera: "+carreraSeleccionada.getDescripcion());
+        }
+
+        if (claseObjeto == Curso.class)
+        {       Curso cursoSeleccionado = (Curso)this.listObjFound.getSelectedValue();
+                this.areaInfoObj.setText("Nombre del curso: " + cursoSeleccionado.getNombreCurso()+"\nCódigo del curso: "+cursoSeleccionado.getCodigoCurso()+"\nSección: "+cursoSeleccionado.getSeccion()+"\nProfesor asignado: "+cursoSeleccionado.getNombreProfesor()+"\nCarrera en que se dicta: "+cursoSeleccionado.getEnCarreraStr()+"\nSemestre en que se dicta: "+cursoSeleccionado.getEnSemestre()+"\nHorario: "+cursoSeleccionado.getHorario()+"\nDescripción del curso: "+cursoSeleccionado.getDescripcion());
+        }
+        if (claseObjeto == Profesor.class)
+        {       Profesor profesorSeleccionado = (Profesor)this.listObjFound.getSelectedValue();
+                this.areaInfoObj.setText("Nombre del profesor: "+profesorSeleccionado.getNombreProfesor()+"\nRut del profesor: "+profesorSeleccionado.getRutProfesor()+"\nCursos para impartir: "+profesorSeleccionado.getCodCursosQueImparte()+"\nHoras disponibles: "+profesorSeleccionado.getHorasDisponibles() + "\nCursosAsignados: "+profesorSeleccionado.getCursosAsignados()+"\nHoras asignadas: "+profesorSeleccionado.getHorasAsignadas());
+        }
+        
+    }//GEN-LAST:event_listObjFoundValueChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaInfoObj;

@@ -118,6 +118,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="campoHorasDisponibles">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Escriba aqu&#xed; las horas disponibles del profesor separadas por un espacio"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoHorasDisponiblesActionPerformed"/>
       </Events>
@@ -125,12 +128,16 @@
     <Component class="javax.swing.JButton" name="botonAplicarCambiosProfesor">
       <Properties>
         <Property name="text" type="java.lang.String" value="Aplicar cambios"/>
+        <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para aplicar los cambios al profesor"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAplicarCambiosProfesorActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="campoRamosQueDicta">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Escriba aqu&#xed; los c&#xf3;digos de curso que puede dictar el profesor separados por un espacio"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="campoRutProfesor">
       <Properties>
@@ -138,10 +145,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="campoNombreProfesorNuevo">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value="Escriba aqu&#xed; el nombre del profesor"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botonCancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para descartar los cambios y cerrar este dialogo"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonCancelarActionPerformed"/>

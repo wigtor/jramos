@@ -80,6 +80,7 @@ public class DialogoEdicionProfesor extends javax.swing.JDialog {
 
         jLabel8.setText("Horas disponibles:");
 
+        campoHorasDisponibles.setToolTipText("Escriba aquí las horas disponibles del profesor separadas por un espacio");
         campoHorasDisponibles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campoHorasDisponiblesActionPerformed(evt);
@@ -87,15 +88,21 @@ public class DialogoEdicionProfesor extends javax.swing.JDialog {
         });
 
         botonAplicarCambiosProfesor.setText("Aplicar cambios");
+        botonAplicarCambiosProfesor.setToolTipText("Haga click aquí para aplicar los cambios al profesor");
         botonAplicarCambiosProfesor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAplicarCambiosProfesorActionPerformed(evt);
             }
         });
 
+        campoRamosQueDicta.setToolTipText("Escriba aquí los códigos de curso que puede dictar el profesor separados por un espacio");
+
         campoRutProfesor.setEditable(false);
 
+        campoNombreProfesorNuevo.setToolTipText("Escriba aquí el nombre del profesor");
+
         botonCancelar.setText("Cancelar");
+        botonCancelar.setToolTipText("Haga click aquí para descartar los cambios y cerrar este dialogo");
         botonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonCancelarActionPerformed(evt);

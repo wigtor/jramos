@@ -282,7 +282,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jScrollPane8.setViewportView(cuadroInformacionCarrera);
 
         botonVerMalla.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        botonVerMalla.setText("Ver Malla");
+        botonVerMalla.setText("Ver malla");
         botonVerMalla.setToolTipText("Haga click aquí para ver la malla de la carrera seleccionada");
         botonVerMalla.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -330,7 +330,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonHorarioCarrera.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        botonHorarioCarrera.setFont(new java.awt.Font("Dialog", 1, 14));
         botonHorarioCarrera.setText("Ver horario de carrera");
         botonHorarioCarrera.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -453,7 +453,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         campoNombreProfesorNuevo.setToolTipText("Escriba aquí el nombre del profesor que desea agregar");
 
-        jLabel5.setText("Nombre Profesor:");
+        jLabel5.setText("Nombre profesor:");
 
         jLabel6.setText("RUT:");
 
@@ -654,7 +654,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonAgregarCurso.setText("Agregar Curso");
+        botonAgregarCurso.setText("Agregar curso");
         botonAgregarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAgregarCursoActionPerformed(evt);
@@ -688,7 +688,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("¿En que semestre? ");
+        jLabel1.setText("¿En qué semestre? ");
 
         selectorListaSemestres.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         selectorListaSemestres.setToolTipText("Elija aquí en que semestre o nivel de la carrera es dictado el curso");
@@ -840,7 +840,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         menuAyuda.setText("Ayuda");
 
-        menuVerManual.setText("Ver Manual de usuario");
+        menuVerManual.setText("Ver manual de usuario");
         menuVerManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuVerManualActionPerformed(evt);

@@ -97,9 +97,7 @@ public class CapaIOCursos
 			}
 			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
 			idInicial = this.stringToIdInicial(new String(lineaDatos.toString()), tipoId);
-			if (idInicial == 0)
-				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un id");
-                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+			lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
                 }
 		/** Cierro el archivo*/
 		lector.close();
@@ -183,9 +181,7 @@ public class CapaIOCursos
 			Carrera carreraEncontrada = this.stringToCarrera(new String(lineaDatos.toString()));
 			if (carreraEncontrada != null)
 				listaCarreras.add(carreraEncontrada);
-			else
-				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es una carrera");
-                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+			lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
                 }
 		/** Cierro el archivo*/
 		lector.close();
@@ -241,9 +237,7 @@ public class CapaIOCursos
 			Curso cursoEncontrado = this.stringToCurso(new String(lineaDatos.toString()));
 			if (cursoEncontrado != null)
 				listaCursos.add(cursoEncontrado);
-			else
-				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un curso");
-                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+			lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
                 }
 		/** Cierro el archivo*/
 		lector.close();
@@ -298,9 +292,7 @@ public class CapaIOCursos
 			Semestre semestreEncontrado = this.stringToSemestre(new String(lineaDatos.toString()));
 			if (semestreEncontrado != null)
 				listaSemestres.add(semestreEncontrado);
-			else
-				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un semestre");
-                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+			lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
                 }
 		/* Cierro el archivo*/
 		lector.close();
@@ -358,9 +350,7 @@ public class CapaIOCursos
                         facultadEncontrada = this.stringToFacultad(new String(lineaDatos.toString()));
 			if (facultadEncontrada != null)
 				listaFacultades.add(facultadEncontrada);
-			else
-				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un semestre");
-                        lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
+			lineaDatos = new StringBuilder(CapaIOCursos.capacidadInicialString);
                 }
 		/* Cierro el archivo*/
 		lector.close();
@@ -854,16 +844,13 @@ public class CapaIOCursos
                         //acá seteo los id de los semestres de carreraLeida!!!, alexis debes hacer un setter parar los id de semestre en las carreras
                         if (idSemestresStr.length() != 0)
                         {       for (i = 0; idSemestresStr.indexOf("|") != -1;i++)
-                                {       System.out.println(idSemestresStr.substring(0, idSemestresStr.indexOf("|")));
-                                        idSemestre = Integer.valueOf(idSemestresStr.substring(0, idSemestresStr.indexOf("|")));
+                                {       idSemestre = Integer.valueOf(idSemestresStr.substring(0, idSemestresStr.indexOf("|")));
                                         posicionBarra = idSemestresStr.indexOf("|");
                                         idSemestresStr = idSemestresStr.substring(posicionBarra+1);
                                         carreraLeida.modIdSemestres(idSemestre, 1);
-                                        System.out.println("En carrera: " + idSemestre);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
                                 carreraLeida.modIdSemestres(Integer.valueOf(idSemestresStr), 1);
-                                System.out.println("En carrera: " +idSemestresStr);
                         }
 
                         return carreraLeida;
@@ -960,16 +947,13 @@ public class CapaIOCursos
                         //Seteo la lista de horarios asignadas al curso
                         if (horario.length() != 0)
                         {       for (i = 0; horario.indexOf("|") != -1;i++)
-                                {       System.out.println(horario.substring(0, horario.indexOf("|")));
-                                        objHora = new Hora(horario.substring(0, horario.indexOf("|")));
+                                {       objHora = new Hora(horario.substring(0, horario.indexOf("|")));
                                         posicionBarra = horario.indexOf("|");
                                         horario = horario.substring(posicionBarra+1);
                                         cursoLeido.modHorario(objHora, 1);
-                                        System.out.println("En hora: " + objHora);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
                                 cursoLeido.modHorario(new Hora(horario), 1);
-                                System.out.println("En hora: " +horario);
                         }
                         
 			return cursoLeido;
@@ -1004,8 +988,7 @@ public class CapaIOCursos
          * @return Devuelve el objeto Facultad modelado como String según la sintaxis válida del archivo de cursos.
          */
         private String facultadToString(Facultad facultadAEscribir)
-        {       System.out.println("Se va a pasar una facultad a String...");
-		String nomFacultad = facultadAEscribir.getNombreFacultad();
+        {       String nomFacultad = facultadAEscribir.getNombreFacultad();
 		String descrip = facultadAEscribir.getDescripcion();
 		int idFacultad = facultadAEscribir.getIdFacultad();
                 String codCarreras = facultadAEscribir.getCodigosCarreras();
@@ -1043,16 +1026,13 @@ public class CapaIOCursos
                         //acá seteo los id de los semestres de carreraLeida!!!, alexis debes hacer un setter parar los id de semestre en las carreras
                         if (codCarreras.length() != 0)
                         {       for (i = 0; codCarreras.indexOf("|") != -1;i++)
-                                {       System.out.println(codCarreras.substring(0, codCarreras.indexOf("|")));
-                                        codCarrera = Integer.valueOf(codCarreras.substring(0, codCarreras.indexOf("|")));
+                                {       codCarrera = Integer.valueOf(codCarreras.substring(0, codCarreras.indexOf("|")));
                                         posicionBarra = codCarreras.indexOf("|");
                                         codCarreras = codCarreras.substring(posicionBarra+1);
                                         facultadLeida.modListaCodigoCarreras(codCarrera, 1);
-                                        System.out.println("codigo de la carrera que tiene la facultad: " + codCarrera);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
                                 facultadLeida.modListaCodigoCarreras(Integer.valueOf(codCarreras), 1);
-                                System.out.println("En carrera: " + codCarreras);
                         }
 
                         return facultadLeida;
@@ -1067,8 +1047,7 @@ public class CapaIOCursos
          * @return Devuelve el objeto Carrera modelado como String según la sintaxis válida del archivo de cursos.
          */
 	private String carreraToString(Carrera carreraAEscribir)
-	{	System.out.println("Se va a pasar una carrera a String...");
-		String nomCarrera = carreraAEscribir.getNombreCarrera();
+	{	String nomCarrera = carreraAEscribir.getNombreCarrera();
 		String descrip = carreraAEscribir.getDescripcion();
 		int codCarrera = carreraAEscribir.getCodigoCarrera();
                 String idSemestresStr = carreraAEscribir.getIdSemestres();
@@ -1081,8 +1060,7 @@ public class CapaIOCursos
          * @return Devuelve el objeto Semestre modelado como String según la sintaxis válida del archivo de cursos.
          */
         private String semestreToString(Semestre semestreAEscribir)
-	{	System.out.println("Se va a pasar un semestre a String...");
-		int numSemestre = semestreAEscribir.getNumeroSemestre();
+	{	int numSemestre = semestreAEscribir.getNumeroSemestre();
 		int idSemestre = semestreAEscribir.getIdSemestre();
 		int enCarreraId = semestreAEscribir.getCodigoEnCarrera();
                 String idCursosDelSemestre = semestreAEscribir.getIdCursosStr();
@@ -1118,16 +1096,13 @@ public class CapaIOCursos
                         Semestre semestreLeido = new Semestre(numSemestre, enCarreraId, idSemestre);
                         if (idRamosDelSemestre.length() != 0)
                         {       for (i = 0; idRamosDelSemestre.indexOf("|") != -1;i++)
-                                {       System.out.println(idRamosDelSemestre.substring(0, idRamosDelSemestre.indexOf("|")));
-                                        codRamo = Integer.valueOf(idRamosDelSemestre.substring(0, idRamosDelSemestre.indexOf("|")));
+                                {       codRamo = Integer.valueOf(idRamosDelSemestre.substring(0, idRamosDelSemestre.indexOf("|")));
                                         posicionBarra = idRamosDelSemestre.indexOf("|");
                                         idRamosDelSemestre = idRamosDelSemestre.substring(posicionBarra+1);
                                         semestreLeido.modIdRamos(codRamo, 1);
-                                        System.out.println("id ramo del semestre: " + codRamo);
                                 }
                                 //Agrego el ultimo que no fue agregado en el bucle:
                                 semestreLeido.modIdRamos(Integer.valueOf(idRamosDelSemestre), 1);
-                                System.out.println("id ramo del semestre: " + idRamosDelSemestre);
                         }
 
                         return semestreLeido;

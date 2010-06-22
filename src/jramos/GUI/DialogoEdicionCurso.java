@@ -132,7 +132,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
 
         selectorListaSemestres.setEnabled(false);
 
-        jLabel1.setText("¿En que semestre? ");
+        jLabel1.setText("¿En qué semestre? ");
 
         botonAplicarCambiosCurso.setText("Aplicar cambios");
         botonAplicarCambiosCurso.setToolTipText("Haga click aquí para aplicar los cambios al curso");
@@ -142,7 +142,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
             }
         });
 
-        jLabel2.setText("Profesor Asignado");
+        jLabel2.setText("Profesor asignado");
 
         selectorListaProfesores.setToolTipText("Seleccione aquí el profesor asignado al curso");
         selectorListaProfesores.addActionListener(new java.awt.event.ActionListener() {
@@ -151,7 +151,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
             }
         });
 
-        jLabel3.setText("Horas Asignadas");
+        jLabel3.setText("Horas asignadas");
 
         botonElegirHoras.setText("Elegir horas...");
         botonElegirHoras.setToolTipText("Haga click aquí para seleccionar la asignación horaria del curso");

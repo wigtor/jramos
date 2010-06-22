@@ -72,10 +72,12 @@ public class DialogoAcercaDe extends javax.swing.JDialog {
 
         jLabel8.setText("Esperamos una buena calificación en este proyecto");
 
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 10));
+        jLabel9.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Alguien muy sabio dijo una vez:");
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 1, 10));
+        jLabel10.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Estudiante que arranca sirve para otra carrera...");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

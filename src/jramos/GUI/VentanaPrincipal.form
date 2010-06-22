@@ -31,7 +31,7 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="menuVerManual">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Ver Manual de usuario"/>
+                <Property name="text" type="java.lang.String" value="Ver manual de usuario"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="menuVerManualActionPerformed"/>
@@ -351,7 +351,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="14" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ver Malla"/>
+                <Property name="text" type="java.lang.String" value="Ver malla"/>
                 <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para ver la malla de la carrera seleccionada"/>
               </Properties>
               <Events>
@@ -597,7 +597,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Nombre Profesor:"/>
+                <Property name="text" type="java.lang.String" value="Nombre profesor:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
@@ -950,7 +950,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="botonAgregarCurso">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Agregar Curso"/>
+                <Property name="text" type="java.lang.String" value="Agregar curso"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAgregarCursoActionPerformed"/>
@@ -995,7 +995,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#xbf;En que semestre? "/>
+                <Property name="text" type="java.lang.String" value="&#xbf;En qu&#xe9; semestre? "/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="selectorListaSemestres">

@@ -67,7 +67,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="botonAceptaAgregarFacultad">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Agregar Facultad"/>
+        <Property name="text" type="java.lang.String" value="Agregar facultad"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAceptaAgregarFacultadActionPerformed"/>
@@ -91,7 +91,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="10" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="breve descripci&#xf3;n: (opcional)"/>
+        <Property name="text" type="java.lang.String" value="Breve descripci&#xf3;n: (opcional)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="campoNombreFacultadNueva">

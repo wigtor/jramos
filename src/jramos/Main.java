@@ -14,7 +14,9 @@ import java.util.ArrayList;
 public class Main
 {
 	public static void main(String args[])
-	{       
+	{       //Seteo por defecto el uso de UTF-8 en la codificación de caracteres.
+                System.out.println("codificación de caracteres usado: " +System.getProperty("file.encoding"));
+                System.setProperty("file.encoding", "UTF-8");
                 CapaIOCursos gestorIOCursos;
                 CapaIOProfes gestorIOProfes;
 

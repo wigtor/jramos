@@ -72,7 +72,7 @@ public class DialogoEdicionProfesor extends javax.swing.JDialog {
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 10));
         jLabel14.setText("Editar la información de un profesor: ");
 
-        jLabel5.setText("Nombre Profesor:");
+        jLabel5.setText("Nombre profesor:");
 
         jLabel6.setText("RUT:");
 

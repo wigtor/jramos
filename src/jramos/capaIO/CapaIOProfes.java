@@ -96,9 +96,7 @@ public class CapaIOProfes
 			Profesor ProfesorEncontrado = this.stringToProfesor(lineaDatos.toString());
 			if (ProfesorEncontrado != null)
 				listaProfes.add(ProfesorEncontrado);
-			else
-				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un curso");
-                        lineaDatos = new StringBuilder(CapaIOProfes.capacidadInicialString);
+			lineaDatos = new StringBuilder(CapaIOProfes.capacidadInicialString);
                 }
 		/** Cierro el archivo*/
 		try
@@ -151,9 +149,7 @@ public class CapaIOProfes
 			}
 			/** Como se ha encontrado una linea con una especificacion de un objeto, ahora proceso esa linea y agrego el objeto que retorna el metodo analizaLinea */
 			idInicial = this.stringToIdInicial(new String(lineaDatos.toString()), tipoId);
-			if (idInicial == 0)
-				System.out.println("Aviso: Lo que se ha encontrado en la linea analizada no es un id");
-                        lineaDatos = new StringBuilder(CapaIOProfes.capacidadInicialString);
+			lineaDatos = new StringBuilder(CapaIOProfes.capacidadInicialString);
                 }
 		/** Cierro el archivo*/
 		lector.close();

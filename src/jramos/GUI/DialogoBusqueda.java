@@ -109,15 +109,15 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         selectorCriterioBusq.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "criterio de busqueda" }));
         selectorCriterioBusq.setToolTipText("Seleccione el criterio de busqueda");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 10));
-        jLabel4.setText("Palabras clave de busqueda");
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel4.setText("Palabras de busqueda");
 
         areaInfoObj.setColumns(20);
         areaInfoObj.setRows(5);
         areaInfoObj.setToolTipText("Información del objeto encontrado");
         jScrollPane2.setViewportView(areaInfoObj);
 
-        jLabel5.setText("Información de objeto: ");
+        jLabel5.setText("Información del objeto: ");
 
         botonCerrar.setText("Cerrar");
         botonCerrar.setToolTipText("Cerrar el dialogo de busqueda");
@@ -162,7 +162,7 @@ public class DialogoBusqueda extends javax.swing.JDialog {
                         .addGap(176, 176, 176))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addContainerGap(273, Short.MAX_VALUE))
+                        .addContainerGap(269, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addContainerGap(277, Short.MAX_VALUE))))

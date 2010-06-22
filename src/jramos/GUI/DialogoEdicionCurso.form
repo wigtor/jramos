@@ -184,7 +184,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#xbf;En que semestre? "/>
+        <Property name="text" type="java.lang.String" value="&#xbf;En qu&#xe9; semestre? "/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botonAplicarCambiosCurso">
@@ -198,7 +198,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Profesor Asignado"/>
+        <Property name="text" type="java.lang.String" value="Profesor asignado"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="selectorListaProfesores">
@@ -214,7 +214,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Horas Asignadas"/>
+        <Property name="text" type="java.lang.String" value="Horas asignadas"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botonElegirHoras">

@@ -62,7 +62,7 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        botonAceptaAgregarFacultad.setText("Agregar Facultad");
+        botonAceptaAgregarFacultad.setText("Agregar facultad");
         botonAceptaAgregarFacultad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAceptaAgregarFacultadActionPerformed(evt);
@@ -78,8 +78,8 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
 
         jLabel1.setText("Nombre facultad: ");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 10));
-        jLabel2.setText("breve descripción: (opcional)");
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        jLabel2.setText("Breve descripción: (opcional)");
 
         campoNombreFacultadNueva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -62,13 +62,13 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                 this.labelHoras.setVisible(false);
                 this.labelElegidas.setEnabled(false);
                 this.labelHoras.setEnabled(false);
-                this.setSize(800, 470);
+                this.setSize(800, 480);
         }
         if (modo == VisualizadorHorarioObjeto.EDICION)
         {       this.horarioMostrado.setCellSelectionEnabled(false);
                 this.panelCursos.setVisible(false);
                 this.labelCursos.setVisible(false);
-                this.setSize(860, 300);
+                this.setSize(860, 310);
                 this.botonCerrarHorario.setText("Aceptar");
                 this.JListHorasSeleccionadas.setEnabled(true);
                 this.JListHorasSeleccionadas.setVisible(true);
@@ -141,7 +141,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         }
         if ((modo == VisualizadorHorarioObjeto.VISUALIZACION) && (objetoQueVerHorario.getClass() == Curso.class))
         {       this.botonCerrarHorario.setAlignmentY(TOP_ALIGNMENT);
-                this.setSize(800, 300);
+                this.setSize(800, 310);
         }
         this.dibujaHhorario();
     }
@@ -304,7 +304,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelCursos)
-                .addContainerGap(789, Short.MAX_VALUE))
+                .addContainerGap(795, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -337,7 +337,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(343, 343, 343)
                 .addComponent(botonCerrarHorario)
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addContainerGap(439, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,7 +376,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                 .addComponent(panelCursos, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonCerrarHorario)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();

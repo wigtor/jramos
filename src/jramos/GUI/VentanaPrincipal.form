@@ -283,7 +283,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="10" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nueva carrera..."/>
+                <Property name="text" type="java.lang.String" value="Nueva carrera"/>
                 <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para agregar una carrera al registro"/>
               </Properties>
               <Events>
@@ -295,7 +295,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Dialog" size="10" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Nueva facultad..."/>
+                <Property name="text" type="java.lang.String" value="Nueva facultad"/>
                 <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para agregar una facultad al registro"/>
               </Properties>
               <Events>
@@ -463,10 +463,10 @@
                                       </Group>
                                       <EmptySpace min="-2" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="campoRutProfesor" alignment="0" pref="169" max="32767" attributes="1"/>
-                                          <Component id="campoNombreProfesorNuevo" alignment="0" pref="169" max="32767" attributes="1"/>
-                                          <Component id="campoRamosQueDicta" alignment="0" pref="169" max="32767" attributes="1"/>
-                                          <Component id="campoHorasDisponibles" alignment="0" pref="169" max="32767" attributes="1"/>
+                                          <Component id="campoRutProfesor" alignment="0" pref="170" max="32767" attributes="1"/>
+                                          <Component id="campoNombreProfesorNuevo" alignment="0" pref="170" max="32767" attributes="1"/>
+                                          <Component id="campoRamosQueDicta" alignment="0" pref="170" max="32767" attributes="1"/>
+                                          <Component id="campoHorasDisponibles" alignment="0" pref="170" max="32767" attributes="1"/>
                                       </Group>
                                   </Group>
                                   <Component id="botonAgregarProfesor" alignment="1" min="-2" pref="197" max="-2" attributes="1"/>
@@ -629,22 +629,22 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ej: Alberto Ceballos"/>
+                <Property name="text" type="java.lang.String" value="Ej: Alberto Ceballos"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ej: 1234567"/>
+                <Property name="text" type="java.lang.String" value="Ej: 13454138"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel11">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ej: codRamo1 codRamo2"/>
+                <Property name="text" type="java.lang.String" value="Ej: codRamo1 codRamo2"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel12">
               <Properties>
-                <Property name="text" type="java.lang.String" value="ej: L4 L5 W3 W4 V1 V2"/>
+                <Property name="text" type="java.lang.String" value="Ej: L4 L5 W3 W4 V1 V2"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel20">

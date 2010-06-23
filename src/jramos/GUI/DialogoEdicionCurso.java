@@ -153,7 +153,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
 
         jLabel3.setText("Horas asignadas");
 
-        botonElegirHoras.setText("Elegir horas...");
+        botonElegirHoras.setText("Elegir horas");
         botonElegirHoras.setToolTipText("Haga click aquí para seleccionar la asignación horaria del curso");
         botonElegirHoras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

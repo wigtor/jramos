@@ -219,7 +219,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="botonElegirHoras">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Elegir horas..."/>
+        <Property name="text" type="java.lang.String" value="Elegir horas"/>
         <Property name="toolTipText" type="java.lang.String" value="Haga click aqu&#xed; para seleccionar la asignaci&#xf3;n horaria del curso"/>
       </Properties>
       <Events>

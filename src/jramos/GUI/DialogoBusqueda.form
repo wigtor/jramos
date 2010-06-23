@@ -137,7 +137,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Resultados busqueda:"/>
+        <Property name="text" type="java.lang.String" value="Resultados b&#xfa;squeda:"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
@@ -171,7 +171,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Dialog" size="10" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Palabras de busqueda"/>
+        <Property name="text" type="java.lang.String" value="Palabra de busqueda"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">

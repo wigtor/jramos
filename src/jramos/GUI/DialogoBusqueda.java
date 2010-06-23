@@ -98,7 +98,7 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(listObjFound);
 
-        jLabel1.setText("Resultados busqueda:");
+        jLabel1.setText("Resultados búsqueda:");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 10));
         jLabel2.setText("Seleccione que está buscando");
@@ -109,8 +109,8 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         selectorCriterioBusq.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "criterio de busqueda" }));
         selectorCriterioBusq.setToolTipText("Seleccione el criterio de busqueda");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
-        jLabel4.setText("Palabras de busqueda");
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 10));
+        jLabel4.setText("Palabra de busqueda");
 
         areaInfoObj.setColumns(20);
         areaInfoObj.setRows(5);

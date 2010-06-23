@@ -213,10 +213,10 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Horario");
 
-        labelElegidas.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        labelElegidas.setFont(new java.awt.Font("Dialog", 1, 10));
         labelElegidas.setText("elegidas:");
 
-        labelHoras.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
+        labelHoras.setFont(new java.awt.Font("Dialog", 1, 10));
         labelHoras.setText("Horas");
 
         JListHorasSeleccionadas.setEnabled(false);
@@ -235,7 +235,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
             }
         });
 
-        labelNivel.setText("Nivel:");
+        labelNivel.setText("Semestre:");
 
         horarioMostrado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -304,11 +304,11 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(labelCursos)
-                .addContainerGap(761, Short.MAX_VALUE))
+                .addContainerGap(789, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panelCursos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE)
+                    .addComponent(panelCursos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(labelClaseObjeto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -327,7 +327,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                                 .addComponent(labelNivel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(selectorSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(panelHorario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 733, Short.MAX_VALUE))
+                    .addComponent(panelHorario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelElegidas)
@@ -337,7 +337,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(343, 343, 343)
                 .addComponent(botonCerrarHorario)
-                .addContainerGap(405, Short.MAX_VALUE))
+                .addContainerGap(433, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,11 +365,9 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                                             .addComponent(jLabel3)
                                             .addComponent(labelNombreObjeto))))
                                 .addGap(7, 7, 7))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(selectorSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(labelNivel))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(selectorSemestre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labelNivel)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)

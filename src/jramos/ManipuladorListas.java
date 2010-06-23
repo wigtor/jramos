@@ -21,6 +21,7 @@ import jramos.tiposDatos.Semestre;
 import jramos.tiposDatos.Hora;
 import jramos.tiposDatos.Profesor;
 import java.util.ArrayList;
+import java.util.Collections;
 import jramos.excepciones.HoraNoDisponibleException;
 import jramos.excepciones.HourOutOfRangeException;
 import jramos.excepciones.StringVacioException;
@@ -49,6 +50,9 @@ public class ManipuladorListas
                 this.listaSemestres = listaSemestres;
                 this.listaCursos = listaCursos;
                 this.listaProfesores = listaProfesores;
+                Collections.sort(this.listaProfesores);
+                Collections.sort(this.listaCursos);
+                Collections.sort(this.listaCarreras);
         }
 
         public ArrayList<Curso> getListaCursos()
@@ -215,7 +219,7 @@ public class ManipuladorListas
                 //Modifico el nombre del profesor
                 if (!profesorAEditar.getNombreProfesor().equals(nuevoNombreProfe))
                     profesorAEditar.setNombre(nuevoNombreProfe);
-
+                Collections.sort(this.listaProfesores);
         }
         
         public void editaCurso(Curso cursoAEditar, Profesor profesorAAsignarle, ArrayList<Hora> horasQueAsignarle, String newDescrip, boolean comprobarHorarioSemestreAnterior, boolean comprobarHorarioSemestreSiguiente) throws HoraNoDisponibleException
@@ -366,6 +370,7 @@ public class ManipuladorListas
                                 profesorAAsignarle.modHorasAsignadas(hora, 1);
                         }
                 }
+                Collections.sort(this.listaCursos);
         }
 
         /**
@@ -424,6 +429,7 @@ public class ManipuladorListas
                         }
 
                 }
+                Collections.sort(this.listaCarreras);
         }
         /**
          * Este método elimina un curso desde la lista de cursos
@@ -449,6 +455,7 @@ public class ManipuladorListas
                                 break ;
                         }
                 }
+                Collections.sort(this.listaCursos);
         }
 
         /**
@@ -551,6 +558,7 @@ public class ManipuladorListas
 
                 //Referencio el curso en la lista de cursos del semestre al cual pertenece
                 semestreAlQuePertenece.modRamos(cursoNuevo, 1);
+                Collections.sort(this.listaCursos);
         }
         /**
          * Crea y agrega un objeto Facultad a la lista de facultades.
@@ -736,6 +744,7 @@ public class ManipuladorListas
                 for (Hora hora : listaHorasDisponibles)
                         profesorNuevo.modHorasDisponibles(hora, 1);
                 this.listaProfesores.add(profesorNuevo);
+                Collections.sort(this.listaProfesores);
         }
 
         /**
@@ -756,6 +765,7 @@ public class ManipuladorListas
                                 }
                         }
                 }
+                Collections.sort(this.listaProfesores);
         }
 
         /**
@@ -800,6 +810,7 @@ public class ManipuladorListas
                 }
 
                 this.listaCarreras.add(carreraNueva);
+                Collections.sort(this.listaCarreras);
         }
 
         /**
@@ -852,6 +863,7 @@ public class ManipuladorListas
                 for (Semestre semestre : semestresAEliminar)
                 {       this.listaSemestres.remove(semestre);
                 }
+                Collections.sort(this.listaCarreras);
         }
 
 }

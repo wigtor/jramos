@@ -16,7 +16,7 @@
 package jramos.tiposDatos;
 import java.util.ArrayList;
 
-public class Curso {
+public class Curso implements Comparable{
     static int idCursoActual = 0;
 
     private String nomCurso;
@@ -424,5 +424,14 @@ public class Curso {
     */
    public void setSemestre(Semestre semestreToAsig){
        this.enSemestre = semestreToAsig;
+   }
+
+
+
+   public int compareTo(Object o)
+   {        if (o.getClass() != Curso.class)
+                    return -1;
+            else
+                    return this.getNombreCurso().compareTo(((Curso)o).getNombreCurso());
    }
 }

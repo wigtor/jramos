@@ -15,7 +15,7 @@
 
 package jramos.tiposDatos;
 import java.util.ArrayList;
-public class Profesor {
+public class Profesor implements Comparable{
     static int idProfesorActual = 0;
 
     private String nomProfe;
@@ -404,5 +404,11 @@ public class Profesor {
      */
     public void setNombre(String nombreProfe)
     {   this.nomProfe = nombreProfe;
+    }
+    public int compareTo(Object o)
+    {       if (o.getClass() != Profesor.class)
+                    return -1;
+            else
+                    return this.getNombreProfesor().compareTo(((Profesor)o).getNombreProfesor());
     }
 }

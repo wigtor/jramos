@@ -14,7 +14,7 @@
 package jramos.tiposDatos;
 import java.util.ArrayList;
 
-public class Carrera {
+public class Carrera implements Comparable{
 
     static int codCarreraActual = 1000;
 
@@ -243,4 +243,10 @@ public class Carrera {
     {       return this.getNombreCarrera();
     }
 
+    public int compareTo(Object o)
+    {       if (o.getClass() != Carrera.class)
+                    return -1;
+            else
+                    return this.getNombreCarrera().compareTo(((Carrera)o).getNombreCarrera());
+    }
 }

@@ -143,10 +143,10 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
         {       this.botonCerrarHorario.setAlignmentY(TOP_ALIGNMENT);
                 this.setSize(800, 310);
         }
-        this.dibujaHhorario();
+        this.dibujaHorario();
     }
 
-    private void dibujaHhorario()
+    private void dibujaHorario()
     {   this.horarioMostrado.removeAll();
         Hora horaTemp;
         int i, j;
@@ -428,7 +428,7 @@ public class VisualizadorHorarioObjeto extends javax.swing.JDialog {
                 {       this.horasAMostrar.addAll(curso.getHorasAsigArrayList());
                 }
                 //dibujo el horario
-                this.dibujaHhorario();
+                this.dibujaHorario();
                 //dibujo la tabla con los cursos asignados y horarios
                 DefaultTableModel modelo = new DefaultTableModel(new Object [][] {},new String [] {"Curso", "Asignatura"});
                 Vector vectorFila = new Vector(3);

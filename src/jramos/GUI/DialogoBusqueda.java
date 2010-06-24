@@ -225,7 +225,7 @@ public class DialogoBusqueda extends javax.swing.JDialog {
         }
         if (this.selectorTipoObj.getSelectedItem().equals("Carrera"))
         {   this.selectorCriterioBusq.addItem("Nombre de carrera");
-            this.selectorCriterioBusq.addItem("nombre de la Facultad");
+            this.selectorCriterioBusq.addItem("Nombre de la Facultad");
             this.selectorCriterioBusq.addItem("Nombre de un curso que posea");
 
         }
@@ -251,7 +251,7 @@ public class DialogoBusqueda extends javax.swing.JDialog {
                                         this.modeloListaObj.addElement(carrera);
                         }
                 }
-                if (criterioBusq.equals("nombre de la Facultad"))
+                if (criterioBusq.equals("Nombre de la Facultad"))
                 {       for (Carrera carrera :this.listManager.getListaCarreras())
                         {       if (carrera.getFacultad().getNombreFacultad().contains(palabraBusq) && (!this.modeloListaObj.contains(carrera)))
                                         this.modeloListaObj.addElement(carrera);

@@ -24,7 +24,7 @@ public class DialogoFacultadNueva extends javax.swing.JDialog {
     private java.awt.Frame ventanaPadre;
     private ManipuladorListas listManager;
     private int nuevaOEdita;
-    Facultad facultadAEditar;
+    private Facultad facultadAEditar;
     /** Creates new form DialogoFacultadNueva */
     public DialogoFacultadNueva(java.awt.Frame ventanaPadre, boolean modal, ManipuladorListas listManager, Facultad facultadAEditar,int nuevaOEdita) {
         super(ventanaPadre, modal);

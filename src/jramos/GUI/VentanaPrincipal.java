@@ -26,6 +26,9 @@ import jramos.excepciones.nombreRepetidoException;
  * @author victor
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
+    public static int NUEVA = 1;
+    public static int EDITA = 2;
+
     public static final String MANUAL_PDF = "Manual_Usuario.pdf";
     private ManipuladorListas listManager;
     private CapaIOCursos gestorIOCursos;
@@ -34,8 +37,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private DefaultListModel listModelCarreras;
     private DefaultListModel listModelProfesores;
     private DefaultListModel listModelCursos;
-    public static int NUEVA = 1;
-    public static int EDITA = 2;
+    
 
     /** Creates new form VentanaPrincipal */
     public VentanaPrincipal(ManipuladorListas listManager, CapaIOCursos gestorIOCursos, CapaIOProfes gestorIOProfes) {

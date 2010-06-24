@@ -30,7 +30,7 @@ public class DialogoConfirmacion extends javax.swing.JDialog {
     public static final int CONFIRMA_AGREGAR_TOPE_NIVEL_ANT = 6;
 
     private int tipoAccion;
-    java.awt.Window ventanaPadre;
+    private java.awt.Window ventanaPadre;
     private Object objetoABorrar;
     private boolean anteriormenteConfirmado;
 

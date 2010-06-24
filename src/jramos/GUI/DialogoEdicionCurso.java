@@ -335,7 +335,7 @@ public class DialogoEdicionCurso extends javax.swing.JDialog {
         this.aplicarCambiosEdicion(true, true);
     }//GEN-LAST:event_botonAplicarCambiosCursoActionPerformed
 
-    void asignarHorasElegidas(ArrayList <Hora> horasElegidas)
+    public void asignarHorasElegidas(ArrayList <Hora> horasElegidas)
     {
             this.horasElegidas = horasElegidas;
     }

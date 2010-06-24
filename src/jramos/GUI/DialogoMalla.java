@@ -23,7 +23,7 @@ import jramos.tiposDatos.Semestre;
  * @author victor
  */
 public class DialogoMalla extends javax.swing.JDialog {
-    Carrera carreraAVerMalla;
+    private Carrera carreraAVerMalla;
 
     /** Creates new form DialogoMalla */
     public DialogoMalla(java.awt.Frame parent, boolean modal, Carrera carreraAVerMalla) {

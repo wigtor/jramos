@@ -312,7 +312,7 @@ public class Curso implements Comparable{
     * Metodo para hacer la conexion al profesor que esta asignado a este curso.
     * Actualiza automaticamente el rut del profesor
     * Si desea desAsignar el profesor del curso debe usar null como parametro
-    * @param profesorToAsign Objeto Profesor o null para desAsignarlo.
+    * @param profesorToAsig Objeto Profesor o null para desAsignarlo.
     */
    public void setProfesor(Profesor profesorToAsig){
        this.profeAsig = profesorToAsig;
@@ -343,7 +343,7 @@ public class Curso implements Comparable{
    /**
     * Metodo para setear la Carrera que contienen a este curso
     *
-    * @param carrera Objeto carrera que se desea agregar o quitar
+    * @param carreraToAsig Objeto carrera que se desea agregar o quitar
     */
    public void setCarrera(Carrera carreraToAsig){
         this.enCarrera = carreraToAsig;
@@ -377,7 +377,7 @@ public class Curso implements Comparable{
    /**
     * Metodo para agregar o quitar una bloque horario donde se imparte este curso
     *
-    * @param horaToAsign Objeto Hora que se desea agregar o quitar
+    * @param horaToAsig Objeto Hora que se desea agregar o quitar
     * @param selector 1: Agregar  -1: Quitar
     */
    public void modHorario(Hora horaToAsig, int selector){

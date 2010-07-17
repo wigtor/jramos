@@ -61,8 +61,7 @@ public class Semestre {
      * Se instancian los ArrayList de ramos y codigos de ramos que posee el semestre
      * Se asignan las referencias con la carrera del que fue creado.
      * @param numeroSemestre int con el numero del semestre
-     * @param codEnLaCarrera int con el codigo de la carrera a la cual pertenece este semestre
-     * @param id int con el id del semestre
+     * @param enLaCarrera objero carrera a la cual pertenece este semestre
      */
     public Semestre(int numeroSemestre, Carrera enLaCarrera){
         this.numSemestre = numeroSemestre;
@@ -235,7 +234,7 @@ public class Semestre {
     /**
      * Metodo para agregar o quitar un ramo a este semestre usando el codigo del ramo
      *
-     * @param codRamo código del ramo que se quiere agregar o quitar del semestre
+     * @param idRamo código del ramo que se quiere agregar o quitar del semestre
      * @param selector 1: Agregar  -1: Quitar
      */
     public void modIdRamos(int idRamo, int selector){

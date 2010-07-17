@@ -173,7 +173,7 @@ public class ManipuladorListas
                                                 break ;
                                         }
                                 }
-
+                                profesorAEditar.modHorasDisponibles(horaEnProfe, -1);
                         }
 
                 }
@@ -208,6 +208,7 @@ public class ManipuladorListas
                                                 }
                                         }
                                 }
+                                profesorAEditar.modCursosParaImpartir(codCursoAntes.intValue(), -1);
                         }
 
                 }
@@ -463,10 +464,10 @@ public class ManipuladorListas
          * 
          * @param descrip
          * @param nombreCurso es el nombre del curso nuevo.
-         * @param codCurso es el codigo del curso nuevo.
+         * @param codCursoStr es el codigo del curso nuevo.
          * @param seccion es la seccion del curso nuevo, un String, por ejemplo: A01.
-         * @param carreraAlQuePertenece es un objeto Carrera con la carrera a la cual pertenece el curso.
-         * @param semestreAlQuePertenece es un objeto Semestre con el semestre al cual pertenece el curso.
+         * @param carreraPert es un objeto Carrera con la carrera a la cual pertenece el curso.
+         * @param semestPert es un objeto Semestre con el semestre al cual pertenece el curso.
          * @throws nombreRepetidoException Se lanza esta excepción cuando el nombre del curso se encuentra repetido con algún nombre de los demás cursos.
          * @throws StringVacioException Se lanza está excepción cuando el nombre o la sección son Strings Vacios
          * Se lanzan con un codigo de error especificado en los atributos estaticos de está clase: ERROR_NOMBRE o ERROR_SECCION
@@ -487,7 +488,7 @@ public class ManipuladorListas
          * Este metodo crea un objeto Curso y lo agrega a la lista de cursos,
          * ademas referencia al curso en la lista de cursos del semestre al cual pertenece
          * @param nombreCurso es el nombre del curso nuevo.
-         * @param codCurso es el codigo del curso nuevo.
+         * @param codCursoStr es el codigo del curso nuevo.
          * @param seccion es la seccion del curso nuevo, un String, por ejemplo: A01.
          * @param carreraAlQuePertenece es un objeto Carrera con la carrera a la cual pertenece el curso.
          * @param semestreAlQuePertenece es un objeto Semestre con el semestre al cual pertenece el curso.
@@ -647,9 +648,9 @@ public class ManipuladorListas
          * Agrega el profesor a la lista de profesores
          * Setea el atributo de sus horas disponibles
          * @param nombreProfesor Es el string con el nombre del nuevo profesor
-         * @param rut es el entero con el rut del profesor, sin dígito verificador
+         * @param rutStr es el entero con el rut del profesor, sin dígito verificador
          * @param cursosDisponibles Es un Arraylist de Integer con los códigos de curso que puede dictar el profesor
-         * @param horasDisponibles Es un ArrayList de Hora con las horas disponibles del profesor para hacer clases
+         * @param horasDisp Es un ArrayList de Hora con las horas disponibles del profesor para hacer clases
          * @throws StringVacioException Lanza esta excepción cuando el nombre del profesor es un string vacio
          * @throws nombreRepetidoException Lanza esta excepción cuando el nombre del profesor está repetido entre los demas profesores
          * @throws NumberFormatException Lanza esta excepción cuando el codigo de curso no es un número o cuando el rut no es válido
@@ -663,6 +664,16 @@ public class ManipuladorListas
                 ArrayList<Integer> listaCodCursosDisponibles = new ArrayList();
                 //Si el nombre es un string vacio no se agrega y lanzo excepcion
                 if (nombreProfesor.trim().equals(""))
+                {       //Lanzo excepción
+                        throw new StringVacioException();
+                }
+                //Si lso codigos de curso son un string vacio no se agrega y lanzo excepcion
+                if (cursosDisponibles.trim().equals(""))
+                {       //Lanzo excepción
+                        throw new StringVacioException();
+                }
+                //Si el campo con horas disponibles es un string vacio no se agrega y lanzo excepcion
+                if (horasDisp.trim().equals(""))
                 {       //Lanzo excepción
                         throw new StringVacioException();
                 }

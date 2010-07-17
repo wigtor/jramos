@@ -9,7 +9,6 @@
 
 package jramos.tiposDatos;
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
 import jramos.excepciones.HourOutOfRangeException;
 import jramos.excepciones.HourNotInicializatedException;
 
@@ -81,7 +80,7 @@ public final class Hora
 }
 	/**
 	* Constructor que instancia una hora usando el 2° formato de hora.
-	* @param dia_hora Es un string con la hora del horario, dia_hora debe seguir la sintaxis BNF del 2° formato de hora. 
+	* @param dia_Hora Es un string con la hora del horario, dia_hora debe seguir la sintaxis BNF del 2° formato de hora.
 	* @throws HourOutOfRangeException Lanza esta excepción cuando el String dia_hora no es válido según la sintaxis del 2° formato de hora.
 	*/
 	public Hora(String dia_Hora) throws HourOutOfRangeException
@@ -157,7 +156,7 @@ public final class Hora
 			throw new HourOutOfRangeException();
 	}
 	/** Método que asigna una hora al objeto según el 2° formato
-	* @param dia_hora Es un string con la hora del horario, dia_hora debe seguir la sintaxis BNF del 2° formato de hora. 
+	* @param dia_Hora Es un string con la hora del horario, dia_hora debe seguir la sintaxis BNF del 2° formato de hora.
 	* @throws HourOutOfRangeException Lanza esta excepción cuando el String dia_hora no es válido según la sintaxis del 2° formato de hora.
 	*/
 	public void setHora(String dia_Hora) throws HourOutOfRangeException

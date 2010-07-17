@@ -1,9 +1,18 @@
-<idProfesInicial="14" >
-<Profesor nombProfe="david cooper" idProfe="3" rutProfe="5854323" idCursosAsig="30|27" codCursosDisp="10013|10014" horasDisp="L4|L5|M1|M2|M3|W4|W5|S7|S8" horasAsig="L4|M3|M1|S7|S8|W4" >
-<Profesor nombProfe="emilia castro" idProfe="8" rutProfe="4563421" idCursosAsig="5" codCursosDisp="10001|10002" horasDisp="L1|L2|M3|M4|W2|J2|V1|L3|M1|M2|J1|J3|V2" horasAsig="L2|M1|J3|V2" >
-<Profesor nombProfe="luis hernandez" idProfe="9" rutProfe="5730432" idCursosAsig="17|36" codCursosDisp="10003|10010" horasDisp="L3|L6|M4|M5|W3|W5|V3|L1|L2|L4|L5|M1|M2|W1|W2|V1|V2|V5|V6|V4|M6" horasAsig="L1|W1|V3|L6|M6|V5" >
-<Profesor nombProfe="schifferli" idProfe="10" rutProfe="2500000" idCursosAsig="20" codCursosDisp="10004" horasDisp="L2|L6|M2|V2|L3|M3|W2|W3|V1|J2|V6|V7" horasAsig="M3|W2" >
-<Profesor nombProfe="julian cortez" idProfe="11" rutProfe="4582002" idCursosAsig="15" codCursosDisp="10001|10002" horasDisp="L2|M2|M3|W2|W3|J1|V1|V2|L1|M4|J2|L3|M1|J3" horasAsig="L3|M2|J1|V1" >
-<Profesor nombProfe="lida mendoza" idProfe="12" rutProfe="12303340" idCursosAsig="35" codCursosDisp="10008" horasDisp="M5|W6|W7|J5" horasAsig="W6|W7|J5|M5" >
-<Profesor nombProfe="alberto ceballos" idProfe="13" rutProfe="5383432" idCursosAsig="32" codCursosDisp="13007|13009" horasDisp="M6|M7|W5|J2|L5|W4" horasAsig="L5|W4|J2" >
-<Profesor nombProfe="jose luis jara" idProfe="14" rutProfe="8654465" idCursosAsig="" codCursosDisp="13006" horasDisp="L2|L3|L4|L5|M3|W3|W4|W5|V2|V3|V5|V6|V7" horasAsig="" >
+<idProfesInicial="18" >
+<Profesor nombProfe="Alberto Ceballos" idProfe="6" rutProfe="10235543" idCursosAsig="" codCursosDisp="13007" horasDisp="L5|W4|J2" horasAsig="" >
+<Profesor nombProfe="Claudio Henriquez" idProfe="10" rutProfe="10443232" idCursosAsig="34" codCursosDisp="13009" horasDisp="V1|V2|V3" horasAsig="V1|V2|V3" >
+<Profesor nombProfe="David Cooper" idProfe="5" rutProfe="9022432" idCursosAsig="" codCursosDisp="10013" horasDisp="L3|L4|L5|M3|M4|M5|W3|W4|W5" horasAsig="" >
+<Profesor nombProfe="Emilia Castro" idProfe="3" rutProfe="6548333" idCursosAsig="6" codCursosDisp="10001|10002" horasDisp="L2|L3|M1|M2|J1|J3|V1|V2" horasAsig="L2|M1|J1|V1" >
+<Profesor nombProfe="Fernando Contreras" idProfe="7" rutProfe="11654332" idCursosAsig="35" codCursosDisp="13010" horasDisp="M2|W2|W3|W7" horasAsig="M2|W2|W3|W7" >
+<Profesor nombProfe="Hernan nuñez" idProfe="12" rutProfe="4357324" idCursosAsig="74" codCursosDisp="10006" horasDisp="S2|L5|M4|M2|M3|W4|W2|W3" horasAsig="S2|L5|W3" >
+<Profesor nombProfe="Jose Soto" idProfe="16" rutProfe="7784563" idCursosAsig="" codCursosDisp="14002" horasDisp="J6|V6|M1|M2|J1|J2" horasAsig="" >
+<Profesor nombProfe="Julian Cortez" idProfe="2" rutProfe="6548333" idCursosAsig="1" codCursosDisp="10001|10002" horasDisp="L2|L3|M1|M2|J1|J3|V1|V2" horasAsig="L3|M2|J3|V2" >
+<Profesor nombProfe="Lida Mendoza" idProfe="4" rutProfe="12334561" idCursosAsig="" codCursosDisp="10008" horasDisp="M5|W6|W7|J5" horasAsig="" >
+<Profesor nombProfe="Luis Fuenzalida" idProfe="15" rutProfe="6784563" idCursosAsig="75" codCursosDisp="10010" horasDisp="L6|M6|V5" horasAsig="L6|M6|V5" >
+<Profesor nombProfe="Luis Hernandez" idProfe="1" rutProfe="5674334" idCursosAsig="7" codCursosDisp="10003|10010" horasDisp="L1|L2|L3|L4|L5|L6|M4|M5|M6|M7|W1|W2|W3|V3|V4|V5|V6|V7" horasAsig="L1|W1|V3" >
+<Profesor nombProfe="Luis Sanchez" idProfe="9" rutProfe="8433254" idCursosAsig="33" codCursosDisp="13008" horasDisp="M1|W1|J1" horasAsig="M1|W1|J1" >
+<Profesor nombProfe="Mabel Roberts" idProfe="13" rutProfe="4354633" idCursosAsig="73" codCursosDisp="10020" horasDisp="L2|W2" horasAsig="W2|L2" >
+<Profesor nombProfe="Rodrigo Castro" idProfe="14" rutProfe="3456843" idCursosAsig="71" codCursosDisp="10008" horasDisp="M5|W6|W7|J5" horasAsig="M5|W6|W7|J5" >
+<Profesor nombProfe="Rosario Meneses" idProfe="17" rutProfe="7866555" idCursosAsig="" codCursosDisp="10009" horasDisp="L4|M4|J6" horasAsig="" >
+<Profesor nombProfe="Sergio Rozas" idProfe="11" rutProfe="4536223" idCursosAsig="72" codCursosDisp="14101" horasDisp="L4|V4|S3|W4|S2|L5" horasAsig="L4|V4|S3" >
+<Profesor nombProfe="Sonia Klimpel" idProfe="8" rutProfe="9324322" idCursosAsig="28" codCursosDisp="10009" horasDisp="L3|M3|J3" horasAsig="L3|M3|J3" >
